@@ -1,0 +1,497 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/logic/grpc/api.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Logic"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/goim/nodes/instances": {
+      "get": {
+        "operationId": "Logic_NodesInstances",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcNodesInstancesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/nodes/weighted": {
+      "get": {
+        "operationId": "Logic_NodesWeighted",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcNodesWeightedReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/online/room": {
+      "get": {
+        "operationId": "Logic_OnlineRoom",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcOnlineRoomReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "rooms",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/online/top": {
+      "get": {
+        "operationId": "Logic_OnlineTop",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcOnlineTopReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/online/total": {
+      "get": {
+        "operationId": "Logic_OnlineTotal",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcOnlineTotalReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/push/all": {
+      "post": {
+        "operationId": "Logic_PushAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcPushAllReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/push/keys": {
+      "post": {
+        "operationId": "Logic_PushKeys",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcPushKeysReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/push/mids": {
+      "post": {
+        "operationId": "Logic_PushMids",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcPushMidsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Logic"
+        ]
+      }
+    },
+    "/api/v1/goim/push/room": {
+      "post": {
+        "operationId": "Logic_PushRoom",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcPushRoomReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Logic"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apilogicgrpcProto": {
+      "type": "object",
+      "properties": {
+        "ver": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "op": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "body": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "grpcBackoff": {
+      "type": "object",
+      "properties": {
+        "MaxDelay": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "BaseDelay": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Factor": {
+          "type": "number",
+          "format": "float"
+        },
+        "Jitter": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "grpcCloseReply": {
+      "type": "object"
+    },
+    "grpcConnectReply": {
+      "type": "object",
+      "properties": {
+        "mid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "key": {
+          "type": "string"
+        },
+        "roomID": {
+          "type": "string"
+        },
+        "accepts": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "heartbeat": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "grpcDisconnectReply": {
+      "type": "object",
+      "properties": {
+        "has": {
+          "type": "boolean"
+        }
+      }
+    },
+    "grpcHeartbeatReply": {
+      "type": "object"
+    },
+    "grpcNodesInstancesReply": {
+      "type": "object"
+    },
+    "grpcNodesReply": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "tcpPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "wsPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "wssPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "heartbeat": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backoff": {
+          "$ref": "#/definitions/grpcBackoff"
+        },
+        "heartbeatMax": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "grpcNodesWeightedReply": {
+      "type": "object"
+    },
+    "grpcOnlineReply": {
+      "type": "object",
+      "properties": {
+        "allRoomCount": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "grpcOnlineRoomReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "grpcOnlineTopReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/grpcTop"
+          }
+        }
+      }
+    },
+    "grpcOnlineTotalReply": {
+      "type": "object",
+      "properties": {
+        "ipCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "connCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "grpcPingReply": {
+      "type": "object"
+    },
+    "grpcPushAllReply": {
+      "type": "object"
+    },
+    "grpcPushKeysReply": {
+      "type": "object"
+    },
+    "grpcPushMidsReply": {
+      "type": "object"
+    },
+    "grpcPushRoomReply": {
+      "type": "object"
+    },
+    "grpcReceiveReply": {
+      "type": "object"
+    },
+    "grpcTop": {
+      "type": "object",
+      "properties": {
+        "roomId": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Must be a valid serialized protocol buffer of the above specified type."
+        }
+      },
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

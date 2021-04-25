@@ -1,0 +1,115 @@
+syntax = "proto3";
+package comet.conf;
+
+option go_package = "edu/comet/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Service service = 1;
+  Server server = 2;
+  Data data = 3;
+  Reg reg = 4;
+  App app = 5;
+}
+
+message Service {
+  string name = 1;
+  string version = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message TCP {
+    repeated string bind = 1;
+    int32 sndbuf = 2;
+    int32 rcvbuf = 3;
+    bool keepalive = 4;
+    int32 reader = 5;
+    int32 readBuf = 6;
+    int32 readBufSize = 7;
+    int32 writer = 8;
+    int32 writeBuf = 9;
+    int32 writeBufSize = 10;
+  }
+  message Websocket {
+    repeated string bind = 1;
+    bool tlsOpen = 2;
+    repeated string tlsBind = 3;
+    string certFile = 4;
+    string privateFile = 5;
+  }
+  message Protocol {
+    int32 timer = 1;
+    int32 timerSize = 2;
+    int32 svrProto = 3;
+    int32 cliProto = 4;
+    google.protobuf.Duration handshakeTimeout = 5;
+  }
+  message Whitelist {
+    repeated int64 Whitelist = 1;
+    string WhiteLog = 2;
+  }
+  message Bucket {
+    int32 size = 1;
+    int32 channel = 2;
+    int32 room = 3;
+    uint64 routineAmount = 4;
+    int32 routineSize = 5;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+  TCP tcp = 3;
+  Websocket websocket = 4;
+  Protocol protocol = 5;
+  Whitelist whitelist = 6;
+  Bucket bucket = 7;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+    google.protobuf.Duration dial_timeout = 5;
+  }
+  Database database = 1;
+  Redis redis = 2;
+}
+
+message Reg {
+  message Etcd {
+    repeated string endpoints = 1;
+    google.protobuf.Duration dialTimeout = 2;
+  }
+  message Instance {
+    string zone = 1;
+    string env = 2;
+    string hostname = 3;
+    string appid = 4;
+    repeated string addrs = 5;
+  }
+  Etcd etcd = 1;
+  Instance instance = 2;
+}
+
+message App {
+  message UUID {
+    uint32 machine_id = 1;
+  }
+  UUID uuid = 1;
+}

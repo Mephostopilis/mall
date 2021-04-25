@@ -1,0 +1,68 @@
+service:
+  name: comet
+  version: v1.0.0
+server:
+  http:
+    address: 0.0.0.0:8006
+    timeout: 1s
+  grpc:
+    address: 0.0.0.0:9006
+    timeout: 1s
+  tcp:
+    bind: [":3101"]
+    sndbuf: 4096
+    rcvbuf: 4096
+    keepalive: false
+    reader: 32
+    readBuf: 1024
+    readBufSize: 8192
+    writer: 32
+    writeBuf: 1024
+    writeBufSize: 8192
+  websocket:
+    bind: [":3102"]
+    tlsOpen: false
+    tlsBind: [":3103"]
+    certFile: "../../cert.pem"
+    privateFile: "../../private.pem"
+  protocol:
+    timer: 32
+    timerSize: 2048
+    svrProto: 10
+    cliProto: 5
+    handshakeTimeout: "8s"
+  whitelist:
+    Whitelist: [123]
+    WhiteLog: "../../tmp/white_list.log"
+  bucket:
+    size: 32
+    channel: 1024
+    room: 1024
+    routineAmount: 32
+    routineSize: 1024
+
+data:
+  database:
+    driver: mysql
+    source: root:123456@tcp(127.0.0.1:3306)/edu_sso?charset=utf8&parseTime=true
+  redis:
+    addr: 127.0.0.1:6379
+    dial_timeout: 0.1s
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+reg:
+  etcd:
+    endpoints:
+      - "119.27.191.44:2379"
+    dialTimeout: 3s
+  instance:
+    zone: "sh001"
+    env: "dev"
+    hostname: "test1"
+    appid: "service.sso"
+    addrs:
+      - "grpc://127.0.0.1:9102"
+app:
+  uuid:
+    # 机器ID
+    machine_id: 1

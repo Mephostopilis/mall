@@ -1,0 +1,201 @@
+syntax = "proto3";
+
+package api.tiku;
+
+import "api/tiku/api.proto";
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/tiku;tiku";
+option java_multiple_files = true;
+option java_package = "api.tiku";
+
+service Admin {
+  rpc GetChoiceList (GetChoiceListRequest) returns (ApiReply) {
+    option (google.api.http) = {
+      get: "/admin/v1/tiku/choicesList"
+    };
+  };
+  rpc GetChoice(GetChoiceRequest) returns (ApiReply) {
+    option (google.api.http) = {
+      get: "/admin/v1/tiku/choices/{id}"
+    };
+  };
+  rpc InsertChoice(Choice) returns (ApiReply) {
+    option (google.api.http) = {
+      post: "/admin/v1/tiku/choices"
+    };
+  };
+  rpc UpdateChoice(Choice) returns (ApiReply) {
+    option (google.api.http) = {
+      put: "/admin/v1/tiku/choices"
+    };
+  };
+  rpc DeleteChoice(DeleteChoiceRequest) returns (ApiReply) {
+    option (google.api.http) = {
+      delete: "/admin/v1/tiku/choices/{id}"
+    };
+  };
+  rpc GetExerciseList (GetExerciseListRequest) returns (ApiReply) {
+    option (google.api.http) = {
+      get: "/admin/v1/tiku/exerciseList"
+    };
+  };
+  rpc GetExercise(GetExerciseRequest) returns (ApiReply) {
+    option (google.api.http) = {
+      get: "/admin/v1/tiku/exercise/{id}"
+    };
+  };
+  rpc InsertExercise(Exercise) returns (ApiReply) {
+    option (google.api.http) = {
+      post: "/admin/v1/tiku/exercise"
+    };
+  };
+  rpc UpdateExercise(Exercise) returns (ApiReply) {
+    option (google.api.http) = {
+      put: "/admin/v1/tiku/exercise"
+    };
+  };
+  rpc DeleteExercise(DeleteExerciseRequest) returns (ApiReply) {
+    option (google.api.http) = {
+      delete: "/admin/v1/tiku/exercise/{id}"
+    };
+  };
+}
+
+service Api {
+  rpc SayHelloURL(HelloReq) returns (HelloResp) {
+    option (google.api.http) = {
+      get:"/api/v1/tiku/say_hello"
+    };
+  };
+  rpc Ping(PingReq) returns (PingResp) {
+    option (google.api.http) = {
+      get: "/api/v1/tiku/public/ping"
+    };
+  };
+  rpc GetChoiceList (GetChoiceListRequest) returns (GetChoiceListReply) {
+    option (google.api.http) = {
+      get: "/api/v1/tiku/choicesList"
+    };
+  };
+  rpc GetChoice (GetChoiceRequest) returns (Choice) {
+    option (google.api.http) = {
+      get: "/api/v1/tiku/choice/{id}"
+    };
+  };
+  rpc AnswerChoice (AnswerChoiceRequest) returns (AnswerChoiceReply) {
+    option (google.api.http) = {
+      put: "/api/v1/tiku/choice/answer"
+    };
+  };
+  rpc GetExerciseList (GetExerciseListRequest) returns (GetExerciseListReply) {
+    option (google.api.http) = {
+      get: "/admin/v1/tiku/exerciseList"
+    };
+  };
+  rpc GetExercise (GetExerciseRequest) returns (Exercise) {
+    option (google.api.http) = {
+      get: "/api/v1/tiku/exercise/{id}"
+    };
+  };
+  rpc AnswerExercise (AnswerExerciseRequest) returns (AnswerExerciseReply) {
+    option (google.api.http) = {
+      put: "/api/v1/tiku/exercise/answer"
+    };
+  };
+}
+
+message PingReq {}
+message PingResp {}
+
+message HelloReq {
+  string name = 1;
+}
+
+message HelloResp {
+  string Content = 1;
+}
+
+message InsertChoiceRequest {
+    string tok = 1;
+    string subject = 2;
+    repeated string sans = 3;
+    string notBefore = 4;
+    string notAfter = 5;
+    string setFile = 6;
+    repeated string set = 7;
+}
+message InsertChoiceReply {}
+
+message UpdateChoiceRequest {}
+message UpdateChoiceReply {}
+
+message DeleteChoiceRequest {
+    uint64 id = 1;
+}
+message DeleteChoiceReply {}
+
+message GetChoiceListRequest {
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string beginTime = 3;
+  string endTime = 4;
+  int32 level = 5;
+  int32 ty = 6;
+}
+message GetChoiceListReply {
+  repeated Choice list = 1;
+  int32 total = 2;
+}
+
+message GetChoiceRequest {
+  uint64 id = 1;
+}
+message GetChoiceReply {}
+
+message AnswerChoiceRequest {
+  uint64 id = 1;
+  string answer = 2;
+}
+message AnswerChoiceReply {}
+
+message InsertExerciseRequest {
+  string tok = 1;
+  string subject = 2;
+  repeated string sans = 3;
+  string notBefore = 4;
+  string notAfter = 5;
+  string setFile = 6;
+  repeated string set = 7;
+}
+message InsertExerciseReply {}
+
+message UpdateExerciseRequest {}
+message UpdateExerciseReply {}
+
+message DeleteExerciseRequest {
+  uint64 id = 1;
+}
+message DeleteExerciseReply {}
+
+message GetExerciseRequest {
+  uint64 id = 1;
+}
+message GetExerciseReply {}
+
+message AnswerExerciseRequest {}
+message AnswerExerciseReply {}
+
+message GetExerciseListRequest {
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  string beginTime = 3;
+  string endTime = 4;
+  int32 level = 5;
+  int32 ty = 6;
+}
+message GetExerciseListReply {
+  repeated Exercise list = 1;
+  int32 total = 2;
+}
+

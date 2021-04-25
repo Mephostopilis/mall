@@ -1,0 +1,228 @@
+syntax = "proto3";
+
+package api.logic.grpc;
+
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/logic/grpc;grpc";
+
+message Proto {
+  int32 ver = 1;
+  int32 op = 2;
+  int32 seq = 3;
+  bytes body = 4;
+}
+
+message PushMsg {
+  enum Type { PUSH = 0; ROOM = 1; BROADCAST = 2; }
+  Type type = 1;
+  int32 operation = 2;
+  int32 speed = 3;
+  string server = 4;
+  string room = 5;
+  repeated string keys = 6;
+  bytes msg = 7;
+}
+
+message CloseReply {}
+
+message CloseReq {}
+
+message PingReply {}
+
+message PingReq {}
+
+message ConnectReq {
+  string server = 1;
+  string cookie = 2;
+  bytes token = 3;
+}
+
+message ConnectReply {
+  int64 mid = 1;
+  string key = 2;
+  string roomID = 3;
+  repeated int32 accepts = 4;
+  int64 heartbeat = 5;
+}
+
+message DisconnectReq {
+  int64 mid = 1;
+  string key = 2;
+  string server = 3;
+}
+
+message DisconnectReply { bool has = 1; }
+
+message HeartbeatReq {
+  int64 mid = 1;
+  string key = 2;
+  string server = 3;
+}
+
+message HeartbeatReply {}
+
+message OnlineReq {
+  string server = 1;
+  map<string, int32> roomCount = 2;
+}
+
+message OnlineReply {
+  map<string, int32> allRoomCount = 1;
+}
+
+message ReceiveReq {
+  int64 mid = 1;
+  Proto proto = 2;
+}
+
+message ReceiveReply {}
+
+message NodesReq {
+  string platform = 1;
+  string clientIP = 2;
+}
+
+message NodesReply {
+  string domain = 1;
+  int32 tcpPort = 2;
+  int32 wsPort = 3;
+  int32 wssPort = 4;
+  int32 heartbeat = 5;
+  repeated string nodes = 6;
+  Backoff backoff = 7;
+  int32 heartbeatMax = 8;
+}
+
+message Backoff {
+  int32 MaxDelay = 1;
+  int32 BaseDelay = 2;
+  float Factor = 3;
+  float Jitter = 4;
+}
+
+message PushKeysReq {
+  int32 operation = 1;
+  repeated string keys = 2;
+}
+message PushKeysReply {}
+
+message PushMidsReq {
+  int32 operation = 1;
+  repeated int64 mids = 2;
+}
+message PushMidsReply {}
+
+message PushRoomReq {
+  int32 operation = 1;
+  string type = 2;
+  string room = 3;
+}
+message PushRoomReply {}
+
+message PushAllReq {
+  int32 operation = 1;
+  int32 speed = 2;
+}
+message PushAllReply {}
+
+message NodesWeightedReq {
+  string platform = 1;
+}
+message NodesWeightedReply {}
+
+message NodesInstancesReq {
+}
+message NodesInstancesReply {}
+
+message Top {
+  string room_id = 1;
+  int32 count = 2;
+}
+
+message OnlineTopReq {
+  string type = 1;
+  int32 limit = 2;
+}
+message OnlineTopReply {
+  repeated Top list = 1;
+}
+
+message OnlineRoomReq {
+  string type = 1;
+  repeated string rooms = 2;
+}
+message OnlineRoomReply {
+  map<string, int32> data = 1;
+}
+
+message OnlineTotalReq {}
+message OnlineTotalReply {
+  int64 ip_count = 1;
+  int64 conn_count = 2;
+}
+
+service Logic {
+  // Ping Service
+  rpc Ping(PingReq) returns(PingReply);
+  // Close Service
+  rpc Close(CloseReq) returns(CloseReply);
+  // Connect
+  rpc Connect(ConnectReq) returns(ConnectReply);
+  // Disconnect
+  rpc Disconnect(DisconnectReq) returns(DisconnectReply);
+  // Heartbeat
+  rpc Heartbeat(HeartbeatReq) returns(HeartbeatReply);
+  // RenewOnline
+  rpc RenewOnline(OnlineReq) returns(OnlineReply);
+  // Receive
+  rpc Receive(ReceiveReq) returns(ReceiveReply);
+  // ServerList
+  rpc Nodes(NodesReq) returns(NodesReply);
+
+  rpc PushKeys(PushKeysReq) returns (PushKeysReply) {
+    option (google.api.http) = {
+      post:"/api/v1/goim/push/keys"
+    };
+  }
+  rpc PushMids (PushMidsReq) returns (PushMidsReply) {
+    option (google.api.http) = {
+      post:"/api/v1/goim/push/mids"
+    };
+  }
+  rpc PushRoom (PushRoomReq) returns (PushRoomReply) {
+    option (google.api.http) = {
+      post:"/api/v1/goim/push/room"
+    };
+  }
+  rpc PushAll (PushAllReq) returns (PushAllReply) {
+    option (google.api.http) = {
+      post:"/api/v1/goim/push/all"
+    };
+  }
+  rpc NodesWeighted (NodesWeightedReq) returns (NodesWeightedReply) {
+    option (google.api.http) = {
+      get:"/api/v1/goim/nodes/weighted"
+    };
+  }
+  rpc NodesInstances (NodesInstancesReq) returns (NodesInstancesReply) {
+    option (google.api.http) = {
+      get:"/api/v1/goim/nodes/instances"
+    };
+  }
+  rpc OnlineTop (OnlineTopReq) returns (OnlineTopReply) {
+    option (google.api.http) = {
+      get:"/api/v1/goim/online/top"
+    };
+  }
+  rpc OnlineRoom (OnlineRoomReq) returns (OnlineRoomReply) {
+    option (google.api.http) = {
+      get:"/api/v1/goim/online/room"
+    };
+  }
+  rpc OnlineTotal (OnlineTotalReq) returns (OnlineTotalReply) {
+    option (google.api.http) = {
+      get:"/api/v1/goim/online/total"
+    };
+  }
+}

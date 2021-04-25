@@ -1,0 +1,18 @@
+[Server]
+    addr = "0.0.0.0:8000"
+    timeout = "1s"
+
+[socks]
+    [socks.httpClient]
+    key = "c1a1cb2d89c33794"
+    secret = "dda47eeca111e03e6845017505baea13"
+    dial = "500ms"
+    timeout = "1s"
+    keepAlive = "60s"
+    timer = 1000
+    [socks.httpClient.breaker]
+    window  ="3s"
+    sleep   ="100ms"
+    bucket  = 10
+    ratio   = 0.5
+    request = 100

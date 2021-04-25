@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": [
+      "@dcloudio/types",
+      "miniprogram-api-typings",
+      "mini-types"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [],
+}

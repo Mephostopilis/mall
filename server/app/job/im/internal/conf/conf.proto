@@ -1,0 +1,93 @@
+syntax = "proto3";
+package job.conf;
+
+option go_package = "edu/job/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Service service = 1;
+  Server server = 2;
+  Data data = 3;
+  Reg reg = 4;
+}
+
+message Service {
+  string name = 1;
+  string version = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message Kafka {
+    string topic = 1;
+    string group = 2;
+    repeated string brokers = 3;
+  }
+  message RabbitMq {
+    string address = 1;
+  }
+  message Comet {
+    int32 routine_chan = 1;
+	  int32 routine_size = 2;
+  }
+  message Room {
+    int32 batch = 1;
+	  google.protobuf.Duration signal = 2;
+	  google.protobuf.Duration idle = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+  Kafka kafka = 3;
+  Comet comet = 4;
+  Room room = 5;
+  RabbitMq rabbitMq = 6;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+    google.protobuf.Duration dial_timeout = 5;
+  }
+  Database database = 1;
+  Redis redis = 2;
+}
+
+message Reg {
+  message Etcd {
+    repeated string endpoints = 1;
+    google.protobuf.Duration dialTimeout = 2;
+  }
+  message Instance {
+    string zone = 1;
+    string env = 2;
+    string hostname = 3;
+    string appid = 4;
+    repeated string addrs = 5;
+  }
+  Etcd etcd = 1;
+  Instance instance = 2;
+}
+
+message App {
+  message UUID {
+    uint32 machine_id = 1;
+  }
+  UUID uuid = 1;
+}

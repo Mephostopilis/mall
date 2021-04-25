@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package api.pms;
+
+import "google/protobuf/any.proto";
+
+option go_package = "edu/api/pms;pms";
+option java_multiple_files = true;
+option java_package = "api.pms";
+
+message ApiReply {
+    int32 code = 1;
+    string reason = 2;
+    string message = 3;
+    int32 ttl = 4;
+    int32 count = 5;
+    repeated google.protobuf.Any details = 6;
+}
+
+message Album {}
+
+message AlbumPic {}

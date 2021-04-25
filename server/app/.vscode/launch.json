@@ -1,0 +1,64 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "Launch sso",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/sso/cmd/sso/main.go",
+            "args": [
+                "-conf=../../configs"
+            ]
+        },
+        {
+            "name": "Launch tiku",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/tiku/cmd/tiku/main.go",
+            "args": [
+                "-conf=../../configs/conf.yaml"
+            ]
+        },
+        {
+            "name": "Launch job im",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/job/im/cmd/im/main.go",
+            "args": [
+                "-conf=../../configs/conf.yaml"
+            ]
+        },
+        {
+            "name": "Launch gateway",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/gateway/cmd/gateway/main.go",
+            "args": [
+                "-conf=../../configs/conf.yaml"
+            ]
+        },
+        {
+            "name": "Launch admin",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/admin/cmd/admin/main.go",
+            "args": [
+                "-conf=../../configs/conf.yaml",
+            ]
+        },
+        {
+            "name": "Launch file",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "D:/Ember/Documents/github/ssc/main.go"
+        }
+    ]
+}

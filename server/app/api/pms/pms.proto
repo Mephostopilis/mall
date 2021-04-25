@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+package api.pms;
+
+import "api/pms/api.proto";
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/pms;pms";
+option java_multiple_files = true;
+option java_package = "api.pms";
+
+service Admin {
+    rpc ListAlbum (ListAlbumRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsalbumList"
+        };
+    };
+    rpc GetAlbum (GetAlbumRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsalbum/{id}"
+        };
+    };
+    rpc CreateAlbum (Album) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/pmsalbum"
+        };
+    };
+    rpc UpdateAlbum (Album) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/pmsalbum"
+        };
+    };
+    rpc DeleteAlbum (DeleteAlbumRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/pmsalbum/{ids}"
+        };
+    };
+    rpc ListAlbumPic (ListAlbumPicRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsalbumpicList"
+        };
+    };
+    rpc GetAlbumPic (GetAlbumPicRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsalbumpic/{id}"
+        };
+    };
+    rpc CreateAlbumPic (AlbumPic) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/pmsalbumpic"
+        };
+    };
+    rpc UpdateAlbumPic (AlbumPic) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/pmsalbumpic"
+        };
+    };
+    rpc DeleteAlbumPic (DeleteAlbumPicRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/pmsalbumpic/{ids}"
+        };
+    };
+}
+
+service Api {
+    // rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
+	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
+	rpc SayHelloURL(HelloReq) returns (HelloResp) {
+        option (google.api.http) = {
+            get:"/api/v1/cms/say_hello"
+        };
+    };
+    rpc ListAlbum (ListAlbumRequest) returns (ListAlbumReply) {
+        option (google.api.http) = {
+            get: "/api/v1/cms/albumList"
+        };
+    };
+    rpc GetAlbum (GetAlbumRequest) returns (GetAlbumReply) {
+        option (google.api.http) = {
+            get: "/api/v1/cms/album/{id}"
+        };
+    };
+}
+
+message HelloReq {
+	string name = 1;
+}
+
+message HelloResp {
+    string Content = 1;
+}
+
+message ListAlbumRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListAlbumReply {}
+
+message GetAlbumRequest {
+    int32 id = 1;
+}
+message GetAlbumReply {}
+
+message CreateAlbumRequest {}
+message CreateAlbumReply {}
+
+message UpdateAlbumRequest {}
+message UpdateAlbumReply {}
+
+message DeleteAlbumRequest {
+    string ids = 1;
+}
+message DeleteAlbumReply {}
+
+message ListAlbumPicRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListAlbumPicReply {}
+
+message GetAlbumPicRequest {
+    int32 id = 1;
+}
+message GetAlbumPicReply {}
+
+message CreateAlbumPicRequest {}
+message CreateAlbumPicReply {}
+
+message UpdateAlbumPicRequest {}
+message UpdateAlbumPicReply {}
+
+message DeleteAlbumPicRequest {
+    string ids = 1;
+}
+message DeleteAlbumPicReply {}

@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+package api.sms;
+
+import "api/sms/api.proto";
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/sms;sms";
+option java_multiple_files = true;
+option java_package = "api.sms";
+
+service Admin {
+    rpc ListCoupon (ListCouponRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/smscouponList"
+        };
+    };
+    rpc GetCoupon (GetCouponRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/smscoupon/{id}"
+        };
+    };
+    rpc CreateCoupon (Coupon) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/smscoupon"
+        };
+    };
+    rpc UpdateCoupon (Coupon) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/smscoupon"
+        };
+    };
+    rpc DeleteCoupon (DeleteCouponRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/smscoupon/{ids}"
+        };
+    };
+    rpc ListCouponHistory (ListCouponHistoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/smscouponhistoryList"
+        };
+    };
+    rpc GetCouponHistory (GetCouponHistoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/smscouponhistory/{id}"
+        };
+    };
+    rpc CreateCouponHistory (CouponHistory) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/smscouponhistory"
+        };
+    };
+    rpc UpdateCouponHistory (CouponHistory) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/smscouponhistory"
+        };
+    };
+    rpc DeleteCouponHistory (DeleteCouponHistoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/smscouponhistory/{ids}"
+        };
+    };
+}
+
+service Api {
+    // rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
+	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
+	rpc SayHelloURL(HelloReq) returns (HelloResp) {
+        option (google.api.http) = {
+            get:"/api/v1/sms/say_hello"
+        };
+    };
+    rpc ListCoupon (ListCouponRequest) returns (ListCouponReply) {
+        option (google.api.http) = {
+            get: "/api/v1/sms/couponList"
+        };
+    };
+    rpc GetCoupon (GetCouponRequest) returns (GetCouponReply) {
+        option (google.api.http) = {
+            get: "/api/v1/sms/coupon/{id}"
+        };
+    };
+}
+
+message HelloReq {
+	string name = 1;
+}
+
+message HelloResp {
+    string Content = 1;
+}
+
+message ListCouponRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListCouponReply {}
+
+message GetCouponRequest {
+    int32 id = 1;
+}
+message GetCouponReply {}
+
+message CreateCouponRequest {}
+message CreateCouponReply {}
+
+message UpdateCouponRequest {}
+message UpdateCouponReply {}
+
+message DeleteCouponRequest {
+    string ids = 1;
+}
+message DeleteCouponReply {}
+
+message ListCouponHistoryRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListCouponHistoryReply {}
+
+message GetCouponHistoryRequest {
+    int32 id = 1;
+}
+message GetCouponHistoryReply {}
+
+message CreateCouponHistoryRequest {}
+message CreateCouponHistoryReply {}
+
+message UpdateCouponHistoryRequest {}
+message UpdateCouponHistoryReply {}
+
+message DeleteCouponHistoryRequest {
+    string ids = 1;
+}
+message DeleteCouponHistoryReply {}

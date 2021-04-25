@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package api.uuid;
+
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/uuid;uuid";
+option java_multiple_files = true;
+option java_package = "api.sso";
+
+service UUID {
+    rpc GenID(GenIDReq) returns (GenIDResp);
+}
+
+message HelloReq {
+	string name = 1;
+}
+
+message HelloResp {
+    string Content = 1;
+}
+
+message GenIDReq {
+}
+message GenIDResp {
+    uint64 id = 1;
+}

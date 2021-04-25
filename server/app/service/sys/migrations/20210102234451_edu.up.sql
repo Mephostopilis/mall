@@ -1,0 +1,35 @@
+CREATE TABLE `sys_tables` (
+`table_id`  int(11) NOT NULL AUTO_INCREMENT ,
+`app_id` bigint(20) unsigned NULL DEFAULT NULL ,
+`table_name`  varchar(255)  NULL DEFAULT NULL ,
+`table_comment`  varchar(255)  NULL DEFAULT NULL ,
+`class_name`  varchar(255)  NULL DEFAULT NULL ,
+`tpl_category`  varchar(255)  NULL DEFAULT NULL ,
+`package_name`  varchar(255)  NULL DEFAULT NULL ,
+`module_name`  varchar(255)  NULL DEFAULT NULL ,
+`business_name`  varchar(255)  NULL DEFAULT NULL ,
+`function_name`  varchar(255)  NULL DEFAULT NULL ,
+`function_author`  varchar(255)  NULL DEFAULT NULL ,
+`pk_column`  varchar(255)  NULL DEFAULT NULL ,
+`pk_go_field`  varchar(255)  NULL DEFAULT NULL ,
+`pk_json_field`  varchar(255)  NULL DEFAULT NULL ,
+`options`  varchar(255)  NULL DEFAULT NULL ,
+`tree_code`  varchar(255)  NULL DEFAULT NULL ,
+`tree_parent_code`  varchar(255)  NULL DEFAULT NULL ,
+`tree_name`  varchar(255)  NULL DEFAULT NULL ,
+`tree`  tinyint(1) NULL DEFAULT NULL ,
+`crud`  tinyint(1) NULL DEFAULT NULL ,
+`remark`  varchar(255)  NULL DEFAULT NULL ,
+`is_logical_delete`  varchar(1)  NULL DEFAULT NULL ,
+`logical_delete`  tinyint(1) NULL DEFAULT NULL ,
+`logical_delete_column`  varchar(128)  NULL DEFAULT NULL ,
+`create_by`  varchar(128)  NULL DEFAULT NULL ,
+`update_by`  varchar(128)  NULL DEFAULT NULL ,
+`created_at`  datetime NULL DEFAULT NULL ,
+`updated_at`  datetime NULL DEFAULT NULL ,
+`deleted_at`  datetime NULL DEFAULT NULL ,
+PRIMARY KEY (`table_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1;

@@ -1,0 +1,9 @@
+CREATE TABLE `pms_product_ladder` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
+  `product_id` bigint(20) DEFAULT NULL,
+  `count` int(11) DEFAULT NULL COMMENT '满足的商品数量',
+  `discount` decimal(10,2) DEFAULT NULL COMMENT '折扣',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '折后价格',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COMMENT='产品阶梯价格表(只针对同商品)';

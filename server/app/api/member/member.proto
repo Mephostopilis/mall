@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+package api.member;
+
+import "api/member/api.proto";
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/member;member";
+option java_multiple_files = true;
+option java_package = "api.member";
+
+service Admin {
+    rpc ListMember (ListMemberRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/umsmemberList"
+        };
+    };
+    rpc GetMember (GetMemberRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/umsmember/{id}"
+        };
+    };
+    rpc CreateMember (Member) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/umsmember"
+        };
+    };
+    rpc UpdateMember (Member) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/umsmember"
+        };
+    };
+    rpc DeleteMember (DeleteMemberRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/umsmember/{ids}"
+        };
+    };
+    rpc ListMemberAssets (ListMemberAssetsRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/umsmemberassetsList"
+        };
+    };
+    rpc GetMemberAssets (GetMemberAssetsRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/umsmemberassets/{id}"
+        };
+    };
+    rpc CreateMemberAssets (MemberAssets) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/umsmemberassets"
+        };
+    };
+    rpc UpdateMemberAssets (MemberAssets) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/umsmemberassets"
+        };
+    };
+    rpc DeleteMemberAssets (DeleteMemberAssetsRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/umsmemberassets/{ids}"
+        };
+    };
+}
+
+service Api {
+	rpc SayHelloURL(HelloReq) returns (HelloResp) {
+        option (google.api.http) = {
+            get:"/api/v1/oms/say_hello"
+        };
+    };
+    rpc GetMember (GetMemberRequest) returns (GetMemberReply) {
+        option (google.api.http) = {
+            get: "/api/v1/member/{id}"
+        };
+    };
+}
+
+message HelloReq {
+	string name = 1;
+}
+
+message HelloResp {
+    string Content = 1;
+}
+
+message ListMemberRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListMemberReply {}
+
+message GetMemberRequest {
+    int32 id = 1;
+}
+message GetMemberReply {}
+
+message CreateMemberRequest {}
+message CreateMemberReply {}
+
+message UpdateMemberRequest {}
+message UpdateMemberReply {}
+
+message DeleteMemberRequest {
+    string ids = 1;
+}
+message DeleteMemberReply {}
+
+message ListMemberAssetsRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListMemberAssetsReply {}
+
+message GetMemberAssetsRequest {
+    int32 id = 1;
+}
+message GetMemberAssetsReply {}
+
+message CreateMemberAssetsRequest {}
+message CreateMemberAssetsReply {}
+
+message UpdateMemberAssetsRequest {}
+message UpdateMemberAssetsReply {}
+
+message DeleteMemberAssetsRequest {
+    string ids = 1;
+}
+message DeleteMemberAssetsReply {}

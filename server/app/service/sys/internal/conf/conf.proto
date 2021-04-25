@@ -1,0 +1,133 @@
+syntax = "proto3";
+package sys.internal.conf;
+
+option go_package = "edu/sys/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Service service = 1;
+  Server server = 2;
+  Client client = 3;
+  Data data = 4;
+  Reg reg = 5;
+  Logger logger = 6;
+  App app = 7;
+}
+
+message Service {
+  string name = 1;
+  string version = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message JWT {
+    string secret = 1;
+    google.protobuf.Duration timeout = 2;
+  }
+  message Middleware {
+    JWT jwt = 1;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+  Middleware middleware = 3;
+}
+
+message Client {
+  message Breaker {
+    string window = 1;
+    int32 bucket = 2;
+    float k = 3;
+    int32 request = 4;
+  }
+  message Sso {
+    string dial = 1;
+    string timeout = 2;
+    string zone = 3;
+    Breaker breaker = 4;
+  }
+  Sso sso = 1;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+    google.protobuf.Duration dial_timeout = 5;
+  }
+  message Migrate {
+    string path = 1;
+  }
+  Database admin = 1;
+  Database sso = 2;
+  Database tiku = 3;
+  Redis redis = 4;
+  Migrate migrate = 5;
+}
+
+message Reg {
+  message Etcd {
+    repeated string endpoints = 1;
+    google.protobuf.Duration dialTimeout = 2;
+  }
+  message Instance {
+    string zone = 1;
+    string env = 2;
+    string hostname = 3;
+    string appid = 4;
+    repeated string addrs = 5;
+  }
+  Etcd etcd = 1;
+  Instance instance = 2;
+}
+
+message App {
+  message Jwt {
+    string secret = 1;
+    google.protobuf.Duration timeout = 2;
+  }
+  message Template {
+    string model = 1;
+    string dao = 2;
+    string js = 3;
+    string vue = 4;
+  }
+  message Gen {
+    string name = 1;
+    string dbname = 2;
+    string frontpath = 3;
+    string backpath = 4;
+    Template template = 5;
+  }
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Tiku {
+    string path = 1;
+  }
+  Jwt jwt = 1;
+  Gen gen = 2;
+  Database tools = 3;
+  Tiku tiku = 4;
+}
+
+message Logger {
+  string path = 1;
+}

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package api.sso;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "edu/api/sso;sso";
+option java_multiple_files = true;
+option java_package = "api.sso";
+
+message ApiReply {
+    int32 code = 1;
+    string reason = 2;
+    string message = 3;
+    int32 ttl = 4;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
+}
+
+message DataPermission {
+    string dataScope = 1;
+	uint64 userId = 2;
+	uint64 roleId = 3;
+    string roleKey = 4;
+    uint64 deptId = 5;
+    uint64 postId = 6;
+}
+
+message HttpReqInfo {
+    string token = 1;
+    string userAgent = 2;
+    string remoteAddr = 3;
+}
+
+message Dept {
+    int64 deptId = 1;
+	int64 parentId = 2;
+	string deptPath = 3;
+	string deptName = 4;
+	int32 sort = 5;
+	string leader = 6;
+	string phone = 7;
+	string email = 8;
+	string status = 9;
+    google.protobuf.Timestamp createdAt = 10;
+}
+
+message Post {
+    int32 postId = 1;
+	string postName = 2;
+	string postCode = 3;
+	int32 sort = 4;
+	string status = 5;
+	string remark = 6;
+    google.protobuf.Timestamp createdAt = 7;
+}

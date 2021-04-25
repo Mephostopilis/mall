@@ -1,0 +1,1019 @@
+syntax = "proto3";
+
+package api.sys.v1;
+
+import "api/sys/v1/api.proto";
+import "google/api/annotations.proto";
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "edu/api/sys/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.sys.v1";
+
+service Admin {
+    rpc CreateResource (SysConfig) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/config"
+        };
+    };
+    rpc UpdateResource (SysConfig) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/config/{configId}"
+        };
+    };
+    rpc DeleteResource (DeleteConfigRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/config/{ids}"
+        };
+    };
+    rpc GetResource (GetConfigRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/config/{configId}"
+        };
+    };
+    rpc ListResource (ListResourceRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/resourceList"
+        };
+    };
+    rpc CreateConfig (SysConfig) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/config"
+        };
+    };
+    rpc UpdateConfig (SysConfig) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/config/{configId}"
+        };
+    };
+    rpc DeleteConfig (DeleteConfigRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/config/{ids}"
+        };
+    };
+    rpc GetConfig (GetConfigRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/config/{configId}"
+        };
+    };
+    rpc GetConfigByConfigKey (GetConfigByConfigKeyRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/configKey/{configKey}"
+        };
+    };
+    rpc ListConfig (ListConfigRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/configList"
+        };
+    };
+    rpc CreateDept (Dept) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/dept"
+        };
+    };
+    rpc UpdateDept (Dept) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/dept"
+        };
+    };
+    rpc DeleteDept (DeleteDeptRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/dept/{ids}"
+        };
+    };
+    rpc GetDept (GetDeptRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dept/{deptId}"
+        };
+    };
+    rpc GetDeptTree (GetDeptTreeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/deptTree"
+        };
+    };
+    rpc ListDept (ListDeptRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/deptList"
+        };
+    };
+    rpc GetDeptTreeRoleselect (GetDeptTreeRoleselectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/roleDeptTreeselect/{roleId}"
+        };
+    };
+    rpc CreateMenu (Menu) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/menu"
+        };
+    };
+    rpc UpdateMenu (Menu) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/menu"
+        };
+    };
+    rpc DeleteMenu (DeleteMenuRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/menu/{ids}"
+        };
+    };
+    rpc GetMenu (GetMenuRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/menu/{id}"
+        };
+    };
+    rpc GetMenuTreeRoleselect (GetMenuTreeRoleselectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/roleMenuTreeselect/{roleId}"
+        };
+    };
+    rpc GetMenuTreeelect (GetMenuTreeelectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/menuTreeselect"
+        };
+    };
+    rpc ListMenu (ListMenuRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/menulist"
+        };
+    };
+    rpc GetMenuRole (GetMenuRoleRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/menurole"
+        };
+    };
+    rpc GetMenuIDS (GetMenuIDSRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/menuids"
+        };
+    };
+    rpc CreateOperLog (OperLog) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/operlog"
+        };
+    };
+    rpc UpdateOperLog (OperLog) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/operlog"
+        };
+    };
+    rpc DeleteOperLog (DeleteOperLogRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/operlog"
+        };
+    };
+    rpc GetOperLog (GetOperLogRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/operlog/{operId}"
+        };
+    };
+    rpc ListOperLog (ListOperLogRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/operloglist"
+        };
+    };
+    rpc CreatePost (Post) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/post"
+        };
+    };
+    rpc UpdatePost (Post) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/post/{postId}"
+        };
+    };
+    rpc DeletePost (DeletePostRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/post/{postId}"
+        };
+    };
+    rpc GetPost (GetPostRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/post/{postId}"
+        };
+    };
+    rpc ListPost (ListPostRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/postlist"
+        };
+    };
+    rpc CreateRoleMenu (Menu) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/rolemenu"
+        };
+    };
+    rpc UpdateRoleMenu (Menu) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/rolemenu"
+        };
+    };
+    rpc DeleteRoleMenu (DeleteRoleMenuRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/rolemenu"
+        };
+    };
+    rpc GetRoleMenu (GetRoleMenuRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/rolemenu"
+        };
+    };
+    rpc ListRoleMenu (ListRoleMenuRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/rolemenulist"
+        };
+    };
+    rpc GetSetting (GetSettingRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/public/setting"
+        };
+    };
+    rpc CreateSetting (SysSetting) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/setting"
+        };
+    };
+    rpc CreateSysjob (Job) returns (ApiReply){
+        option (google.api.http) = {
+            post: "/admin/v1/sysjob"
+        };
+    };
+    rpc UpdateSysjob (Job) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/sysjob"
+        };
+    };
+    rpc DeleteSysjob (DeleteSysjobRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/sysjob/{jobId}"
+        };
+    };
+    rpc GetSysjob (GetSysjobRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/sysjob/{jobId}"
+        };
+    };
+    rpc ListSysjob (ListSysjobRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/sysjob"
+        };
+    };
+    rpc StartJob (StartJobRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/job/start/{jobId}"
+        };
+    };
+    rpc RemoveJob (RemoveJobRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/job/remove/{jobId}"
+        };
+    };
+    rpc GetDictDataList (GetDictDataListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/datalist"
+        };
+    };
+    rpc GetDictDataListByDictType (GetDictDataListByDictTypeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/databytype/{dictType}"
+        };
+    };
+    rpc GetDictData(GetDictDataRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/data/{dictCode}"
+        };
+    };
+    rpc InsertDictData(DictData) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/dict/data"
+        };
+    };
+    rpc UpdateDictData(DictData) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/dict/data"
+        };
+    };
+    rpc DeleteDictData(DeleteDictDataRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/dict/data/{dictCode}"
+        };
+    };
+    rpc GetDictTypeList (GetDictTypeListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/typelist"
+        };
+    };
+    rpc GetDictType (GetDictTypeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/type/{dictId}"
+        };
+    };
+    rpc GetDictTypeOptionSelect (GetDictTypeOptionSelectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/typeoptionselect"
+        };
+    };
+    rpc InsertDictType (DictType) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/dict/type"
+        };
+    };
+    rpc UpdateDictType (DictType) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/dict/type"
+        };
+    };
+    rpc DeleteDictType (DeleteDictTypeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/dict/type/{dictId}"
+        };
+    };
+    rpc GetServerInfo (GetServerInfoRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/serverInfo"
+        };
+    };
+    rpc GetSysTableList (GetSysTableListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/sys/tables/page"
+        };
+    };
+    rpc GetSysTables (GetSysTablesRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/sys/tables/info/{tableId}"
+        };
+    };
+    rpc InsertSysTable (InsertSysTableRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/tools/sys/tables/info"
+        };
+    };
+    rpc UpdateSysTable (SysTable) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/tools/sys/tables/info"
+        };
+    };
+    rpc DeleteSysTables (DeleteSysTablesRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/tools/sys/tables/info/{ids}"
+        };
+    };
+    rpc GetSysColumn (GetSysColumnRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/sys/column/info/{tableId}"
+        };
+    };
+    rpc UpdateSysColumn (SysColumn) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/tools/sys/column/info"
+        };
+    };
+    rpc GetDBTableList (GetDBTableListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/db/tables/page"
+        };
+    };
+    rpc GetDBColumnList (GetDBColumnListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/db/columns/page"
+        };
+    };
+    rpc Preview (PreviewRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/gen/preview/{tableId}"
+        };
+    };
+    rpc GenCode (GenCodeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/gen/toproject/{tableId}"
+        };
+    };
+    rpc GenMenuAndApi (GenMenuAndApiRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/tools/gen/todb/{tableId}"
+        };
+    };
+}
+
+service Api {
+    rpc GetDictDataListByDictType (GetDictDataListByDictTypeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/dict/databytype/{dictType}"
+        };
+    };
+    rpc GetDictData(GetDictDataRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dict/data/{dictCode}"
+        };
+    };
+    rpc GetDictTypeList (GetDictTypeListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dict/typelist"
+        };
+    };
+    rpc GetDictType (GetDictTypeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/api/v1/dict/type/{dictId}"
+        };
+    };
+}
+
+service Sys {
+    rpc GetDept (GetDeptRequest) returns (Dept);
+    rpc GetPost (GetPostRequest) returns (Post);
+}
+
+message SysResource {
+    int32 id = 1;
+    string v1 = 2;
+    string v2 = 3;
+    string v3 = 4;
+    string v4 = 5;
+    string v5 = 6;
+}
+
+message CreateResourceRequest {}
+message CreateResourceReply {}
+
+message UpdateResourceRequest {}
+message UpdateResourceReply {}
+
+message DeleteResourceRequest {
+    string ids = 1;
+}
+message DeleteResourceReply {}
+
+message GetResourceRequest {
+    int32 configId = 1;
+}
+message GetResourceReply {}
+
+message ListResourceRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListResourceReply {}
+
+message SysConfig {
+    int32 configId = 1;
+	string configName = 2;
+	string configKey = 3;
+	string configValue = 4;
+	string configType = 5;
+	string remark = 6;
+    google.protobuf.Timestamp createdAt = 7;
+}
+
+message CreateConfigRequest {}
+message CreateConfigReply {}
+
+message UpdateConfigRequest {}
+message UpdateConfigReply {}
+
+message DeleteConfigRequest {
+    string ids = 1;
+}
+message DeleteConfigReply {}
+
+message GetConfigRequest {
+    int32 configId = 1;
+}
+message GetConfigReply {}
+
+message GetConfigByConfigKeyRequest {
+    string configKey = 1;
+}
+message GetConfigByConfigKeyReply {}
+
+message ListConfigRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListConfigReply {}
+
+message Dept {
+    int64 deptId = 1;
+	int64 parentId = 2;
+	string deptPath = 3;
+	string deptName = 4;
+	int32 sort = 5;
+	string leader = 6;
+	string phone = 7;
+	string email = 8;
+	string status = 9;
+    google.protobuf.Timestamp createdAt = 10;
+    repeated Dept children = 11;
+}
+
+message DeptLable {
+    int32 id = 1;
+	string label = 2;
+	repeated DeptLable children = 3;
+}
+
+message CreateDeptRequest {}
+message CreateDeptReply {}
+
+message UpdateDeptRequest {}
+message UpdateDeptReply {}
+
+message DeleteDeptRequest {
+    string ids = 1;
+}
+message DeleteDeptReply {}
+
+message GetDeptRequest {
+    int32 deptId = 1;
+}
+message GetDeptReply {}
+
+message GetDeptTreeRequest {
+    string deptName = 1;
+    string status = 2;
+    int32 deptId = 3;
+}
+message GetDeptTreeReply {}
+
+message GetMenuTreeelectRequest {}
+message GetMenuTreeelectReply {}
+
+message ListDeptRequest {
+    string deptName = 1;
+    string status = 2;
+    int32 deptId = 3;
+}
+message ListDeptReply {}
+
+message GetDeptTreeRoleselectRequest {
+    int32 roleId = 1;
+}
+message GetDeptTreeRoleselectReply {
+    repeated DeptLable depts = 1;
+    repeated int32 checkedKeys = 2;
+}
+
+message Menu {
+    int32 menuId = 1;
+	string menuName = 2;
+	string title = 3;
+    string icon = 4;
+	string path = 5;
+	string paths = 6;
+	string menuType = 7;
+	string action = 8;
+	string permission = 9;
+	int32 parentId = 10;
+	bool noCache = 11;
+	string breadcrumb = 12;
+	string component = 13;
+	int32 sort = 14;
+    string visible = 15;
+    string isFrame = 16;
+    repeated Menu children = 18;
+    google.protobuf.Timestamp createdAt = 19;
+}
+
+message MenuLable {
+    int32 Id = 1;
+	string Label = 2;
+	repeated MenuLable Children = 3;
+}
+
+message MenuPath {
+    string path = 1;
+}
+
+message CreateMenuRequest {}
+message CreateMenuReply {}
+
+message UpdateMenuRequest {}
+message UpdateMenuReply {}
+
+message DeleteMenuRequest {
+    string ids = 1;
+}
+message DeleteMenuReply {}
+
+message GetMenuRequest {
+    int32 id = 1;
+}
+message GetMenuReply {}
+
+message GetMenuTreeRoleselectRequest {
+    int32 roleId = 1;
+}
+message GetMenuTreeRoleselectReply {
+    repeated MenuLable menus = 1;
+    repeated int32 checkedKeys = 2;
+}
+
+message ListMenuRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string roleName = 3;
+    bool visible = 4;
+    string title = 5;
+}
+message ListMenuReply {}
+
+message GetMenuRoleRequest {}
+message GetMenuRoleReply {}
+
+message GetMenuIDSRequest {}
+message GetMenuIDSReply {}
+
+message GetServerInfoRequest {}
+message GetServerInfoReply {
+    message OS {
+        string goOs = 1;
+        string arch = 2;
+        int32 mem = 3;
+        string compiler = 4;
+        string version = 5;
+        int32 numGoroutine = 6;
+        string ip = 7;
+        string projectDir = 8;
+    }
+    message MEM {
+        int32 total = 1;
+        int32 used = 2;
+        int32 free = 3;
+        int32 usage = 4;
+    }
+    message Cpu {
+        message Info {
+            string modelName = 1;
+            int32 cores = 2;
+        }
+        repeated Info cpuInfo = 1;
+        repeated double Percent = 2;
+        int32 cpuNum = 3;
+    }
+    message Disk {
+        int32 total = 1;
+        int32 free = 2;
+    }
+    OS os = 1;
+    MEM mem = 2;
+    Cpu cpu = 3;
+    Disk disk = 4;
+}
+
+message OperLog {
+    int64 operId = 1;
+	string title = 2;
+	string businessType = 3;
+	string businessTypes = 4;
+	string method = 5;
+	string requestMethod = 7;
+	string operatorType = 8;
+	string operName = 9;
+	string deptName = 10;
+	string operUrl = 11;
+	string operIp = 12;
+	string operLocation = 13;
+	string operParam = 14;
+	string status = 15;
+	google.protobuf.Timestamp operTime = 16;
+    string jsonResult = 17;
+}
+
+message CreateOperLogRequest {}
+message CreateOperLogReply {}
+
+message UpdateOperLogRequest {}
+message UpdateOperLogReply {}
+
+message DeleteOperLogRequest {}
+message DeleteOperLogReply {}
+
+message GetOperLogRequest {
+    int32 operId = 1;
+}
+message GetOperLogReply {}
+
+message ListOperLogRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string operName = 3;
+    string operIp = 4;
+    string status = 5;
+}
+message ListOperLogReply {}
+
+message Post {
+    int32 postId = 1;
+	string postName = 2;
+	string postCode = 3;
+	int32 sort = 4;
+	string status = 5;
+	string remark = 6;
+    google.protobuf.Timestamp createdAt = 7;
+}
+
+message CreatePostRequest {}
+message CreatePostReply {}
+
+message UpdatePostRequest {}
+message UpdatePostReply {}
+
+message DeletePostRequest {
+    string postId = 1;
+}
+message DeletePostReply {}
+
+message GetPostRequest {
+    int32 postId = 1;
+}
+message GetPostReply {}
+
+message ListPostRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    int32 postId = 3;
+    string postCode = 4;
+    string postName = 5;
+    string status = 6;
+}
+message ListPostReply {}
+
+message CreateRoleMenuRequest {}
+message CreateRoleMenuReply {}
+
+message UpdateRoleMenuRequest {}
+message UpdateRoleMenuReply {}
+
+message DeleteRoleMenuRequest {
+    int32 menu_id = 1;
+}
+message DeleteRoleMenuReply {}
+
+message GetRoleMenuRequest {}
+message GetRoleMenuReply {}
+
+message ListRoleMenuRequest {}
+message ListRoleMenuReply {}
+
+message SysSetting {
+    string name = 1;
+	string logo = 2;
+}
+
+message CreateSettingRequest {}
+message CreateSettingReply {}
+
+message GetSettingRequest {}
+message GetSettingReply {}
+
+
+message CreateSysjobRequest {}
+message CreateSysjobReply {}
+
+message UpdateSysjobRequest {}
+message UpdateSysjobReply {}
+
+message DeleteSysjobRequest {
+    int32 jobId = 1;
+}
+message DeleteSysjobReply {}
+
+message GetSysjobRequest {
+    int32 jobId = 1;
+}
+message GetSysjobReply {}
+
+message ListSysjobRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    int32 jobId = 3;
+    string jobName = 4;
+    string jobGroup = 5;
+    string cronExpression = 6;
+    string invokeTarget = 7;
+    int32 status = 8;
+}
+message ListSysjobReply {}
+
+message StartJobRequest {
+    int32 jobId = 1;
+}
+message StartJobReply {}
+
+message RemoveJobRequest {
+    int32 jobId = 1;
+}
+message RemoveJobReply {}
+
+message Job {
+    int32 jobId = 1;
+	string jobName = 2;
+	string jobGroup = 3;
+	int32 JobType = 4;
+	string cronExpression = 5;
+	string invokeTarget = 6;
+	int32 MisfirePolicy = 7;
+	int32 Concurrent = 8;
+	int32 status = 9;
+	int32 entryId = 10;
+}
+
+message DictData {
+    int64 dictCode = 1;
+	int32 dictSort = 2;
+	string dictLabel = 3;
+	string dictValue = 4;
+	string dictType = 5;
+	string cssClass = 6;
+	string listClass = 7;
+    string isDefault = 8;
+	string status = 9;
+	string default = 10;
+    string remark = 11;
+    google.protobuf.Timestamp createdAt = 12;
+}
+
+message GetDictDataListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string dictLabel = 3;
+    string status = 4;
+    string dictType = 5;
+    int32 dictCode = 6;
+}
+message GetDictDataListReply {
+    repeated DictData list = 1;
+    int32 count = 2;
+    int32 pageIndex = 3;
+    int32 pageSize = 4;
+}
+
+message GetDictDataListByDictTypeRequest {
+    string dictType = 1;
+}
+message GetDictDataListByDictTypeReply {}
+
+message GetDictDataRequest {
+    string dictLabel = 1;
+    int32 dictCode = 2;
+}
+message GetDictDataReply {
+    DictData data = 1;
+}
+
+message InsertDictDataRequest {
+    int64 id = 1;
+	int64 buyer = 2;
+	string vip = 3;
+	float price = 4;
+	int32 status = 5;
+}
+message InsertDictDataReply {
+    DictData data = 1;
+}
+
+message UpdateDictDataRequest {
+    int64 id = 1;
+	int64 buyer = 2;
+	string vip = 3;
+	float price = 4;
+	int32 status = 5;
+}
+message UpdateDictDataReply {
+    DictData data = 1;
+}
+
+message DeleteDictDataRequest {
+    int32 dictCode = 1;
+}
+message DeleteDictDataReply {}
+
+message DictType {
+    int32 dictId = 1;
+	string dictName = 2;
+	string dictType = 3;
+	string status = 4;
+    string remark = 5;
+    google.protobuf.Timestamp createdAt = 6;
+}
+
+message GetDictTypeListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string dictName = 3;
+    int32 dictId = 4;
+    string dictType = 5;
+}
+message GetDictTypeListReply {}
+
+message GetDictTypeRequest {
+    string dictName = 1;
+    int32 dictId = 2;
+}
+message GetDictTypeReply {}
+
+message GetDictTypeOptionSelectRequest {
+    string dictName = 1;
+    int32 dictId = 2;
+}
+message GetDictTypeOptionSelectReply {}
+
+message InsertDictTypeRequest {}
+message InsertDictTypeReply {}
+
+message UpdateDictTypeRequest {}
+message UpdateDictTypeReply {}
+
+message DeleteDictTypeRequest {
+    int32 dictId = 2;
+}
+message DeleteDictTypeReply {}
+
+message GetSysTableListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string beginTime = 3;
+    string endTime = 4;
+    string tableName = 5;
+    string tableComment = 6;
+}
+message GetSysTableListReply {}
+
+message InsertSysTableRequest {
+    string tables = 1;
+}
+message InsertSysTableReply {}
+
+message UpdateSysTableRequest {}
+message UpdateSysTableReply {}
+
+message DeleteSysTablesRequest {
+    string ids = 1;
+}
+message DeleteSysTablesReply {}
+
+message GetSysTablesRequest {
+    int32 tableId = 1;
+}
+message GetSysTablesReply {
+    repeated SysColumn rows = 1;
+    SysTable info = 2;
+}
+
+message GetSysColumnRequest {
+    int32 tableId = 1;
+}
+message GetSysColumnReply {}
+
+message UpdateSysColumnRequest {}
+message UpdateSysColumnReply {}
+
+message DBTable {
+    string tableName = 1;
+    string engine = 2;
+    string tableRows = 3;
+    string tableCollation = 4;
+    google.protobuf.Timestamp createTime = 5;
+    google.protobuf.Timestamp updateTime = 6;
+    string tableComment = 7;
+}
+
+message GetDBTableListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string tableName = 3;
+}
+message GetDBTableListReply {}
+
+message GetDBColumnListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string tableName = 3;
+}
+message GetDBColumnListReply {}
+
+message PreviewRequest {
+    int32 tableId = 1;
+}
+message PreviewReply {
+    string model = 1;
+    string dao = 2;
+    string js = 3;
+    string vue = 4;
+}
+
+message GenCodeRequest {
+    int32 tableId = 1;
+    bool ischeckrole = 2;
+}
+message GenCodeReply {}
+
+message GenMenuAndApiRequest {
+    int32 tableId = 1;
+}
+message GenMenuAndApiReply {}

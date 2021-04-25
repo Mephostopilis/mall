@@ -1,0 +1,17 @@
+{
+    "protoc": {
+        "path": "F:/GO/bin/protoc.exe",
+        "options": [
+            "--proto_path=F:/GO/src/kratos/third_party",
+            "--java_out=gen/java"
+        ],
+    },
+    "go.formatTool": "goreturns",
+    "[go]": {
+        "editor.formatOnSave": true
+    },
+    "[proto3]": {
+        "editor.formatOnSave": false
+    },
+    "cmake.configureOnOpen": true
+}

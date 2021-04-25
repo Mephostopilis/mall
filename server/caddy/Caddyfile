@@ -1,0 +1,8 @@
+:9000 {
+  root * /root/test/dist
+  file_server
+
+  reverse_proxy /admin/* 127.0.0.1:8000
+  reverse_proxy /tiku/* 127.0.0.1:8002
+}
+

@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package api.sys.v1;
+
+import "google/protobuf/any.proto";
+
+option go_package = "edu/api/sys/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.admin.v1";
+
+message ApiReply {
+    int32 code = 1;
+    string reason = 2;
+    string message = 3;
+    int32 ttl = 4;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
+}
+
+message SysColumn {
+    int32 columnId = 1;
+    int32 tableId = 2;
+    string columnName = 3;
+    string columnType = 4;
+    string goType = 5;
+    string goField = 6;
+    string jsonField = 7;
+    string isPk = 8;
+    string isIncrement = 9;
+    string isRequired = 10;
+    string isInsert = 11;
+    string isEdit = 12;
+    string isList = 13;
+    string isQuery = 14;
+    string queryType = 15;
+    string htmlType = 16;
+    string dictType = 17;
+    int32 sort = 18;
+    string list = 19;
+    bool pk = 20;
+    bool required = 21;
+    bool superColumn = 22;
+    bool usableColumn = 23;
+    bool increment = 24;
+    bool insert = 25;
+    bool edit = 26;
+    bool query = 27;
+    string remark = 28;
+    string createdAt = 29;
+}
+
+message SysTable {
+    int32 tableId = 1;
+    string tableName = 2;
+    string tableComment = 3;
+    string className = 4;
+    string tplCategory = 5;
+    string packageName = 6;
+    string moduleName = 7;
+    string businessName = 8;
+    string functionName = 9;
+    string functionAuthor = 10;
+    string pkColumn = 11;
+    string pkGoField = 12;
+    string pkJsonField = 13;
+    string options = 14;
+    string treeCode = 15;
+    string treeParentCode = 16;
+    string treeName = 17;
+    bool tree = 18;
+    bool crud = 19;
+    string remark = 20;
+    string isLogicalDelete = 21;
+    bool logicalDelete = 22;
+    string logicalDeleteColumn = 23;
+    repeated SysColumn columns = 24;
+    string createdAt = 25;
+}

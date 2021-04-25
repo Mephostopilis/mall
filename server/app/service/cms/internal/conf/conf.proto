@@ -1,0 +1,82 @@
+syntax = "proto3";
+package cms.internal.conf;
+
+option go_package = "edu/cms/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Service service = 1;
+  Server server = 2;
+  Data data = 3;
+  Reg reg = 4;
+  App app = 5;
+}
+
+message Service {
+  string name = 1;
+  string version = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string address = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration read_timeout = 3;
+    google.protobuf.Duration write_timeout = 4;
+    google.protobuf.Duration dial_timeout = 5;
+  }
+  message Migrate {
+    string path = 1;
+  }
+  Database database = 1;
+  Redis redis = 2;
+  Migrate migrate = 3;
+}
+
+message Reg {
+  message Etcd {
+    repeated string endpoints = 1;
+    google.protobuf.Duration dialTimeout = 2;
+  }
+  message Instance {
+    string zone = 1;
+    string env = 2;
+    string hostname = 3;
+    string appid = 4;
+    repeated string addrs = 5;
+  }
+  Etcd etcd = 1;
+  Instance instance = 2;
+}
+
+message App {
+  message Jwt {
+    string secret = 1;
+    google.protobuf.Duration timeout = 2;
+  }
+  message UUID {
+    uint32 machine_id = 1;
+  }
+  Jwt jwt = 1;
+  UUID uuid = 2;
+}

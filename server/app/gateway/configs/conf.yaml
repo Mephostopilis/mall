@@ -1,0 +1,37 @@
+service:
+  name: gateway
+  version: v1.0.0
+server:
+  http:
+    address: 0.0.0.0:8001
+    timeout: 1s
+  grpc:
+    address: 0.0.0.0:9001
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    source: root:123456@tcp(127.0.0.1:3306)/edu_sso?charset=utf8&parseTime=true
+  redis:
+    addr: 127.0.0.1:6379
+    dial_timeout: 0.1s
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+reg:
+  etcd:
+    endpoints:
+      - "119.27.191.44:2379"
+    dialTimeout: 3s
+  instance:
+    zone: "sh001"
+    env: "dev"
+    hostname: "test1"
+    appid: "service.sso"
+    addrs:
+      - "grpc://127.0.0.1:9102"
+app:
+  jwt:
+    # token 密钥，生产环境时及的修改
+    secret: edu/admin
+    # token 过期时间 单位：秒
+    timeout: 3600s
