@@ -81,7 +81,6 @@ func (s *AdminService) GetDictTypeOptionSelect(ctx context.Context, req *pb.GetD
 	if err != nil {
 		return
 	}
-
 	list := make([]*anypb.Any, 0)
 	for i := 0; i < len(result); i++ {
 		it := result[i]
@@ -104,7 +103,6 @@ func (s *AdminService) GetDictTypeOptionSelect(ctx context.Context, req *pb.GetD
 		Count:   int32(len(result)),
 		Data:    list,
 	}
-
 	return
 }
 

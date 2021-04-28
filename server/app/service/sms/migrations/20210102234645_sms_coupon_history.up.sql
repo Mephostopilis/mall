@@ -1,5 +1,5 @@
 CREATE TABLE `sms_coupon_history` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `coupon_id` bigint(20) DEFAULT NULL,
   `member_id` bigint(20) DEFAULT NULL,
@@ -11,6 +11,11 @@ CREATE TABLE `sms_coupon_history` (
   `use_time` datetime DEFAULT NULL COMMENT '使用时间',
   `order_id` bigint(20) DEFAULT NULL COMMENT '订单编号',
   `order_sn` varchar(100) DEFAULT NULL COMMENT '订单号码',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_member_id` (`member_id`) USING BTREE,
   KEY `idx_coupon_id` (`coupon_id`) USING BTREE

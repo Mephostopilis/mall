@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.sms;
 
 import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "edu/api/sms;sms";
 option java_multiple_files = true;
@@ -13,10 +14,20 @@ message ApiReply {
     string reason = 2;
     string message = 3;
     int32 ttl = 4;
-    int32 count = 5;
-    repeated google.protobuf.Any details = 6;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
 }
 
-message Coupon {}
+message Coupon {
+    uint64 id = 1;
+    int32 type = 2;
+    string name = 3;
+    int32 platform = 4;
+    int32 count = 5;
+    float amount = 6;
+    google.protobuf.Timestamp createdAt = 7;
+}
 
 message CouponHistory {}

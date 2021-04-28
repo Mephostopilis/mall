@@ -173,7 +173,6 @@
                     <el-radio label="M">目录</el-radio>
                     <el-radio label="C">菜单</el-radio>
                     <el-radio label="F">按钮</el-radio>
-                    <el-radio label="A">接口</el-radio>
                   </el-radio-group>
                 </el-form-item>
               </el-col>
@@ -444,6 +443,7 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.menuId !== undefined) {
+            console.log('updateMenu', this.form)
             updateMenu(this.form).then((response) => {
               if (response.code === 0) {
                 this.msgSuccess('修改成功')

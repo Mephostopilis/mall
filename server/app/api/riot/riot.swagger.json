@@ -212,11 +212,19 @@
           "type": "integer",
           "format": "int32"
         },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
         "count": {
           "type": "integer",
           "format": "int32"
         },
-        "details": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"

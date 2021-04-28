@@ -1,5 +1,5 @@
 CREATE TABLE `ums_member` (
-  `id` bigint(20) NOT NULL COMMENT 'id',
+  `id` bigint(20) unsigned NOT NULL COMMENT 'id',
   `secret` varchar(255) DEFAULT NULL COMMENT '密钥',
   `domain` varchar(255) DEFAULT NULL COMMENT 'domain',
   `user_id` varchar(255) DEFAULT NULL COMMENT '用户id',

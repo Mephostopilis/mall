@@ -36,7 +36,7 @@ type GreeterUsecase struct {
 
 func NewGreeterUsecase(repo dao.Dao, logger log.Logger) *GreeterUsecase {
 	ctx := context.Background()
-	uuidc, err := uuidpb.NewClient(ctx)
+	uuidc, err := uuidpb.NewUUID(ctx)
 	if err != nil {
 		panic(err)
 	}

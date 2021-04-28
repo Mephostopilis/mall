@@ -47,7 +47,7 @@ func (d *dao) GetPmsAlbumPage(ctx context.Context, e *model.PmsAlbum, pageSize i
 }
 
 // 更新PmsAlbum
-func (d *dao) UpdatePmsAlbum(ctx context.Context, e *model.PmsAlbum, id int) (update model.PmsAlbum, err error) {
+func (d *dao) UpdatePmsAlbum(ctx context.Context, e *model.PmsAlbum, id uint64) (update model.PmsAlbum, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -71,7 +71,7 @@ func (d *dao) DeletePmsAlbum(ctx context.Context, e *model.PmsAlbum, id int) (su
 }
 
 //批量删除
-func (d *dao) BatchDeletePmsAlbum(ctx context.Context, e *model.PmsAlbum, id []int) (Result bool, err error) {
+func (d *dao) BatchDeletePmsAlbum(ctx context.Context, e *model.PmsAlbum, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.PmsAlbum{}).Error; err != nil {
 		return
 	}

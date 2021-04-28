@@ -3,11 +3,24 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-
+        <el-form
+          ref="queryForm"
+          :model="queryParams"
+          :inline="true"
+          label-width="68px"
+        >
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >搜索</el-button>
+            <el-button
+              icon="el-icon-refresh"
+              size="mini"
+              @click="resetQuery"
+            >重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -46,10 +59,39 @@
           </el-col>
         </el-row>
 
-        <el-table v-loading="loading" :data="pmsbrandList" @selection-change="handleSelectionChange">
+        <el-table
+          v-loading="loading"
+          :data="pmsbrandList"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column prop="name" label="名称" />
+          <el-table-column prop="logo" label="logo">
+            <template scope="scope">
+              <el-image
+                slot="reference"
+                :src="baseUrl + scope.row.logo"
+                :alt="baseUrl + scope.row.logo"
+                style="max-height: 50px; max-width: 50px"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column prop="factoryStatus" label="是否是制造商" />
+          <el-table-column prop="productCount" label="产品数" />
+          <el-table-column
+            label="操作"
+            align="center"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope">
+              <el-button
+                v-permisaction="['pmsbrand:pmsbrand:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-info"
+                @click="handleDetail(scope.row)"
+              >详情
+              </el-button>
               <el-button
                 v-permisaction="['pmsbrand:pmsbrand:edit']"
                 size="mini"
@@ -71,7 +113,7 @@
         </el-table>
 
         <pagination
-          v-show="total>0"
+          v-show="total > 0"
           :total="total"
           :page.sync="queryParams.pageIndex"
           :limit.sync="queryParams.pageSize"
@@ -79,50 +121,41 @@
         />
 
         <!-- 添加或修改对话框 -->
-        <el-dialog :title="title" :visible.sync="open" width="500px">
-          <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
-            <el-form-item label="" prop="appId">
-              <el-input
-                v-model="form.appId"
-                placeholder=""
-              />
+        <el-dialog :title="title" :visible.sync="open" width="600px">
+          <el-form ref="form" :model="form" :rules="rules" label-width="100px" :disabled="isDisabled">
+            <el-form-item label="名称" prop="name">
+              <el-input v-model="form.name" placeholder="" />
             </el-form-item>
             <el-form-item label="专区大图" prop="bigPic">
-              <el-input
-                v-model="form.bigPic"
-                placeholder="专区大图"
-              />
+              <div v-if="form.logo && form.logo.length > 0">
+                <el-image :src="baseUrl + form.logo" />
+              </div>
+              <div v-else>
+                <single-image-upload :on-success="handleBigPicSuccess" />
+              </div>
             </el-form-item>
             <el-form-item label="品牌故事" prop="brandStory">
-              <el-input
-                v-model="form.brandStory"
-                placeholder="品牌故事"
-              />
+              <el-input v-model="form.brandStory" placeholder="品牌故事" />
             </el-form-item>
-            <el-form-item label="是否为品牌制造商：0->不是；1->是" prop="factoryStatus">
-              <el-input
-                v-model="form.factoryStatus"
-                placeholder="是否为品牌制造商：0->不是；1->是"
-              />
+            <el-form-item
+              label="品牌制造商"
+              prop="factoryStatus"
+            >
+              <el-select v-model="form.factoryStatus" placeholder="请选择">
+                <el-option label="是" value="1" />
+                <el-option label="否" value="0" />
+              </el-select>
             </el-form-item>
             <el-form-item label="首字母" prop="firstLetter">
-              <el-input
-                v-model="form.firstLetter"
-                placeholder="首字母"
-              />
+              <el-input v-model="form.firstLetter" placeholder="首字母" />
             </el-form-item>
             <el-form-item label="品牌logo" prop="logo">
-              <el-input
-                v-model="form.logo"
-                placeholder="品牌logo"
-              />
-            </el-form-item>
-            <el-form-item label="" prop="name">
-              <el-input
-                v-model="form.name"
-                placeholder=""
-              />
+              <div v-if="form.logo && form.logo.length > 0">
+                <el-image :src="baseUrl + form.logo" />
+              </div>
+              <div v-else>
+                <single-image-upload :on-success="handleLogoSuccess" />
+              </div>
             </el-form-item>
             <el-form-item label="产品评论数量" prop="productCommentCount">
               <el-input
@@ -131,22 +164,16 @@
               />
             </el-form-item>
             <el-form-item label="产品数量" prop="productCount">
-              <el-input
-                v-model="form.productCount"
-                placeholder="产品数量"
-              />
+              <el-input v-model="form.productCount" placeholder="产品数量" />
             </el-form-item>
-            <el-form-item label="" prop="showStatus">
-              <el-input
-                v-model="form.showStatus"
-                placeholder=""
-              />
+            <el-form-item label="状态" prop="showStatus">
+              <el-select v-model="form.showStatus" placeholder="请选择">
+                <el-option label="是" value="1" />
+                <el-option label="否" value="0" />
+              </el-select>
             </el-form-item>
-            <el-form-item label="" prop="sort">
-              <el-input
-                v-model="form.sort"
-                placeholder=""
-              />
+            <el-form-item label="排序" prop="sort">
+              <el-input-number v-model="form.sort" placeholder="" />
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -160,10 +187,21 @@
 </template>
 
 <script>
-import { addPmsBrand, delPmsBrand, getPmsBrand, listPmsBrand, updatePmsBrand } from '@/api/pms/pmsbrand'
+import {
+  addPmsBrand,
+  delPmsBrand,
+  getPmsBrand,
+  listPmsBrand,
+  updatePmsBrand
+} from '@/api/pms/pmsbrand'
+import SingleImageUpload from '@/components/Upload/SingleImage'
+import qs from 'qs'
 
 export default {
-  name: 'Config',
+  name: 'PmsBrand',
+  components: {
+    SingleImageUpload
+  },
   data() {
     return {
       // 遮罩层
@@ -181,6 +219,8 @@ export default {
       // 是否显示弹出层
       open: false,
       isEdit: false,
+      isDisabled: false,
+
       // 类型数据字典
       typeOptions: [],
       pmsbrandList: [],
@@ -189,13 +229,13 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10
-
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
-      rules: {}
+      rules: {},
+      // 文件服基础
+      baseUrl: 'http://192.168.21.95:8080'
     }
   },
   created() {
@@ -205,11 +245,12 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listPmsBrand(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        this.pmsbrandList = response.data
-        this.total = response.count
-        this.loading = false
-      }
+      listPmsBrand(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          this.pmsbrandList = response.data
+          this.total = response.count
+          this.loading = false
+        }
       )
     },
     // 取消按钮
@@ -220,13 +261,11 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-
-        appId: undefined,
+        id: undefined,
         bigPic: undefined,
         brandStory: undefined,
         factoryStatus: undefined,
         firstLetter: undefined,
-        id: undefined,
         logo: undefined,
         name: undefined,
         productCommentCount: undefined,
@@ -248,38 +287,51 @@ export default {
       this.resetForm('queryForm')
       this.handleQuery()
     },
+    /** 详情 */
+    handleDetail(row) {
+      this.reset()
+      const id = row.id || this.ids
+      getPmsBrand(id).then((response) => {
+        this.form = response.data[0]
+        this.open = true
+        this.title = '品牌详情'
+        this.isEdit = true
+        this.isDisabled = true
+      })
+    },
     /** 新增按钮操作 */
     handleAdd() {
       this.reset()
       this.open = true
       this.title = '添加品牌表'
       this.isEdit = false
+      this.isDisabled = false
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map((item) => item.id)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const id =
-                row.id || this.ids
-      getPmsBrand(id).then(response => {
-        this.form = response.data
+      const id = row.id || this.ids
+      getPmsBrand(id).then((response) => {
+        this.form = response.data[0]
         this.open = true
         this.title = '修改品牌表'
         this.isEdit = true
+        this.isDisabled = false
       })
     },
     /** 提交按钮 */
     submitForm: function() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updatePmsBrand(this.form).then(response => {
-              if (response.code === 200) {
+            updatePmsBrand(qs.stringify(this.form)).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('修改成功')
                 this.open = false
                 this.getList()
@@ -288,8 +340,8 @@ export default {
               }
             })
           } else {
-            addPmsBrand(this.form).then(response => {
-              if (response.code === 200) {
+            addPmsBrand(qs.stringify(this.form)).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('新增成功')
                 this.open = false
                 this.getList()
@@ -308,13 +360,21 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delPmsBrand(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delPmsBrand(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
+    },
+    handleBigPicSuccess(pathname) {
+      this.form.bigPic = pathname
+    },
+    handleLogoSuccess(pathname) {
+      this.form.logo = pathname
     }
   }
 }

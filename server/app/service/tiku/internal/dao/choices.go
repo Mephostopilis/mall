@@ -74,7 +74,7 @@ func (d *dao) UpdateChoices(ctx context.Context, e *model.Choices, id uint64) (u
 }
 
 // 删除Choices
-func (d *dao) DeleteChoices(ctx context.Context, e *model.Choices, id int) (success bool, err error) {
+func (d *dao) DeleteChoices(ctx context.Context, e *model.Choices, id uint64) (success bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).Delete(&model.Choices{}).Error; err != nil {
 		success = false
 		return
@@ -84,7 +84,7 @@ func (d *dao) DeleteChoices(ctx context.Context, e *model.Choices, id int) (succ
 }
 
 //批量删除
-func (d *dao) BatchDeleteChoices(ctx context.Context, e *model.Choices, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteChoices(ctx context.Context, e *model.Choices, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.Choices{}).Error; err != nil {
 		return
 	}

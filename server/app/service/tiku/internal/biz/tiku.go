@@ -7,11 +7,14 @@ import (
 	pb "edu/api/tiku"
 	uuidpb "edu/api/uuid"
 	"edu/pkg/jwtauth"
+	"edu/pkg/strings"
 	"edu/service/tiku/internal/conf"
 	"edu/service/tiku/internal/dao"
 	"edu/service/tiku/internal/model"
 
+	"github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -22,9 +25,9 @@ type TikuUsecase struct {
 	log   *log.Helper
 }
 
-func NewTikuUsecase(c *conf.App, logger log.Logger, d dao.Dao) (*TikuUsecase, error) {
+func NewTikuUsecase(c *conf.App, logger log.Logger, d dao.Dao, r *registry.Registry) (*TikuUsecase, error) {
 	log := log.NewHelper("usecase/tiku", logger)
-	uuidc, err := uuidpb.NewClient(context.Background())
+	uuidc, err := uuidpb.NewUUID(context.Background(), grpc.WithDiscovery(r))
 	if err != nil {
 		return nil, err
 	}
@@ -191,6 +194,29 @@ func (uc *TikuUsecase) CreateExercise(ctx context.Context, token string, req *pb
 	_, err = uc.d.CreateExercise(ctx, e)
 	if err != nil {
 		return err
+	}
+	return
+}
+
+func (uc *TikuUsecase) UpdateExercise(ctx context.Context, req *pb.Exercise) (err error) {
+	d := model.Exercise{
+		Id: req.Id,
+	}
+	_, err = uc.d.UpdateExercise(ctx, &d, req.Id)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *TikuUsecase) DeleteExercise(ctx context.Context, req *pb.DeleteExerciseRequest) (err error) {
+	ids, err := strings.SplitUint64s(req.Ids, ",")
+	if err != nil {
+		return
+	}
+	_, err = uc.d.BatchDeleteExercise(ctx, &model.Exercise{}, ids)
+	if err != nil {
+		return
 	}
 	return
 }

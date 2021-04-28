@@ -4,7 +4,13 @@
     <BasicLayout>
       <template #wrapper>
         <el-card class="box-card">
-          <el-form ref="queryForm" :model="queryParams" :inline="true" label-position="left" label-width="68px">
+          <el-form
+            ref="queryForm"
+            :model="queryParams"
+            :inline="true"
+            label-position="left"
+            label-width="68px"
+          >
             <el-form-item label="名称" prop="jobName">
               <el-input
                 v-model="queryParams.jobName"
@@ -46,8 +52,17 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-              <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-search"
+                size="mini"
+                @click="handleQuery"
+              >搜索</el-button>
+              <el-button
+                icon="el-icon-refresh"
+                size="mini"
+                @click="resetQuery"
+              >重置</el-button>
             </el-form-item>
           </el-form>
 
@@ -93,12 +108,19 @@
                 @click="handleLog"
               >日志
               </el-button>
-
             </el-col>
           </el-row>
 
-          <el-table v-loading="loading" :data="sysjobList" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55" align="center" /><el-table-column
+          <el-table
+            v-loading="loading"
+            :data="sysjobList"
+            @selection-change="handleSelectionChange"
+          >
+            <el-table-column
+              type="selection"
+              width="55"
+              align="center"
+            /><el-table-column
               label="编码"
               align="center"
               prop="jobId"
@@ -119,8 +141,7 @@
             >
               <template slot-scope="scope">
                 {{ jobGroupFormat(scope.row) }}
-              </template>
-            </el-table-column><el-table-column
+              </template> </el-table-column><el-table-column
               label="cron表达式"
               align="center"
               prop="cronExpression"
@@ -141,7 +162,11 @@
                 {{ statusFormat(scope.row) }}
               </template>
             </el-table-column>
-            <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+            <el-table-column
+              label="操作"
+              align="center"
+              class-name="small-padding fixed-width"
+            >
               <template slot-scope="scope">
                 <el-button
                   v-permisaction="['sysjob:sysjob:edit']"
@@ -152,7 +177,7 @@
                 >修改
                 </el-button>
                 <el-button
-                  v-if="scope.row.entry_id!==0"
+                  v-if="scope.row.entry_id !== 0"
                   v-permisaction="['sysjob:job:remove']"
                   size="mini"
                   type="text"
@@ -161,7 +186,7 @@
                 >停止
                 </el-button>
                 <el-button
-                  v-if="scope.row.entry_id==0"
+                  v-if="scope.row.entry_id == 0"
                   v-permisaction="['sysjob:job:start']"
                   size="mini"
                   type="text"
@@ -182,7 +207,7 @@
           </el-table>
 
           <pagination
-            v-show="total>0"
+            v-show="total > 0"
             :total="total"
             :page.sync="queryParams.pageIndex"
             :limit.sync="queryParams.pageSize"
@@ -190,23 +215,28 @@
           />
 
           <!-- 添加或修改对话框 -->
-          <el-dialog v-dialogDrag :title="title" :visible.sync="open" width="700px" append-to-body>
-            <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+          <el-dialog
+            v-dialogDrag
+            :title="title"
+            :visible.sync="open"
+            width="700px"
+            append-to-body
+          >
+            <el-form
+              ref="form"
+              :model="form"
+              :rules="rules"
+              label-width="120px"
+            >
               <el-row>
                 <el-col :span="12">
                   <el-form-item label="名称" prop="jobName">
-                    <el-input
-                      v-model="form.jobName"
-                      placeholder="名称"
-                    />
+                    <el-input v-model="form.jobName" placeholder="名称" />
                   </el-form-item>
                 </el-col>
                 <el-col :span="12">
                   <el-form-item label="任务分组" prop="jobGroup">
-                    <el-select
-                      v-model="form.jobGroup"
-                      placeholder="请选择"
-                    >
+                    <el-select v-model="form.jobGroup" placeholder="请选择">
                       <el-option
                         v-for="dict in jobGroupOptions"
                         :key="dict.dictValue"
@@ -222,7 +252,8 @@
                       调用目标
                       <el-tooltip placement="top">
                         <div slot="content">
-                          调用示例：func (t *EXEC) ExamplesNoParam(){..} 填写 ExamplesNoParam 即可；
+                          调用示例：func (t *EXEC) ExamplesNoParam(){..} 填写
+                          ExamplesNoParam 即可；
                           <br>参数说明：目前不支持带参调用
                         </div>
                         <i class="el-icon-question" />
@@ -270,10 +301,7 @@
                 </el-col>
                 <el-col :span="12">
                   <el-form-item label="状态" prop="status">
-                    <el-select
-                      v-model="form.status"
-                      placeholder="请选择"
-                    >
+                    <el-select v-model="form.status" placeholder="请选择">
                       <el-option
                         v-for="dict in statusOptions"
                         :key="dict.dictValue"
@@ -290,7 +318,6 @@
               <el-button @click="cancel">取 消</el-button>
             </div>
           </el-dialog>
-
         </el-card>
       </template>
     </BasicLayout>
@@ -298,13 +325,19 @@
 </template>
 
 <script>
-import { addSysJob, delSysJob, getSysJob, listSysJob, updateSysJob, removeJob, startJob } from '@/api/system/job'
+import {
+  addSysJob,
+  delSysJob,
+  getSysJob,
+  listSysJob,
+  updateSysJob,
+  removeJob,
+  startJob
+} from '@/api/system/job'
 
 export default {
-  name: 'Config',
-  components: {
-
-  },
+  name: 'SysJob',
+  components: {},
   data() {
     return {
       // 遮罩层
@@ -331,52 +364,36 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10,
-        jobName:
-            undefined,
-        jobGroup:
-            undefined,
-        status:
-            undefined
-
+        jobName: undefined,
+        jobGroup: undefined,
+        status: undefined
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
-      rules: { jobId:
-                [
-                  { required: true, message: '编码不能为空', trigger: 'blur' }
-                ],
-      jobName:
-                [
-                  { required: true, message: '名称不能为空', trigger: 'blur' }
-                ],
-      jobGroup:
-                [
-                  { required: true, message: '任务分组不能为空', trigger: 'blur' }
-                ],
-      cronExpression:
-                [
-                  { required: true, message: 'cron表达式不能为空', trigger: 'blur' }
-                ],
-      invokeTarget:
-                [
-                  { required: true, message: '调用目标不能为空', trigger: 'blur' }
-                ],
-      status:
-                [
-                  { required: true, message: '状态不能为空', trigger: 'blur' }
-                ]
+      rules: {
+        jobId: [{ required: true, message: '编码不能为空', trigger: 'blur' }],
+        jobName: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        jobGroup: [
+          { required: true, message: '任务分组不能为空', trigger: 'blur' }
+        ],
+        cronExpression: [
+          { required: true, message: 'cron表达式不能为空', trigger: 'blur' }
+        ],
+        invokeTarget: [
+          { required: true, message: '调用目标不能为空', trigger: 'blur' }
+        ],
+        status: [{ required: true, message: '状态不能为空', trigger: 'blur' }]
       }
     }
   },
   created() {
     this.getList()
-    this.getDicts('sys_job_group').then(response => {
+    this.getDicts('sys_job_group').then((response) => {
       this.jobGroupOptions = response.data
     })
 
-    this.getDicts('sys_job_status').then(response => {
+    this.getDicts('sys_job_status').then((response) => {
       this.statusOptions = response.data
     })
   },
@@ -384,12 +401,13 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listSysJob(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        // console.log(response)
-        this.sysjobList = response.data
-        this.total = response.count
-        this.loading = false
-      }
+      listSysJob(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          // console.log(response)
+          this.sysjobList = response.data
+          this.total = response.count
+          this.loading = false
+        }
       )
     },
     // 取消按钮
@@ -439,16 +457,15 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.jobId)
+      this.ids = selection.map((item) => item.jobId)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const jobId =
-                row.jobId || this.ids
-      getSysJob(jobId).then(response => {
+      const jobId = row.jobId || this.ids
+      getSysJob(jobId).then((response) => {
         this.form = response.data
         this.form.status = String(this.form.status)
         this.form.misfirePolicy = String(this.form.misfirePolicy)
@@ -462,14 +479,14 @@ export default {
     /** 提交按钮 */
     submitForm: function() {
       console.log(this.form)
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.jobId !== undefined) {
             this.form.status = parseInt(this.form.status)
             this.form.misfirePolicy = parseInt(this.form.misfirePolicy)
             this.form.concurrent = parseInt(this.form.concurrent)
             this.form.jobType = parseInt(this.form.jobType)
-            updateSysJob(this.form).then(response => {
+            updateSysJob(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess('修改成功')
                 this.open = false
@@ -483,7 +500,7 @@ export default {
             this.form.misfirePolicy = parseInt(this.form.misfirePolicy)
             this.form.concurrent = parseInt(this.form.concurrent)
             this.form.jobType = parseInt(this.form.jobType)
-            addSysJob(this.form).then(response => {
+            addSysJob(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess('新增成功')
                 this.open = false
@@ -503,13 +520,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delSysJob(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delSysJob(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
     },
     /** 开始按钮操作 */
     handleStart(row) {
@@ -517,13 +536,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return startJob(row.jobId)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('启动成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return startJob(row.jobId)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('启动成功')
+        })
+        .catch(function() {})
     },
     /** 停止按钮操作 */
     handleRemove(row) {
@@ -531,16 +552,18 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return removeJob(row.jobId)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('关闭成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return removeJob(row.jobId)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('关闭成功')
+        })
+        .catch(function() {})
     },
     handleLog() {
-      this.$router.push({ name: 'job_log', params: { }})
+      this.$router.push({ name: 'job_log', params: {}})
     }
   }
 }

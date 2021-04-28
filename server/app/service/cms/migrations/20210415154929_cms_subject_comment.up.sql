@@ -1,7 +1,7 @@
 CREATE TABLE `cms_subject_comment` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
-  `subject_id` bigint(20) DEFAULT NULL,
+  `subject_id` bigint(20) unsigned DEFAULT NULL,
   `member_nick_name` varchar(255) DEFAULT NULL,
   `member_icon` varchar(255) DEFAULT NULL,
   `content` varchar(1000) DEFAULT NULL,

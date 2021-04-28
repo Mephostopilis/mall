@@ -3,11 +3,24 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-
+        <el-form
+          ref="queryForm"
+          :model="queryParams"
+          :inline="true"
+          label-width="68px"
+        >
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >搜索</el-button>
+            <el-button
+              icon="el-icon-refresh"
+              size="mini"
+              @click="resetQuery"
+            >重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -46,9 +59,21 @@
           </el-col>
         </el-row>
 
-        <el-table v-loading="loading" :data="pmsalbumList" @selection-change="handleSelectionChange">
+        <el-table
+          v-loading="loading"
+          :data="pmsalbumList"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column prop="name" label="名称" />
+          <el-table-column prop="coverPic" label="封面图片" width="200" />
+          <el-table-column prop="picCount" label="图片数量" width="200" />
+          <el-table-column prop="sort" label="图片数量" width="200" />
+          <el-table-column
+            label="操作"
+            align="center"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope">
               <el-button
                 v-permisaction="['pmsalbum:pmsalbum:edit']"
@@ -71,7 +96,7 @@
         </el-table>
 
         <pagination
-          v-show="total>0"
+          v-show="total > 0"
           :total="total"
           :page.sync="queryParams.pageIndex"
           :limit.sync="queryParams.pageSize"
@@ -81,42 +106,20 @@
         <!-- 添加或修改对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
-            <el-form-item label="" prop="appId">
-              <el-input
-                v-model="form.appId"
-                placeholder=""
-              />
+            <el-form-item label="名称" prop="name">
+              <el-input v-model="form.name" placeholder="请输入名称" />
             </el-form-item>
-            <el-form-item label="" prop="coverPic">
-              <el-input
-                v-model="form.coverPic"
-                placeholder=""
-              />
+            <el-form-item label="封面" prop="coverPic">
+              <el-input v-model="form.coverPic" placeholder="" />
             </el-form-item>
-            <el-form-item label="" prop="description">
-              <el-input
-                v-model="form.description"
-                placeholder=""
-              />
+            <el-form-item label="封面数量" prop="picCount">
+              <el-input v-model="form.picCount" placeholder="" />
             </el-form-item>
-            <el-form-item label="" prop="name">
-              <el-input
-                v-model="form.name"
-                placeholder=""
-              />
+            <el-form-item label="描述" prop="description">
+              <el-input v-model="form.description" placeholder="" />
             </el-form-item>
-            <el-form-item label="" prop="picCount">
-              <el-input
-                v-model="form.picCount"
-                placeholder=""
-              />
-            </el-form-item>
-            <el-form-item label="" prop="sort">
-              <el-input
-                v-model="form.sort"
-                placeholder=""
-              />
+            <el-form-item label="排序" prop="sort">
+              <el-input v-model="form.sort" placeholder="" />
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -130,10 +133,16 @@
 </template>
 
 <script>
-import { addPmsAlbum, delPmsAlbum, getPmsAlbum, listPmsAlbum, updatePmsAlbum } from '@/api/pms/pmsalbum'
+import {
+  addPmsAlbum,
+  delPmsAlbum,
+  getPmsAlbum,
+  listPmsAlbum,
+  updatePmsAlbum
+} from '@/api/pms/pmsalbum'
 
 export default {
-  name: 'Config',
+  name: 'PmsAlbum',
   data() {
     return {
       // 遮罩层
@@ -159,13 +168,13 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10
-
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
-      rules: {}
+      rules: {
+        name: [{ required: true, message: '名称不能为空', trigger: 'blur' }]
+      }
     }
   },
   created() {
@@ -175,11 +184,13 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listPmsAlbum(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        this.pmsalbumList = response.data
-        this.total = response.count
-        this.loading = false
-      }
+      listPmsAlbum(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          console.log('pms album list ', response)
+          this.pmsalbumList = response.data
+          this.total = response.count
+          this.loading = false
+        }
       )
     },
     // 取消按钮
@@ -190,7 +201,6 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-
         appId: undefined,
         coverPic: undefined,
         description: undefined,
@@ -222,16 +232,15 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map((item) => item.id)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const id =
-                row.id || this.ids
-      getPmsAlbum(id).then(response => {
+      const id = row.id || this.ids
+      getPmsAlbum(id).then((response) => {
         this.form = response.data
         this.open = true
         this.title = '修改相册表'
@@ -240,11 +249,11 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updatePmsAlbum(this.form).then(response => {
-              if (response.code === 200) {
+            updatePmsAlbum(this.form).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('修改成功')
                 this.open = false
                 this.getList()
@@ -253,8 +262,8 @@ export default {
               }
             })
           } else {
-            addPmsAlbum(this.form).then(response => {
-              if (response.code === 200) {
+            addPmsAlbum(this.form).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('新增成功')
                 this.open = false
                 this.getList()
@@ -273,13 +282,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delPmsAlbum(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delPmsAlbum(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
     }
   }
 }

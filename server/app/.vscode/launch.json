@@ -24,6 +24,16 @@
             ]
         },
         {
+            "name": "Launch sys",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/service/sys/cmd/sys/main.go",
+            "args": [
+                "-conf=../../configs/conf.yaml"
+            ]
+        },
+        {
             "name": "Launch job im",
             "type": "go",
             "request": "launch",

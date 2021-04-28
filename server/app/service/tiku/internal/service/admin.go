@@ -20,7 +20,7 @@ type AdminService struct {
 }
 
 func NewAdminService(logger log.Logger, uc *biz.TikuUsecase) *AdminService {
-	log := log.NewHelper("service", logger)
+	log := log.NewHelper("service/admin", logger)
 	s := &AdminService{
 		uc:  uc,
 		log: log,
@@ -165,9 +165,23 @@ func (s *AdminService) InsertExercise(ctx context.Context, req *pb.Exercise) (re
 }
 
 func (s *AdminService) UpdateExercise(ctx context.Context, req *pb.Exercise) (reply *pb.ApiReply, err error) {
+	if err = s.uc.UpdateExercise(ctx, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+	}
 	return
 }
 
 func (s *AdminService) DeleteExercise(ctx context.Context, req *pb.DeleteExerciseRequest) (reply *pb.ApiReply, err error) {
+	if err = s.uc.DeleteExercise(ctx, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+	}
 	return
 }

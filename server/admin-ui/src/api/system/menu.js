@@ -42,7 +42,7 @@ export function addMenu(data) {
     },
     url: '/admin/v1/menu',
     method: 'post',
-    data: data
+    data: qs.stringify(data)
   })
 }
 
@@ -54,7 +54,7 @@ export function updateMenu(data) {
     },
     url: '/admin/v1/menu',
     method: 'put',
-    data: data
+    data: qs.stringify(data)
   })
 }
 

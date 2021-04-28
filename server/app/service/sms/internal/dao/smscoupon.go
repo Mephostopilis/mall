@@ -47,7 +47,7 @@ func (d *dao) GetSmsCouponPage(ctx context.Context, e *model.SmsCoupon, pageSize
 }
 
 // 更新SmsCoupon
-func (d *dao) UpdateSmsCoupon(ctx context.Context, e *model.SmsCoupon, id int) (update model.SmsCoupon, err error) {
+func (d *dao) UpdateSmsCoupon(ctx context.Context, e *model.SmsCoupon, id uint64) (update model.SmsCoupon, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -71,7 +71,7 @@ func (d *dao) DeleteSmsCoupon(ctx context.Context, e *model.SmsCoupon, id int) (
 }
 
 //批量删除
-func (d *dao) BatchDeleteSmsCoupon(ctx context.Context, e *model.SmsCoupon, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteSmsCoupon(ctx context.Context, e *model.SmsCoupon, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.SmsCoupon{}).Error; err != nil {
 		return
 	}

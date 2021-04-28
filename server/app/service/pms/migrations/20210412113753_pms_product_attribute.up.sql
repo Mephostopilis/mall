@@ -1,5 +1,5 @@
 CREATE TABLE `pms_product_attribute` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `product_attribute_category_id` bigint(20) DEFAULT NULL,
   `name` varchar(64) DEFAULT NULL,
@@ -12,5 +12,10 @@ CREATE TABLE `pms_product_attribute` (
   `related_status` int(1) DEFAULT NULL COMMENT '相同属性产品是否关联；0->不关联；1->关联',
   `hand_add_status` int(1) DEFAULT NULL COMMENT '是否支持手动新增；0->不支持；1->支持',
   `type` int(1) DEFAULT NULL COMMENT '属性的类型；0->规格；1->参数',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='商品属性参数表';

@@ -28,6 +28,11 @@ type AdminClient interface {
 	CreateHelpCategory(ctx context.Context, in *HelpCategory, opts ...grpc.CallOption) (*ApiReply, error)
 	UpdateHelpCategory(ctx context.Context, in *HelpCategory, opts ...grpc.CallOption) (*ApiReply, error)
 	DeleteHelpCategory(ctx context.Context, in *DeleteHelpCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListSubject(ctx context.Context, in *ListSubjectRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	CreateSubject(ctx context.Context, in *Subject, opts ...grpc.CallOption) (*ApiReply, error)
+	UpdateSubject(ctx context.Context, in *Subject, opts ...grpc.CallOption) (*ApiReply, error)
+	DeleteSubject(ctx context.Context, in *DeleteSubjectRequest, opts ...grpc.CallOption) (*ApiReply, error)
 }
 
 type adminClient struct {
@@ -128,6 +133,51 @@ func (c *adminClient) DeleteHelpCategory(ctx context.Context, in *DeleteHelpCate
 	return out, nil
 }
 
+func (c *adminClient) ListSubject(ctx context.Context, in *ListSubjectRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.cms.Admin/ListSubject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetSubject(ctx context.Context, in *GetSubjectRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.cms.Admin/GetSubject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateSubject(ctx context.Context, in *Subject, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.cms.Admin/CreateSubject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateSubject(ctx context.Context, in *Subject, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.cms.Admin/UpdateSubject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteSubject(ctx context.Context, in *DeleteSubjectRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.cms.Admin/DeleteSubject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -142,6 +192,11 @@ type AdminServer interface {
 	CreateHelpCategory(context.Context, *HelpCategory) (*ApiReply, error)
 	UpdateHelpCategory(context.Context, *HelpCategory) (*ApiReply, error)
 	DeleteHelpCategory(context.Context, *DeleteHelpCategoryRequest) (*ApiReply, error)
+	ListSubject(context.Context, *ListSubjectRequest) (*ApiReply, error)
+	GetSubject(context.Context, *GetSubjectRequest) (*ApiReply, error)
+	CreateSubject(context.Context, *Subject) (*ApiReply, error)
+	UpdateSubject(context.Context, *Subject) (*ApiReply, error)
+	DeleteSubject(context.Context, *DeleteSubjectRequest) (*ApiReply, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -178,6 +233,21 @@ func (UnimplementedAdminServer) UpdateHelpCategory(context.Context, *HelpCategor
 }
 func (UnimplementedAdminServer) DeleteHelpCategory(context.Context, *DeleteHelpCategoryRequest) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHelpCategory not implemented")
+}
+func (UnimplementedAdminServer) ListSubject(context.Context, *ListSubjectRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSubject not implemented")
+}
+func (UnimplementedAdminServer) GetSubject(context.Context, *GetSubjectRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubject not implemented")
+}
+func (UnimplementedAdminServer) CreateSubject(context.Context, *Subject) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSubject not implemented")
+}
+func (UnimplementedAdminServer) UpdateSubject(context.Context, *Subject) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubject not implemented")
+}
+func (UnimplementedAdminServer) DeleteSubject(context.Context, *DeleteSubjectRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSubject not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -372,6 +442,96 @@ func _Admin_DeleteHelpCategory_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_ListSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSubjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListSubject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.cms.Admin/ListSubject",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListSubject(ctx, req.(*ListSubjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSubjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetSubject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.cms.Admin/GetSubject",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetSubject(ctx, req.(*GetSubjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Subject)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateSubject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.cms.Admin/CreateSubject",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateSubject(ctx, req.(*Subject))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Subject)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateSubject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.cms.Admin/UpdateSubject",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateSubject(ctx, req.(*Subject))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteSubject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSubjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteSubject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.cms.Admin/DeleteSubject",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteSubject(ctx, req.(*DeleteSubjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -418,6 +578,26 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteHelpCategory",
 			Handler:    _Admin_DeleteHelpCategory_Handler,
+		},
+		{
+			MethodName: "ListSubject",
+			Handler:    _Admin_ListSubject_Handler,
+		},
+		{
+			MethodName: "GetSubject",
+			Handler:    _Admin_GetSubject_Handler,
+		},
+		{
+			MethodName: "CreateSubject",
+			Handler:    _Admin_CreateSubject_Handler,
+		},
+		{
+			MethodName: "UpdateSubject",
+			Handler:    _Admin_UpdateSubject_Handler,
+		},
+		{
+			MethodName: "DeleteSubject",
+			Handler:    _Admin_DeleteSubject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1,7 +1,7 @@
 CREATE TABLE `oms_order_item` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
-  `order_id` bigint(20) DEFAULT NULL COMMENT '订单id',
+  `order_id` bigint(20) unsigned DEFAULT NULL COMMENT '订单id',
   `order_sn` varchar(64) DEFAULT NULL COMMENT '订单编号',
   `product_id` bigint(20) DEFAULT NULL,
   `product_pic` varchar(500) DEFAULT NULL,
@@ -21,5 +21,10 @@ CREATE TABLE `oms_order_item` (
   `gift_integration` int(11) DEFAULT '0',
   `gift_growth` int(11) DEFAULT '0',
   `product_attr` varchar(500) DEFAULT NULL COMMENT '商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COMMENT='订单中所包含的商品';

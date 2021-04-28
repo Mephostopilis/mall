@@ -3,7 +3,7 @@ package dao
 import (
 	"context"
 
-	"edu/riot/internal/conf"
+	"edu/service/riot/internal/conf"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"

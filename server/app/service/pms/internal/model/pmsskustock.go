@@ -13,6 +13,8 @@ type PmsSkuStock struct {
 	SkuCode        string `json:"skuCode" gorm:"type:varchar(64);"`          // sku编码
 	SpData         string `json:"spData" gorm:"type:varchar(500);"`          // 商品销售属性，json格式
 	Stock          string `json:"stock" gorm:"type:int;"`                    // 库存
+	CreateBy       uint64 `gorm:"column:create_by;type:bigint;" json:"createBy"`
+	UpdateBy       uint64 `gorm:"column:update_By;type:bigint;" json:"updateBy"`
 	BaseModel
 }
 

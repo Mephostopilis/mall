@@ -1,5 +1,5 @@
 CREATE TABLE `pms_product_category` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `parent_id` bigint(20) DEFAULT NULL COMMENT '上机分类的编号：0表示一级分类',
   `name` varchar(64) DEFAULT NULL,
@@ -12,5 +12,10 @@ CREATE TABLE `pms_product_category` (
   `icon` varchar(255) DEFAULT NULL COMMENT '图标',
   `keywords` varchar(255) DEFAULT NULL,
   `description` text COMMENT '描述',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='产品分类';

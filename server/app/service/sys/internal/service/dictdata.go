@@ -4,6 +4,7 @@ import (
 	"context"
 
 	pb "edu/api/sys/v1"
+	"edu/pkg/strings"
 
 	"edu/service/sys/internal/model"
 
@@ -29,7 +30,6 @@ func (s *AdminService) GetDictDataList(ctx context.Context, req *pb.GetDictDataL
 	if err != nil {
 		return
 	}
-
 	list := make([]*anypb.Any, 0)
 	for i := 0; i < len(result); i++ {
 		it := result[i]
@@ -141,20 +141,17 @@ func (s *AdminService) InsertDictData(ctx context.Context, req *pb.DictData) (re
 		err = errors.Unknown("meta", "error")
 		return
 	}
-
 	v := md.Get("UserID")
 	if len(v) < 0 {
 		err = errors.Unknown("meta", "error")
 		return
 	}
-
 	var data model.SysDictData
 	data.CreateBy = v[0]
 	it, err := s.adao.CreateDictData(&data)
 	if err != nil {
 		return
 	}
-
 	list := make([]*anypb.Any, 0)
 	d := &pb.DictData{
 		DictCode:  int64(it.DictCode),
@@ -254,7 +251,6 @@ func (s *AdminService) DeleteDictData(ctx context.Context, req *pb.DeleteDictDat
 		err = errors.Unknown("meta", "error")
 		return
 	}
-
 	v := md.Get("UserID")
 	if len(v) < 0 {
 		err = errors.Unknown("meta", "error")
@@ -262,7 +258,10 @@ func (s *AdminService) DeleteDictData(ctx context.Context, req *pb.DeleteDictDat
 	}
 	var data model.SysDictData
 	data.UpdateBy = v[0]
-	IDS := make([]int, 0)
+	IDS, err := strings.SplitInts(req.Ids, ",")
+	if err != nil {
+		return
+	}
 	_, err = s.adao.BatchDeleteDictData(&data, IDS)
 	if err != nil {
 		return

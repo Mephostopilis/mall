@@ -47,7 +47,7 @@ func (d *dao) GetCmsHelpPage(ctx context.Context, e *model.CmsHelp, pageSize int
 }
 
 // 更新CmsHelp
-func (d *dao) UpdateCmsHelp(ctx context.Context, e *model.CmsHelp, id int) (update model.CmsHelp, err error) {
+func (d *dao) UpdateCmsHelp(ctx context.Context, e *model.CmsHelp, id uint64) (update model.CmsHelp, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -71,7 +71,7 @@ func (d *dao) DeleteCmsHelp(ctx context.Context, e *model.CmsHelp, id int) (succ
 }
 
 //批量删除
-func (d *dao) BatchDeleteCmsHelp(ctx context.Context, e *model.CmsHelp, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteCmsHelp(ctx context.Context, e *model.CmsHelp, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.CmsHelp{}).Error; err != nil {
 		return
 	}

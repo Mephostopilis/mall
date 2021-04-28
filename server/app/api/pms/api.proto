@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.pms;
 
 import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "edu/api/pms;pms";
 option java_multiple_files = true;
@@ -13,10 +14,126 @@ message ApiReply {
     string reason = 2;
     string message = 3;
     int32 ttl = 4;
-    int32 count = 5;
-    repeated google.protobuf.Any details = 6;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
 }
 
-message Album {}
+message Album {
+    uint64 id = 1;
+    string name = 2;
+    string coverPic = 3;
+    int32 picCount = 4;
+    int32 sort = 5;
+    string description = 6;
+    repeated AlbumPic pics = 7;
+    google.protobuf.Timestamp createdAt = 8;
+}
 
-message AlbumPic {}
+message AlbumPic {
+    uint64 id = 1;
+    uint64 albumId = 2;
+    string pic = 3;
+    google.protobuf.Timestamp createdAt = 4;
+}
+
+message Brand {
+    uint64 id = 1;
+    string name = 2;
+    string firstLetter = 3;
+    int32 sort = 4;
+    int32 factoryStatus = 5;
+    int32 showStatus = 6;
+    int32 productCount = 7;
+    int32 productCommentCount = 8;
+    string logo = 9;
+    string bigPic = 10;
+    string brandStory = 11;
+    google.protobuf.Timestamp createdAt = 12;
+}
+
+message Product {
+    uint64 id = 1;
+    uint64 brandId = 2;
+    uint64 productCategoryId = 3;
+    uint64 feightTemplateId = 4;
+    uint64 productAttributeCategoryId = 5;
+    string name = 6;
+    string pic = 7;
+    string productSn = 8;
+    int32 publishStatus = 9;
+    int32 newStatus = 10;
+    int32 recommandStatus = 11;
+    int32 verifyStatus = 12;
+    int32 sort = 13;
+    int32 sale = 14;
+    float price = 15;
+    float promotionPrice = 16;
+    int32 giftGrowth = 17;
+    int32 giftPoint = 18;
+    int32 usePointLimit = 19;
+    string subTitle = 20;
+    string description = 21;
+    float originalPrice = 22;
+    int32 stock = 23;
+    int32 lowStock = 24;
+    string unit = 25;
+    float weight = 26;
+    int32 previewStatus = 27;
+    string serviceIds = 28;
+    string keywords = 29;
+    string note = 30;
+    string albumPics = 31;
+    string detailTitle = 32;
+    string detailDesc = 33;
+    string detailHtml = 34;
+    google.protobuf.Timestamp promotionStartTime = 35;
+    google.protobuf.Timestamp promotionEndTime = 36;
+    int32 promotionPerLimit = 37;
+    int32 promotionType = 38;
+    string brandName = 39;
+    string productCategoryName = 40;
+    google.protobuf.Timestamp createdAt = 41;
+}
+
+message ProductCategory {
+    uint64 id = 1;
+    uint64 parentId = 2;
+    string name = 3;
+    int32 level = 4;
+    int32 productCount = 5;
+    string productUnit = 6;
+    int32 navStatus = 7;
+    int32 showStatus = 8;
+    int32 sort = 9;
+    string icon = 10;
+    string keywords = 11;
+    string description = 12;
+    google.protobuf.Timestamp createdAt = 13;
+    repeated ProductCategory children = 14;
+}
+
+message ProductAttribute {
+    uint64 id = 1;
+    uint64 productAttributeCategoryId = 2;
+    string name = 3;
+    int32 selectType = 4;
+    int32 inputType = 5;
+    string inputList = 6;
+    int32 sort = 7;
+    int32 filterType = 8;
+    int32 searchType = 9;
+    int32 relatedStatus = 10;
+    int32 handAddStatus = 11;
+    int32 type = 12;
+    google.protobuf.Timestamp createdAt = 13;
+}
+
+message ProductAttributeCategory {
+    uint64 id = 1;
+    string name = 2;
+    int32 attributeCount = 3;
+    int32 paramCount = 4;
+    google.protobuf.Timestamp createdAt = 5;
+}

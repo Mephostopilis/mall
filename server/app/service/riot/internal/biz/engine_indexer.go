@@ -1,11 +1,5 @@
 package biz
 
-import (
-	"context"
-
-	"edu/service/riot/internal/model"
-)
-
 //IndexDoc 索引
 // 这里可能是唯一要考虑的地方
 // 建立索引与查询不在同一线程
@@ -26,12 +20,12 @@ import (
 // 	return
 // }
 
-func (engine *Engine) IndexBlock(ctx context.Context, id int32, b *model.Block) (err error) {
-	index := engine.indexer[id]
-	b.UID = "block:" + b.Hash
-	if err = index.Index(b.UID, b); err != nil {
-		engine.log.Errorf("err = %v", err)
-		return
-	}
-	return
-}
+// func (engine *Engine) IndexBlock(ctx context.Context, id int32, b *model.Block) (err error) {
+// 	index := engine.indexer[id]
+// 	b.UID = "block:" + b.Hash
+// 	if err = index.Index(b.UID, b); err != nil {
+// 		engine.log.Errorf("err = %v", err)
+// 		return
+// 	}
+// 	return
+// }

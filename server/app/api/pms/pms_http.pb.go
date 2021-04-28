@@ -22,23 +22,65 @@ const _ = http1.SupportPackageIsVersion1
 type AdminHandler interface {
 	CreateAlbum(context.Context, *Album) (*ApiReply, error)
 
-	CreateAlbumPic(context.Context, *AlbumPic) (*ApiReply, error)
+	CreateBrand(context.Context, *Brand) (*ApiReply, error)
+
+	CreateProduct(context.Context, *Product) (*ApiReply, error)
+
+	CreateProductAttribute(context.Context, *ProductAttribute) (*ApiReply, error)
+
+	CreateProductAttributeCategory(context.Context, *ProductAttributeCategory) (*ApiReply, error)
+
+	CreateProductCategory(context.Context, *ProductCategory) (*ApiReply, error)
 
 	DeleteAlbum(context.Context, *DeleteAlbumRequest) (*ApiReply, error)
 
-	DeleteAlbumPic(context.Context, *DeleteAlbumPicRequest) (*ApiReply, error)
+	DeleteBrand(context.Context, *DeleteBrandRequest) (*ApiReply, error)
+
+	DeleteProduct(context.Context, *DeleteProductRequest) (*ApiReply, error)
+
+	DeleteProductAttribute(context.Context, *DeleteProductAttributeRequest) (*ApiReply, error)
+
+	DeleteProductAttributeCategory(context.Context, *DeleteProductAttributeCategoryRequest) (*ApiReply, error)
+
+	DeleteProductCategory(context.Context, *DeleteProductCategoryRequest) (*ApiReply, error)
 
 	GetAlbum(context.Context, *GetAlbumRequest) (*ApiReply, error)
 
-	GetAlbumPic(context.Context, *GetAlbumPicRequest) (*ApiReply, error)
+	GetBrand(context.Context, *GetBrandRequest) (*ApiReply, error)
+
+	GetProduct(context.Context, *GetProductRequest) (*ApiReply, error)
+
+	GetProductAttribute(context.Context, *GetProductAttributeRequest) (*ApiReply, error)
+
+	GetProductAttributeCategory(context.Context, *GetProductAttributeCategoryRequest) (*ApiReply, error)
+
+	GetProductCategory(context.Context, *GetProductCategoryRequest) (*ApiReply, error)
 
 	ListAlbum(context.Context, *ListAlbumRequest) (*ApiReply, error)
 
-	ListAlbumPic(context.Context, *ListAlbumPicRequest) (*ApiReply, error)
+	ListBrand(context.Context, *ListBrandRequest) (*ApiReply, error)
+
+	ListProduct(context.Context, *ListProductRequest) (*ApiReply, error)
+
+	ListProductAttribute(context.Context, *ListProductAttributeRequest) (*ApiReply, error)
+
+	ListProductAttributeCategory(context.Context, *ListProductAttributeCategoryRequest) (*ApiReply, error)
+
+	ListProductCategory(context.Context, *ListProductCategoryRequest) (*ApiReply, error)
+
+	ListProductCategoryTree(context.Context, *ListProductCategoryTreeRequest) (*ApiReply, error)
 
 	UpdateAlbum(context.Context, *Album) (*ApiReply, error)
 
-	UpdateAlbumPic(context.Context, *AlbumPic) (*ApiReply, error)
+	UpdateBrand(context.Context, *Brand) (*ApiReply, error)
+
+	UpdateProduct(context.Context, *Product) (*ApiReply, error)
+
+	UpdateProductAttribute(context.Context, *ProductAttribute) (*ApiReply, error)
+
+	UpdateProductAttributeCategory(context.Context, *ProductAttributeCategory) (*ApiReply, error)
+
+	UpdateProductCategory(context.Context, *ProductCategory) (*ApiReply, error)
 }
 
 func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler {
@@ -178,15 +220,15 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("DELETE")
 
-	r.HandleFunc("/admin/v1/pmsalbumpicList", func(w http.ResponseWriter, r *http.Request) {
-		var in ListAlbumPicRequest
+	r.HandleFunc("/admin/v1/pmsbrandList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListBrandRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
 			return
 		}
 
 		next := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListAlbumPic(ctx, req.(*ListAlbumPicRequest))
+			return srv.ListBrand(ctx, req.(*ListBrandRequest))
 		}
 		if h.Middleware != nil {
 			next = h.Middleware(next)
@@ -202,8 +244,8 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("GET")
 
-	r.HandleFunc("/admin/v1/pmsalbumpic/{id}", func(w http.ResponseWriter, r *http.Request) {
-		var in GetAlbumPicRequest
+	r.HandleFunc("/admin/v1/pmsbrand/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var in GetBrandRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
 			return
@@ -215,7 +257,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 
 		next := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAlbumPic(ctx, req.(*GetAlbumPicRequest))
+			return srv.GetBrand(ctx, req.(*GetBrandRequest))
 		}
 		if h.Middleware != nil {
 			next = h.Middleware(next)
@@ -231,15 +273,15 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("GET")
 
-	r.HandleFunc("/admin/v1/pmsalbumpic", func(w http.ResponseWriter, r *http.Request) {
-		var in AlbumPic
+	r.HandleFunc("/admin/v1/pmsbrand", func(w http.ResponseWriter, r *http.Request) {
+		var in Brand
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
 			return
 		}
 
 		next := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateAlbumPic(ctx, req.(*AlbumPic))
+			return srv.CreateBrand(ctx, req.(*Brand))
 		}
 		if h.Middleware != nil {
 			next = h.Middleware(next)
@@ -255,15 +297,15 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("POST")
 
-	r.HandleFunc("/admin/v1/pmsalbumpic", func(w http.ResponseWriter, r *http.Request) {
-		var in AlbumPic
+	r.HandleFunc("/admin/v1/pmsbrand", func(w http.ResponseWriter, r *http.Request) {
+		var in Brand
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
 			return
 		}
 
 		next := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateAlbumPic(ctx, req.(*AlbumPic))
+			return srv.UpdateBrand(ctx, req.(*Brand))
 		}
 		if h.Middleware != nil {
 			next = h.Middleware(next)
@@ -279,8 +321,8 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/pmsalbumpic/{ids}", func(w http.ResponseWriter, r *http.Request) {
-		var in DeleteAlbumPicRequest
+	r.HandleFunc("/admin/v1/pmsbrand/{ids}", func(w http.ResponseWriter, r *http.Request) {
+		var in DeleteBrandRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
 			return
@@ -292,7 +334,551 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 
 		next := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteAlbumPic(ctx, req.(*DeleteAlbumPicRequest))
+			return srv.DeleteBrand(ctx, req.(*DeleteBrandRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("DELETE")
+
+	r.HandleFunc("/admin/v1/pmsproductcategoryList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListProductCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListProductCategory(ctx, req.(*ListProductCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductcategorytreeList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListProductCategoryTreeRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListProductCategoryTree(ctx, req.(*ListProductCategoryTreeRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductcategory/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var in GetProductCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetProductCategory(ctx, req.(*GetProductCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductcategory", func(w http.ResponseWriter, r *http.Request) {
+		var in ProductCategory
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateProductCategory(ctx, req.(*ProductCategory))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("POST")
+
+	r.HandleFunc("/admin/v1/pmsproductcategory", func(w http.ResponseWriter, r *http.Request) {
+		var in ProductCategory
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateProductCategory(ctx, req.(*ProductCategory))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("PUT")
+
+	r.HandleFunc("/admin/v1/pmsproductcategory/{ids}", func(w http.ResponseWriter, r *http.Request) {
+		var in DeleteProductCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteProductCategory(ctx, req.(*DeleteProductCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("DELETE")
+
+	r.HandleFunc("/admin/v1/pmsproductList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListProductRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListProduct(ctx, req.(*ListProductRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproduct/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var in GetProductRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetProduct(ctx, req.(*GetProductRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproduct", func(w http.ResponseWriter, r *http.Request) {
+		var in Product
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateProduct(ctx, req.(*Product))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("POST")
+
+	r.HandleFunc("/admin/v1/pmsproduct", func(w http.ResponseWriter, r *http.Request) {
+		var in Product
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateProduct(ctx, req.(*Product))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("PUT")
+
+	r.HandleFunc("/admin/v1/pmsproduct/{ids}", func(w http.ResponseWriter, r *http.Request) {
+		var in DeleteProductRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteProduct(ctx, req.(*DeleteProductRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("DELETE")
+
+	r.HandleFunc("/admin/v1/pmsproductattributeList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListProductAttributeRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListProductAttribute(ctx, req.(*ListProductAttributeRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductattribute/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var in GetProductAttributeRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetProductAttribute(ctx, req.(*GetProductAttributeRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductattribute", func(w http.ResponseWriter, r *http.Request) {
+		var in ProductAttribute
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateProductAttribute(ctx, req.(*ProductAttribute))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("POST")
+
+	r.HandleFunc("/admin/v1/pmsproductattribute", func(w http.ResponseWriter, r *http.Request) {
+		var in ProductAttribute
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateProductAttribute(ctx, req.(*ProductAttribute))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("PUT")
+
+	r.HandleFunc("/admin/v1/pmsproductattribute/{ids}", func(w http.ResponseWriter, r *http.Request) {
+		var in DeleteProductAttributeRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteProductAttribute(ctx, req.(*DeleteProductAttributeRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("DELETE")
+
+	r.HandleFunc("/admin/v1/pmsproductattributecategoryList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListProductAttributeCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListProductAttributeCategory(ctx, req.(*ListProductAttributeCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductattributecategory/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var in GetProductAttributeCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetProductAttributeCategory(ctx, req.(*GetProductAttributeCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/pmsproductattributecategory", func(w http.ResponseWriter, r *http.Request) {
+		var in ProductAttributeCategory
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateProductAttributeCategory(ctx, req.(*ProductAttributeCategory))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("POST")
+
+	r.HandleFunc("/admin/v1/pmsproductattributecategory", func(w http.ResponseWriter, r *http.Request) {
+		var in ProductAttributeCategory
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateProductAttributeCategory(ctx, req.(*ProductAttributeCategory))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("PUT")
+
+	r.HandleFunc("/admin/v1/pmsproductattributecategory/{ids}", func(w http.ResponseWriter, r *http.Request) {
+		var in DeleteProductAttributeCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteProductAttributeCategory(ctx, req.(*DeleteProductAttributeCategoryRequest))
 		}
 		if h.Middleware != nil {
 			next = h.Middleware(next)

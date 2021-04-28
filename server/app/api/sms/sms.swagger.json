@@ -113,8 +113,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -272,8 +272,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -359,8 +359,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -474,11 +474,19 @@
           "type": "integer",
           "format": "int32"
         },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
         "count": {
           "type": "integer",
           "format": "int32"
         },
-        "details": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"

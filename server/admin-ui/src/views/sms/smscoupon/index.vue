@@ -3,11 +3,24 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-
+        <el-form
+          ref="queryForm"
+          :model="queryParams"
+          :inline="true"
+          label-width="68px"
+        >
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >搜索</el-button>
+            <el-button
+              icon="el-icon-refresh"
+              size="mini"
+              @click="resetQuery"
+            >重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -46,9 +59,17 @@
           </el-col>
         </el-row>
 
-        <el-table v-loading="loading" :data="smscouponList" @selection-change="handleSelectionChange">
+        <el-table
+          v-loading="loading"
+          :data="smscouponList"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column
+            label="操作"
+            align="center"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope">
               <el-button
                 v-permisaction="['smscoupon:smscoupon:edit']"
@@ -71,7 +92,7 @@
         </el-table>
 
         <pagination
-          v-show="total>0"
+          v-show="total > 0"
           :total="total"
           :page.sync="queryParams.pageIndex"
           :limit.sync="queryParams.pageSize"
@@ -81,42 +102,23 @@
         <!-- 添加或修改对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
             <el-form-item label="价格" prop="amount">
-              <el-input
-                v-model="form.amount"
-                placeholder="价格"
-              />
+              <el-input v-model="form.amount" placeholder="价格" />
             </el-form-item>
             <el-form-item label="" prop="appId">
-              <el-input
-                v-model="form.appId"
-                placeholder=""
-              />
+              <el-input v-model="form.appId" placeholder="" />
             </el-form-item>
             <el-form-item label="数量" prop="count">
-              <el-input
-                v-model="form.count"
-                placeholder="数量"
-              />
+              <el-input v-model="form.count" placeholder="数量" />
             </el-form-item>
             <el-form-item label="name" prop="name">
-              <el-input
-                v-model="form.name"
-                placeholder="name"
-              />
+              <el-input v-model="form.name" placeholder="name" />
             </el-form-item>
             <el-form-item label="用户id" prop="platform">
-              <el-input
-                v-model="form.platform"
-                placeholder="用户id"
-              />
+              <el-input v-model="form.platform" placeholder="用户id" />
             </el-form-item>
             <el-form-item label="类型" prop="type">
-              <el-input
-                v-model="form.type"
-                placeholder="类型"
-              />
+              <el-input v-model="form.type" placeholder="类型" />
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -130,10 +132,17 @@
 </template>
 
 <script>
-import { addSmsCoupon, delSmsCoupon, getSmsCoupon, listSmsCoupon, updateSmsCoupon } from '@/api/sms/smscoupon'
+import {
+  addSmsCoupon,
+  delSmsCoupon,
+  getSmsCoupon,
+  listSmsCoupon,
+  updateSmsCoupon
+} from '@/api/sms/smscoupon'
+import qs from 'qs'
 
 export default {
-  name: 'Config',
+  name: 'SmsCoupon',
   data() {
     return {
       // 遮罩层
@@ -159,11 +168,9 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10
-
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
       rules: {}
     }
@@ -175,11 +182,12 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listSmsCoupon(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        this.smscouponList = response.data
-        this.total = response.count
-        this.loading = false
-      }
+      listSmsCoupon(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          this.smscouponList = response.data
+          this.total = response.count
+          this.loading = false
+        }
       )
     },
     // 取消按钮
@@ -190,14 +198,12 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-
-        amount: undefined,
-        appId: undefined,
-        count: undefined,
         id: undefined,
         name: undefined,
         platform: undefined,
-        type: undefined
+        type: undefined,
+        amount: undefined,
+        count: undefined
       }
       this.resetForm('form')
     },
@@ -222,16 +228,15 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map((item) => item.id)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const id =
-                row.id || this.ids
-      getSmsCoupon(id).then(response => {
+      const id = row.id || this.ids
+      getSmsCoupon(id).then((response) => {
         this.form = response.data
         this.open = true
         this.title = '修改SmsCoupon'
@@ -240,11 +245,11 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updateSmsCoupon(this.form).then(response => {
-              if (response.code === 200) {
+            updateSmsCoupon(qs.stringify(this.form)).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('修改成功')
                 this.open = false
                 this.getList()
@@ -253,8 +258,8 @@ export default {
               }
             })
           } else {
-            addSmsCoupon(this.form).then(response => {
-              if (response.code === 200) {
+            addSmsCoupon(qs.stringify(this.form)).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('新增成功')
                 this.open = false
                 this.getList()
@@ -273,13 +278,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delSmsCoupon(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delSmsCoupon(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
     }
   }
 }

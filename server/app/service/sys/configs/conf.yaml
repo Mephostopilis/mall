@@ -75,13 +75,13 @@ app:
     # 
     cookie: jwt
   gen:
-    name: member
+    name: pms
     # 代码生成读取的数据库名称
-    dbname: edu_member
+    dbname: edu_pms
     # 代码生成是使用前端代码存放位置，需要指定到src文件夹，相对路径
     frontpath: ../../../../../admin-ui/src
     # 后端代码生成位置
-    backpath: ../../../member/internal
+    backpath: ../../../pms/internal
     # 模板
     template:
       model: ../../template/model.go.template

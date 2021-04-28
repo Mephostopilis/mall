@@ -13,10 +13,8 @@ message ApiReply {
     string reason = 2;
     string message = 3;
     int32 ttl = 4;
-    int32 count = 5;
-    repeated google.protobuf.Any details = 6;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
 }
-
-message Coupon {}
-
-message CouponHistory {}

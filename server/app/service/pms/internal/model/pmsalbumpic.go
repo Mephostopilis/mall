@@ -1,10 +1,12 @@
 package model
 
 type PmsAlbumPic struct {
-	AlbumId string `json:"albumId" gorm:"type:bigint;"`        //
-	AppId   string `json:"appId" gorm:"type:bigint unsigned;"` //
-	Id      int    `json:"id" gorm:"type:bigint;primary_key"`  //
-	Pic     string `json:"pic" gorm:"type:varchar(1000);"`     //
+	Id       int    `json:"id" gorm:"type:bigint;primary_key"`  //
+	AlbumId  string `json:"albumId" gorm:"type:bigint;"`        //
+	AppId    string `json:"appId" gorm:"type:bigint unsigned;"` //
+	Pic      string `json:"pic" gorm:"type:varchar(1000);"`     //
+	CreateBy uint64 `gorm:"column:create_by;type:bigint;" json:"createBy"`
+	UpdateBy uint64 `gorm:"column:update_By;type:bigint;" json:"updateBy"`
 	BaseModel
 }
 

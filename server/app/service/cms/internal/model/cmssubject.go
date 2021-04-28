@@ -1,14 +1,14 @@
 package model
 
 type CmsSubject struct {
-	Id           int32  `json:"id" gorm:"type:int;primary_key"`         // id
-	AppId        string `json:"appId" gorm:"type:bigint unsigned;"`     //
-	CategoryId   string `json:"categoryId" gorm:"type:int;"`            // 客户端id
+	Id           uint64 `json:"id" gorm:"type:bigint;primary_key"`      // id
+	AppId        uint64 `json:"appappId" gorm:"type:bigint unsigned;"`  //
+	CategoryId   uint64 `json:"categoryId" gorm:"type:bigint;"`         // 客户端id
+	Title        string `json:"title" gorm:"type:varchar(255);"`        // 标题
 	Pic          string `json:"pic" gorm:"type:varchar(255);"`          // pic
 	ProductCount string `json:"productCount" gorm:"type:varchar(255);"` // 产品数量
-	Title        string `json:"title" gorm:"type:varchar(255);"`        // 标题
-	CreateBy     string `json:"createBy" gorm:"type:bigint;"`           //
-	UpdateBy     string `json:"updateBy" gorm:"type:bigint;"`           //
+	CreateBy     uint64 `json:"createBy" gorm:"type:bigint;"`           //
+	UpdateBy     uint64 `json:"updateBy" gorm:"type:bigint;"`           //
 	BaseModel
 }
 

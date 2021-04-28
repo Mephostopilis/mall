@@ -3,11 +3,24 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-
+        <el-form
+          ref="queryForm"
+          :model="queryParams"
+          :inline="true"
+          label-width="68px"
+        >
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >搜索</el-button>
+            <el-button
+              icon="el-icon-refresh"
+              size="mini"
+              @click="resetQuery"
+            >重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -46,9 +59,23 @@
           </el-col>
         </el-row>
 
-        <el-table v-loading="loading" :data="cmshelpcategoryList" @selection-change="handleSelectionChange">
+        <el-table
+          v-loading="loading"
+          :data="cmshelpcategoryList"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column prop="name" label="名称" />
+          <el-table-column prop="icon" label="icon" />
+          <el-table-column prop="helpCount" label="数量" />
+          <el-table-column prop="showStatus" label="显示状态" />
+          <el-table-column prop="sort" label="排序" />
+          <el-table-column prop="createdAt" label="创建日期" />
+          <el-table-column
+            label="操作"
+            align="center"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope">
               <el-button
                 v-permisaction="['cmshelpcategory:cmshelpcategory:edit']"
@@ -71,7 +98,7 @@
         </el-table>
 
         <pagination
-          v-show="total>0"
+          v-show="total > 0"
           :total="total"
           :page.sync="queryParams.pageIndex"
           :limit.sync="queryParams.pageSize"
@@ -81,42 +108,23 @@
         <!-- 添加或修改对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
-            <el-form-item label="" prop="appId">
-              <el-input
-                v-model="form.appId"
-                placeholder=""
-              />
+            <el-form-item label="名称" prop="name">
+              <el-input v-model="form.name" placeholder="" />
             </el-form-item>
-            <el-form-item label="" prop="helpCount">
-              <el-input
-                v-model="form.helpCount"
-                placeholder=""
-              />
+            <el-form-item label="icon" prop="icon">
+              <el-input v-model="form.icon" placeholder="" />
             </el-form-item>
-            <el-form-item label="" prop="icon">
-              <el-input
-                v-model="form.icon"
-                placeholder=""
-              />
+            <el-form-item label="数量" prop="helpCount">
+              <el-input v-model="form.helpCount" placeholder="输入数量" />
             </el-form-item>
-            <el-form-item label="" prop="name">
-              <el-input
-                v-model="form.name"
-                placeholder=""
-              />
+            <el-form-item label="状态" prop="showStatus">
+              <el-select v-model="form.showStatus" placeholder="请选择">
+                <el-option label="禁止" value="0" />
+                <el-option label="启用" value="1" />
+              </el-select>
             </el-form-item>
-            <el-form-item label="" prop="showStatus">
-              <el-input
-                v-model="form.showStatus"
-                placeholder=""
-              />
-            </el-form-item>
-            <el-form-item label="" prop="sort">
-              <el-input
-                v-model="form.sort"
-                placeholder=""
-              />
+            <el-form-item label="排序" prop="sort">
+              <el-input v-model="form.sort" placeholder="" />
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -130,7 +138,14 @@
 </template>
 
 <script>
-import { addCmsHelpCategory, delCmsHelpCategory, getCmsHelpCategory, listCmsHelpCategory, updateCmsHelpCategory } from '@/api/cms/cmshelpcategory'
+import {
+  addCmsHelpCategory,
+  delCmsHelpCategory,
+  getCmsHelpCategory,
+  listCmsHelpCategory,
+  updateCmsHelpCategory
+} from '@/api/cms/cmshelpcategory'
+import qs from 'qs'
 
 export default {
   name: 'Config',
@@ -159,13 +174,17 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10
-
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
-      rules: {}
+      rules: {
+        name: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        icon: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        helpCount: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        showStatus: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        sort: [{ required: true, message: '名称不能为空', trigger: 'blur' }]
+      }
     }
   },
   created() {
@@ -175,12 +194,14 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listCmsHelpCategory(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      listCmsHelpCategory(
+        this.addDateRange(this.queryParams, this.dateRange)
+      ).then((response) => {
+        // console.log(response)
         this.cmshelpcategoryList = response.data
         this.total = response.count
         this.loading = false
-      }
-      )
+      })
     },
     // 取消按钮
     cancel() {
@@ -190,7 +211,6 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-
         appId: undefined,
         helpCount: undefined,
         icon: undefined,
@@ -217,34 +237,34 @@ export default {
     handleAdd() {
       this.reset()
       this.open = true
-      this.title = '添加CmsHelpCategory'
+      this.title = '添加帮助分类'
       this.isEdit = false
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map((item) => item.id)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const id =
-                row.id || this.ids
-      getCmsHelpCategory(id).then(response => {
-        this.form = response.data
+      const id = row.id || this.ids
+      getCmsHelpCategory(id).then((response) => {
+        console.log(response)
+        this.form = response.data[0]
         this.open = true
-        this.title = '修改CmsHelpCategory'
+        this.title = '修改帮助分类'
         this.isEdit = true
       })
     },
     /** 提交按钮 */
     submitForm: function() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updateCmsHelpCategory(this.form).then(response => {
-              if (response.code === 200) {
+            updateCmsHelpCategory(qs.stringify(this.form)).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('修改成功')
                 this.open = false
                 this.getList()
@@ -253,8 +273,8 @@ export default {
               }
             })
           } else {
-            addCmsHelpCategory(this.form).then(response => {
-              if (response.code === 200) {
+            addCmsHelpCategory(qs.stringify(this.form)).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('新增成功')
                 this.open = false
                 this.getList()
@@ -273,13 +293,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delCmsHelpCategory(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delCmsHelpCategory(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
     }
   }
 }

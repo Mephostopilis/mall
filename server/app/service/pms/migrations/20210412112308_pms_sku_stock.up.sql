@@ -1,5 +1,5 @@
 CREATE TABLE `pms_sku_stock` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `product_id` bigint(20) DEFAULT NULL,
   `sku_code` varchar(64) NOT NULL COMMENT 'sku编码',
@@ -11,5 +11,10 @@ CREATE TABLE `pms_sku_stock` (
   `promotion_price` decimal(10,2) DEFAULT NULL COMMENT '单品促销价格',
   `lock_stock` int(11) DEFAULT '0' COMMENT '锁定库存',
   `sp_data` varchar(500) DEFAULT NULL COMMENT '商品销售属性，json格式',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8 COMMENT='sku的库存';

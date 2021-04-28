@@ -2,6 +2,7 @@
 const path = require('path')
 const CompressionPlugin = require('compression-webpack-plugin')// 引入gzip压缩插件
 const defaultSettings = require('./src/settings.js')
+const autoprefixer = require('autoprefixer');
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -146,7 +147,7 @@ module.exports = {
         },
         // DO NOT REMOVE THIS LINE
         javascriptEnabled: true
-      }
+      },
     }
   }
 }

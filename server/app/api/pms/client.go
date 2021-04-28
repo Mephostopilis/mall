@@ -32,7 +32,7 @@ func NewApi(ctx context.Context, opts ...grpctransport.ClientOption) (ApiClient,
 // NewClient new grpc client
 func NewAdmin(ctx context.Context, opts ...grpctransport.ClientOption) (AdminClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
+	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
 	for _, o := range opts {
 		t = append(t, o)

@@ -1,5 +1,5 @@
 CREATE TABLE `pms_product` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `brand_id` bigint(20) DEFAULT NULL,
   `product_category_id` bigint(20) DEFAULT NULL,
@@ -8,7 +8,6 @@ CREATE TABLE `pms_product` (
   `name` varchar(64) NOT NULL,
   `pic` varchar(255) DEFAULT NULL,
   `product_sn` varchar(64) NOT NULL COMMENT '货号',
-  `delete_status` int(1) DEFAULT NULL COMMENT '删除状态：0->未删除；1->已删除',
   `publish_status` int(1) DEFAULT NULL COMMENT '上架状态：0->下架；1->上架',
   `new_status` int(1) DEFAULT NULL COMMENT '新品状态:0->不是新品；1->新品',
   `recommand_status` int(1) DEFAULT NULL COMMENT '推荐状态；0->不推荐；1->推荐',
@@ -42,5 +41,10 @@ CREATE TABLE `pms_product` (
   `promotion_type` int(1) DEFAULT NULL COMMENT '促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购',
   `brand_name` varchar(255) DEFAULT NULL COMMENT '品牌名称',
   `product_category_name` varchar(255) DEFAULT NULL COMMENT '商品分类名称',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='商品信息';

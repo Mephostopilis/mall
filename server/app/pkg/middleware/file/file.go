@@ -2,16 +2,10 @@ package file
 
 import (
 	"context"
-	"io"
-	"os"
-	"strconv"
-
-	pb "edu/api/sys/v1"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware"
 	transporthttp "github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/golang/protobuf/ptypes"
 )
 
 // FILE 获取文件数据
@@ -81,33 +75,4 @@ func uploadfile(ctx context.Context, log *log.Helper, h transporthttp.ServerInfo
 	// 	}
 	// }
 	return ctx, nil
-}
-
-func downloadCertFile(ctx context.Context, log *log.Helper, h transporthttp.ServerInfo, ret interface{}) (interface{}, error) {
-	reply := ret.(*pb.ApiReply)
-	if reply.Code == 0 {
-		it := reply.Data[0]
-		var d pb.DownloadCertReply
-		if err := ptypes.UnmarshalAny(it, &d); err != nil {
-			return ctx, err
-		}
-		file, err := os.Open(d.Path)
-		if err != nil {
-			return nil, err
-		}
-		defer file.Close()
-
-		fileHeader := make([]byte, 512)
-		file.Read(fileHeader)
-
-		fileStat, _ := file.Stat()
-
-		h.Response.Header().Set("Content-Disposition", "attachment;filename="+d.Crt)
-		h.Response.Header().Set("Content-Type", "application/force-download")
-		h.Response.Header().Set("Content-Length", strconv.FormatInt(fileStat.Size(), 10))
-
-		file.Seek(0, 0)
-		io.Copy(h.Response, file)
-	}
-	return ret, nil
 }

@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.cms;
 
 import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "edu/api/cms;cms";
 option java_multiple_files = true;
@@ -13,10 +14,38 @@ message ApiReply {
     string reason = 2;
     string message = 3;
     int32 ttl = 4;
-    int32 count = 5;
-    repeated google.protobuf.Any details = 6;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
 }
 
-message Help {}
+message Help {
+    uint64 id = 1;
+    uint64 categoryId = 2;
+    string icon = 3;
+    string title = 4;
+    int32 showStatus = 5;
+    int32 readCount = 6;
+    string content = 7;
+    google.protobuf.Timestamp createdAt = 8;
+}
 
-message HelpCategory {}
+message HelpCategory {
+    uint64 id = 1;
+    string name = 2;
+    string icon = 3;
+    uint32 helpCount = 4;
+    int32 showStatus = 5;
+    int32 sort = 6;
+    google.protobuf.Timestamp createdAt = 7;
+}
+
+message Subject {
+    uint64 id = 1;
+    uint64 categoryId = 2;
+    string title = 3;
+    string pic = 4;
+    string productCount = 5;
+    google.protobuf.Timestamp createdAt = 7;
+}

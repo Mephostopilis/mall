@@ -295,7 +295,7 @@ service Admin {
     };
     rpc DeleteDictData(DeleteDictDataRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/dict/data/{dictCode}"
+            delete: "/admin/v1/dict/data/{ids}"
         };
     };
     rpc GetDictTypeList (GetDictTypeListRequest) returns (ApiReply) {
@@ -325,7 +325,7 @@ service Admin {
     };
     rpc DeleteDictType (DeleteDictTypeRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/dict/type/{dictId}"
+            delete: "/admin/v1/dict/type/{ids}"
         };
     };
     rpc GetServerInfo (GetServerInfoRequest) returns (ApiReply) {
@@ -889,7 +889,7 @@ message UpdateDictDataReply {
 }
 
 message DeleteDictDataRequest {
-    int32 dictCode = 1;
+    string ids = 1;
 }
 message DeleteDictDataReply {}
 
@@ -930,7 +930,7 @@ message UpdateDictTypeRequest {}
 message UpdateDictTypeReply {}
 
 message DeleteDictTypeRequest {
-    int32 dictId = 2;
+    string ids = 1;
 }
 message DeleteDictTypeReply {}
 

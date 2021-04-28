@@ -35,29 +35,134 @@ service Admin {
             delete: "/admin/v1/pmsalbum/{ids}"
         };
     };
-    rpc ListAlbumPic (ListAlbumPicRequest) returns (ApiReply) {
+    rpc ListBrand (ListBrandRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/pmsalbumpicList"
+            get: "/admin/v1/pmsbrandList"
         };
     };
-    rpc GetAlbumPic (GetAlbumPicRequest) returns (ApiReply) {
+    rpc GetBrand (GetBrandRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/pmsalbumpic/{id}"
+            get: "/admin/v1/pmsbrand/{id}"
         };
     };
-    rpc CreateAlbumPic (AlbumPic) returns (ApiReply) {
+    rpc CreateBrand (Brand) returns (ApiReply) {
         option (google.api.http) = {
-            post: "/admin/v1/pmsalbumpic"
+            post: "/admin/v1/pmsbrand"
         };
     };
-    rpc UpdateAlbumPic (AlbumPic) returns (ApiReply){
+    rpc UpdateBrand (Brand) returns (ApiReply){
         option (google.api.http) = {
-            put: "/admin/v1/pmsalbumpic"
+            put: "/admin/v1/pmsbrand"
         };
     };
-    rpc DeleteAlbumPic (DeleteAlbumPicRequest) returns (ApiReply) {
+    rpc DeleteBrand (DeleteBrandRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/pmsalbumpic/{ids}"
+            delete: "/admin/v1/pmsbrand/{ids}"
+        };
+    };
+    rpc ListProductCategory (ListProductCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductcategoryList"
+        };
+    };
+    rpc ListProductCategoryTree (ListProductCategoryTreeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductcategorytreeList"
+        };
+    };
+    rpc GetProductCategory (GetProductCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductcategory/{id}"
+        };
+    };
+    rpc CreateProductCategory (ProductCategory) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/pmsproductcategory"
+        };
+    };
+    rpc UpdateProductCategory (ProductCategory) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/pmsproductcategory"
+        };
+    };
+    rpc DeleteProductCategory (DeleteProductCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/pmsproductcategory/{ids}"
+        };
+    };
+    rpc ListProduct (ListProductRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductList"
+        };
+    };
+    rpc GetProduct (GetProductRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproduct/{id}"
+        };
+    };
+    rpc CreateProduct (Product) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/pmsproduct"
+        };
+    };
+    rpc UpdateProduct (Product) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/pmsproduct"
+        };
+    };
+    rpc DeleteProduct (DeleteProductRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/pmsproduct/{ids}"
+        };
+    };
+    rpc ListProductAttribute (ListProductAttributeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductattributeList"
+        };
+    };
+    rpc GetProductAttribute (GetProductAttributeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductattribute/{id}"
+        };
+    };
+    rpc CreateProductAttribute (ProductAttribute) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/pmsproductattribute"
+        };
+    };
+    rpc UpdateProductAttribute (ProductAttribute) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/pmsproductattribute"
+        };
+    };
+    rpc DeleteProductAttribute (DeleteProductAttributeRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/pmsproductattribute/{ids}"
+        };
+    };
+    rpc ListProductAttributeCategory (ListProductAttributeCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductattributecategoryList"
+        };
+    };
+    rpc GetProductAttributeCategory (GetProductAttributeCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/pmsproductattributecategory/{id}"
+        };
+    };
+    rpc CreateProductAttributeCategory (ProductAttributeCategory) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/pmsproductattributecategory"
+        };
+    };
+    rpc UpdateProductAttributeCategory (ProductAttributeCategory) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/pmsproductattributecategory"
+        };
+    };
+    rpc DeleteProductAttributeCategory (DeleteProductAttributeCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/pmsproductattributecategory/{ids}"
         };
     };
 }
@@ -100,7 +205,7 @@ message ListAlbumRequest {
 message ListAlbumReply {}
 
 message GetAlbumRequest {
-    int32 id = 1;
+    uint64 id = 1;
 }
 message GetAlbumReply {}
 
@@ -115,27 +220,163 @@ message DeleteAlbumRequest {
 }
 message DeleteAlbumReply {}
 
-message ListAlbumPicRequest {
+message ListBrandRequest {
     int32 pageSize = 1;
     int32 pageIndex = 2;
     string configKey = 3;
     string configName = 4;
     string configType = 5;
 }
-message ListAlbumPicReply {}
+message ListBrandReply {}
 
-message GetAlbumPicRequest {
-    int32 id = 1;
+message GetBrandRequest {
+    uint64 id = 1;
 }
-message GetAlbumPicReply {}
+message GetBrandReply {}
 
-message CreateAlbumPicRequest {}
-message CreateAlbumPicReply {}
+message CreateBrandRequest {}
+message CreateBrandReply {}
 
-message UpdateAlbumPicRequest {}
-message UpdateAlbumPicReply {}
+message UpdateBrandRequest {}
+message UpdateBrandReply {}
 
-message DeleteAlbumPicRequest {
+message DeleteBrandRequest {
     string ids = 1;
 }
-message DeleteAlbumPicReply {}
+message DeleteBrandReply {}
+
+message ListProductCategoryRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductCategoryReply {}
+
+message ListProductCategoryTreeRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductCategoryTreeReply {}
+
+message GetProductCategoryRequest {
+    uint64 id = 1;
+}
+message GetProductCategoryReply {}
+
+message CreateProductCategoryRequest {}
+message CreateProductCategoryReply {}
+
+message UpdateProductCategoryRequest {}
+message UpdateProductCategoryReply {}
+
+message DeleteProductCategoryRequest {
+    string ids = 1;
+}
+message DeleteProductCategoryReply {}
+
+message ListProductRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductReply {}
+
+message ListProductTreeRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductTreeReply {}
+
+message GetProductRequest {
+    uint64 id = 1;
+}
+message GetProductReply {}
+
+message CreateProductRequest {}
+message CreateProductReply {}
+
+message UpdateProductRequest {}
+message UpdateProductReply {}
+
+message DeleteProductRequest {
+    string ids = 1;
+}
+message DeleteProductReply {}
+
+message ListProductAttributeRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductAttributeReply {}
+
+message ListProductAttributeTreeRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductAttributeTreeReply {}
+
+message GetProductAttributeRequest {
+    uint64 id = 1;
+}
+message GetProductAttributeReply {}
+
+message CreateProductAttributeRequest {}
+message CreateProductAttributeReply {}
+
+message UpdateProductAttributeRequest {}
+message UpdateProductAttributeReply {}
+
+message DeleteProductAttributeRequest {
+    string ids = 1;
+}
+message DeleteProductAttributeReply {}
+
+message ListProductAttributeCategoryRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductAttributeCategoryReply {}
+
+message ListProductAttributeCategoryTreeRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListProductAttributeCategoryTreeReply {}
+
+message GetProductAttributeCategoryRequest {
+    uint64 id = 1;
+}
+message GetProductAttributeCategoryReply {}
+
+message CreateProductAttributeCategoryRequest {}
+message CreateProductAttributeCategoryReply {}
+
+message UpdateProductAttributeCategoryRequest {}
+message UpdateProductAttributeCategoryReply {}
+
+message DeleteProductAttributeCategoryRequest {
+    string ids = 1;
+}
+message DeleteProductAttributeCategoryReply {}

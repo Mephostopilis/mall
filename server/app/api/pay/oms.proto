@@ -1,0 +1,154 @@
+syntax = "proto3";
+
+package api.pay;
+
+import "api/pay/api.proto";
+import "google/api/annotations.proto";
+
+option go_package = "edu/api/pay;pay";
+option java_multiple_files = true;
+option java_package = "api.pay";
+
+service Admin {
+    rpc ListOrder (ListOrderRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/omsorderList"
+        };
+    };
+    rpc GetOrder (GetOrderRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/omsorder/{id}"
+        };
+    };
+    rpc CreateOrder (Order) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/omsorder"
+        };
+    };
+    rpc UpdateOrder (Order) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/omsorder"
+        };
+    };
+    rpc DeleteOrder (DeleteOrderRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/omsorder/{ids}"
+        };
+    };
+    rpc ListCompanyAddress (ListCompanyAddressRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/omscompanyaddressList"
+        };
+    };
+    rpc GetCompanyAddress (GetCompanyAddressRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/omscompanyaddress/{id}"
+        };
+    };
+    rpc CreateCompanyAddress (CompanyAddress) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/omscompanyaddress"
+        };
+    };
+    rpc UpdateCompanyAddress (CompanyAddress) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/omscompanyaddress"
+        };
+    };
+    rpc DeleteCompanyAddress (DeleteCompanyAddressRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/omscompanyaddress/{ids}"
+        };
+    };
+}
+
+service Api {
+    // rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
+	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
+	rpc SayHelloURL(HelloReq) returns (HelloResp) {
+        option (google.api.http) = {
+            get:"/api/v1/oms/say_hello"
+        };
+    };
+    rpc ListOrder (ListOrderRequest) returns (ListOrderReply) {
+        option (google.api.http) = {
+            get: "/api/v1/oms/orderList"
+        };
+    };
+    rpc GetOrder (GetOrderRequest) returns (GetOrderReply) {
+        option (google.api.http) = {
+            get: "/api/v1/oms/order/{id}"
+        };
+    };
+    rpc CreateOrder (Order) returns (CreateOrderReply) {
+        option (google.api.http) = {
+            post: "/api/v1/oms/order"
+        };
+    };
+    rpc AlipayCallback (Order) returns (CreateOrderReply) {
+        option (google.api.http) = {
+            post: "/api/v1/oms/order"
+        };
+    };
+}
+
+message HelloReq {
+	string name = 1;
+}
+
+message HelloResp {
+    string Content = 1;
+}
+
+message ListOrderRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListOrderReply {}
+
+message GetOrderRequest {
+    int32 id = 1;
+}
+message GetOrderReply {}
+
+message CreateOrderRequest {}
+message CreateOrderReply {}
+
+message UpdateOrderRequest {}
+message UpdateOrderReply {}
+
+message DeleteOrderRequest {
+    string ids = 1;
+}
+message DeleteOrderReply {}
+
+message ListCompanyAddressRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListCompanyAddressReply {}
+
+message GetCompanyAddressRequest {
+    int32 id = 1;
+}
+message GetCompanyAddressReply {}
+
+message CreateCompanyAddressRequest {}
+message CreateCompanyAddressReply {}
+
+message UpdateCompanyAddressRequest {}
+message UpdateCompanyAddressReply {}
+
+message DeleteCompanyAddressRequest {
+    string ids = 1;
+}
+message DeleteCompanyAddressReply {}
+
+message AlipayCallbackRequest {}
+message AlipayCallbackReply {}

@@ -178,4 +178,12 @@ INSERT INTO sys_role_menu VALUES
 (177, 1, 1, 504, 'admin', NULL, NULL),
 (178, 1, 1, 505, 'admin', NULL, NULL),
 (179, 1, 1, 506, 'admin', NULL, NULL),
-(180, 1, 1, 507, 'admin', NULL, NULL);
+(180, 1, 1, 507, 'admin', NULL, NULL),
+(182, 1, 1, 509, 'admin', NULL, NULL),
+(183, 1, 1, 510, 'admin', NULL, NULL),
+(184, 1, 1, 511, 'admin', NULL, NULL),
+(185, 1, 1, 512, 'admin', NULL, NULL),
+(186, 1, 1, 513, 'admin', NULL, NULL),
+(187, 1, 1, 514, 'admin', NULL, NULL),
+(188, 1, 1, 515, 'admin', NULL, NULL),
+(189, 1, 1, 516, 'admin', NULL, NULL);

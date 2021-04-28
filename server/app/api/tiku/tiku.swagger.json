@@ -61,9 +61,9 @@
         ]
       }
     },
-    "/admin/v1/tiku/choices/{id}": {
-      "get": {
-        "operationId": "Admin_GetChoice",
+    "/admin/v1/tiku/choices/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteChoice",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -80,19 +80,20 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "ids",
             "in": "path",
             "required": true,
-            "type": "string",
-            "format": "uint64"
+            "type": "string"
           }
         ],
         "tags": [
           "Admin"
         ]
-      },
-      "delete": {
-        "operationId": "Admin_DeleteChoice",
+      }
+    },
+    "/admin/v1/tiku/choices/{id}": {
+      "get": {
+        "operationId": "Admin_GetChoice",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -227,9 +228,9 @@
         ]
       }
     },
-    "/admin/v1/tiku/exercise/{id}": {
-      "get": {
-        "operationId": "Admin_GetExercise",
+    "/admin/v1/tiku/exercise/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteExercise",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -246,19 +247,20 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "ids",
             "in": "path",
             "required": true,
-            "type": "string",
-            "format": "uint64"
+            "type": "string"
           }
         ],
         "tags": [
           "Admin"
         ]
-      },
-      "delete": {
-        "operationId": "Admin_DeleteExercise",
+      }
+    },
+    "/admin/v1/tiku/exercise/{id}": {
+      "get": {
+        "operationId": "Admin_GetExercise",
         "responses": {
           "200": {
             "description": "A successful response.",

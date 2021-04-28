@@ -83,8 +83,8 @@
             "name": "helpId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -272,8 +272,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -284,6 +284,165 @@
     "/admin/v1/cmshelpcategoryList": {
       "get": {
         "operationId": "Admin_ListHelpCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apicmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "configKey",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/cmssubject": {
+      "post": {
+        "operationId": "Admin_CreateSubject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apicmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "Admin_UpdateSubject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apicmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/cmssubject/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteSubject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apicmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/cmssubject/{id}": {
+      "get": {
+        "operationId": "Admin_GetSubject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apicmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/cmssubjectList": {
+      "get": {
+        "operationId": "Admin_ListSubject",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -359,8 +518,8 @@
             "name": "helpId",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -474,11 +633,19 @@
           "type": "integer",
           "format": "int32"
         },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
         "count": {
           "type": "integer",
           "format": "int32"
         },
-        "details": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"

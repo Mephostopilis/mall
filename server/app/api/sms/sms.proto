@@ -4,6 +4,7 @@ package api.sms;
 
 import "api/sms/api.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "edu/api/sms;sms";
 option java_multiple_files = true;
@@ -100,7 +101,7 @@ message ListCouponRequest {
 message ListCouponReply {}
 
 message GetCouponRequest {
-    int32 id = 1;
+    uint64 id = 1;
 }
 message GetCouponReply {}
 
@@ -125,7 +126,7 @@ message ListCouponHistoryRequest {
 message ListCouponHistoryReply {}
 
 message GetCouponHistoryRequest {
-    int32 id = 1;
+    uint64 id = 1;
 }
 message GetCouponHistoryReply {}
 

@@ -3,11 +3,24 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-
+        <el-form
+          ref="queryForm"
+          :model="queryParams"
+          :inline="true"
+          label-width="68px"
+        >
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >搜索</el-button>
+            <el-button
+              icon="el-icon-refresh"
+              size="mini"
+              @click="resetQuery"
+            >重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -46,9 +59,17 @@
           </el-col>
         </el-row>
 
-        <el-table v-loading="loading" :data="pmscommentList" @selection-change="handleSelectionChange">
+        <el-table
+          v-loading="loading"
+          :data="pmscommentList"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column
+            label="操作"
+            align="center"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope">
               <el-button
                 v-permisaction="['pmscomment:pmscomment:edit']"
@@ -71,7 +92,7 @@
         </el-table>
 
         <pagination
-          v-show="total>0"
+          v-show="total > 0"
           :total="total"
           :page.sync="queryParams.pageIndex"
           :limit.sync="queryParams.pageSize"
@@ -81,48 +102,26 @@
         <!-- 添加或修改对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
             <el-form-item label="" prop="appId">
-              <el-input
-                v-model="form.appId"
-                placeholder=""
-              />
+              <el-input v-model="form.appId" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="collectCouont">
-              <el-input
-                v-model="form.collectCouont"
-                placeholder=""
-              />
+              <el-input v-model="form.collectCouont" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="content">
-              <el-input
-                v-model="form.content"
-                placeholder=""
-              />
+              <el-input v-model="form.content" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="createTime">
-              <el-input
-                v-model="form.createTime"
-                placeholder=""
-              />
+              <el-input v-model="form.createTime" placeholder="" />
             </el-form-item>
             <el-form-item label="评论用户头像" prop="memberIcon">
-              <el-input
-                v-model="form.memberIcon"
-                placeholder="评论用户头像"
-              />
+              <el-input v-model="form.memberIcon" placeholder="评论用户头像" />
             </el-form-item>
             <el-form-item label="评价的ip" prop="memberIp">
-              <el-input
-                v-model="form.memberIp"
-                placeholder="评价的ip"
-              />
+              <el-input v-model="form.memberIp" placeholder="评价的ip" />
             </el-form-item>
             <el-form-item label="" prop="memberNickName">
-              <el-input
-                v-model="form.memberNickName"
-                placeholder=""
-              />
+              <el-input v-model="form.memberNickName" placeholder="" />
             </el-form-item>
             <el-form-item label="上传图片地址，以逗号隔开" prop="pics">
               <el-input
@@ -137,40 +136,22 @@
               />
             </el-form-item>
             <el-form-item label="" prop="productId">
-              <el-input
-                v-model="form.productId"
-                placeholder=""
-              />
+              <el-input v-model="form.productId" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="productName">
-              <el-input
-                v-model="form.productName"
-                placeholder=""
-              />
+              <el-input v-model="form.productName" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="readCount">
-              <el-input
-                v-model="form.readCount"
-                placeholder=""
-              />
+              <el-input v-model="form.readCount" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="replayCount">
-              <el-input
-                v-model="form.replayCount"
-                placeholder=""
-              />
+              <el-input v-model="form.replayCount" placeholder="" />
             </el-form-item>
             <el-form-item label="" prop="showStatus">
-              <el-input
-                v-model="form.showStatus"
-                placeholder=""
-              />
+              <el-input v-model="form.showStatus" placeholder="" />
             </el-form-item>
             <el-form-item label="评价星数：0->5" prop="star">
-              <el-input
-                v-model="form.star"
-                placeholder="评价星数：0->5"
-              />
+              <el-input v-model="form.star" placeholder="评价星数：0->5" />
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -184,10 +165,16 @@
 </template>
 
 <script>
-import { addPmsComment, delPmsComment, getPmsComment, listPmsComment, updatePmsComment } from '@/api/pms/pmscomment'
+import {
+  addPmsComment,
+  delPmsComment,
+  getPmsComment,
+  listPmsComment,
+  updatePmsComment
+} from '@/api/pms/pmscomment'
 
 export default {
-  name: 'Config',
+  name: 'PmsComment',
   data() {
     return {
       // 遮罩层
@@ -213,11 +200,9 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10
-
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
       rules: {}
     }
@@ -229,11 +214,12 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listPmsComment(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        this.pmscommentList = response.data
-        this.total = response.count
-        this.loading = false
-      }
+      listPmsComment(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          this.pmscommentList = response.data
+          this.total = response.count
+          this.loading = false
+        }
       )
     },
     // 取消按钮
@@ -244,7 +230,6 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-
         appId: undefined,
         collectCouont: undefined,
         content: undefined,
@@ -285,16 +270,15 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map((item) => item.id)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const id =
-                row.id || this.ids
-      getPmsComment(id).then(response => {
+      const id = row.id || this.ids
+      getPmsComment(id).then((response) => {
         this.form = response.data
         this.open = true
         this.title = '修改商品评价表'
@@ -303,10 +287,10 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updatePmsComment(this.form).then(response => {
+            updatePmsComment(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess('修改成功')
                 this.open = false
@@ -316,7 +300,7 @@ export default {
               }
             })
           } else {
-            addPmsComment(this.form).then(response => {
+            addPmsComment(this.form).then((response) => {
               if (response.code === 200) {
                 this.msgSuccess('新增成功')
                 this.open = false
@@ -336,13 +320,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delPmsComment(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delPmsComment(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
     }
   }
 }

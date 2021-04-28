@@ -109,3 +109,20 @@ func SplitInt64s(s, p string) ([]int64, error) {
 	}
 	return res, nil
 }
+
+// SplitInt64s split string into int64 slice.
+func SplitUint64s(s, p string) ([]uint64, error) {
+	if s == "" {
+		return nil, nil
+	}
+	sArr := strings.Split(s, p)
+	res := make([]uint64, 0, len(sArr))
+	for _, sc := range sArr {
+		i, err := strconv.ParseUint(sc, 10, 64)
+		if err != nil {
+			return nil, err
+		}
+		res = append(res, i)
+	}
+	return res, nil
+}

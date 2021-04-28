@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"edu/service/sms/internal/conf"
+	"edu/service/sms/internal/model"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
@@ -13,7 +14,6 @@ import (
 
 var ProviderSet = wire.NewSet(New)
 
-//go:generate kratos tool genbts
 // Dao dao interface
 type Dao interface {
 	Close()
@@ -21,6 +21,11 @@ type Dao interface {
 	// bts: -nullcache=&model.Article{ID:-1} -check_null_code=$!=nil&&$.ID==-1
 	// Article(c context.Context, id int64) (*model.Article, error)
 
+	GetSmsCouponPage(ctx context.Context, e *model.SmsCoupon, pageSize int, pageIndex int) (docs []model.SmsCoupon, total int64, err error)
+	GetSmsCoupon(ctx context.Context, e *model.SmsCoupon) (model.SmsCoupon, error)
+	CreateSmsCoupon(ctx context.Context, e *model.SmsCoupon) (model.SmsCoupon, error)
+	UpdateSmsCoupon(ctx context.Context, e *model.SmsCoupon, id uint64) (update model.SmsCoupon, err error)
+	BatchDeleteSmsCoupon(ctx context.Context, e *model.SmsCoupon, id []uint64) (Result bool, err error)
 }
 
 // dao dao.

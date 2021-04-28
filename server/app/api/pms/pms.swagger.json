@@ -113,8 +113,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -178,9 +178,9 @@
         ]
       }
     },
-    "/admin/v1/pmsalbumpic": {
+    "/admin/v1/pmsbrand": {
       "post": {
-        "operationId": "Admin_CreateAlbumPic",
+        "operationId": "Admin_CreateBrand",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -200,7 +200,7 @@
         ]
       },
       "put": {
-        "operationId": "Admin_UpdateAlbumPic",
+        "operationId": "Admin_UpdateBrand",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -220,9 +220,9 @@
         ]
       }
     },
-    "/admin/v1/pmsalbumpic/{ids}": {
+    "/admin/v1/pmsbrand/{ids}": {
       "delete": {
-        "operationId": "Admin_DeleteAlbumPic",
+        "operationId": "Admin_DeleteBrand",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -250,9 +250,9 @@
         ]
       }
     },
-    "/admin/v1/pmsalbumpic/{id}": {
+    "/admin/v1/pmsbrand/{id}": {
       "get": {
-        "operationId": "Admin_GetAlbumPic",
+        "operationId": "Admin_GetBrand",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -272,8 +272,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -281,9 +281,701 @@
         ]
       }
     },
-    "/admin/v1/pmsalbumpicList": {
+    "/admin/v1/pmsbrandList": {
       "get": {
-        "operationId": "Admin_ListAlbumPic",
+        "operationId": "Admin_ListBrand",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "configKey",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproduct": {
+      "post": {
+        "operationId": "Admin_CreateProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "Admin_UpdateProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproduct/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproduct/{id}": {
+      "get": {
+        "operationId": "Admin_GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductList": {
+      "get": {
+        "operationId": "Admin_ListProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "configKey",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattribute": {
+      "post": {
+        "operationId": "Admin_CreateProductAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "Admin_UpdateProductAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattribute/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteProductAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattribute/{id}": {
+      "get": {
+        "operationId": "Admin_GetProductAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattributeList": {
+      "get": {
+        "operationId": "Admin_ListProductAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "configKey",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattributecategory": {
+      "post": {
+        "operationId": "Admin_CreateProductAttributeCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "Admin_UpdateProductAttributeCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattributecategory/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteProductAttributeCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattributecategory/{id}": {
+      "get": {
+        "operationId": "Admin_GetProductAttributeCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductattributecategoryList": {
+      "get": {
+        "operationId": "Admin_ListProductAttributeCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "configKey",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductcategory": {
+      "post": {
+        "operationId": "Admin_CreateProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "Admin_UpdateProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductcategory/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductcategory/{id}": {
+      "get": {
+        "operationId": "Admin_GetProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductcategoryList": {
+      "get": {
+        "operationId": "Admin_ListProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apipmsApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "configKey",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "configType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/pmsproductcategorytreeList": {
+      "get": {
+        "operationId": "Admin_ListProductCategoryTree",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -359,8 +1051,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -474,11 +1166,19 @@
           "type": "integer",
           "format": "int32"
         },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
         "count": {
           "type": "integer",
           "format": "int32"
         },
-        "details": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"
@@ -494,11 +1194,89 @@
         }
       }
     },
+    "pmsAlbumPic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "albumId": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "pic": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "pmsGetAlbumReply": {
       "type": "object"
     },
     "pmsListAlbumReply": {
       "type": "object"
+    },
+    "pmsProductCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "parentId": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productUnit": {
+          "type": "string"
+        },
+        "navStatus": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "showStatus": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pmsProductCategory"
+          }
+        }
+      }
     },
     "protobufAny": {
       "type": "object",

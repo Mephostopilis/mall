@@ -1,5 +1,5 @@
 CREATE TABLE `cms_help` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) unsigned NOT NULL COMMENT 'id',
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `category_id` bigint(20) DEFAULT NULL COMMENT '分类',
   `icon` varchar(255) DEFAULT NULL COMMENT 'icon',

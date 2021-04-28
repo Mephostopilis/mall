@@ -67,6 +67,21 @@ func (d *dao) GetMenuByMenuId(e *model.Menu) (Menu model.Menu, err error) {
 	return
 }
 
+func (d *dao) initPaths(menu *model.Menu) (err error) {
+	parentMenu := new(model.Menu)
+	if int(menu.ParentId) != 0 {
+		d.orm.Table("sys_menu").Where("menu_id = ?", menu.ParentId).First(parentMenu)
+		if parentMenu.Paths == "" {
+			err = errors.OutOfRange("table", "父级paths异常，请尝试对当前节点父级菜单进行更新操作！")
+			return
+		}
+		menu.Paths = parentMenu.Paths + "/" + tools.IntToString(int(menu.MenuId))
+	} else {
+		menu.Paths = "/0/" + tools.IntToString(int(menu.MenuId))
+	}
+	return
+}
+
 func (d *dao) CreateMenu(e *model.Menu) (id int32, err error) {
 	if err = d.initPaths(e); err != nil {
 		return
@@ -80,22 +95,6 @@ func (d *dao) CreateMenu(e *model.Menu) (id int32, err error) {
 	return
 }
 
-func (d *dao) initPaths(menu *model.Menu) (err error) {
-	parentMenu := new(model.Menu)
-	if int(menu.ParentId) != 0 {
-		d.orm.Table("sys_menu").Where("menu_id = ?", menu.ParentId).First(parentMenu)
-		if parentMenu.Paths == "" {
-			err = errors.OutOfRange("table", "父级paths异常，请尝试对当前节点父级菜单进行更新操作！")
-			return
-		}
-		menu.Paths = parentMenu.Paths + "/" + tools.IntToString(int(menu.MenuId))
-	} else {
-		menu.Paths = "/0/" + tools.IntToString(int(menu.MenuId))
-	}
-	d.orm.Table("sys_menu").Where("menu_id = ?", menu.MenuId).Update("paths", menu.Paths)
-	return
-}
-
 func (d *dao) UpdateMenu(e *model.Menu, id int) (update model.Menu, err error) {
 	if err = d.orm.Table(e.TableName()).First(&update, id).Error; err != nil {
 		return
@@ -103,10 +102,12 @@ func (d *dao) UpdateMenu(e *model.Menu, id int) (update model.Menu, err error) {
 
 	//参数1:是要修改的数据
 	//参数2:是修改的数据
+	if err = d.initPaths(e); err != nil {
+		return
+	}
 	if err = d.orm.Table(e.TableName()).Model(&update).Updates(&e).Error; err != nil {
 		return
 	}
-	err = d.initPaths(e)
 	if err != nil {
 		return
 	}

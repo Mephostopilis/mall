@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package api.pay;
+
+import "google/protobuf/any.proto";
+
+option go_package = "edu/api/pay;pay";
+option java_multiple_files = true;
+option java_package = "api.pay";
+
+message ApiReply {
+    int32 code = 1;
+    string reason = 2;
+    string message = 3;
+    int32 ttl = 4;
+    int32 pageIndex = 5;
+    int32 pageSize = 6;
+    int32 count = 7; // total
+    repeated google.protobuf.Any data = 8;
+}
+
+message Order {}
+
+message CompanyAddress {}

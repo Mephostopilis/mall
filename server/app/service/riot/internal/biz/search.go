@@ -7,7 +7,7 @@ import (
 
 	pb "edu/api/riot"
 
-	"edu/riot/internal/types"
+	"edu/service/riot/internal/types"
 )
 
 // Search 搜索数据

@@ -32,7 +32,7 @@ service Admin {
   };
   rpc DeleteChoice(DeleteChoiceRequest) returns (ApiReply) {
     option (google.api.http) = {
-      delete: "/admin/v1/tiku/choices/{id}"
+      delete: "/admin/v1/tiku/choices/{ids}"
     };
   };
   rpc GetExerciseList (GetExerciseListRequest) returns (ApiReply) {
@@ -57,7 +57,7 @@ service Admin {
   };
   rpc DeleteExercise(DeleteExerciseRequest) returns (ApiReply) {
     option (google.api.http) = {
-      delete: "/admin/v1/tiku/exercise/{id}"
+      delete: "/admin/v1/tiku/exercise/{ids}"
     };
   };
 }
@@ -131,7 +131,7 @@ message UpdateChoiceRequest {}
 message UpdateChoiceReply {}
 
 message DeleteChoiceRequest {
-    uint64 id = 1;
+  string ids = 1;
 }
 message DeleteChoiceReply {}
 
@@ -174,7 +174,7 @@ message UpdateExerciseRequest {}
 message UpdateExerciseReply {}
 
 message DeleteExerciseRequest {
-  uint64 id = 1;
+  string ids = 1;
 }
 message DeleteExerciseReply {}
 

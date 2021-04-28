@@ -1,7 +1,7 @@
 package zh
 
 import (
-	"edu/riot/internal/analysis/tokenizer/gse"
+	"edu/service/riot/internal/analysis/tokenizer/gse"
 
 	"github.com/blevesearch/bleve/analysis"
 	"github.com/blevesearch/bleve/analysis/token/lowercase"

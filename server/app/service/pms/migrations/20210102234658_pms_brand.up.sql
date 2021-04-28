@@ -1,5 +1,5 @@
 CREATE TABLE `pms_brand` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `name` varchar(64) DEFAULT NULL,
   `first_letter` varchar(8) DEFAULT NULL COMMENT '首字母',
@@ -11,5 +11,10 @@ CREATE TABLE `pms_brand` (
   `logo` varchar(255) DEFAULT NULL COMMENT '品牌logo',
   `big_pic` varchar(255) DEFAULT NULL COMMENT '专区大图',
   `brand_story` text COMMENT '品牌故事',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='品牌表';

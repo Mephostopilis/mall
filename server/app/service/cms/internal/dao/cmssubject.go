@@ -47,7 +47,7 @@ func (d *dao) GetCmsSubjectPage(ctx context.Context, e *model.CmsSubject, pageSi
 }
 
 // 更新CmsSubject
-func (d *dao) UpdateCmsSubject(ctx context.Context, e *model.CmsSubject, id int) (update model.CmsSubject, err error) {
+func (d *dao) UpdateCmsSubject(ctx context.Context, e *model.CmsSubject, id uint64) (update model.CmsSubject, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -71,7 +71,7 @@ func (d *dao) DeleteCmsSubject(ctx context.Context, e *model.CmsSubject, id int)
 }
 
 //批量删除
-func (d *dao) BatchDeleteCmsSubject(ctx context.Context, e *model.CmsSubject, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteCmsSubject(ctx context.Context, e *model.CmsSubject, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.CmsSubject{}).Error; err != nil {
 		return
 	}

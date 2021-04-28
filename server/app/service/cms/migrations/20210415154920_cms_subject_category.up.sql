@@ -1,5 +1,5 @@
 CREATE TABLE `cms_subject_category` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `name` varchar(100) DEFAULT NULL,
   `icon` varchar(500) DEFAULT NULL COMMENT '分类图标',

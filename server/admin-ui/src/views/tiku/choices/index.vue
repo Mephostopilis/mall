@@ -141,7 +141,7 @@
 </template>
 
 <script>
-import { addChoices, delChoices, getChoices, listChoices, updateChoices } from '@/api/choices'
+import { addChoices, delChoices, getChoices, listChoices, updateChoices } from '@/api/tiku/choices'
 
 export default {
   name: 'Config',

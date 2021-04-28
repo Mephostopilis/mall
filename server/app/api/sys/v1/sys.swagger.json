@@ -486,7 +486,9 @@
         "tags": [
           "Admin"
         ]
-      },
+      }
+    },
+    "/admin/v1/dict/data/{ids}": {
       "delete": {
         "operationId": "Admin_DeleteDictData",
         "responses": {
@@ -505,11 +507,10 @@
         },
         "parameters": [
           {
-            "name": "dictCode",
+            "name": "ids",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         ],
         "tags": [
@@ -687,7 +688,9 @@
         "tags": [
           "Admin"
         ]
-      },
+      }
+    },
+    "/admin/v1/dict/type/{ids}": {
       "delete": {
         "operationId": "Admin_DeleteDictType",
         "responses": {
@@ -706,11 +709,10 @@
         },
         "parameters": [
           {
-            "name": "dictId",
+            "name": "ids",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         ],
         "tags": [

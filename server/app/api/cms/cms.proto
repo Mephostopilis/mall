@@ -60,6 +60,31 @@ service Admin {
             delete: "/admin/v1/cmshelpcategory/{ids}"
         };
     };
+    rpc ListSubject (ListSubjectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/cmssubjectList"
+        };
+    };
+    rpc GetSubject (GetSubjectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/cmssubject/{id}"
+        };
+    };
+    rpc CreateSubject (Subject) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/cmssubject"
+        };
+    };
+    rpc UpdateSubject (Subject) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/cmssubject"
+        };
+    };
+    rpc DeleteSubject (DeleteSubjectRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/cmssubject/{ids}"
+        };
+    };
 }
 
 service Api {
@@ -100,7 +125,7 @@ message ListHelpRequest {
 message ListHelpReply {}
 
 message GetHelpRequest {
-    int32 helpId = 1;
+    uint64 helpId = 1;
 }
 message GetHelpReply {}
 
@@ -125,7 +150,7 @@ message ListHelpCategoryRequest {
 message ListHelpCategoryReply {}
 
 message GetHelpCategoryRequest {
-    int32 id = 1;
+    uint64 id = 1;
 }
 message GetHelpCategoryReply {}
 
@@ -139,3 +164,28 @@ message DeleteHelpCategoryRequest {
     string ids = 1;
 }
 message DeleteHelpCategoryReply {}
+
+message ListSubjectRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListSubjectReply {}
+
+message GetSubjectRequest {
+    uint64 id = 1;
+}
+message GetSubjectReply {}
+
+message CreateSubjectRequest {}
+message CreateSubjectReply {}
+
+message UpdateSubjectRequest {}
+message UpdateSubjectReply {}
+
+message DeleteSubjectRequest {
+    string ids = 1;
+}
+message DeleteSubjectReply {}

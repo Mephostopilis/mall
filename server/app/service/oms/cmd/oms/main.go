@@ -66,7 +66,7 @@ func main() {
 		panic(err)
 	}
 	r := registry.New(cli)
-	app, err := di.InitApp(bc.Service, bc.Server, bc.App, logger, r)
+	app, err := di.InitApp(bc.Service, bc.Server, bc.Data, logger, r)
 	if err != nil {
 		panic(err)
 	}

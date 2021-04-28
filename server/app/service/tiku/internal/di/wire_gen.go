@@ -23,7 +23,7 @@ func InitApp(confService *conf.Service, confServer *conf.Server, data *conf.Data
 	if err != nil {
 		return nil, err
 	}
-	tikuUsecase, err := biz.NewTikuUsecase(app, logger, daoDao)
+	tikuUsecase, err := biz.NewTikuUsecase(app, logger, daoDao, registryRegistry)
 	if err != nil {
 		return nil, err
 	}

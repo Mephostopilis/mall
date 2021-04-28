@@ -1,15 +1,15 @@
 package model
 
 type CmsHelpCategory struct {
-	AppId      string `json:"appId" gorm:"type:bigint unsigned;"`  //
-	CreateBy   string `json:"createBy" gorm:"type:bigint;"`        //
-	HelpCount  string `json:"helpCount" gorm:"type:int unsigned;"` //
+	Id         uint64 `json:"id" gorm:"type:bigint;primary_key"`   // id
+	AppId      uint64 `json:"appId" gorm:"type:bigint unsigned;"`  //
+	HelpCount  uint32 `json:"helpCount" gorm:"type:int unsigned;"` //
 	Icon       string `json:"icon" gorm:"type:varchar(255);"`      //
-	Id         int    `json:"id" gorm:"type:int;primary_key"`      // id
 	Name       string `json:"name" gorm:"type:varchar(255);"`      //
-	ShowStatus string `json:"showStatus" gorm:"type:int;"`         //
-	Sort       string `json:"sort" gorm:"type:int;"`               //
-	UpdateBy   string `json:"updateBy" gorm:"type:bigint;"`        //
+	ShowStatus int32  `json:"showStatus" gorm:"type:int;"`         //
+	Sort       int32  `json:"sort" gorm:"type:int;"`               //
+	CreateBy   uint64 `json:"createBy" gorm:"type:bigint;"`        //
+	UpdateBy   uint64 `json:"updateBy" gorm:"type:bigint;"`        //
 	BaseModel
 }
 

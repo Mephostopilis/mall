@@ -1,5 +1,5 @@
 CREATE TABLE `cms_prefrence_area` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `name` varchar(255) DEFAULT NULL,
   `sub_title` varchar(255) DEFAULT NULL,

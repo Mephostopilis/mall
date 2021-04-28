@@ -4,7 +4,6 @@ CREATE TABLE `oms_order` (
   `member_id` bigint(20) NOT NULL,
   `coupon_id` bigint(20) DEFAULT NULL,
   `order_sn` varchar(64) DEFAULT NULL COMMENT '订单编号',
-  `create_time` datetime DEFAULT NULL COMMENT '提交时间',
   `member_username` varchar(64) DEFAULT NULL COMMENT '用户帐号',
   `total_amount` decimal(10,2) DEFAULT NULL COMMENT '订单总金额',
   `pay_amount` decimal(10,2) DEFAULT NULL COMMENT '应付金额（实际支付金额）',
@@ -43,6 +42,10 @@ CREATE TABLE `oms_order` (
   `delivery_time` datetime DEFAULT NULL COMMENT '发货时间',
   `receive_time` datetime DEFAULT NULL COMMENT '确认收货时间',
   `comment_time` datetime DEFAULT NULL COMMENT '评价时间',
-  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COMMENT='订单表';

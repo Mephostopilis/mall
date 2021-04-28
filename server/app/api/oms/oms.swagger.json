@@ -344,7 +344,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/omsCreateOrderReply"
+              "$ref": "#/definitions/apiomsCreateOrderReply"
             }
           },
           "default": {
@@ -366,7 +366,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/omsGetOrderReply"
+              "$ref": "#/definitions/apiomsGetOrderReply"
             }
           },
           "default": {
@@ -397,7 +397,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/omsListOrderReply"
+              "$ref": "#/definitions/apiomsListOrderReply"
             }
           },
           "default": {
@@ -496,17 +496,31 @@
           "type": "integer",
           "format": "int32"
         },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
         "count": {
           "type": "integer",
           "format": "int32"
         },
-        "details": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
         }
       }
+    },
+    "apiomsCreateOrderReply": {
+      "type": "object"
+    },
+    "apiomsGetOrderReply": {
+      "type": "object"
     },
     "apiomsHelloResp": {
       "type": "object",
@@ -516,13 +530,7 @@
         }
       }
     },
-    "omsCreateOrderReply": {
-      "type": "object"
-    },
-    "omsGetOrderReply": {
-      "type": "object"
-    },
-    "omsListOrderReply": {
+    "apiomsListOrderReply": {
       "type": "object"
     },
     "protobufAny": {

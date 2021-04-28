@@ -7,6 +7,7 @@ package di
 import (
 	"edu/service/sms/internal/biz"
 	"edu/service/sms/internal/conf"
+	"edu/service/sms/internal/dao"
 	"edu/service/sms/internal/server"
 	"edu/service/sms/internal/service"
 
@@ -17,6 +18,6 @@ import (
 )
 
 // initApp init kratos application.
-func InitApp(*conf.Service, *conf.Server, *conf.App, log.Logger, *registry.Registry) (*kratos.App, error) {
-	panic(wire.Build(server.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
+func InitApp(*conf.Service, *conf.Server, *conf.Data, log.Logger, *registry.Registry) (*kratos.App, error) {
+	panic(wire.Build(server.ProviderSet, dao.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
 }

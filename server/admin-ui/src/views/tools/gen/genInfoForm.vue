@@ -125,7 +125,12 @@ export default {
   props: {
     info: {
       type: Object,
-      default: null
+      default: null,
+      tplCategory: '',
+      packageName: '',
+      moduleName: '',
+      businessName: '',
+      functionName: ''
     }
   },
   data() {

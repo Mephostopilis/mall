@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { addExercise, delExercise, getExercise, listExercise, updateExercise } from '@/api/exercise'
+import { addExercise, delExercise, getExercise, listExercise, updateExercise } from '@/api/tiku/exercise'
 
 export default {
   name: 'Config',

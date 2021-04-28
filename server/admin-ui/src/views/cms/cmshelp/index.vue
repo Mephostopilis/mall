@@ -3,11 +3,24 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-
+        <el-form
+          ref="queryForm"
+          :model="queryParams"
+          :inline="true"
+          label-width="68px"
+        >
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="handleQuery"
+            >搜索</el-button>
+            <el-button
+              icon="el-icon-refresh"
+              size="mini"
+              @click="resetQuery"
+            >重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -46,9 +59,22 @@
           </el-col>
         </el-row>
 
-        <el-table v-loading="loading" :data="cmshelpList" @selection-change="handleSelectionChange">
+        <el-table
+          v-loading="loading"
+          :data="cmshelpList"
+          @selection-change="handleSelectionChange"
+        >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column prop="title" label="标题" />
+          <el-table-column prop="icon" label="icon" />
+          <el-table-column prop="categoryId" label="分类" />
+          <el-table-column prop="showStatus" label="显示状态" />
+          <el-table-column prop="readCount" label="读取次数" />
+          <el-table-column
+            label="操作"
+            align="center"
+            class-name="small-padding fixed-width"
+          >
             <template slot-scope="scope">
               <el-button
                 v-permisaction="['cmshelp:cmshelp:edit']"
@@ -71,7 +97,7 @@
         </el-table>
 
         <pagination
-          v-show="total>0"
+          v-show="total > 0"
           :total="total"
           :page.sync="queryParams.pageIndex"
           :limit.sync="queryParams.pageSize"
@@ -81,48 +107,26 @@
         <!-- 添加或修改对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
             <el-form-item label="" prop="appId">
-              <el-input
-                v-model="form.appId"
-                placeholder=""
-              />
+              <el-input v-model="form.appId" placeholder="" />
             </el-form-item>
             <el-form-item label="分类" prop="categoryId">
-              <el-input
-                v-model="form.categoryId"
-                placeholder="分类"
-              />
+              <el-input v-model="form.categoryId" placeholder="分类" />
             </el-form-item>
             <el-form-item label="内容" prop="content">
-              <el-input
-                v-model="form.content"
-                placeholder="内容"
-              />
+              <el-input v-model="form.content" placeholder="内容" />
             </el-form-item>
             <el-form-item label="icon" prop="icon">
-              <el-input
-                v-model="form.icon"
-                placeholder="icon"
-              />
+              <el-input v-model="form.icon" placeholder="icon" />
             </el-form-item>
             <el-form-item label="读取数" prop="readCount">
-              <el-input
-                v-model="form.readCount"
-                placeholder="读取数"
-              />
+              <el-input v-model="form.readCount" placeholder="读取数" />
             </el-form-item>
             <el-form-item label="显示状态" prop="showStatus">
-              <el-input
-                v-model="form.showStatus"
-                placeholder="显示状态"
-              />
+              <el-input v-model="form.showStatus" placeholder="显示状态" />
             </el-form-item>
             <el-form-item label="title" prop="title">
-              <el-input
-                v-model="form.title"
-                placeholder="title"
-              />
+              <el-input v-model="form.title" placeholder="title" />
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -136,7 +140,13 @@
 </template>
 
 <script>
-import { addCmsHelp, delCmsHelp, getCmsHelp, listCmsHelp, updateCmsHelp } from '@/api/cms/cmshelp'
+import {
+  addCmsHelp,
+  delCmsHelp,
+  getCmsHelp,
+  listCmsHelp,
+  updateCmsHelp
+} from '@/api/cms/cmshelp'
 
 export default {
   name: 'Config',
@@ -165,11 +175,9 @@ export default {
       queryParams: {
         pageIndex: 1,
         pageSize: 10
-
       },
       // 表单参数
-      form: {
-      },
+      form: {},
       // 表单校验
       rules: {}
     }
@@ -181,11 +189,12 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listCmsHelp(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-        this.cmshelpList = response.data
-        this.total = response.count
-        this.loading = false
-      }
+      listCmsHelp(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          this.cmshelpList = response.data
+          this.total = response.count
+          this.loading = false
+        }
       )
     },
     // 取消按钮
@@ -196,7 +205,6 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-
         appId: undefined,
         categoryId: undefined,
         content: undefined,
@@ -229,16 +237,15 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map((item) => item.id)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      const id =
-                row.id || this.ids
-      getCmsHelp(id).then(response => {
+      const id = row.id || this.ids
+      getCmsHelp(id).then((response) => {
         this.form = response.data
         this.open = true
         this.title = '修改CmsHelp'
@@ -247,11 +254,11 @@ export default {
     },
     /** 提交按钮 */
     submitForm: function() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updateCmsHelp(this.form).then(response => {
-              if (response.code === 200) {
+            updateCmsHelp(this.form).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('修改成功')
                 this.open = false
                 this.getList()
@@ -260,8 +267,8 @@ export default {
               }
             })
           } else {
-            addCmsHelp(this.form).then(response => {
-              if (response.code === 200) {
+            addCmsHelp(this.form).then((response) => {
+              if (response.code === 0) {
                 this.msgSuccess('新增成功')
                 this.open = false
                 this.getList()
@@ -280,13 +287,15 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return delCmsHelp(Ids)
-      }).then(() => {
-        this.getList()
-        this.msgSuccess('删除成功')
-      }).catch(function() {
       })
+        .then(function() {
+          return delCmsHelp(Ids)
+        })
+        .then(() => {
+          this.getList()
+          this.msgSuccess('删除成功')
+        })
+        .catch(function() {})
     }
   }
 }

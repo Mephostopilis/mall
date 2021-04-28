@@ -44,7 +44,7 @@
               </el-form-item>
             </el-form>
           </template>
-          <template v-slot:action="action" v-permisaction="['system:schedule:edit']" class="action">
+          <template #action="action" v-permisaction="['system:schedule:edit']" class="action">
             <el-button type="text" icon="el-icon-search" size="mini" :disabled="action.item.status === 1" @click="handleAction(action.item,1)">启动</el-button>
             <el-button type="text" icon="el-icon-search" size="mini" :disabled="action.item.status === 2" @click="handleAction(action.item,2)">暂停</el-button>
           </template>

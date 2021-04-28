@@ -149,7 +149,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/tiku/choices/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/tiku/choices/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteChoiceRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -279,7 +279,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/tiku/exercise/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/tiku/exercise/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteExerciseRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)

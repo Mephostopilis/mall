@@ -1,11 +1,10 @@
 CREATE TABLE `oms_order_return_apply` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `order_id` bigint(20) DEFAULT NULL COMMENT '订单id',
   `company_address_id` bigint(20) DEFAULT NULL COMMENT '收货地址表id',
   `product_id` bigint(20) DEFAULT NULL COMMENT '退货商品id',
   `order_sn` varchar(64) DEFAULT NULL COMMENT '订单编号',
-  `create_time` datetime DEFAULT NULL COMMENT '申请时间',
   `member_username` varchar(64) DEFAULT NULL COMMENT '会员用户名',
   `return_amount` decimal(10,2) DEFAULT NULL COMMENT '退款金额',
   `return_name` varchar(100) DEFAULT NULL COMMENT '退货人姓名',
@@ -27,5 +26,10 @@ CREATE TABLE `oms_order_return_apply` (
   `receive_man` varchar(100) DEFAULT NULL COMMENT '收货人',
   `receive_time` datetime DEFAULT NULL COMMENT '收货时间',
   `receive_note` varchar(500) DEFAULT NULL COMMENT '收货备注',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='订单退货申请';

@@ -47,7 +47,7 @@ func (d *dao) GetPmsBrandPage(ctx context.Context, e *model.PmsBrand, pageSize i
 }
 
 // 更新PmsBrand
-func (d *dao) UpdatePmsBrand(ctx context.Context, e *model.PmsBrand, id int) (update model.PmsBrand, err error) {
+func (d *dao) UpdatePmsBrand(ctx context.Context, e *model.PmsBrand, id uint64) (update model.PmsBrand, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -61,7 +61,7 @@ func (d *dao) UpdatePmsBrand(ctx context.Context, e *model.PmsBrand, id int) (up
 }
 
 // 删除PmsBrand
-func (d *dao) DeletePmsBrand(ctx context.Context, e *model.PmsBrand, id int) (success bool, err error) {
+func (d *dao) DeletePmsBrand(ctx context.Context, e *model.PmsBrand, id uint64) (success bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).Delete(&model.PmsBrand{}).Error; err != nil {
 		success = false
 		return
@@ -71,7 +71,7 @@ func (d *dao) DeletePmsBrand(ctx context.Context, e *model.PmsBrand, id int) (su
 }
 
 //批量删除
-func (d *dao) BatchDeletePmsBrand(ctx context.Context, e *model.PmsBrand, id []int) (Result bool, err error) {
+func (d *dao) BatchDeletePmsBrand(ctx context.Context, e *model.PmsBrand, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.PmsBrand{}).Error; err != nil {
 		return
 	}

@@ -22,15 +22,17 @@ type Dao interface {
 	// bts: -nullcache=&model.Article{ID:-1} -check_null_code=$!=nil&&$.ID==-1
 	// Article(c context.Context, id int64) (*model.Article, error)
 
-	GetChoices(ctx context.Context, e *model.Choices) (model.Choices, error)
 	GetChoicesPage(ctx context.Context, e *model.Choices, pageSize int, pageIndex int) ([]model.Choices, int64, error)
+	GetChoices(ctx context.Context, e *model.Choices) (model.Choices, error)
 	CreateChoices(ctx context.Context, e *model.Choices) (model.Choices, error)
 	UpdateChoices(ctx context.Context, e *model.Choices, id uint64) (update model.Choices, err error)
-	DeleteChoices(ctx context.Context, e *model.Choices, id int) (success bool, err error)
+	BatchDeleteChoices(ctx context.Context, e *model.Choices, id []uint64) (Result bool, err error)
 
 	GetExercisePage(ctx context.Context, e *model.Exercise, pageSize int, pageIndex int) ([]model.Exercise, int64, error)
 	GetExercise(ctx context.Context, e *model.Exercise) (model.Exercise, error)
 	CreateExercise(ctx context.Context, e *model.Exercise) (model.Exercise, error)
+	UpdateExercise(ctx context.Context, e *model.Exercise, id uint64) (update model.Exercise, err error)
+	BatchDeleteExercise(ctx context.Context, e *model.Exercise, id []uint64) (Result bool, err error)
 
 	GetUserChoices(ctx context.Context, e *model.UserChoices) (model.UserChoices, error)
 	GetUserChoicesPage(ctx context.Context, e *model.UserChoices, pageSize int, pageIndex int) ([]model.UserChoices, int64, error)

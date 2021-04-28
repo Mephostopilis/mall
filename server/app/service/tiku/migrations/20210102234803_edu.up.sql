@@ -6,7 +6,7 @@ CREATE TABLE `tiku_user_exercise` (
   `answer` varchar(255) DEFAULT NULL COMMENT '答案',
   `remark` text NOT NULL COMMENT '自己标记',
   `approve` text NOT NULL COMMENT '批准',
-  
+
   `create_by` bigint(20) DEFAULT NULL,
   `update_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,

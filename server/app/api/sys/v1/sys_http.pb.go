@@ -1639,7 +1639,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/dict/data/{dictCode}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/dict/data/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteDictDataRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -1793,7 +1793,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/dict/type/{dictId}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/dict/type/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteDictTypeRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)

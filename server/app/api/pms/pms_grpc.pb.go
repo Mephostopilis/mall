@@ -23,11 +23,32 @@ type AdminClient interface {
 	CreateAlbum(ctx context.Context, in *Album, opts ...grpc.CallOption) (*ApiReply, error)
 	UpdateAlbum(ctx context.Context, in *Album, opts ...grpc.CallOption) (*ApiReply, error)
 	DeleteAlbum(ctx context.Context, in *DeleteAlbumRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	ListAlbumPic(ctx context.Context, in *ListAlbumPicRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	GetAlbumPic(ctx context.Context, in *GetAlbumPicRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	CreateAlbumPic(ctx context.Context, in *AlbumPic, opts ...grpc.CallOption) (*ApiReply, error)
-	UpdateAlbumPic(ctx context.Context, in *AlbumPic, opts ...grpc.CallOption) (*ApiReply, error)
-	DeleteAlbumPic(ctx context.Context, in *DeleteAlbumPicRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListBrand(ctx context.Context, in *ListBrandRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	GetBrand(ctx context.Context, in *GetBrandRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	CreateBrand(ctx context.Context, in *Brand, opts ...grpc.CallOption) (*ApiReply, error)
+	UpdateBrand(ctx context.Context, in *Brand, opts ...grpc.CallOption) (*ApiReply, error)
+	DeleteBrand(ctx context.Context, in *DeleteBrandRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListProductCategory(ctx context.Context, in *ListProductCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListProductCategoryTree(ctx context.Context, in *ListProductCategoryTreeRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	GetProductCategory(ctx context.Context, in *GetProductCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	CreateProductCategory(ctx context.Context, in *ProductCategory, opts ...grpc.CallOption) (*ApiReply, error)
+	UpdateProductCategory(ctx context.Context, in *ProductCategory, opts ...grpc.CallOption) (*ApiReply, error)
+	DeleteProductCategory(ctx context.Context, in *DeleteProductCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListProduct(ctx context.Context, in *ListProductRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	CreateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*ApiReply, error)
+	UpdateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*ApiReply, error)
+	DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListProductAttribute(ctx context.Context, in *ListProductAttributeRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	GetProductAttribute(ctx context.Context, in *GetProductAttributeRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	CreateProductAttribute(ctx context.Context, in *ProductAttribute, opts ...grpc.CallOption) (*ApiReply, error)
+	UpdateProductAttribute(ctx context.Context, in *ProductAttribute, opts ...grpc.CallOption) (*ApiReply, error)
+	DeleteProductAttribute(ctx context.Context, in *DeleteProductAttributeRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	ListProductAttributeCategory(ctx context.Context, in *ListProductAttributeCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	GetProductAttributeCategory(ctx context.Context, in *GetProductAttributeCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
+	CreateProductAttributeCategory(ctx context.Context, in *ProductAttributeCategory, opts ...grpc.CallOption) (*ApiReply, error)
+	UpdateProductAttributeCategory(ctx context.Context, in *ProductAttributeCategory, opts ...grpc.CallOption) (*ApiReply, error)
+	DeleteProductAttributeCategory(ctx context.Context, in *DeleteProductAttributeCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error)
 }
 
 type adminClient struct {
@@ -83,45 +104,234 @@ func (c *adminClient) DeleteAlbum(ctx context.Context, in *DeleteAlbumRequest, o
 	return out, nil
 }
 
-func (c *adminClient) ListAlbumPic(ctx context.Context, in *ListAlbumPicRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+func (c *adminClient) ListBrand(ctx context.Context, in *ListBrandRequest, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListAlbumPic", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) GetAlbumPic(ctx context.Context, in *GetAlbumPicRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+func (c *adminClient) GetBrand(ctx context.Context, in *GetBrandRequest, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.pms.Admin/GetAlbumPic", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/GetBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) CreateAlbumPic(ctx context.Context, in *AlbumPic, opts ...grpc.CallOption) (*ApiReply, error) {
+func (c *adminClient) CreateBrand(ctx context.Context, in *Brand, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.pms.Admin/CreateAlbumPic", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/CreateBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) UpdateAlbumPic(ctx context.Context, in *AlbumPic, opts ...grpc.CallOption) (*ApiReply, error) {
+func (c *adminClient) UpdateBrand(ctx context.Context, in *Brand, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.pms.Admin/UpdateAlbumPic", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/UpdateBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) DeleteAlbumPic(ctx context.Context, in *DeleteAlbumPicRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+func (c *adminClient) DeleteBrand(ctx context.Context, in *DeleteBrandRequest, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.pms.Admin/DeleteAlbumPic", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/DeleteBrand", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListProductCategory(ctx context.Context, in *ListProductCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListProductCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListProductCategoryTree(ctx context.Context, in *ListProductCategoryTreeRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListProductCategoryTree", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetProductCategory(ctx context.Context, in *GetProductCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/GetProductCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateProductCategory(ctx context.Context, in *ProductCategory, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/CreateProductCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateProductCategory(ctx context.Context, in *ProductCategory, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/UpdateProductCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteProductCategory(ctx context.Context, in *DeleteProductCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/DeleteProductCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListProduct(ctx context.Context, in *ListProductRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/GetProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/CreateProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/UpdateProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/DeleteProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListProductAttribute(ctx context.Context, in *ListProductAttributeRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListProductAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetProductAttribute(ctx context.Context, in *GetProductAttributeRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/GetProductAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateProductAttribute(ctx context.Context, in *ProductAttribute, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/CreateProductAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateProductAttribute(ctx context.Context, in *ProductAttribute, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/UpdateProductAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteProductAttribute(ctx context.Context, in *DeleteProductAttributeRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/DeleteProductAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListProductAttributeCategory(ctx context.Context, in *ListProductAttributeCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/ListProductAttributeCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetProductAttributeCategory(ctx context.Context, in *GetProductAttributeCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/GetProductAttributeCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateProductAttributeCategory(ctx context.Context, in *ProductAttributeCategory, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/CreateProductAttributeCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateProductAttributeCategory(ctx context.Context, in *ProductAttributeCategory, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/UpdateProductAttributeCategory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteProductAttributeCategory(ctx context.Context, in *DeleteProductAttributeCategoryRequest, opts ...grpc.CallOption) (*ApiReply, error) {
+	out := new(ApiReply)
+	err := c.cc.Invoke(ctx, "/api.pms.Admin/DeleteProductAttributeCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,11 +347,32 @@ type AdminServer interface {
 	CreateAlbum(context.Context, *Album) (*ApiReply, error)
 	UpdateAlbum(context.Context, *Album) (*ApiReply, error)
 	DeleteAlbum(context.Context, *DeleteAlbumRequest) (*ApiReply, error)
-	ListAlbumPic(context.Context, *ListAlbumPicRequest) (*ApiReply, error)
-	GetAlbumPic(context.Context, *GetAlbumPicRequest) (*ApiReply, error)
-	CreateAlbumPic(context.Context, *AlbumPic) (*ApiReply, error)
-	UpdateAlbumPic(context.Context, *AlbumPic) (*ApiReply, error)
-	DeleteAlbumPic(context.Context, *DeleteAlbumPicRequest) (*ApiReply, error)
+	ListBrand(context.Context, *ListBrandRequest) (*ApiReply, error)
+	GetBrand(context.Context, *GetBrandRequest) (*ApiReply, error)
+	CreateBrand(context.Context, *Brand) (*ApiReply, error)
+	UpdateBrand(context.Context, *Brand) (*ApiReply, error)
+	DeleteBrand(context.Context, *DeleteBrandRequest) (*ApiReply, error)
+	ListProductCategory(context.Context, *ListProductCategoryRequest) (*ApiReply, error)
+	ListProductCategoryTree(context.Context, *ListProductCategoryTreeRequest) (*ApiReply, error)
+	GetProductCategory(context.Context, *GetProductCategoryRequest) (*ApiReply, error)
+	CreateProductCategory(context.Context, *ProductCategory) (*ApiReply, error)
+	UpdateProductCategory(context.Context, *ProductCategory) (*ApiReply, error)
+	DeleteProductCategory(context.Context, *DeleteProductCategoryRequest) (*ApiReply, error)
+	ListProduct(context.Context, *ListProductRequest) (*ApiReply, error)
+	GetProduct(context.Context, *GetProductRequest) (*ApiReply, error)
+	CreateProduct(context.Context, *Product) (*ApiReply, error)
+	UpdateProduct(context.Context, *Product) (*ApiReply, error)
+	DeleteProduct(context.Context, *DeleteProductRequest) (*ApiReply, error)
+	ListProductAttribute(context.Context, *ListProductAttributeRequest) (*ApiReply, error)
+	GetProductAttribute(context.Context, *GetProductAttributeRequest) (*ApiReply, error)
+	CreateProductAttribute(context.Context, *ProductAttribute) (*ApiReply, error)
+	UpdateProductAttribute(context.Context, *ProductAttribute) (*ApiReply, error)
+	DeleteProductAttribute(context.Context, *DeleteProductAttributeRequest) (*ApiReply, error)
+	ListProductAttributeCategory(context.Context, *ListProductAttributeCategoryRequest) (*ApiReply, error)
+	GetProductAttributeCategory(context.Context, *GetProductAttributeCategoryRequest) (*ApiReply, error)
+	CreateProductAttributeCategory(context.Context, *ProductAttributeCategory) (*ApiReply, error)
+	UpdateProductAttributeCategory(context.Context, *ProductAttributeCategory) (*ApiReply, error)
+	DeleteProductAttributeCategory(context.Context, *DeleteProductAttributeCategoryRequest) (*ApiReply, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -164,20 +395,83 @@ func (UnimplementedAdminServer) UpdateAlbum(context.Context, *Album) (*ApiReply,
 func (UnimplementedAdminServer) DeleteAlbum(context.Context, *DeleteAlbumRequest) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlbum not implemented")
 }
-func (UnimplementedAdminServer) ListAlbumPic(context.Context, *ListAlbumPicRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAlbumPic not implemented")
+func (UnimplementedAdminServer) ListBrand(context.Context, *ListBrandRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBrand not implemented")
 }
-func (UnimplementedAdminServer) GetAlbumPic(context.Context, *GetAlbumPicRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAlbumPic not implemented")
+func (UnimplementedAdminServer) GetBrand(context.Context, *GetBrandRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBrand not implemented")
 }
-func (UnimplementedAdminServer) CreateAlbumPic(context.Context, *AlbumPic) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAlbumPic not implemented")
+func (UnimplementedAdminServer) CreateBrand(context.Context, *Brand) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBrand not implemented")
 }
-func (UnimplementedAdminServer) UpdateAlbumPic(context.Context, *AlbumPic) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAlbumPic not implemented")
+func (UnimplementedAdminServer) UpdateBrand(context.Context, *Brand) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrand not implemented")
 }
-func (UnimplementedAdminServer) DeleteAlbumPic(context.Context, *DeleteAlbumPicRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlbumPic not implemented")
+func (UnimplementedAdminServer) DeleteBrand(context.Context, *DeleteBrandRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBrand not implemented")
+}
+func (UnimplementedAdminServer) ListProductCategory(context.Context, *ListProductCategoryRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductCategory not implemented")
+}
+func (UnimplementedAdminServer) ListProductCategoryTree(context.Context, *ListProductCategoryTreeRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductCategoryTree not implemented")
+}
+func (UnimplementedAdminServer) GetProductCategory(context.Context, *GetProductCategoryRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductCategory not implemented")
+}
+func (UnimplementedAdminServer) CreateProductCategory(context.Context, *ProductCategory) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProductCategory not implemented")
+}
+func (UnimplementedAdminServer) UpdateProductCategory(context.Context, *ProductCategory) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductCategory not implemented")
+}
+func (UnimplementedAdminServer) DeleteProductCategory(context.Context, *DeleteProductCategoryRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductCategory not implemented")
+}
+func (UnimplementedAdminServer) ListProduct(context.Context, *ListProductRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProduct not implemented")
+}
+func (UnimplementedAdminServer) GetProduct(context.Context, *GetProductRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProduct not implemented")
+}
+func (UnimplementedAdminServer) CreateProduct(context.Context, *Product) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
+}
+func (UnimplementedAdminServer) UpdateProduct(context.Context, *Product) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProduct not implemented")
+}
+func (UnimplementedAdminServer) DeleteProduct(context.Context, *DeleteProductRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProduct not implemented")
+}
+func (UnimplementedAdminServer) ListProductAttribute(context.Context, *ListProductAttributeRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductAttribute not implemented")
+}
+func (UnimplementedAdminServer) GetProductAttribute(context.Context, *GetProductAttributeRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductAttribute not implemented")
+}
+func (UnimplementedAdminServer) CreateProductAttribute(context.Context, *ProductAttribute) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProductAttribute not implemented")
+}
+func (UnimplementedAdminServer) UpdateProductAttribute(context.Context, *ProductAttribute) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttribute not implemented")
+}
+func (UnimplementedAdminServer) DeleteProductAttribute(context.Context, *DeleteProductAttributeRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductAttribute not implemented")
+}
+func (UnimplementedAdminServer) ListProductAttributeCategory(context.Context, *ListProductAttributeCategoryRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProductAttributeCategory not implemented")
+}
+func (UnimplementedAdminServer) GetProductAttributeCategory(context.Context, *GetProductAttributeCategoryRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductAttributeCategory not implemented")
+}
+func (UnimplementedAdminServer) CreateProductAttributeCategory(context.Context, *ProductAttributeCategory) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProductAttributeCategory not implemented")
+}
+func (UnimplementedAdminServer) UpdateProductAttributeCategory(context.Context, *ProductAttributeCategory) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeCategory not implemented")
+}
+func (UnimplementedAdminServer) DeleteProductAttributeCategory(context.Context, *DeleteProductAttributeCategoryRequest) (*ApiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductAttributeCategory not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -282,92 +576,470 @@ func _Admin_DeleteAlbum_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_ListAlbumPic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAlbumPicRequest)
+func _Admin_ListBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBrandRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).ListAlbumPic(ctx, in)
+		return srv.(AdminServer).ListBrand(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pms.Admin/ListAlbumPic",
+		FullMethod: "/api.pms.Admin/ListBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).ListAlbumPic(ctx, req.(*ListAlbumPicRequest))
+		return srv.(AdminServer).ListBrand(ctx, req.(*ListBrandRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_GetAlbumPic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAlbumPicRequest)
+func _Admin_GetBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBrandRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).GetAlbumPic(ctx, in)
+		return srv.(AdminServer).GetBrand(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pms.Admin/GetAlbumPic",
+		FullMethod: "/api.pms.Admin/GetBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetAlbumPic(ctx, req.(*GetAlbumPicRequest))
+		return srv.(AdminServer).GetBrand(ctx, req.(*GetBrandRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_CreateAlbumPic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AlbumPic)
+func _Admin_CreateBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Brand)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).CreateAlbumPic(ctx, in)
+		return srv.(AdminServer).CreateBrand(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pms.Admin/CreateAlbumPic",
+		FullMethod: "/api.pms.Admin/CreateBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).CreateAlbumPic(ctx, req.(*AlbumPic))
+		return srv.(AdminServer).CreateBrand(ctx, req.(*Brand))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_UpdateAlbumPic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AlbumPic)
+func _Admin_UpdateBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Brand)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).UpdateAlbumPic(ctx, in)
+		return srv.(AdminServer).UpdateBrand(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pms.Admin/UpdateAlbumPic",
+		FullMethod: "/api.pms.Admin/UpdateBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).UpdateAlbumPic(ctx, req.(*AlbumPic))
+		return srv.(AdminServer).UpdateBrand(ctx, req.(*Brand))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_DeleteAlbumPic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteAlbumPicRequest)
+func _Admin_DeleteBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBrandRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).DeleteAlbumPic(ctx, in)
+		return srv.(AdminServer).DeleteBrand(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pms.Admin/DeleteAlbumPic",
+		FullMethod: "/api.pms.Admin/DeleteBrand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).DeleteAlbumPic(ctx, req.(*DeleteAlbumPicRequest))
+		return srv.(AdminServer).DeleteBrand(ctx, req.(*DeleteBrandRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListProductCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListProductCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/ListProductCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListProductCategory(ctx, req.(*ListProductCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListProductCategoryTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductCategoryTreeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListProductCategoryTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/ListProductCategoryTree",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListProductCategoryTree(ctx, req.(*ListProductCategoryTreeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetProductCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetProductCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/GetProductCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetProductCategory(ctx, req.(*GetProductCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateProductCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductCategory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateProductCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/CreateProductCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateProductCategory(ctx, req.(*ProductCategory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateProductCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductCategory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateProductCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/UpdateProductCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateProductCategory(ctx, req.(*ProductCategory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteProductCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteProductCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/DeleteProductCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteProductCategory(ctx, req.(*DeleteProductCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/ListProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListProduct(ctx, req.(*ListProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/GetProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetProduct(ctx, req.(*GetProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Product)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/CreateProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateProduct(ctx, req.(*Product))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Product)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/UpdateProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateProduct(ctx, req.(*Product))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/DeleteProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteProduct(ctx, req.(*DeleteProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListProductAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListProductAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/ListProductAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListProductAttribute(ctx, req.(*ListProductAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetProductAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetProductAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/GetProductAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetProductAttribute(ctx, req.(*GetProductAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateProductAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductAttribute)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateProductAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/CreateProductAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateProductAttribute(ctx, req.(*ProductAttribute))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateProductAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductAttribute)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateProductAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/UpdateProductAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateProductAttribute(ctx, req.(*ProductAttribute))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteProductAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteProductAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/DeleteProductAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteProductAttribute(ctx, req.(*DeleteProductAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductAttributeCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListProductAttributeCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/ListProductAttributeCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListProductAttributeCategory(ctx, req.(*ListProductAttributeCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductAttributeCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetProductAttributeCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/GetProductAttributeCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetProductAttributeCategory(ctx, req.(*GetProductAttributeCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductAttributeCategory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateProductAttributeCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/CreateProductAttributeCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateProductAttributeCategory(ctx, req.(*ProductAttributeCategory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductAttributeCategory)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateProductAttributeCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/UpdateProductAttributeCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateProductAttributeCategory(ctx, req.(*ProductAttributeCategory))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductAttributeCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteProductAttributeCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pms.Admin/DeleteProductAttributeCategory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteProductAttributeCategory(ctx, req.(*DeleteProductAttributeCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -400,24 +1072,108 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Admin_DeleteAlbum_Handler,
 		},
 		{
-			MethodName: "ListAlbumPic",
-			Handler:    _Admin_ListAlbumPic_Handler,
+			MethodName: "ListBrand",
+			Handler:    _Admin_ListBrand_Handler,
 		},
 		{
-			MethodName: "GetAlbumPic",
-			Handler:    _Admin_GetAlbumPic_Handler,
+			MethodName: "GetBrand",
+			Handler:    _Admin_GetBrand_Handler,
 		},
 		{
-			MethodName: "CreateAlbumPic",
-			Handler:    _Admin_CreateAlbumPic_Handler,
+			MethodName: "CreateBrand",
+			Handler:    _Admin_CreateBrand_Handler,
 		},
 		{
-			MethodName: "UpdateAlbumPic",
-			Handler:    _Admin_UpdateAlbumPic_Handler,
+			MethodName: "UpdateBrand",
+			Handler:    _Admin_UpdateBrand_Handler,
 		},
 		{
-			MethodName: "DeleteAlbumPic",
-			Handler:    _Admin_DeleteAlbumPic_Handler,
+			MethodName: "DeleteBrand",
+			Handler:    _Admin_DeleteBrand_Handler,
+		},
+		{
+			MethodName: "ListProductCategory",
+			Handler:    _Admin_ListProductCategory_Handler,
+		},
+		{
+			MethodName: "ListProductCategoryTree",
+			Handler:    _Admin_ListProductCategoryTree_Handler,
+		},
+		{
+			MethodName: "GetProductCategory",
+			Handler:    _Admin_GetProductCategory_Handler,
+		},
+		{
+			MethodName: "CreateProductCategory",
+			Handler:    _Admin_CreateProductCategory_Handler,
+		},
+		{
+			MethodName: "UpdateProductCategory",
+			Handler:    _Admin_UpdateProductCategory_Handler,
+		},
+		{
+			MethodName: "DeleteProductCategory",
+			Handler:    _Admin_DeleteProductCategory_Handler,
+		},
+		{
+			MethodName: "ListProduct",
+			Handler:    _Admin_ListProduct_Handler,
+		},
+		{
+			MethodName: "GetProduct",
+			Handler:    _Admin_GetProduct_Handler,
+		},
+		{
+			MethodName: "CreateProduct",
+			Handler:    _Admin_CreateProduct_Handler,
+		},
+		{
+			MethodName: "UpdateProduct",
+			Handler:    _Admin_UpdateProduct_Handler,
+		},
+		{
+			MethodName: "DeleteProduct",
+			Handler:    _Admin_DeleteProduct_Handler,
+		},
+		{
+			MethodName: "ListProductAttribute",
+			Handler:    _Admin_ListProductAttribute_Handler,
+		},
+		{
+			MethodName: "GetProductAttribute",
+			Handler:    _Admin_GetProductAttribute_Handler,
+		},
+		{
+			MethodName: "CreateProductAttribute",
+			Handler:    _Admin_CreateProductAttribute_Handler,
+		},
+		{
+			MethodName: "UpdateProductAttribute",
+			Handler:    _Admin_UpdateProductAttribute_Handler,
+		},
+		{
+			MethodName: "DeleteProductAttribute",
+			Handler:    _Admin_DeleteProductAttribute_Handler,
+		},
+		{
+			MethodName: "ListProductAttributeCategory",
+			Handler:    _Admin_ListProductAttributeCategory_Handler,
+		},
+		{
+			MethodName: "GetProductAttributeCategory",
+			Handler:    _Admin_GetProductAttributeCategory_Handler,
+		},
+		{
+			MethodName: "CreateProductAttributeCategory",
+			Handler:    _Admin_CreateProductAttributeCategory_Handler,
+		},
+		{
+			MethodName: "UpdateProductAttributeCategory",
+			Handler:    _Admin_UpdateProductAttributeCategory_Handler,
+		},
+		{
+			MethodName: "DeleteProductAttributeCategory",
+			Handler:    _Admin_DeleteProductAttributeCategory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

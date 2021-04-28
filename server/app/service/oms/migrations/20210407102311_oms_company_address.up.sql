@@ -1,5 +1,5 @@
 CREATE TABLE `oms_company_address` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `address_name` varchar(200) DEFAULT NULL COMMENT '地址名称',
   `send_status` int(1) DEFAULT NULL COMMENT '默认发货地址：0->否；1->是',
@@ -10,5 +10,10 @@ CREATE TABLE `oms_company_address` (
   `city` varchar(64) DEFAULT NULL COMMENT '市',
   `region` varchar(64) DEFAULT NULL COMMENT '区',
   `detail_address` varchar(200) DEFAULT NULL COMMENT '详细地址',
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='公司收发货地址表';

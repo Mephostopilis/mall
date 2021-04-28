@@ -47,7 +47,7 @@ func (d *dao) GetCmsHelpCategoryPage(ctx context.Context, e *model.CmsHelpCatego
 }
 
 // 更新CmsHelpCategory
-func (d *dao) UpdateCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategory, id int) (update model.CmsHelpCategory, err error) {
+func (d *dao) UpdateCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategory, id uint64) (update model.CmsHelpCategory, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -61,7 +61,7 @@ func (d *dao) UpdateCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategor
 }
 
 // 删除CmsHelpCategory
-func (d *dao) DeleteCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategory, id int) (success bool, err error) {
+func (d *dao) DeleteCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategory, id uint64) (success bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).Delete(&model.CmsHelpCategory{}).Error; err != nil {
 		success = false
 		return
@@ -71,7 +71,7 @@ func (d *dao) DeleteCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategor
 }
 
 //批量删除
-func (d *dao) BatchDeleteCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategory, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteCmsHelpCategory(ctx context.Context, e *model.CmsHelpCategory, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.CmsHelpCategory{}).Error; err != nil {
 		return
 	}

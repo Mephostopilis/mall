@@ -59,7 +59,7 @@ func (d *dao) GetExercisePage(ctx context.Context, e *model.Exercise, pageSize i
 }
 
 // 更新Exercise
-func (d *dao) UpdateExercise(ctx context.Context, e *model.Exercise, id int) (update model.Exercise, err error) {
+func (d *dao) UpdateExercise(ctx context.Context, e *model.Exercise, id uint64) (update model.Exercise, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -83,7 +83,7 @@ func (d *dao) DeleteExercise(ctx context.Context, e *model.Exercise, id int) (su
 }
 
 //批量删除
-func (d *dao) BatchDeleteExercise(ctx context.Context, e *model.Exercise, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteExercise(ctx context.Context, e *model.Exercise, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.Exercise{}).Error; err != nil {
 		return
 	}

@@ -3,11 +3,10 @@ package biz
 import (
 	"edu/pkg/constants"
 	"edu/pkg/utils"
-	"edu/riot/internal/conf"
-	"edu/riot/internal/dao"
-	"edu/riot/internal/mapping"
+	"edu/service/riot/internal/conf"
+	"edu/service/riot/internal/dao"
+	"edu/service/riot/internal/mapping"
 
-	"csac.pro/csacio/go-csac/util/logging"
 	"github.com/blevesearch/bleve"
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -21,6 +20,7 @@ type Engine struct {
 
 // New initialize the engine
 func New(logger log.Logger, d dao.Dao) (engine *Engine, cf func(), err error) {
+	log := log.NewHelper("engine", logger)
 	cfg := conf.BleveConfig{
 		Indexs: 1,
 		Path:   []string{"bleve/0"},
@@ -30,6 +30,7 @@ func New(logger log.Logger, d dao.Dao) (engine *Engine, cf func(), err error) {
 	engine = &Engine{
 		indexer: make([]bleve.Index, cfg.Indexs),
 		dao:     d,
+		log: log,
 	}
 	for i := int32(0); i < cfg.Indexs; i++ {
 		exists, xerr := utils.PathExists(cfg.Path[i])
@@ -40,7 +41,7 @@ func New(logger log.Logger, d dao.Dao) (engine *Engine, cf func(), err error) {
 		if exists {
 			index, xerr := bleve.OpenUsing(cfg.Path[i], nil)
 			if xerr != nil {
-				logging.VLog().Errorf("err = %v", xerr)
+				log.Errorf("err = %v", xerr)
 				err = xerr
 				return
 			}
@@ -107,5 +108,5 @@ func (engine *Engine) Close() {
 	for i := 0; i < len(engine.indexer); i++ {
 		engine.indexer[i].Close()
 	}
-	logging.VLog().Infof("engine closed")
+	engine.log.Infof("engine closed")
 }

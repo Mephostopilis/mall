@@ -202,14 +202,14 @@ func request_Admin_DeleteChoice_0(ctx context.Context, marshaler runtime.Marshal
 		_   = err
 	)
 
-	val, ok = pathParams["id"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.Id, err = runtime.Uint64(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := client.DeleteChoice(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -228,14 +228,14 @@ func local_request_Admin_DeleteChoice_0(ctx context.Context, marshaler runtime.M
 		_   = err
 	)
 
-	val, ok = pathParams["id"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.Id, err = runtime.Uint64(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := server.DeleteChoice(ctx, &protoReq)
@@ -414,14 +414,14 @@ func request_Admin_DeleteExercise_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["id"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.Id, err = runtime.Uint64(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := client.DeleteExercise(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -440,14 +440,14 @@ func local_request_Admin_DeleteExercise_0(ctx context.Context, marshaler runtime
 		_   = err
 	)
 
-	val, ok = pathParams["id"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.Id, err = runtime.Uint64(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := server.DeleteExercise(ctx, &protoReq)
@@ -1421,7 +1421,7 @@ var (
 
 	pattern_Admin_UpdateChoice_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "tiku", "choices"}, ""))
 
-	pattern_Admin_DeleteChoice_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "tiku", "choices", "id"}, ""))
+	pattern_Admin_DeleteChoice_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "tiku", "choices", "ids"}, ""))
 
 	pattern_Admin_GetExerciseList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "tiku", "exerciseList"}, ""))
 
@@ -1431,7 +1431,7 @@ var (
 
 	pattern_Admin_UpdateExercise_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "tiku", "exercise"}, ""))
 
-	pattern_Admin_DeleteExercise_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "tiku", "exercise", "id"}, ""))
+	pattern_Admin_DeleteExercise_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "tiku", "exercise", "ids"}, ""))
 )
 
 var (

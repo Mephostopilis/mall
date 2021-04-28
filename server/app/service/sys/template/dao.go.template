@@ -67,8 +67,27 @@ return
 return
 }
 
+// 获取{{.ClassName}}列表
+func (d *dao) Get{{.ClassName}}List(ctx context.Context, e *model.{{.ClassName}}) (docs []model.{{.ClassName}}, err error) {
+
+table := d.orm.Table(e.TableName())
+{{ range .Columns }}
+    {{- if .IsQuery }}
+        if e.{{.GoField}} != {{if eq .GoType "string" -}} "" {{ else if eq .GoType "int" -}} 0 {{- end}} {
+        table = table.Where("{{.ColumnName}}{{if eq .QueryType "EQ"}} = {{else if eq .QueryType "NE"}} != {{else if eq .QueryType "GT"}} >  {{else if eq .QueryType "GTE"}} >=  {{else if eq .QueryType "LT"}} < {{else if eq .QueryType "LTE"}} <= {{else if eq .QueryType "LIKE"}} like {{end}}?", {{ if eq .QueryType "LIKE"}}"%"+e.{{.GoField}}+"%"{{else}}e.{{.GoField}}{{end}})
+        }
+    {{ end -}}
+{{- end }}
+
+if err = table.Find(&docs).Error; err != nil {
+return
+}
+
+return
+}
+
 // 更新{{.ClassName}}
-func (d *dao) Update{{.ClassName}}(ctx context.Context, e *model.{{.ClassName}},id int) (update model.{{.ClassName}}, err error) {
+func (d *dao) Update{{.ClassName}}(ctx context.Context, e *model.{{.ClassName}},id uint64) (update model.{{.ClassName}}, err error) {
     if err = d.orm.Table(e.TableName()).Where("{{.PkColumn}} = ?", id).First(&update).Error; err != nil {
         return
     }
@@ -82,7 +101,7 @@ func (d *dao) Update{{.ClassName}}(ctx context.Context, e *model.{{.ClassName}},
 }
 
 // 删除{{.ClassName}}
-func (d *dao) Delete{{.ClassName}}(ctx context.Context, e *model.{{.ClassName}}, id int) (success bool, err error) {
+func (d *dao) Delete{{.ClassName}}(ctx context.Context, e *model.{{.ClassName}}, id uint64) (success bool, err error) {
     if err = d.orm.Table(e.TableName()).Where("{{.PkColumn}} = ?", id).Delete(&model.{{.ClassName}}{}).Error; err != nil {
         success = false
         return

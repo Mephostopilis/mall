@@ -13,7 +13,6 @@ import (
 
 var ProviderSet = wire.NewSet(New)
 
-//go:generate kratos tool genbts
 // Dao dao interface
 type Dao interface {
 	Close()

@@ -2372,14 +2372,14 @@ func request_Admin_DeleteDictData_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["dictCode"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "dictCode")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.DictCode, err = runtime.Int32(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "dictCode", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := client.DeleteDictData(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -2398,14 +2398,14 @@ func local_request_Admin_DeleteDictData_0(ctx context.Context, marshaler runtime
 		_   = err
 	)
 
-	val, ok = pathParams["dictCode"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "dictCode")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.DictCode, err = runtime.Int32(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "dictCode", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := server.DeleteDictData(ctx, &protoReq)
@@ -2638,14 +2638,14 @@ func request_Admin_DeleteDictType_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["dictId"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "dictId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.DictId, err = runtime.Int32(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "dictId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := client.DeleteDictType(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -2664,14 +2664,14 @@ func local_request_Admin_DeleteDictType_0(ctx context.Context, marshaler runtime
 		_   = err
 	)
 
-	val, ok = pathParams["dictId"]
+	val, ok = pathParams["ids"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "dictId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ids")
 	}
 
-	protoReq.DictId, err = runtime.Int32(val)
+	protoReq.Ids, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "dictId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ids", err)
 	}
 
 	msg, err := server.DeleteDictType(ctx, &protoReq)
@@ -7003,7 +7003,7 @@ var (
 
 	pattern_Admin_UpdateDictData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "dict", "data"}, ""))
 
-	pattern_Admin_DeleteDictData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "dict", "data", "dictCode"}, ""))
+	pattern_Admin_DeleteDictData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "dict", "data", "ids"}, ""))
 
 	pattern_Admin_GetDictTypeList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "dict", "typelist"}, ""))
 
@@ -7015,7 +7015,7 @@ var (
 
 	pattern_Admin_UpdateDictType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "dict", "type"}, ""))
 
-	pattern_Admin_DeleteDictType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "dict", "type", "dictId"}, ""))
+	pattern_Admin_DeleteDictType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "dict", "type", "ids"}, ""))
 
 	pattern_Admin_GetServerInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "tools", "serverInfo"}, ""))
 

@@ -1,12 +1,11 @@
 CREATE TABLE `cms_help_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) unsigned NOT NULL COMMENT 'id',
   `app_id` bigint(20) unsigned NULL DEFAULT NULL ,
   `name` varchar(255) NOT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `help_count` int(11) unsigned DEFAULT NULL,
   `show_status` int(11) DEFAULT NULL,
   `sort` int(11) NULL DEFAULT NULL,
-
   `create_by` bigint(20) DEFAULT NULL,
   `update_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,

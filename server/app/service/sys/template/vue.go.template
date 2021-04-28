@@ -89,6 +89,14 @@
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
                             <el-button
+                                v-permisaction="['pmsbrand:pmsbrand:info']"
+                                size="mini"
+                                type="text"
+                                icon="el-icon-info"
+                                @click="handleDetail(scope.row)"
+                            >详情
+                            </el-button>
+                            <el-button
                                     v-permisaction="['{{.PackageName}}:{{.ModuleName}}:edit']"
                                     size="mini"
                                     type="text"
@@ -182,9 +190,9 @@
 
 <script>
     import {add{{.ClassName}}, del{{.ClassName}}, get{{.ClassName}}, list{{.ClassName}}, update{{.ClassName}}} from '@/api/{{.Module}}/{{.PackageName}}'
-
+    import qs from 'qs'
     export default {
-        name: 'Config',
+        name: '{{.ClassName}}',
         data() {
             return {
                 // 遮罩层
@@ -202,6 +210,8 @@
                 // 是否显示弹出层
                 open: false,
                 isEdit: false,
+                isDisabled: false,
+
                 // 类型数据字典
                 typeOptions: [],
                 {{.ModuleName}}List: [],
@@ -305,6 +315,18 @@
                 this.resetForm('queryForm')
                 this.handleQuery()
             },
+            /** 详情 */
+            handleDetail(row) {
+                this.reset()
+                const id = row.id || this.ids
+                getPmsBrand(id).then((response) => {
+                    this.form = response.data[0]
+                    this.open = true
+                    this.title = '{{.TableComment}}详情'
+                    this.isEdit = true
+                    this.isDisabled = true
+                })
+            },
             /** 新增按钮操作 */
             handleAdd() {
                 this.reset()
@@ -324,7 +346,7 @@
                 const {{.PkJsonField}} =
                 row.{{.PkJsonField}} || this.ids
                 get{{.ClassName}}({{.PkJsonField}}).then(response => {
-                    this.form = response.data
+                    this.form = response.data[0]
                     this.open = true
                     this.title = '修改{{.TableComment}}'
                     this.isEdit = true
@@ -335,8 +357,8 @@
                 this.$refs['form'].validate(valid => {
                     if (valid) {
                         if (this.form.{{.PkJsonField}} !== undefined) {
-                            update{{.ClassName}}(this.form).then(response => {
-                                if (response.code === 200) {
+                            update{{.ClassName}}(qs.stringify(this.form)).then(response => {
+                                if (response.code === 0) {
                                     this.msgSuccess('修改成功')
                                     this.open = false
                                     this.getList()
@@ -345,8 +367,8 @@
                                 }
                             })
                         } else {
-                            add{{.ClassName}}(this.form).then(response => {
-                                if (response.code === 200) {
+                            add{{.ClassName}}(qs.stringify(this.form)).then(response => {
+                                if (response.code === 0) {
                                     this.msgSuccess('新增成功')
                                     this.open = false
                                     this.getList()
