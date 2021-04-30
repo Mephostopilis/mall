@@ -30,4 +30,16 @@ message Coupon {
     google.protobuf.Timestamp createdAt = 7;
 }
 
-message CouponHistory {}
+message CouponHistory {
+    uint64 id = 1;
+    uint64 couponId = 2;
+    uint64 memberId = 3;
+    string couponCode = 4;
+    string memberNickname = 5;
+    int32 getType = 6;
+    int32 useStatus = 7;
+    google.protobuf.Timestamp useTime = 8;
+    uint64 orderId = 9;
+    string orderSn = 10;
+    google.protobuf.Timestamp createdAt = 11;
+}

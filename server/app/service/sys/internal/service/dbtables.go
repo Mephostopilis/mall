@@ -5,12 +5,8 @@ import (
 
 	pb "edu/api/sys/v1"
 
-	"edu/service/sys/internal/model"
-	"edu/service/sys/internal/tools"
-
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // @Summary 分页列表数据 / page list data
@@ -22,34 +18,14 @@ import (
 // @Success 200 {object} pb.ApiReply "{"code": 200, "data": [...]}"
 // @Router /admin/tools/v1/db/tables/page [get]
 func (s *AdminService) GetDBTableList(ctx context.Context, req *pb.GetDBTableListRequest) (reply *pb.ApiReply, err error) {
-	var data model.DBTables
-	var pageSize = int(req.PageSize)
-	var pageIndex = int(req.PageIndex)
-	data.TableName = req.TableName
-	d, err := tools.New(s.cfg, s.logger)
+	page, total, err := s.uc.GetDBTableList(ctx, req)
 	if err != nil {
 		return
 	}
-	defer d.Close()
-
-	result, count, err := d.GetDBTablesPage(s.cfg.Gen.Dbname, &data, pageSize, pageIndex)
-	if err != nil {
-		return
-	}
-	s.log.Infof("GetDBTablesPage: %v", count)
 	list := make([]*anypb.Any, 0)
-	for i := 0; i < len(result); i++ {
-		it := result[i]
-		d := &pb.DBTable{
-			TableName:      it.TableName,
-			Engine:         it.Engine,
-			TableRows:      it.TableRows,
-			TableCollation: it.TableCollation,
-			TableComment:   it.TableComment,
-			CreateTime:     timestamppb.New(it.CreateTime),
-			UpdateTime:     timestamppb.New(it.UpdateTime),
-		}
-		any, err1 := ptypes.MarshalAny(d)
+	for i := 0; i < len(page); i++ {
+		it := page[i]
+		any, err1 := ptypes.MarshalAny(it)
 		if err1 != nil {
 			err = err1
 			return
@@ -59,7 +35,7 @@ func (s *AdminService) GetDBTableList(ctx context.Context, req *pb.GetDBTableLis
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
-		Count:   int32(count),
+		Count:   int32(total),
 		Data:    list,
 	}
 	return

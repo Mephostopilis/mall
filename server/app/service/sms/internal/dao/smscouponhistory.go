@@ -47,7 +47,7 @@ func (d *dao) GetSmsCouponHistoryPage(ctx context.Context, e *model.SmsCouponHis
 }
 
 // 更新SmsCouponHistory
-func (d *dao) UpdateSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id int) (update model.SmsCouponHistory, err error) {
+func (d *dao) UpdateSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id uint64) (update model.SmsCouponHistory, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -61,7 +61,7 @@ func (d *dao) UpdateSmsCouponHistory(ctx context.Context, e *model.SmsCouponHist
 }
 
 // 删除SmsCouponHistory
-func (d *dao) DeleteSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id int) (success bool, err error) {
+func (d *dao) DeleteSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id uint64) (success bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).Delete(&model.SmsCouponHistory{}).Error; err != nil {
 		success = false
 		return
@@ -71,7 +71,7 @@ func (d *dao) DeleteSmsCouponHistory(ctx context.Context, e *model.SmsCouponHist
 }
 
 //批量删除
-func (d *dao) BatchDeleteSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.SmsCouponHistory{}).Error; err != nil {
 		return
 	}

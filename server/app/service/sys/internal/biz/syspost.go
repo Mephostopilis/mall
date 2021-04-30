@@ -2,8 +2,11 @@ package biz
 
 import (
 	"context"
+	"fmt"
 
 	pb "edu/api/sys/v1"
+	"edu/pkg/meta"
+	"edu/pkg/strings"
 	"edu/service/sys/internal/model"
 
 	"github.com/golang/protobuf/ptypes"
@@ -17,11 +20,10 @@ func (uc *AdminUsecase) ListPost(c context.Context, token string, req *pb.ListPo
 	// 	return
 	// }
 	// dp := out.(*ssopb.DataPermission)
-
 	var pageSize = int(req.PageSize)
 	var pageIndex = int(req.PageIndex)
 	var data model.SysPost
-	data.PostId = int(req.PostId)
+	data.PostId = (req.PostId)
 	data.PostCode = req.PostCode
 	data.PostName = req.PostName
 	data.Status = req.Status
@@ -53,6 +55,76 @@ func (uc *AdminUsecase) ListPost(c context.Context, token string, req *pb.ListPo
 		Message: "OK",
 		Count:   int32(count),
 		Data:    list,
+	}
+	return
+}
+
+func (uc *AdminUsecase) GetPost(ctx context.Context, req *pb.GetPostRequest) (reply *pb.Post, err error) {
+	var filter model.SysPost
+	filter.PostId = (req.PostId)
+	it, err := uc.d.GetPost(&filter)
+	if err != nil {
+		return
+	}
+	reply = &pb.Post{
+		PostId:   int32(it.PostId),
+		PostName: it.PostName,
+		PostCode: it.PostCode,
+		Sort:     int32(it.Sort),
+		Status:   it.Status,
+		Remark:   it.Remark,
+	}
+	return
+}
+
+func (uc *AdminUsecase) CreatePost(c context.Context, req *pb.Post) (err error) {
+	data := model.SysPost{
+		PostName: req.PostName,
+		PostCode: req.PostCode,
+		Sort:     req.Sort,
+		Status:   req.Status,
+		Remark:   req.Remark,
+	}
+	// data.CreateBy = fmt.Sprint(dp.UserId)
+	_, err = uc.d.CreatePost(&data)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *AdminUsecase) UpdatePost(ctx context.Context, req *pb.Post) (err error) {
+	// dp, err := meta.GetDataPermissions(ctx)
+	data := model.SysPost{
+		PostId:   req.PostId,
+		PostName: req.PostName,
+		PostCode: req.PostCode,
+		Sort:     req.Sort,
+		Status:   req.Status,
+		Remark:   req.Remark,
+	}
+	// data.UpdateBy = fmt.Sprint(dp.UserId)
+	_, err = uc.d.UpdatePost(&data, int(data.PostId))
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *AdminUsecase) DeletePost(ctx context.Context, req *pb.DeletePostRequest) (err error) {
+	dp, err := meta.GetDataPermissions(ctx)
+	if err != nil {
+		return
+	}
+	var data model.SysPost
+	data.UpdateBy = fmt.Sprint(dp.UserId)
+	ids, err := strings.SplitInts(req.Ids, ",")
+	if err != nil {
+		return
+	}
+	_, err = uc.d.BatchDeletePost(&data, ids)
+	if err != nil {
+		return
 	}
 	return
 }

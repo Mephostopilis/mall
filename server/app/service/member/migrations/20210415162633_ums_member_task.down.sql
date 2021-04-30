@@ -1,4 +1,4 @@
 -- ----------------------------
--- Table structure for ums_member_task
+-- Table structure for member_task
 -- ----------------------------
-DROP TABLE IF EXISTS `ums_member_task`;
+DROP TABLE IF EXISTS `member_task`;

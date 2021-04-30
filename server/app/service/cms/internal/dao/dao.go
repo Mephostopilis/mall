@@ -38,6 +38,12 @@ type Dao interface {
 	CreateCmsSubject(ctx context.Context, e *model.CmsSubject) (model.CmsSubject, error)
 	UpdateCmsSubject(ctx context.Context, e *model.CmsSubject, id uint64) (update model.CmsSubject, err error)
 	BatchDeleteCmsSubject(ctx context.Context, e *model.CmsSubject, id []uint64) (Result bool, err error)
+
+	GetCmsSubjectCategoryPage(ctx context.Context, e *model.CmsSubjectCategory, pageSize int, pageIndex int) (docs []model.CmsSubjectCategory, total int64, err error)
+	GetCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory) (model.CmsSubjectCategory, error)
+	CreateCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory) (model.CmsSubjectCategory, error)
+	UpdateCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id uint64) (update model.CmsSubjectCategory, err error)
+	BatchDeleteCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id []uint64) (Result bool, err error)
 }
 
 // dao dao.

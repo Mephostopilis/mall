@@ -19,7 +19,7 @@
     "application/json"
   ],
   "paths": {
-    "/admin/v1/umsmember": {
+    "/admin/v1/member": {
       "post": {
         "operationId": "Admin_CreateMember",
         "responses": {
@@ -61,7 +61,7 @@
         ]
       }
     },
-    "/admin/v1/umsmember/{ids}": {
+    "/admin/v1/member/{ids}": {
       "delete": {
         "operationId": "Admin_DeleteMember",
         "responses": {
@@ -91,7 +91,7 @@
         ]
       }
     },
-    "/admin/v1/umsmember/{id}": {
+    "/admin/v1/member/{id}": {
       "get": {
         "operationId": "Admin_GetMember",
         "responses": {
@@ -122,7 +122,7 @@
         ]
       }
     },
-    "/admin/v1/umsmemberList": {
+    "/admin/v1/memberList": {
       "get": {
         "operationId": "Admin_ListMember",
         "responses": {
@@ -178,7 +178,7 @@
         ]
       }
     },
-    "/admin/v1/umsmemberassets": {
+    "/admin/v1/memberassets": {
       "post": {
         "operationId": "Admin_CreateMemberAssets",
         "responses": {
@@ -220,7 +220,7 @@
         ]
       }
     },
-    "/admin/v1/umsmemberassets/{ids}": {
+    "/admin/v1/memberassets/{ids}": {
       "delete": {
         "operationId": "Admin_DeleteMemberAssets",
         "responses": {
@@ -250,7 +250,7 @@
         ]
       }
     },
-    "/admin/v1/umsmemberassets/{id}": {
+    "/admin/v1/memberassets/{id}": {
       "get": {
         "operationId": "Admin_GetMemberAssets",
         "responses": {
@@ -281,7 +281,7 @@
         ]
       }
     },
-    "/admin/v1/umsmemberassetsList": {
+    "/admin/v1/memberassetsList": {
       "get": {
         "operationId": "Admin_ListMemberAssets",
         "responses": {

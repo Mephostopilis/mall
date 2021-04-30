@@ -1,23 +1,15 @@
-CREATE TABLE `ums_member_assets_detail` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `client_id` varchar(255) DEFAULT NULL COMMENT '客户端id',
-  `user_id` varchar(255) DEFAULT NULL COMMENT '用户id',
-  `redirect_uri` varchar(255) DEFAULT NULL COMMENT 'redirect',
-  `scope` varchar(255) DEFAULT NULL COMMENT '范围',
-  `code` varchar(255) DEFAULT NULL COMMENT 'code',
-  `code_created_at` timestamp NULL DEFAULT NULL COMMENT 'code创建时',
-  `code_expires_in` varchar(255) DEFAULT NULL COMMENT 'code创建时',
-  `access` varchar(255) DEFAULT NULL COMMENT 'code',
-  `access_created_at` timestamp NULL DEFAULT NULL COMMENT 'code创建时',
-  `access_expires_in` varchar(255) DEFAULT NULL COMMENT 'code创建时',
-  `refresh` varchar(255) DEFAULT NULL COMMENT 'code',
-  `refresh_created_at` timestamp NULL DEFAULT NULL COMMENT 'code创建时',
-  `refresh_expires_in` varchar(255) DEFAULT NULL COMMENT 'code创建时',
-  
+CREATE TABLE `member_assets_detail` (
+  `id` bigint(20) unsigned NOT NULL COMMENT '主键',
+  `member_id` bigint(20) unsigned NOT NULL COMMENT '会员ID',
+  `bill_no` varchar(50) NOT NULL COMMENT '流水号',
+  `type` int(11) NOT NULL COMMENT '类型（1充值，2商品购买）',
+  `amount` decimal(38,10) NOT NULL COMMENT '变动金额',
+  `balance` decimal(38,10) NOT NULL COMMENT '变动后金额',
+  `time` varchar(12) NOT NULL COMMENT '日期',
   `create_by` bigint(20) DEFAULT NULL,
   `update_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员资产变更明细';

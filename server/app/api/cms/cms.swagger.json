@@ -339,7 +339,7 @@
     },
     "/admin/v1/cmssubject": {
       "post": {
-        "operationId": "Admin_CreateSubject",
+        "operationId": "Admin_CreateSubjectCategory",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -359,7 +359,7 @@
         ]
       },
       "put": {
-        "operationId": "Admin_UpdateSubject",
+        "operationId": "Admin_UpdateSubjectCategory",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -381,7 +381,7 @@
     },
     "/admin/v1/cmssubject/{ids}": {
       "delete": {
-        "operationId": "Admin_DeleteSubject",
+        "operationId": "Admin_DeleteSubjectCategory",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -411,7 +411,7 @@
     },
     "/admin/v1/cmssubject/{id}": {
       "get": {
-        "operationId": "Admin_GetSubject",
+        "operationId": "Admin_GetSubjectCategory",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -442,7 +442,7 @@
     },
     "/admin/v1/cmssubjectList": {
       "get": {
-        "operationId": "Admin_ListSubject",
+        "operationId": "Admin_ListSubjectCategory",
         "responses": {
           "200": {
             "description": "A successful response.",

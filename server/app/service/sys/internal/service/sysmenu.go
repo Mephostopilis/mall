@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
@@ -277,24 +276,14 @@ func (s *AdminService) GetMenuRole(ctx context.Context, req *pb.GetMenuRoleReque
 // @Router /admin/v1/menuids/{id} [get]
 // @Security Bearer
 func (s *AdminService) GetMenuIDS(ctx context.Context, req *pb.GetMenuIDSRequest) (reply *pb.ApiReply, err error) {
-	dp, err := meta.GetDataPermissions(ctx)
-	if err != nil {
-		return
-	}
-	var data model.SysRoleMenu
-	data.RoleName = dp.RoleKey
-	data.UpdateBy = fmt.Sprint(dp.UserId)
-	result, err := s.adao.GetRoleMenuIDSFromSysMenu(&data)
+	result, err := s.uc.GetMenuIDS(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
 	for i := 0; i < len(result); i++ {
 		it := result[i]
-		d := &pb.MenuPath{
-			Path: it.Path,
-		}
-		any, err1 := ptypes.MarshalAny(d)
+		any, err1 := ptypes.MarshalAny(it)
 		if err1 != nil {
 			err = err1
 			return

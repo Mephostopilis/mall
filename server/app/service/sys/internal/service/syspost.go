@@ -2,12 +2,9 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
-	"edu/pkg/tools"
-	"edu/service/sys/internal/model"
 
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -39,21 +36,11 @@ func (s *AdminService) ListPost(c context.Context, req *pb.ListPostRequest) (rep
 // @Router /admin/v1/post/{postId} [get]
 // @Security Bearer
 func (s *AdminService) GetPost(ctx context.Context, req *pb.GetPostRequest) (reply *pb.ApiReply, err error) {
-	var Post model.SysPost
-	Post.PostId = int(req.PostId)
-	it, err := s.adao.GetPost(&Post)
+	d, err := s.uc.GetPost(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.Post{
-		PostId:   int32(it.PostId),
-		PostName: it.PostName,
-		PostCode: it.PostCode,
-		Sort:     int32(it.Sort),
-		Status:   it.Status,
-		Remark:   it.Remark,
-	}
 	any, err1 := ptypes.MarshalAny(d)
 	if err1 != nil {
 		err = err1
@@ -80,32 +67,13 @@ func (s *AdminService) GetPost(ctx context.Context, req *pb.GetPostRequest) (rep
 // @Router /admin/v1/post [post]
 // @Security Bearer
 func (s *AdminService) CreatePost(c context.Context, req *pb.Post) (reply *pb.ApiReply, err error) {
-	var data model.SysPost
-	// data.CreateBy = fmt.Sprint(dp.UserId)
-	it, err := s.adao.CreatePost(&data)
+	err = s.uc.CreatePost(c, req)
 	if err != nil {
 		return
 	}
-	list := make([]*anypb.Any, 0)
-	d := &pb.Post{
-		PostId:   int32(it.PostId),
-		PostName: it.PostName,
-		PostCode: it.PostCode,
-		Sort:     int32(it.Sort),
-		Status:   it.Status,
-		Remark:   it.Remark,
-	}
-	any, err1 := ptypes.MarshalAny(d)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
-		Count:   int32(1),
-		Data:    list,
 	}
 	return
 }
@@ -121,33 +89,13 @@ func (s *AdminService) CreatePost(c context.Context, req *pb.Post) (reply *pb.Ap
 // @Router /admin/v1/post/ [put]
 // @Security Bearer
 func (s *AdminService) UpdatePost(ctx context.Context, req *pb.Post) (reply *pb.ApiReply, err error) {
-	// dp, err := meta.GetDataPermissions(ctx)
-	var data model.SysPost
-	// data.UpdateBy = fmt.Sprint(dp.UserId)
-	it, err := s.adao.UpdatePost(&data, data.PostId)
+	err = s.uc.UpdatePost(ctx, req)
 	if err != nil {
 		return
 	}
-	list := make([]*anypb.Any, 0)
-	d := &pb.Post{
-		PostId:   int32(it.PostId),
-		PostName: it.PostName,
-		PostCode: it.PostCode,
-		Sort:     int32(it.Sort),
-		Status:   it.Status,
-		Remark:   it.Remark,
-	}
-	any, err1 := ptypes.MarshalAny(d)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
-		Count:   int32(1),
-		Data:    list,
 	}
 	return
 }
@@ -160,11 +108,7 @@ func (s *AdminService) UpdatePost(ctx context.Context, req *pb.Post) (reply *pb.
 // @Success 500 {string} string	"{"code": 500, "message": "删除失败"}"
 // @Router /admin/v1/post/{postId} [delete]
 func (s *AdminService) DeletePost(ctx context.Context, req *pb.DeletePostRequest) (reply *pb.ApiReply, err error) {
-	dp, err := meta.GetDataPermissions(ctx)
-	var data model.SysPost
-	data.UpdateBy = fmt.Sprint(dp.UserId)
-	IDS := tools.IdsStrToIdsIntGroup(req.PostId)
-	_, err = s.adao.BatchDeletePost(&data, IDS)
+	err = s.uc.DeletePost(ctx, req)
 	if err != nil {
 		return
 	}

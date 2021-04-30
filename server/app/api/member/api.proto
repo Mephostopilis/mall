@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.member;
 
 import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "edu/api/member;member";
 option java_multiple_files = true;
@@ -17,6 +18,48 @@ message ApiReply {
     repeated google.protobuf.Any details = 6;
 }
 
-message Member {}
+message Member {
+    uint64 id = 1;
+    uint64 memberLevelId = 2;
+    int32 sourceType = 3;
+    int32 integration = 4;
+    int32 growth = 5;
+    int32 luckeyCount = 6;
+    int32 historyIntegration = 7;
+    google.protobuf.Timestamp createdAt = 8;
+}
 
-message MemberAssets {}
+message MemberAssets {
+    uint64 memberId = 1;
+    float balance = 2;
+    float frozen = 3;
+    google.protobuf.Timestamp createdAt = 8;
+}
+
+message MemberAssetsDetail {
+    uint64 id = 1;
+    uint64 memberId = 2;
+    string billNo = 3;
+    int32 type = 4;
+    float amount = 5;
+    float balance = 6;
+    string time = 7;
+    google.protobuf.Timestamp createdAt = 8;
+}
+
+message MemberLevel {
+    uint64 id = 1;
+    string name = 2;
+    int32 growthPoint = 3;
+    int32 defaultStatus = 4;
+    float freeFreightPoint = 5;
+    int32 commentGrowthPoint = 6;
+    int32 priviledgeFreeFreight = 7;
+    int32 priviledgeSignIn = 8;
+    int32 priviledgeComment = 9;
+    int32 priviledgePromotion = 10;
+    int32 priviledgeMemberPrice = 11;
+    int32 priviledgeBirthday = 12;
+    string note = 13;
+    google.protobuf.Timestamp createdAt = 14;
+}

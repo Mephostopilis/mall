@@ -4,13 +4,8 @@ import (
 	"context"
 
 	pb "edu/api/sys/v1"
-	"edu/pkg/strings"
 
-	"edu/service/sys/internal/model"
-
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
@@ -90,26 +85,11 @@ func (s *AdminService) GetDictDataListByDictType(ctx context.Context, req *pb.Ge
 // @Router /api/v1/dict/data/{dictCode} [get]
 // @Security Bearer
 func (s *AdminService) GetDictData(ctx context.Context, req *pb.GetDictDataRequest) (reply *pb.ApiReply, err error) {
-	var DictData model.SysDictData
-	DictData.DictLabel = req.DictLabel
-	DictData.DictCode = int(req.DictCode)
-	it, err := s.adao.GetDictDataByCode(&DictData)
+	d, err := s.uc.GetDictData(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.DictData{
-		DictCode:  int64(it.DictCode),
-		DictSort:  int32(it.DictSort),
-		DictLabel: it.DictLabel,
-		DictValue: it.DictValue,
-		DictType:  it.DictType,
-		CssClass:  it.CssClass,
-		ListClass: it.ListClass,
-		IsDefault: it.IsDefault,
-		Status:    it.Status,
-		Default:   it.Default,
-	}
 	any, err1 := ptypes.MarshalAny(d)
 	if err1 != nil {
 		err = err1
@@ -136,48 +116,14 @@ func (s *AdminService) GetDictData(ctx context.Context, req *pb.GetDictDataReque
 // @Router /api/v1/dict/data [post]
 // @Security Bearer
 func (s *AdminService) InsertDictData(ctx context.Context, req *pb.DictData) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
+	if err = s.uc.InsertDictData(ctx, req); err != nil {
 		return
 	}
-	v := md.Get("UserID")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var data model.SysDictData
-	data.CreateBy = v[0]
-	it, err := s.adao.CreateDictData(&data)
-	if err != nil {
-		return
-	}
-	list := make([]*anypb.Any, 0)
-	d := &pb.DictData{
-		DictCode:  int64(it.DictCode),
-		DictSort:  int32(it.DictSort),
-		DictLabel: it.DictLabel,
-		DictValue: it.DictValue,
-		DictType:  it.DictType,
-		CssClass:  it.CssClass,
-		ListClass: it.ListClass,
-		IsDefault: it.IsDefault,
-		Status:    it.Status,
-		Default:   it.Default,
-	}
-	any, err1 := ptypes.MarshalAny(d)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
 		Count:   int32(1),
-		Data:    list,
 	}
-
 	return
 }
 
@@ -192,49 +138,14 @@ func (s *AdminService) InsertDictData(ctx context.Context, req *pb.DictData) (re
 // @Router /api/v1/dict/data [put]
 // @Security Bearer
 func (s *AdminService) UpdateDictData(ctx context.Context, req *pb.DictData) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
+	if err = s.uc.UpdateDictData(ctx, req); err != nil {
 		return
 	}
-
-	v := md.Get("UserID")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var data model.SysDictData
-	data.UpdateBy = v[0]
-	it, err := s.adao.UpdateDictData(&data, data.DictCode)
-	if err != nil {
-		return
-	}
-	list := make([]*anypb.Any, 0)
-	d := &pb.DictData{
-		DictCode:  int64(it.DictCode),
-		DictSort:  int32(it.DictSort),
-		DictLabel: it.DictLabel,
-		DictValue: it.DictValue,
-		DictType:  it.DictType,
-		CssClass:  it.CssClass,
-		ListClass: it.ListClass,
-		IsDefault: it.IsDefault,
-		Status:    it.Status,
-		Default:   it.Default,
-	}
-	any, err1 := ptypes.MarshalAny(d)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
 		Count:   int32(1),
-		Data:    list,
 	}
-
 	return
 }
 
@@ -246,24 +157,7 @@ func (s *AdminService) UpdateDictData(ctx context.Context, req *pb.DictData) (re
 // @Success 200 {string} string	"{"code": -1, "message": "删除失败"}"
 // @Router /api/v1/dict/data/{dictCode} [delete]
 func (s *AdminService) DeleteDictData(ctx context.Context, req *pb.DeleteDictDataRequest) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("UserID")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var data model.SysDictData
-	data.UpdateBy = v[0]
-	IDS, err := strings.SplitInts(req.Ids, ",")
-	if err != nil {
-		return
-	}
-	_, err = s.adao.BatchDeleteDictData(&data, IDS)
-	if err != nil {
+	if err = s.uc.DeleteDictData(ctx, req); err != nil {
 		return
 	}
 	reply = &pb.ApiReply{

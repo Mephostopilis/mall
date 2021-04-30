@@ -1,7 +1,8 @@
 package dao
 
 import (
-	"edu/pkg/tools"
+	"fmt"
+
 	"edu/service/sys/internal/model"
 
 	"github.com/go-kratos/kratos/v2/errors"
@@ -75,9 +76,9 @@ func (d *dao) initPaths(menu *model.Menu) (err error) {
 			err = errors.OutOfRange("table", "父级paths异常，请尝试对当前节点父级菜单进行更新操作！")
 			return
 		}
-		menu.Paths = parentMenu.Paths + "/" + tools.IntToString(int(menu.MenuId))
+		menu.Paths = parentMenu.Paths + "/" + fmt.Sprintf("%v", menu.MenuId)
 	} else {
-		menu.Paths = "/0/" + tools.IntToString(int(menu.MenuId))
+		menu.Paths = "/0/" + fmt.Sprintf("%v", menu.MenuId)
 	}
 	return
 }

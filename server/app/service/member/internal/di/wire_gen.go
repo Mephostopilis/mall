@@ -24,8 +24,11 @@ func InitApp(confService *conf.Service, confServer *conf.Server, app *conf.App, 
 	if err != nil {
 		return nil, err
 	}
-	greeterUsecase := biz.NewGreeterUsecase(app, logger, daoDao)
-	adminService := service.NewAdminService(logger, greeterUsecase)
+	memberUsecase, err := biz.NewMemberUsecase(logger, daoDao, registryRegistry)
+	if err != nil {
+		return nil, err
+	}
+	adminService := service.NewAdminService(logger, memberUsecase)
 	grpcServer := server.NewGRPCServer(confServer, logger, apiService, adminService)
 	kratosApp := newApp(confService, logger, grpcServer, registryRegistry)
 	return kratosApp, nil

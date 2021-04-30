@@ -4,10 +4,7 @@ import (
 	"context"
 
 	pb "edu/api/sys/v1"
-
 	"edu/pkg/ecode"
-	"edu/service/sys/internal/model"
-	"edu/service/sys/internal/tools"
 
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -22,27 +19,17 @@ import (
 // @Success 200 {object} pb.ApiReply "{"code": 200, "data": [...]}"
 // @Router /admin/tools/v1/db/columns/page [get]
 func (s *AdminService) GetDBColumnList(ctx context.Context, req *pb.GetDBColumnListRequest) (reply *pb.ApiReply, err error) {
-	var data model.DBColumns
-	var pageSize = int(req.PageSize)
-	var pageIndex = int(req.PageIndex)
 	if req.TableName == "" {
 		err = ecode.AdminTableEmpty
 		return
 	}
-	data.TableName = req.TableName
-	d, err := tools.New(s.cfg, s.logger)
-	if err != nil {
-		return
-	}
-	defer d.Close()
-
-	result, count, err := d.GetDBColumnsPage(s.cfg.Gen.Dbname, &data, pageSize, pageIndex)
+	result, count, err := s.uc.GetDBColumnList(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
 	for i := 0; i < len(result); i++ {
-		d := &pb.DBTable{}
+		d := result[i]
 		any, err1 := ptypes.MarshalAny(d)
 		if err1 != nil {
 			err = err1

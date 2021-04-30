@@ -1,4 +1,4 @@
-CREATE TABLE `ums_member_statistics_info` (
+CREATE TABLE `member_statistics_info` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `member_id` bigint(20) DEFAULT NULL,
   `consume_amount` decimal(10,2) DEFAULT NULL COMMENT '累计消费金额',
@@ -15,5 +15,11 @@ CREATE TABLE `ums_member_statistics_info` (
   `collect_comment_count` int(11) DEFAULT NULL,
   `invite_friend_count` int(11) DEFAULT NULL,
   `recent_order_time` datetime DEFAULT NULL COMMENT '最后一次下订单时间',
+
+  `create_by` bigint(20) DEFAULT NULL,
+  `update_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员统计信息';

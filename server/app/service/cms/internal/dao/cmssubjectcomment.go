@@ -47,7 +47,7 @@ func (d *dao) GetCmsSubjectCommentPage(ctx context.Context, e *model.CmsSubjectC
 }
 
 // 更新CmsSubjectComment
-func (d *dao) UpdateCmsSubjectComment(ctx context.Context, e *model.CmsSubjectComment, id int) (update model.CmsSubjectComment, err error) {
+func (d *dao) UpdateCmsSubjectComment(ctx context.Context, e *model.CmsSubjectComment, id uint64) (update model.CmsSubjectComment, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -61,7 +61,7 @@ func (d *dao) UpdateCmsSubjectComment(ctx context.Context, e *model.CmsSubjectCo
 }
 
 // 删除CmsSubjectComment
-func (d *dao) DeleteCmsSubjectComment(ctx context.Context, e *model.CmsSubjectComment, id int) (success bool, err error) {
+func (d *dao) DeleteCmsSubjectComment(ctx context.Context, e *model.CmsSubjectComment, id uint64) (success bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).Delete(&model.CmsSubjectComment{}).Error; err != nil {
 		success = false
 		return
@@ -71,7 +71,7 @@ func (d *dao) DeleteCmsSubjectComment(ctx context.Context, e *model.CmsSubjectCo
 }
 
 //批量删除
-func (d *dao) BatchDeleteCmsSubjectComment(ctx context.Context, e *model.CmsSubjectComment, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteCmsSubjectComment(ctx context.Context, e *model.CmsSubjectComment, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.CmsSubjectComment{}).Error; err != nil {
 		return
 	}

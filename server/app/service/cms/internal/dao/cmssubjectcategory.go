@@ -47,7 +47,7 @@ func (d *dao) GetCmsSubjectCategoryPage(ctx context.Context, e *model.CmsSubject
 }
 
 // 更新CmsSubjectCategory
-func (d *dao) UpdateCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id int) (update model.CmsSubjectCategory, err error) {
+func (d *dao) UpdateCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id uint64) (update model.CmsSubjectCategory, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).First(&update).Error; err != nil {
 		return
 	}
@@ -61,7 +61,7 @@ func (d *dao) UpdateCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectC
 }
 
 // 删除CmsSubjectCategory
-func (d *dao) DeleteCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id int) (success bool, err error) {
+func (d *dao) DeleteCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id uint64) (success bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id = ?", id).Delete(&model.CmsSubjectCategory{}).Error; err != nil {
 		success = false
 		return
@@ -71,7 +71,7 @@ func (d *dao) DeleteCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectC
 }
 
 //批量删除
-func (d *dao) BatchDeleteCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id []int) (Result bool, err error) {
+func (d *dao) BatchDeleteCmsSubjectCategory(ctx context.Context, e *model.CmsSubjectCategory, id []uint64) (Result bool, err error) {
 	if err = d.orm.Table(e.TableName()).Where("id in (?)", id).Delete(&model.CmsSubjectCategory{}).Error; err != nil {
 		return
 	}

@@ -5,6 +5,8 @@ import (
 	xhttp "net/http"
 
 	cmspb "edu/api/cms"
+	memberpb "edu/api/member"
+	pmspb "edu/api/pms"
 	ssopb "edu/api/sso"
 	syspb "edu/api/sys/v1"
 	tikupb "edu/api/tiku"
@@ -81,11 +83,25 @@ func NewHTTPServer(c *conf.Server, logger log.Logger) *http.Server {
 		panic(err)
 	}
 	syspb.RegisterApiHandlerClient(ctx, mux, sysc)
+	// tiku
 	tikuc, err := tikupb.NewApi(ctx, m)
 	if err != nil {
 		panic(err)
 	}
 	tikupb.RegisterApiHandlerClient(ctx, mux, tikuc)
+	// pms
+	pmsc, err := pmspb.NewApi(ctx, m)
+	if err != nil {
+		panic(err)
+	}
+	pmspb.RegisterApiHandlerClient(ctx, mux, pmsc)
+	// member
+	memberc, err := memberpb.NewApi(ctx, m)
+	if err != nil {
+		panic(err)
+	}
+	memberpb.RegisterApiHandlerClient(ctx, mux, memberc)
+	// cms
 	cmsc, err := cmspb.NewApi(ctx, m)
 	if err != nil {
 		panic(err)

@@ -49,3 +49,23 @@ message Subject {
     string productCount = 5;
     google.protobuf.Timestamp createdAt = 7;
 }
+
+message SubjectCategory {
+    uint64 id = 1;
+    string name = 2;
+    string icon = 3;
+    int32 subjectCount = 4;
+    int32 showStatus = 5;
+    int32 sort = 6;
+    google.protobuf.Timestamp createdAt = 8;
+}
+
+message SubjectComment {
+    uint64 id = 1;
+    uint64 subjectId = 2;
+    string memberNickname = 3;
+    string memberIcon = 4;
+    string content = 5;
+    int32 showStatus = 6;
+    google.protobuf.Timestamp createdAt = 7;
+}

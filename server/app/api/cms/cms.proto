@@ -85,6 +85,31 @@ service Admin {
             delete: "/admin/v1/cmssubject/{ids}"
         };
     };
+    rpc ListSubjectCategory (ListSubjectCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/cmssubjectList"
+        };
+    };
+    rpc GetSubjectCategory (GetSubjectCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/cmssubject/{id}"
+        };
+    };
+    rpc CreateSubjectCategory (SubjectCategory) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/cmssubject"
+        };
+    };
+    rpc UpdateSubjectCategory (SubjectCategory) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/cmssubject"
+        };
+    };
+    rpc DeleteSubjectCategory (DeleteSubjectCategoryRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/cmssubject/{ids}"
+        };
+    };
 }
 
 service Api {
@@ -189,3 +214,29 @@ message DeleteSubjectRequest {
     string ids = 1;
 }
 message DeleteSubjectReply {}
+
+
+message ListSubjectCategoryRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string configKey = 3;
+    string configName = 4;
+    string configType = 5;
+}
+message ListSubjectCategoryReply {}
+
+message GetSubjectCategoryRequest {
+    uint64 id = 1;
+}
+message GetSubjectCategoryReply {}
+
+message CreateSubjectCategoryRequest {}
+message CreateSubjectCategoryReply {}
+
+message UpdateSubjectCategoryRequest {}
+message UpdateSubjectCategoryReply {}
+
+message DeleteSubjectCategoryRequest {
+    string ids = 1;
+}
+message DeleteSubjectCategoryReply {}

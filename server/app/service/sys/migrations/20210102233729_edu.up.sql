@@ -37,5 +37,4 @@ CREATE TABLE `sys_columns` (
 PRIMARY KEY (`column_id`)
 )
 ENGINE=InnoDB
-DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=1;
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;

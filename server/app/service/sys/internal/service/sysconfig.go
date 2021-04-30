@@ -2,19 +2,16 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	ssopb "edu/api/sso"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
-	"edu/service/sys/internal/model"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // @Summary 配置列表数据
@@ -44,23 +41,12 @@ func (s *AdminService) ListConfig(ctx context.Context, req *pb.ListConfigRequest
 // @Router /api/v1/config/{configId} [get]
 // @Security Bearer
 func (s *AdminService) GetConfig(ctx context.Context, req *pb.GetConfigRequest) (reply *pb.ApiReply, err error) {
-	var Config model.SysConfig
-	Config.ConfigId = (req.ConfigId)
-	it, err := s.adao.GetSysConfig(&Config)
+	it, err := s.uc.GetConfig(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.SysConfig{
-		ConfigId:    int32(it.ConfigId),
-		ConfigName:  it.ConfigName,
-		ConfigKey:   it.ConfigKey,
-		ConfigValue: it.ConfigValue,
-		ConfigType:  it.ConfigType,
-		Remark:      it.Remark,
-		CreatedAt:   timestamppb.New(it.CreatedAt),
-	}
-	any, err1 := ptypes.MarshalAny(d)
+	any, err1 := ptypes.MarshalAny(it)
 	if err1 != nil {
 		err = err1
 		return
@@ -83,23 +69,12 @@ func (s *AdminService) GetConfig(ctx context.Context, req *pb.GetConfigRequest) 
 // @Router /api/v1/configKey/{configKey} [get]
 // @Security Bearer
 func (s *AdminService) GetConfigByConfigKey(ctx context.Context, req *pb.GetConfigByConfigKeyRequest) (reply *pb.ApiReply, err error) {
-	var Config model.SysConfig
-	Config.ConfigKey = req.ConfigKey
-	it, err := s.adao.GetSysConfig(&Config)
+	it, err := s.uc.GetConfigByConfigKey(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.SysConfig{
-		ConfigId:    int32(it.ConfigId),
-		ConfigName:  it.ConfigName,
-		ConfigKey:   it.ConfigKey,
-		ConfigValue: it.ConfigValue,
-		ConfigType:  it.ConfigType,
-		Remark:      it.Remark,
-		CreatedAt:   timestamppb.New(it.CreatedAt),
-	}
-	any, err1 := ptypes.MarshalAny(d)
+	any, err1 := ptypes.MarshalAny(it)
 	if err1 != nil {
 		err = err1
 		return
@@ -139,16 +114,7 @@ func (s *AdminService) CreateConfig(ctx context.Context, req *pb.SysConfig) (rep
 	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
 		return
 	}
-	data := model.SysConfig{
-		ConfigId:    req.ConfigId,
-		ConfigName:  req.ConfigName,
-		ConfigKey:   req.ConfigKey,
-		ConfigValue: req.ConfigValue,
-		ConfigType:  req.ConfigType,
-		Remark:      req.Remark,
-	}
-	data.CreateBy = fmt.Sprint(permission.UserId)
-	_, err = s.adao.CreateSysConfig(ctx, &data)
+	err = s.uc.CreateConfig(ctx, req)
 	if err != nil {
 		return
 	}
@@ -184,16 +150,7 @@ func (s *AdminService) UpdateConfig(ctx context.Context, req *pb.SysConfig) (rep
 	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
 		return
 	}
-	data := model.SysConfig{
-		ConfigId:    req.ConfigId,
-		ConfigName:  req.ConfigName,
-		ConfigKey:   req.ConfigKey,
-		ConfigValue: req.ConfigValue,
-		ConfigType:  req.ConfigType,
-		Remark:      req.Remark,
-	}
-	data.UpdateBy = fmt.Sprint(permission.UserId)
-	_, err = s.adao.UpdateSysConfig(&data, int(data.ConfigId))
+	err = s.uc.UpdateConfig(ctx, req)
 	if err != nil {
 		return
 	}
@@ -226,11 +183,7 @@ func (s *AdminService) DeleteConfig(ctx context.Context, req *pb.DeleteConfigReq
 	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
 		return
 	}
-	var data model.SysConfig
-	data.UpdateBy = fmt.Sprint(permission.UserId)
-	// IDS := jwt.IdsStrToIdsIntGroup("configId", ctx)
-	IDS := make([]int, 0)
-	_, err = s.adao.BatchDeleteSysConfig(&data, IDS)
+	err = s.uc.DeleteConfig(ctx, req)
 	if err != nil {
 		return
 	}

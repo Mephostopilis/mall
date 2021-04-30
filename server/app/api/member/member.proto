@@ -12,52 +12,52 @@ option java_package = "api.member";
 service Admin {
     rpc ListMember (ListMemberRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/umsmemberList"
+            get: "/admin/v1/memberList"
         };
     };
     rpc GetMember (GetMemberRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/umsmember/{id}"
+            get: "/admin/v1/member/{id}"
         };
     };
     rpc CreateMember (Member) returns (ApiReply) {
         option (google.api.http) = {
-            post: "/admin/v1/umsmember"
+            post: "/admin/v1/member"
         };
     };
     rpc UpdateMember (Member) returns (ApiReply){
         option (google.api.http) = {
-            put: "/admin/v1/umsmember"
+            put: "/admin/v1/member"
         };
     };
     rpc DeleteMember (DeleteMemberRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/umsmember/{ids}"
+            delete: "/admin/v1/member/{ids}"
         };
     };
     rpc ListMemberAssets (ListMemberAssetsRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/umsmemberassetsList"
+            get: "/admin/v1/memberassetsList"
         };
     };
     rpc GetMemberAssets (GetMemberAssetsRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/umsmemberassets/{id}"
+            get: "/admin/v1/memberassets/{id}"
         };
     };
     rpc CreateMemberAssets (MemberAssets) returns (ApiReply) {
         option (google.api.http) = {
-            post: "/admin/v1/umsmemberassets"
+            post: "/admin/v1/memberassets"
         };
     };
     rpc UpdateMemberAssets (MemberAssets) returns (ApiReply){
         option (google.api.http) = {
-            put: "/admin/v1/umsmemberassets"
+            put: "/admin/v1/memberassets"
         };
     };
     rpc DeleteMemberAssets (DeleteMemberAssetsRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/umsmemberassets/{ids}"
+            delete: "/admin/v1/memberassets/{ids}"
         };
     };
 }

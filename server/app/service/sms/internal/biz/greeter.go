@@ -119,3 +119,106 @@ func (uc *GreeterUsecase) DeleteCoupon(ctx context.Context, req *pb.DeleteCoupon
 	}
 	return
 }
+
+func (uc *GreeterUsecase) ListCouponHistoryPage(ctx context.Context, req *pb.ListCouponHistoryRequest) (page []*pb.CouponHistory, total int64, err error) {
+	filter := model.SmsCouponHistory{}
+	list, total, err := uc.d.GetSmsCouponHistoryPage(ctx, &filter, int(req.PageSize), int(req.PageIndex))
+	if err != nil {
+		return
+	}
+	page = make([]*pb.CouponHistory, 0)
+	for i := 0; i < len(list); i++ {
+		it := list[i]
+		page = append(page, &pb.CouponHistory{
+			Id:             it.Id,
+			CouponId:       it.CouponId,
+			MemberId:       it.MemberId,
+			CouponCode:     it.CouponCode,
+			MemberNickname: it.MemberNickname,
+			GetType:        it.GetType,
+			UseStatus:      it.UseStatus,
+			UseTime:        timestamppb.New(it.UseTime),
+			OrderId:        it.OrderId,
+			OrderSn:        it.OrderSn,
+			CreatedAt:      timestamppb.New(it.CreatedAt),
+		})
+	}
+	return
+}
+
+func (uc *GreeterUsecase) GetCouponHistory(ctx context.Context, req *pb.GetCouponHistoryRequest) (reply *pb.CouponHistory, err error) {
+	it, err := uc.d.GetSmsCouponHistory(ctx, &model.SmsCouponHistory{Id: req.Id})
+	if err != nil {
+		return
+	}
+	reply = &pb.CouponHistory{
+		Id:             it.Id,
+		CouponId:       it.CouponId,
+		MemberId:       it.MemberId,
+		CouponCode:     it.CouponCode,
+		MemberNickname: it.MemberNickname,
+		GetType:        it.GetType,
+		UseStatus:      it.UseStatus,
+		UseTime:        timestamppb.New(it.UseTime),
+		OrderId:        it.OrderId,
+		OrderSn:        it.OrderSn,
+		CreatedAt:      timestamppb.New(it.CreatedAt),
+	}
+	return
+}
+
+func (uc *GreeterUsecase) CreateCouponHistory(ctx context.Context, req *pb.CouponHistory) (err error) {
+	id, err := uc.uuidc.GenID(ctx, &uuidpb.GenIDReq{})
+	if err != nil {
+		return
+	}
+	d := model.SmsCouponHistory{
+		Id:             id.Id,
+		CouponId:       req.CouponId,
+		MemberId:       req.MemberId,
+		CouponCode:     req.CouponCode,
+		MemberNickname: req.MemberNickname,
+		GetType:        req.GetType,
+		UseStatus:      req.UseStatus,
+		UseTime:        req.UseTime.AsTime(),
+		OrderId:        req.OrderId,
+		OrderSn:        req.OrderSn,
+	}
+	_, err = uc.d.CreateSmsCouponHistory(ctx, &d)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *GreeterUsecase) UpdateCouponHistory(ctx context.Context, req *pb.CouponHistory) (err error) {
+	d := model.SmsCouponHistory{
+		Id:             req.Id,
+		CouponId:       req.CouponId,
+		MemberId:       req.MemberId,
+		CouponCode:     req.CouponCode,
+		MemberNickname: req.MemberNickname,
+		GetType:        req.GetType,
+		UseStatus:      req.UseStatus,
+		UseTime:        req.UseTime.AsTime(),
+		OrderId:        req.OrderId,
+		OrderSn:        req.OrderSn,
+	}
+	_, err = uc.d.UpdateSmsCouponHistory(ctx, &d, req.Id)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *GreeterUsecase) DeleteCouponHistory(ctx context.Context, req *pb.DeleteCouponHistoryRequest) (err error) {
+	ids, err := strings.SplitUint64s(req.Ids, ",")
+	if err != nil {
+		return
+	}
+	_, err = uc.d.BatchDeleteSmsCouponHistory(ctx, &model.SmsCouponHistory{}, ids)
+	if err != nil {
+		return
+	}
+	return
+}

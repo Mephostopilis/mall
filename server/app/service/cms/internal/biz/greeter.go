@@ -299,3 +299,93 @@ func (uc *GreeterUsecase) DeleteSubject(ctx context.Context, req *pb.DeleteSubje
 	}
 	return
 }
+
+func (uc *GreeterUsecase) ListSubjectCategoryPage(ctx context.Context, req *pb.ListSubjectCategoryRequest) (page []*pb.SubjectCategory, total int64, err error) {
+	filter := model.CmsSubjectCategory{}
+	list, total, err := uc.d.GetCmsSubjectCategoryPage(ctx, &filter, int(req.PageSize), int(req.PageIndex))
+	if err != nil {
+		return
+	}
+	page = make([]*pb.SubjectCategory, 0)
+	for i := 0; i < len(list); i++ {
+		it := list[i]
+		page = append(page, &pb.SubjectCategory{
+			Id:           it.Id,
+			Name:         it.Name,
+			Icon:         it.Icon,
+			SubjectCount: it.SubjectCount,
+			ShowStatus:   it.ShowStatus,
+			Sort:         it.Sort,
+			CreatedAt:    timestamppb.New(it.CreatedAt),
+		})
+	}
+	return
+}
+
+func (uc *GreeterUsecase) GetSubjectCategory(ctx context.Context, req *pb.GetSubjectCategoryRequest) (reply *pb.SubjectCategory, err error) {
+	filter := model.CmsSubjectCategory{
+		Id: uint64(req.Id),
+	}
+	it, err := uc.d.GetCmsSubjectCategory(ctx, &filter)
+	if err != nil {
+		return
+	}
+	reply = &pb.SubjectCategory{
+		Id:           it.Id,
+		Name:         it.Name,
+		Icon:         it.Icon,
+		SubjectCount: it.SubjectCount,
+		ShowStatus:   it.ShowStatus,
+		Sort:         it.Sort,
+		CreatedAt:    timestamppb.New(it.CreatedAt),
+	}
+	return
+}
+
+func (uc *GreeterUsecase) CreateSubjectCategory(ctx context.Context, req *pb.SubjectCategory) (err error) {
+	id, err := uc.uuidc.GenID(ctx, &uuidpb.GenIDReq{})
+	if err != nil {
+		return
+	}
+	d := model.CmsSubjectCategory{
+		Id:           id.Id,
+		Name:         req.Name,
+		Icon:         req.Icon,
+		SubjectCount: req.SubjectCount,
+		ShowStatus:   req.ShowStatus,
+		Sort:         req.Sort,
+	}
+	_, err = uc.d.CreateCmsSubjectCategory(ctx, &d)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *GreeterUsecase) UpdateSubjectCategory(ctx context.Context, req *pb.SubjectCategory) (err error) {
+	d := model.CmsSubjectCategory{
+		Id:           req.Id,
+		Name:         req.Name,
+		Icon:         req.Icon,
+		SubjectCount: req.SubjectCount,
+		ShowStatus:   req.ShowStatus,
+		Sort:         req.Sort,
+	}
+	_, err = uc.d.UpdateCmsSubjectCategory(ctx, &d, req.Id)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *GreeterUsecase) DeleteSubjectCategory(ctx context.Context, req *pb.DeleteSubjectCategoryRequest) (err error) {
+	ids, err := strings.SplitUint64s(req.Ids, ",")
+	if err != nil {
+		return
+	}
+	_, err = uc.d.BatchDeleteCmsSubjectCategory(ctx, &model.CmsSubjectCategory{}, ids)
+	if err != nil {
+		return
+	}
+	return
+}

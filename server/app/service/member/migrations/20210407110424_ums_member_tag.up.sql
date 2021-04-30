@@ -1,23 +1,12 @@
-CREATE TABLE `ums_member_tag` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `client_id` varchar(255) DEFAULT NULL COMMENT '客户端id',
-  `user_id` varchar(255) DEFAULT NULL COMMENT '用户id',
-  `redirect_uri` varchar(255) DEFAULT NULL COMMENT 'redirect',
-  `scope` varchar(255) DEFAULT NULL COMMENT '范围',
-  `code` varchar(255) DEFAULT NULL COMMENT 'code',
-  `code_created_at` timestamp NULL DEFAULT NULL COMMENT 'code创建时',
-  `code_expires_in` varchar(255) DEFAULT NULL COMMENT 'code创建时',
-  `access` varchar(255) DEFAULT NULL COMMENT 'code',
-  `access_created_at` timestamp NULL DEFAULT NULL COMMENT 'code创建时',
-  `access_expires_in` varchar(255) DEFAULT NULL COMMENT 'code创建时',
-  `refresh` varchar(255) DEFAULT NULL COMMENT 'code',
-  `refresh_created_at` timestamp NULL DEFAULT NULL COMMENT 'code创建时',
-  `refresh_expires_in` varchar(255) DEFAULT NULL COMMENT 'code创建时',
-  
+CREATE TABLE `member_tag` (
+  `id` bigint(20) unsigned NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `finish_order_count` int(11) DEFAULT NULL COMMENT '自动打标签完成订单数量',
+  `finish_order_amount` decimal(10,2) DEFAULT NULL COMMENT '自动打标签完成订单金额',
   `create_by` bigint(20) DEFAULT NULL,
   `update_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户标签表';

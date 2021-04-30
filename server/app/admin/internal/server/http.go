@@ -6,6 +6,7 @@ import (
 
 	"edu/admin/internal/conf"
 	cmspb "edu/api/cms"
+	memberpb "edu/api/member"
 	omspb "edu/api/oms"
 	pmspb "edu/api/pms"
 	smspb "edu/api/sms"
@@ -119,6 +120,13 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 		panic(err)
 	}
 	smspb.RegisterAdminHandlerClient(ctx, gr, smsc)
+
+	// member
+	memberc, err := memberpb.NewAdmin(ctx, m, grpc.WithDiscovery(r))
+	if err != nil {
+		panic(err)
+	}
+	memberpb.RegisterAdminHandlerClient(ctx, gr, memberc)
 
 	httpSrv.HandlePrefix("/admin/v1", cors(gr))
 	httpSrv.HandlePrefix("/admin/login", cors(gr))

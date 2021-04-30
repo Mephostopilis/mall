@@ -115,7 +115,7 @@ service Admin {
     };
     rpc DeleteMenu (DeleteMenuRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/menu/{ids}"
+            delete: "/admin/v1/menu/{id}"
         };
     };
     rpc GetMenu (GetMenuRequest) returns (ApiReply) {
@@ -185,7 +185,7 @@ service Admin {
     };
     rpc DeletePost (DeletePostRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/post/{postId}"
+            delete: "/admin/v1/post/{ids}"
         };
     };
     rpc GetPost (GetPostRequest) returns (ApiReply) {
@@ -245,7 +245,7 @@ service Admin {
     };
     rpc DeleteSysjob (DeleteSysjobRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/sysjob/{jobId}"
+            delete: "/admin/v1/sysjob/{ids}"
         };
     };
     rpc GetSysjob (GetSysjobRequest) returns (ApiReply) {
@@ -596,7 +596,7 @@ message UpdateMenuRequest {}
 message UpdateMenuReply {}
 
 message DeleteMenuRequest {
-    string ids = 1;
+    int32 id = 1;
 }
 message DeleteMenuReply {}
 
@@ -666,7 +666,7 @@ message GetServerInfoReply {
 }
 
 message OperLog {
-    int64 operId = 1;
+    int32 operId = 1;
 	string title = 2;
 	string businessType = 3;
 	string businessTypes = 4;
@@ -724,7 +724,7 @@ message UpdatePostRequest {}
 message UpdatePostReply {}
 
 message DeletePostRequest {
-    string postId = 1;
+    string ids = 1;
 }
 message DeletePostReply {}
 
@@ -779,7 +779,7 @@ message UpdateSysjobRequest {}
 message UpdateSysjobReply {}
 
 message DeleteSysjobRequest {
-    int32 jobId = 1;
+    string ids = 1;
 }
 message DeleteSysjobReply {}
 
@@ -824,7 +824,7 @@ message Job {
 }
 
 message DictData {
-    int64 dictCode = 1;
+    int32 dictCode = 1;
 	int32 dictSort = 2;
 	string dictLabel = 3;
 	string dictValue = 4;
@@ -982,6 +982,8 @@ message DBTable {
     google.protobuf.Timestamp updateTime = 6;
     string tableComment = 7;
 }
+
+message DBColumn {}
 
 message GetDBTableListRequest {
     int32 pageIndex = 1;

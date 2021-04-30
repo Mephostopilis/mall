@@ -710,7 +710,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/menu/{ids}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/menu/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteMenuRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -1071,7 +1071,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/post/{postId}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/post/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeletePostRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -1369,7 +1369,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/sysjob/{jobId}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/sysjob/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteSysjobRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)

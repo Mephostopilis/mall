@@ -410,6 +410,196 @@ func (x *Subject) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type SubjectCategory struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id           uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name         string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Icon         string                 `protobuf:"bytes,3,opt,name=icon,proto3" json:"icon,omitempty"`
+	SubjectCount int32                  `protobuf:"varint,4,opt,name=subjectCount,proto3" json:"subjectCount,omitempty"`
+	ShowStatus   int32                  `protobuf:"varint,5,opt,name=showStatus,proto3" json:"showStatus,omitempty"`
+	Sort         int32                  `protobuf:"varint,6,opt,name=sort,proto3" json:"sort,omitempty"`
+	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+}
+
+func (x *SubjectCategory) Reset() {
+	*x = SubjectCategory{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_cms_api_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SubjectCategory) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubjectCategory) ProtoMessage() {}
+
+func (x *SubjectCategory) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cms_api_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubjectCategory.ProtoReflect.Descriptor instead.
+func (*SubjectCategory) Descriptor() ([]byte, []int) {
+	return file_api_cms_api_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SubjectCategory) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SubjectCategory) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SubjectCategory) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *SubjectCategory) GetSubjectCount() int32 {
+	if x != nil {
+		return x.SubjectCount
+	}
+	return 0
+}
+
+func (x *SubjectCategory) GetShowStatus() int32 {
+	if x != nil {
+		return x.ShowStatus
+	}
+	return 0
+}
+
+func (x *SubjectCategory) GetSort() int32 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+func (x *SubjectCategory) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type SubjectComment struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id             uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SubjectId      uint64                 `protobuf:"varint,2,opt,name=subjectId,proto3" json:"subjectId,omitempty"`
+	MemberNickname string                 `protobuf:"bytes,3,opt,name=memberNickname,proto3" json:"memberNickname,omitempty"`
+	MemberIcon     string                 `protobuf:"bytes,4,opt,name=memberIcon,proto3" json:"memberIcon,omitempty"`
+	Content        string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	ShowStatus     int32                  `protobuf:"varint,6,opt,name=showStatus,proto3" json:"showStatus,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+}
+
+func (x *SubjectComment) Reset() {
+	*x = SubjectComment{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_cms_api_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SubjectComment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubjectComment) ProtoMessage() {}
+
+func (x *SubjectComment) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cms_api_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubjectComment.ProtoReflect.Descriptor instead.
+func (*SubjectComment) Descriptor() ([]byte, []int) {
+	return file_api_cms_api_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SubjectComment) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SubjectComment) GetSubjectId() uint64 {
+	if x != nil {
+		return x.SubjectId
+	}
+	return 0
+}
+
+func (x *SubjectComment) GetMemberNickname() string {
+	if x != nil {
+		return x.MemberNickname
+	}
+	return ""
+}
+
+func (x *SubjectComment) GetMemberIcon() string {
+	if x != nil {
+		return x.MemberIcon
+	}
+	return ""
+}
+
+func (x *SubjectComment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *SubjectComment) GetShowStatus() int32 {
+	if x != nil {
+		return x.ShowStatus
+	}
+	return 0
+}
+
+func (x *SubjectComment) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 var File_api_cms_api_proto protoreflect.FileDescriptor
 
 var file_api_cms_api_proto_rawDesc = []byte{
@@ -473,9 +663,39 @@ var file_api_cms_api_proto_rawDesc = []byte{
 	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54,
 	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x64, 0x41, 0x74, 0x42, 0x1c, 0x0a, 0x07, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6d, 0x73, 0x50, 0x01,
-	0x5a, 0x0f, 0x65, 0x64, 0x75, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6d, 0x73, 0x3b, 0x63, 0x6d,
-	0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x41, 0x74, 0x22, 0xdb, 0x01, 0x0a, 0x0f, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x43,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x69,
+	0x63, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x63, 0x6f, 0x6e, 0x12,
+	0x22, 0x0a, 0x0c, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x43, 0x6f,
+	0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x38, 0x0a, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x64, 0x41, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41,
+	0x74, 0x22, 0xfa, 0x01, 0x0a, 0x0e, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x43, 0x6f, 0x6d,
+	0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74,
+	0x49, 0x64, 0x12, 0x26, 0x0a, 0x0e, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x4e, 0x69, 0x63, 0x6b,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x6d, 0x65, 0x6d, 0x62,
+	0x65, 0x72, 0x4e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x6d, 0x65,
+	0x6d, 0x62, 0x65, 0x72, 0x49, 0x63, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x63, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x53, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x12, 0x38, 0x0a, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41,
+	0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
+	0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x42, 0x1c,
+	0x0a, 0x07, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6d, 0x73, 0x50, 0x01, 0x5a, 0x0f, 0x65, 0x64, 0x75,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6d, 0x73, 0x3b, 0x63, 0x6d, 0x73, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -490,25 +710,29 @@ func file_api_cms_api_proto_rawDescGZIP() []byte {
 	return file_api_cms_api_proto_rawDescData
 }
 
-var file_api_cms_api_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_api_cms_api_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_api_cms_api_proto_goTypes = []interface{}{
 	(*ApiReply)(nil),              // 0: api.cms.ApiReply
 	(*Help)(nil),                  // 1: api.cms.Help
 	(*HelpCategory)(nil),          // 2: api.cms.HelpCategory
 	(*Subject)(nil),               // 3: api.cms.Subject
-	(*anypb.Any)(nil),             // 4: google.protobuf.Any
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*SubjectCategory)(nil),       // 4: api.cms.SubjectCategory
+	(*SubjectComment)(nil),        // 5: api.cms.SubjectComment
+	(*anypb.Any)(nil),             // 6: google.protobuf.Any
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
 }
 var file_api_cms_api_proto_depIdxs = []int32{
-	4, // 0: api.cms.ApiReply.data:type_name -> google.protobuf.Any
-	5, // 1: api.cms.Help.createdAt:type_name -> google.protobuf.Timestamp
-	5, // 2: api.cms.HelpCategory.createdAt:type_name -> google.protobuf.Timestamp
-	5, // 3: api.cms.Subject.createdAt:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	6, // 0: api.cms.ApiReply.data:type_name -> google.protobuf.Any
+	7, // 1: api.cms.Help.createdAt:type_name -> google.protobuf.Timestamp
+	7, // 2: api.cms.HelpCategory.createdAt:type_name -> google.protobuf.Timestamp
+	7, // 3: api.cms.Subject.createdAt:type_name -> google.protobuf.Timestamp
+	7, // 4: api.cms.SubjectCategory.createdAt:type_name -> google.protobuf.Timestamp
+	7, // 5: api.cms.SubjectComment.createdAt:type_name -> google.protobuf.Timestamp
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_cms_api_proto_init() }
@@ -565,6 +789,30 @@ func file_api_cms_api_proto_init() {
 				return nil
 			}
 		}
+		file_api_cms_api_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SubjectCategory); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_cms_api_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SubjectComment); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -572,7 +820,7 @@ func file_api_cms_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_cms_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

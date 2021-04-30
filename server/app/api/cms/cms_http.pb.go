@@ -26,11 +26,15 @@ type AdminHandler interface {
 
 	CreateSubject(context.Context, *Subject) (*ApiReply, error)
 
+	CreateSubjectCategory(context.Context, *SubjectCategory) (*ApiReply, error)
+
 	DeleteHelp(context.Context, *DeleteHelpRequest) (*ApiReply, error)
 
 	DeleteHelpCategory(context.Context, *DeleteHelpCategoryRequest) (*ApiReply, error)
 
 	DeleteSubject(context.Context, *DeleteSubjectRequest) (*ApiReply, error)
+
+	DeleteSubjectCategory(context.Context, *DeleteSubjectCategoryRequest) (*ApiReply, error)
 
 	GetHelp(context.Context, *GetHelpRequest) (*ApiReply, error)
 
@@ -38,17 +42,23 @@ type AdminHandler interface {
 
 	GetSubject(context.Context, *GetSubjectRequest) (*ApiReply, error)
 
+	GetSubjectCategory(context.Context, *GetSubjectCategoryRequest) (*ApiReply, error)
+
 	ListHelp(context.Context, *ListHelpRequest) (*ApiReply, error)
 
 	ListHelpCategory(context.Context, *ListHelpCategoryRequest) (*ApiReply, error)
 
 	ListSubject(context.Context, *ListSubjectRequest) (*ApiReply, error)
 
+	ListSubjectCategory(context.Context, *ListSubjectCategoryRequest) (*ApiReply, error)
+
 	UpdateHelp(context.Context, *Help) (*ApiReply, error)
 
 	UpdateHelpCategory(context.Context, *HelpCategory) (*ApiReply, error)
 
 	UpdateSubject(context.Context, *Subject) (*ApiReply, error)
+
+	UpdateSubjectCategory(context.Context, *SubjectCategory) (*ApiReply, error)
 }
 
 func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler {
@@ -433,6 +443,136 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 
 		next := func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteSubject(ctx, req.(*DeleteSubjectRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("DELETE")
+
+	r.HandleFunc("/admin/v1/cmssubjectList", func(w http.ResponseWriter, r *http.Request) {
+		var in ListSubjectCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListSubjectCategory(ctx, req.(*ListSubjectCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/cmssubject/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var in GetSubjectCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetSubjectCategory(ctx, req.(*GetSubjectCategoryRequest))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("GET")
+
+	r.HandleFunc("/admin/v1/cmssubject", func(w http.ResponseWriter, r *http.Request) {
+		var in SubjectCategory
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateSubjectCategory(ctx, req.(*SubjectCategory))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("POST")
+
+	r.HandleFunc("/admin/v1/cmssubject", func(w http.ResponseWriter, r *http.Request) {
+		var in SubjectCategory
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateSubjectCategory(ctx, req.(*SubjectCategory))
+		}
+		if h.Middleware != nil {
+			next = h.Middleware(next)
+		}
+		out, err := next(r.Context(), &in)
+		if err != nil {
+			h.Error(w, r, err)
+			return
+		}
+		reply := out.(*ApiReply)
+		if err := h.Encode(w, r, reply); err != nil {
+			h.Error(w, r, err)
+		}
+	}).Methods("PUT")
+
+	r.HandleFunc("/admin/v1/cmssubject/{ids}", func(w http.ResponseWriter, r *http.Request) {
+		var in DeleteSubjectCategoryRequest
+		if err := h.Decode(r, &in); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		if err := binding.MapProto(&in, mux.Vars(r)); err != nil {
+			h.Error(w, r, err)
+			return
+		}
+
+		next := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteSubjectCategory(ctx, req.(*DeleteSubjectCategoryRequest))
 		}
 		if h.Middleware != nil {
 			next = h.Middleware(next)

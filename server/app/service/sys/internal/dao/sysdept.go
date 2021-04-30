@@ -1,7 +1,8 @@
 package dao
 
 import (
-	"edu/pkg/tools"
+	"fmt"
+
 	"edu/service/sys/internal/model"
 
 	"github.com/go-kratos/kratos/v2/errors"
@@ -9,7 +10,7 @@ import (
 
 func (d *dao) CreateSysDept(e *model.SysDept) (doc model.SysDept, err error) {
 	table := d.orm.Begin()
-	deptPath := "/" + tools.IntToString(e.DeptId)
+	deptPath := "/" + fmt.Sprintf("%d", e.DeptId)
 	if int(e.ParentId) != 0 {
 		var deptP model.SysDept
 		if err = table.Table(e.TableName()).Where("dept_id = ?", e.ParentId).First(&deptP).Error; err != nil {
@@ -94,8 +95,7 @@ func (d *dao) UpdateSysDept(e *model.SysDept, id int) (update model.SysDept, err
 	if err = d.orm.Table(e.TableName()).Where("dept_id = ?", id).First(&update).Error; err != nil {
 		return
 	}
-
-	deptPath := "/" + tools.IntToString(e.DeptId)
+	deptPath := "/" + fmt.Sprintf("%d", e.DeptId)
 	if int(e.ParentId) != 0 {
 		var deptP model.SysDept
 		d.orm.Table(e.TableName()).Where("dept_id = ?", e.ParentId).First(&deptP)
@@ -115,7 +115,6 @@ func (d *dao) UpdateSysDept(e *model.SysDept, id int) (update model.SysDept, err
 	if err = d.orm.Table(e.TableName()).Model(&update).Updates(&e).Error; err != nil {
 		return
 	}
-
 	return
 }
 

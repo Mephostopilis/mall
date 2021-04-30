@@ -6,7 +6,7 @@ import (
 
 //sys_operlog
 type SysOperLog struct {
-	OperId        int       `json:"operId" gorm:"primary_key;AUTO_INCREMENT"` //日志编码
+	OperId        int32     `json:"operId" gorm:"primary_key;AUTO_INCREMENT"` //日志编码
 	Title         string    `json:"title" gorm:"size:255;"`                   //操作模块
 	BusinessType  string    `json:"businessType" gorm:"size:128;"`            //操作类型
 	BusinessTypes string    `json:"businessTypes" gorm:"size:128;"`           //操作类型

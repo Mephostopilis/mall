@@ -4,11 +4,9 @@ import (
 	"context"
 
 	pb "edu/api/sys/v1"
-	"edu/service/sys/internal/model"
 
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // @Summary 登录日志列表
@@ -23,38 +21,14 @@ import (
 // @Router /admin/v1/operloglist [get]
 // @Security Bearer
 func (s *AdminService) ListOperLog(ctx context.Context, req *pb.ListOperLogRequest) (reply *pb.ApiReply, err error) {
-	var data model.SysOperLog
-	var pageSize = int(req.PageSize)
-	var pageIndex = int(req.PageIndex)
-	data.OperName = req.OperName
-	data.Status = req.Status
-	data.OperIp = req.OperIp
-	result, count, err := s.adao.GetSysOperLogPage(&data, pageSize, pageIndex)
+	result, count, err := s.uc.ListOperLogPage(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
 	for i := 0; i < len(result); i++ {
 		it := result[i]
-		d := &pb.OperLog{
-			OperId:        int64(it.OperId),
-			Title:         it.Title,
-			BusinessType:  it.BusinessType,
-			BusinessTypes: it.BusinessTypes,
-			Method:        it.Method,
-			RequestMethod: it.RequestMethod,
-			OperatorType:  it.OperatorType,
-			OperName:      it.OperName,
-			DeptName:      it.DeptName,
-			OperUrl:       it.OperUrl,
-			OperIp:        it.OperIp,
-			OperLocation:  it.OperLocation,
-			OperParam:     it.OperParam,
-			Status:        it.Status,
-			OperTime:      timestamppb.New(it.OperTime),
-			JsonResult:    it.JsonResult,
-		}
-		any, err1 := ptypes.MarshalAny(d)
+		any, err1 := ptypes.MarshalAny(it)
 		if err1 != nil {
 			err = err1
 			return
@@ -78,32 +52,12 @@ func (s *AdminService) ListOperLog(ctx context.Context, req *pb.ListOperLogReque
 // @Router /admin/v1/operlog/{infoId} [get]
 // @Security Bearer
 func (s *AdminService) GetOperLog(ctx context.Context, req *pb.GetOperLogRequest) (reply *pb.ApiReply, err error) {
-	var OperLog model.SysOperLog
-	OperLog.OperId = int(req.OperId)
-	it, err := s.adao.GetSysOperLog(&OperLog)
+	it, err := s.uc.GetOperLog(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.OperLog{
-		OperId:        int64(it.OperId),
-		Title:         it.Title,
-		BusinessType:  it.BusinessType,
-		BusinessTypes: it.BusinessTypes,
-		Method:        it.Method,
-		RequestMethod: it.RequestMethod,
-		OperatorType:  it.OperatorType,
-		OperName:      it.OperName,
-		DeptName:      it.DeptName,
-		OperUrl:       it.OperUrl,
-		OperIp:        it.OperIp,
-		OperLocation:  it.OperLocation,
-		OperParam:     it.OperParam,
-		Status:        it.Status,
-		OperTime:      timestamppb.New(it.OperTime),
-		JsonResult:    it.JsonResult,
-	}
-	any, err1 := ptypes.MarshalAny(d)
+	any, err1 := ptypes.MarshalAny(it)
 	if err1 != nil {
 		err = err1
 		return
@@ -129,42 +83,14 @@ func (s *AdminService) GetOperLog(ctx context.Context, req *pb.GetOperLogRequest
 // @Router /admin/v1/operlog [post]
 // @Security Bearer
 func (s *AdminService) CreateOperLog(ctx context.Context, req *pb.OperLog) (reply *pb.ApiReply, err error) {
-	data := model.SysOperLog{
-		Title:         req.Title,
-		BusinessType:  req.BusinessType,
-		BusinessTypes: req.BusinessTypes,
-		Method:        req.Method,
-		RequestMethod: req.RequestMethod,
-		OperatorType:  req.OperatorType,
-		OperName:      req.OperName,
-		DeptName:      req.DeptName,
-		OperUrl:       req.OperUrl,
-		OperIp:        req.OperIp,
-		OperLocation:  req.OperLocation,
-		OperParam:     req.OperParam,
-		Status:        req.Status,
-		OperTime:      req.OperTime.AsTime(),
-		JsonResult:    req.JsonResult,
-		// CreateBy:      fmt.Sprint(dp.UserId),
-	}
-
-	result, err := s.adao.CreateSysOperLog(&data)
+	err = s.uc.CreateOperLog(ctx, req)
 	if err != nil {
 		return
 	}
-	list := make([]*anypb.Any, 0)
-	req.OperId = int64(result.OperId)
-	any, err1 := ptypes.MarshalAny(req)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
 		Count:   int32(1),
-		Data:    list,
 	}
 	return
 }

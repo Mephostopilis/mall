@@ -8,6 +8,9 @@ import (
 	pb "edu/api/sys/v1"
 	"edu/service/sys/internal/model"
 
+	"github.com/go-kratos/kratos/v2/errors"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -31,7 +34,7 @@ func (uc *AdminUsecase) GetDept(ctx context.Context, deptID int32) (reply *pb.De
 	return
 }
 
-func (uc *AdminUsecase) CreateDept(ctx context.Context, token string, req *pb.Dept) (reply *pb.ApiReply, err error) {
+func (uc *AdminUsecase) CreateDept(ctx context.Context, token string, req *pb.Dept) (err error) {
 	out, err := uc.mw.ValidationToken(token)
 	if err != nil {
 		return
@@ -53,10 +56,39 @@ func (uc *AdminUsecase) CreateDept(ctx context.Context, token string, req *pb.De
 	if err != nil {
 		return
 	}
-	reply = &pb.ApiReply{
-		Code:    0,
-		Message: "OK",
-		Count:   int32(1),
+	return
+}
+
+func (uc *AdminUsecase) UpdateDept(ctx context.Context, req *pb.Dept) (err error) {
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		err = errors.Unknown("meta", "error")
+		return
+	}
+	v := md.Get("permision")
+	if len(v) < 0 {
+		err = errors.Unknown("meta", "error")
+		return
+	}
+	var permission ssopb.DataPermission
+	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
+		return
+	}
+	data := model.SysDept{
+		DeptId:   int(req.DeptId),
+		ParentId: int(req.ParentId),
+		DeptPath: req.DeptPath,
+		DeptName: req.DeptName,
+		Sort:     int(req.Sort),
+		Leader:   req.Leader,
+		Phone:    req.Phone,
+		Email:    req.Email,
+		Status:   req.Status,
+	}
+	data.UpdateBy = fmt.Sprint(permission.UserId)
+	_, err = uc.d.UpdateSysDept(&data, data.DeptId)
+	if err != nil {
+		return
 	}
 	return
 }

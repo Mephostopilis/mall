@@ -2,12 +2,8 @@ package service
 
 import (
 	"context"
-	"fmt"
-	"strings"
 
 	pb "edu/api/sys/v1"
-
-	"edu/service/sys/internal/model"
 
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -21,17 +17,12 @@ import (
 // @Success 200 {string} string	"{"code": -1, "message": "添加失败"}"
 // @Router /admin/v1/setting [get]
 func (s *AdminService) GetSetting(ctx context.Context, req *pb.GetSettingRequest) (reply *pb.ApiReply, err error) {
-	filter := model.SysSetting{}
-	set, err := s.adao.GetSysSetting(ctx, &filter)
+	set, err := s.uc.GetSetting(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.SysSetting{
-		Name: set.Name,
-		Logo: set.Logo,
-	}
-	any, err1 := ptypes.MarshalAny(d)
+	any, err1 := ptypes.MarshalAny(set)
 	if err1 != nil {
 		s.log.Errorf("err = %v", err1)
 		err = err1
@@ -55,16 +46,7 @@ func (s *AdminService) GetSetting(ctx context.Context, req *pb.GetSettingRequest
 // @Success 200 {string} string	"{"code": -1, "message": "添加失败"}"
 // @Router /admin/v1/system/setting [post]
 func (s *AdminService) CreateSetting(ctx context.Context, req *pb.SysSetting) (reply *pb.ApiReply, err error) {
-	var sModel model.SysSetting
-	sModel.Logo = req.Logo
-	sModel.Name = req.Name
-	if sModel.Logo != "" {
-		if !strings.HasPrefix(sModel.Logo, "http") {
-			sModel.Logo = fmt.Sprintf("http://%s", sModel.Logo)
-		}
-	}
-	_, e := s.adao.UpdateSysSetting(ctx, &sModel)
-	if e != nil {
+	if err = s.uc.CreateSetting(ctx, req); err != nil {
 		return
 	}
 	reply = &pb.ApiReply{

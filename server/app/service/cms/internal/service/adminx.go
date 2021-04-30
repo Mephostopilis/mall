@@ -197,7 +197,7 @@ func (s *AdminService) ListSubject(ctx context.Context, req *pb.ListSubjectReque
 		Count:   int32(count),
 		Data:    list,
 	}
-	return &pb.ApiReply{}, nil
+	return
 }
 
 func (s *AdminService) GetSubject(ctx context.Context, req *pb.GetSubjectRequest) (reply *pb.ApiReply, err error) {
@@ -245,6 +245,84 @@ func (s *AdminService) UpdateSubject(ctx context.Context, req *pb.Subject) (repl
 
 func (s *AdminService) DeleteSubject(ctx context.Context, req *pb.DeleteSubjectRequest) (reply *pb.ApiReply, err error) {
 	if err = s.uc.DeleteSubject(ctx, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+	}
+	return
+}
+
+func (s *AdminService) ListSubjectCategory(ctx context.Context, req *pb.ListSubjectCategoryRequest) (reply *pb.ApiReply, err error) {
+	result, count, err := s.uc.ListSubjectCategoryPage(ctx, req)
+	if err != nil {
+		return
+	}
+	list := make([]*anypb.Any, 0)
+	for i := 0; i < len(result); i++ {
+		it := result[i]
+		any, err1 := ptypes.MarshalAny(it)
+		if err1 != nil {
+			err = err1
+			return
+		}
+		list = append(list, any)
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+		Count:   int32(count),
+		Data:    list,
+	}
+	return
+}
+
+func (s *AdminService) GetSubjectCategory(ctx context.Context, req *pb.GetSubjectCategoryRequest) (reply *pb.ApiReply, err error) {
+	it, err := s.uc.GetSubjectCategory(ctx, req)
+	if err != nil {
+		return
+	}
+	list := make([]*anypb.Any, 0)
+	any, err1 := ptypes.MarshalAny(it)
+	if err1 != nil {
+		err = err1
+		return
+	}
+	list = append(list, any)
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+		Count:   int32(1),
+		Data:    list,
+	}
+	return
+}
+
+func (s *AdminService) CreateSubjectCategory(ctx context.Context, req *pb.SubjectCategory) (reply *pb.ApiReply, err error) {
+	if err = s.uc.CreateSubjectCategory(ctx, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+	}
+	return
+}
+
+func (s *AdminService) UpdateSubjectCategory(ctx context.Context, req *pb.SubjectCategory) (reply *pb.ApiReply, err error) {
+	if err = s.uc.UpdateSubjectCategory(ctx, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+	}
+	return
+}
+
+func (s *AdminService) DeleteSubjectCategory(ctx context.Context, req *pb.DeleteSubjectCategoryRequest) (reply *pb.ApiReply, err error) {
+	if err = s.uc.DeleteSubjectCategory(ctx, req); err != nil {
 		return
 	}
 	reply = &pb.ApiReply{

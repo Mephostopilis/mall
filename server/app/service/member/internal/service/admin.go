@@ -12,10 +12,10 @@ import (
 type AdminService struct {
 	pb.UnimplementedAdminServer
 	log *log.Helper
-	uc  *biz.GreeterUsecase
+	uc  *biz.MemberUsecase
 }
 
-func NewAdminService(logger log.Logger, uc *biz.GreeterUsecase) *AdminService {
+func NewAdminService(logger log.Logger, uc *biz.MemberUsecase) *AdminService {
 	return &AdminService{
 		log: log.NewHelper("service/admin", logger),
 		uc:  uc,

@@ -319,7 +319,7 @@
             handleDetail(row) {
                 this.reset()
                 const id = row.id || this.ids
-                getPmsBrand(id).then((response) => {
+                get{{.ClassName}}(id).then((response) => {
                     this.form = response.data[0]
                     this.open = true
                     this.title = '{{.TableComment}}详情'

@@ -26,6 +26,12 @@ type Dao interface {
 	CreateSmsCoupon(ctx context.Context, e *model.SmsCoupon) (model.SmsCoupon, error)
 	UpdateSmsCoupon(ctx context.Context, e *model.SmsCoupon, id uint64) (update model.SmsCoupon, err error)
 	BatchDeleteSmsCoupon(ctx context.Context, e *model.SmsCoupon, id []uint64) (Result bool, err error)
+
+	GetSmsCouponHistoryPage(ctx context.Context, e *model.SmsCouponHistory, pageSize int, pageIndex int) (docs []model.SmsCouponHistory, total int64, err error)
+	GetSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory) (model.SmsCouponHistory, error)
+	CreateSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory) (model.SmsCouponHistory, error)
+	UpdateSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id uint64) (update model.SmsCouponHistory, err error)
+	BatchDeleteSmsCouponHistory(ctx context.Context, e *model.SmsCouponHistory, id []uint64) (Result bool, err error)
 }
 
 // dao dao.

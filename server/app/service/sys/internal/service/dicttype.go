@@ -2,17 +2,11 @@ package service
 
 import (
 	"context"
-	"fmt"
 
-	ssopb "edu/api/sso"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
-	"edu/service/sys/internal/model"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
@@ -32,7 +26,7 @@ func (s *AdminService) GetDictTypeList(ctx context.Context, req *pb.GetDictTypeL
 	if err != nil {
 		return
 	}
-	return s.uc.GetDictTypeList(ctx, token, req)
+	return s.uc.GetDictTypePage(ctx, token, req)
 }
 
 // @Summary 通过字典id获取字典类型
@@ -43,21 +37,11 @@ func (s *AdminService) GetDictTypeList(ctx context.Context, req *pb.GetDictTypeL
 // @Router /admin/v1/dict/type/{dictId} [get]
 // @Security Bearer
 func (s *AdminService) GetDictType(ctx context.Context, req *pb.GetDictTypeRequest) (reply *pb.ApiReply, err error) {
-	var DictType model.SysDictType
-	DictType.DictName = req.DictName
-	DictType.DictId = int(req.DictId)
-	it, err := s.adao.GetDictType(&DictType)
+	d, err := s.uc.GetDictType(ctx, req)
 	if err != nil {
 		return
 	}
-
 	list := make([]*anypb.Any, 0)
-	d := &pb.DictType{
-		DictId:   int32(it.DictId),
-		DictName: it.DictName,
-		DictType: it.DictType,
-		Status:   it.Status,
-	}
 	any, err1 := ptypes.MarshalAny(d)
 	if err1 != nil {
 		err = err1
@@ -74,23 +58,14 @@ func (s *AdminService) GetDictType(ctx context.Context, req *pb.GetDictTypeReque
 }
 
 func (s *AdminService) GetDictTypeOptionSelect(ctx context.Context, req *pb.GetDictTypeOptionSelectRequest) (reply *pb.ApiReply, err error) {
-	var DictType model.SysDictType
-	DictType.DictName = req.DictName
-	DictType.DictId = int(req.DictId)
-	result, err := s.adao.GetDictTypeList(&DictType)
+	result, err := s.uc.GetDictTypeListOptionSelect(ctx, req)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
 	for i := 0; i < len(result); i++ {
 		it := result[i]
-		d := &pb.DictType{
-			DictId:   int32(it.DictId),
-			DictName: it.DictName,
-			DictType: it.DictType,
-			Status:   it.Status,
-		}
-		any, err1 := ptypes.MarshalAny(d)
+		any, err1 := ptypes.MarshalAny(it)
 		if err1 != nil {
 			err = err1
 			return
@@ -120,7 +95,15 @@ func (s *AdminService) InsertDictType(ctx context.Context, req *pb.DictType) (re
 	if err != nil {
 		return
 	}
-	return s.uc.InsertDictType(ctx, token, req)
+	if err = s.uc.InsertDictType(ctx, token, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+		Count:   int32(1),
+	}
+	return
 }
 
 // @Summary 修改字典类型
@@ -134,48 +117,14 @@ func (s *AdminService) InsertDictType(ctx context.Context, req *pb.DictType) (re
 // @Router /admin/v1/dict/type [put]
 // @Security Bearer
 func (s *AdminService) UpdateDictType(ctx context.Context, req *pb.DictType) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
+	if err = s.uc.UpdateDictType(ctx, req); err != nil {
 		return
 	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
-		return
-	}
-
-	var data model.SysDictType
-	data.UpdateBy = fmt.Sprint(permission.UserId)
-	it, err := s.adao.UpdateDictType(&data, data.DictId)
-	if err != nil {
-		return
-	}
-
-	list := make([]*anypb.Any, 0)
-	d := &pb.DictType{
-		DictId:   int32(it.DictId),
-		DictName: it.DictName,
-		DictType: it.DictType,
-		Status:   it.Status,
-	}
-	any, err1 := ptypes.MarshalAny(d)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
 		Count:   int32(1),
-		Data:    list,
 	}
-
 	return
 }
 
@@ -187,26 +136,7 @@ func (s *AdminService) UpdateDictType(ctx context.Context, req *pb.DictType) (re
 // @Success 200 {string} string	"{"code": -1, "message": "删除失败"}"
 // @Router /api/v1/dict/type/{dictId} [delete]
 func (s *AdminService) DeleteDictType(ctx context.Context, req *pb.DeleteDictTypeRequest) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
-		return
-	}
-	var data model.SysDictType
-	data.UpdateBy = permission.RoleKey
-	// IDS := jwt.IdsStrToIdsIntGroup("dictId", ctx)
-	IDS := make([]int, 0)
-	_, err = s.adao.BatchDeleteDictType(&data, IDS)
-	if err != nil {
+	if err = s.uc.DeleteDictType(ctx, req); err != nil {
 		return
 	}
 	reply = &pb.ApiReply{

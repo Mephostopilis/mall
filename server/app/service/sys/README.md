@@ -15,7 +15,7 @@
   </a>
 </p>
 
-  [English](https://github.com/kratos-admin/admin/blob/main/admin/README.en.md) | 简体中文
+  [English](https://github.com/mephostopils/amll/blob/main/admin/README.en.md) | 简体中文
 
 ##### 基于go-kratos + Vue + Element UI的前后端分离权限管理系统
 

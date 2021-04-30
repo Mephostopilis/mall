@@ -1,4 +1,4 @@
 -- ----------------------------
--- Table structure for user_withdraw
+-- Table structure for member_withdraw
 -- ----------------------------
-DROP TABLE IF EXISTS `user_withdraw`;
+DROP TABLE IF EXISTS `member_withdraw`;

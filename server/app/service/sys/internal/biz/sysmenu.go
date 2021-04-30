@@ -239,9 +239,32 @@ func (uc *AdminUsecase) ListMenuLable(e *model.Menu) (m []*pb.MenuLable, err err
 }
 
 func (uc *AdminUsecase) DeleteMenu(ctx context.Context, req *pb.DeleteMenuRequest) (err error) {
-	// _, err = uc.d.DeleteMenu(&model.Menu{}, int(req.Id))
-	// if err != nil {
-	// 	return
-	// }
+	_, err = uc.d.DeleteMenu(&model.Menu{}, int(req.Id))
+	if err != nil {
+		return
+	}
+	return
+}
+
+func (uc *AdminUsecase) GetMenuIDS(ctx context.Context, req *pb.GetMenuIDSRequest) (list []*pb.MenuPath, err error) {
+	dp, err := meta.GetDataPermissions(ctx)
+	if err != nil {
+		return
+	}
+	var data model.SysRoleMenu
+	data.RoleName = dp.RoleKey
+	data.UpdateBy = fmt.Sprint(dp.UserId)
+	result, err := uc.d.GetRoleMenuIDSFromSysMenu(&data)
+	if err != nil {
+		return
+	}
+	list = make([]*pb.MenuPath, 0)
+	for i := 0; i < len(result); i++ {
+		it := result[i]
+		d := &pb.MenuPath{
+			Path: it.Path,
+		}
+		list = append(list, d)
+	}
 	return
 }

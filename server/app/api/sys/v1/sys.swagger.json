@@ -918,9 +918,9 @@
         ]
       }
     },
-    "/admin/v1/menu/{ids}": {
-      "delete": {
-        "operationId": "Admin_DeleteMenu",
+    "/admin/v1/menu/{id}": {
+      "get": {
+        "operationId": "Admin_GetMenu",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -937,20 +937,19 @@
         },
         "parameters": [
           {
-            "name": "ids",
+            "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
           "Admin"
         ]
-      }
-    },
-    "/admin/v1/menu/{id}": {
-      "get": {
-        "operationId": "Admin_GetMenu",
+      },
+      "delete": {
+        "operationId": "Admin_DeleteMenu",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1272,6 +1271,36 @@
         ]
       }
     },
+    "/admin/v1/post/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeletePost",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/sysv1ApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
     "/admin/v1/post/{postId}": {
       "get": {
         "operationId": "Admin_GetPost",
@@ -1296,34 +1325,6 @@
             "required": true,
             "type": "integer",
             "format": "int32"
-          }
-        ],
-        "tags": [
-          "Admin"
-        ]
-      },
-      "delete": {
-        "operationId": "Admin_DeletePost",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/sysv1ApiReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -1814,9 +1815,9 @@
         ]
       }
     },
-    "/admin/v1/sysjob/{jobId}": {
-      "get": {
-        "operationId": "Admin_GetSysjob",
+    "/admin/v1/sysjob/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteSysjob",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1833,19 +1834,20 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "ids",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         ],
         "tags": [
           "Admin"
         ]
-      },
-      "delete": {
-        "operationId": "Admin_DeleteSysjob",
+      }
+    },
+    "/admin/v1/sysjob/{jobId}": {
+      "get": {
+        "operationId": "Admin_GetSysjob",
         "responses": {
           "200": {
             "description": "A successful response.",

@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	ssopb "edu/api/sso"
 	pb "edu/api/sys/v1"
@@ -87,30 +86,12 @@ func (s *AdminService) GetDeptTree(ctx context.Context, req *pb.GetDeptTreeReque
 // @Router /api/v1/dept/{deptId} [get]
 // @Security Bearer
 func (s *AdminService) GetDept(ctx context.Context, req *pb.GetDeptRequest) (reply *pb.ApiReply, err error) {
-	// token, err := meta.GetToken(ctx)
-	// if err != nil {
-	// 	return
-	// }
-	dept := model.SysDept{
-		DeptId: int(req.DeptId),
-	}
-	it, err := s.adao.GetSysDept(&dept)
+	it, err := s.uc.GetDept(ctx, req.DeptId)
 	if err != nil {
 		return
 	}
 	list := make([]*anypb.Any, 0)
-	d := &pb.Dept{
-		DeptId:   int64(it.DeptId),
-		ParentId: int64(it.ParentId),
-		DeptPath: it.DeptPath,
-		DeptName: it.DeptName,
-		Sort:     int32(it.Sort),
-		Leader:   it.Leader,
-		Phone:    it.Phone,
-		Email:    it.Email,
-		Status:   it.Status,
-	}
-	any, err1 := ptypes.MarshalAny(d)
+	any, err1 := ptypes.MarshalAny(it)
 	if err1 != nil {
 		err = err1
 		return
@@ -140,7 +121,15 @@ func (s *AdminService) CreateDept(ctx context.Context, req *pb.Dept) (reply *pb.
 	if err != nil {
 		return
 	}
-	return s.uc.CreateDept(ctx, token, req)
+	if err = s.uc.CreateDept(ctx, token, req); err != nil {
+		return
+	}
+	reply = &pb.ApiReply{
+		Code:    0,
+		Message: "OK",
+		Count:   int32(1),
+	}
+	return
 }
 
 // @Summary 修改部门
@@ -169,45 +158,12 @@ func (s *AdminService) UpdateDept(ctx context.Context, req *pb.Dept) (reply *pb.
 	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
 		return
 	}
-	data := model.SysDept{
-		DeptId:   int(req.DeptId),
-		ParentId: int(req.ParentId),
-		DeptPath: req.DeptPath,
-		DeptName: req.DeptName,
-		Sort:     int(req.Sort),
-		Leader:   req.Leader,
-		Phone:    req.Phone,
-		Email:    req.Email,
-		Status:   req.Status,
-	}
-	data.UpdateBy = fmt.Sprint(permission.UserId)
-	it, err := s.adao.UpdateSysDept(&data, data.DeptId)
-	if err != nil {
+	if err = s.uc.UpdateDept(ctx, req); err != nil {
 		return
 	}
-	list := make([]*anypb.Any, 0)
-	d := &pb.Dept{
-		DeptId:   int64(it.DeptId),
-		ParentId: int64(it.ParentId),
-		DeptPath: it.DeptPath,
-		DeptName: it.DeptName,
-		Sort:     int32(it.Sort),
-		Leader:   it.Leader,
-		Phone:    it.Phone,
-		Email:    it.Email,
-		Status:   it.Status,
-	}
-	any, err1 := ptypes.MarshalAny(d)
-	if err1 != nil {
-		err = err1
-		return
-	}
-	list = append(list, any)
 	reply = &pb.ApiReply{
 		Code:    0,
 		Message: "OK",
-		Count:   int32(1),
-		Data:    list,
 	}
 	return
 }

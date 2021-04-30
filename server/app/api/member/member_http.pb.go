@@ -48,7 +48,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 	}
 	r := mux.NewRouter()
 
-	r.HandleFunc("/admin/v1/umsmemberList", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/memberList", func(w http.ResponseWriter, r *http.Request) {
 		var in ListMemberRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -72,7 +72,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("GET")
 
-	r.HandleFunc("/admin/v1/umsmember/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/member/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var in GetMemberRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -101,7 +101,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("GET")
 
-	r.HandleFunc("/admin/v1/umsmember", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/member", func(w http.ResponseWriter, r *http.Request) {
 		var in Member
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -125,7 +125,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("POST")
 
-	r.HandleFunc("/admin/v1/umsmember", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/member", func(w http.ResponseWriter, r *http.Request) {
 		var in Member
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -149,7 +149,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/umsmember/{ids}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/member/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteMemberRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -178,7 +178,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("DELETE")
 
-	r.HandleFunc("/admin/v1/umsmemberassetsList", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/memberassetsList", func(w http.ResponseWriter, r *http.Request) {
 		var in ListMemberAssetsRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -202,7 +202,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("GET")
 
-	r.HandleFunc("/admin/v1/umsmemberassets/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/memberassets/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var in GetMemberAssetsRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -231,7 +231,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("GET")
 
-	r.HandleFunc("/admin/v1/umsmemberassets", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/memberassets", func(w http.ResponseWriter, r *http.Request) {
 		var in MemberAssets
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -255,7 +255,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("POST")
 
-	r.HandleFunc("/admin/v1/umsmemberassets", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/memberassets", func(w http.ResponseWriter, r *http.Request) {
 		var in MemberAssets
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
@@ -279,7 +279,7 @@ func NewAdminHandler(srv AdminHandler, opts ...http1.HandleOption) http.Handler 
 		}
 	}).Methods("PUT")
 
-	r.HandleFunc("/admin/v1/umsmemberassets/{ids}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/admin/v1/memberassets/{ids}", func(w http.ResponseWriter, r *http.Request) {
 		var in DeleteMemberAssetsRequest
 		if err := h.Decode(r, &in); err != nil {
 			h.Error(w, r, err)
