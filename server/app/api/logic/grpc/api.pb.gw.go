@@ -331,7 +331,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushKeys")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushKeys", runtime.WithHTTPPathPattern("/api/v1/goim/push/keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -354,7 +354,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushMids")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushMids", runtime.WithHTTPPathPattern("/api/v1/goim/push/mids"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -377,7 +377,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushRoom")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushRoom", runtime.WithHTTPPathPattern("/api/v1/goim/push/room"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -400,7 +400,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushAll")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/PushAll", runtime.WithHTTPPathPattern("/api/v1/goim/push/all"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -423,7 +423,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesWeighted")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesWeighted", runtime.WithHTTPPathPattern("/api/v1/goim/nodes/weighted"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -446,7 +446,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesInstances")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesInstances", runtime.WithHTTPPathPattern("/api/v1/goim/nodes/instances"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -469,7 +469,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTop")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTop", runtime.WithHTTPPathPattern("/api/v1/goim/online/top"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -492,7 +492,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineRoom")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineRoom", runtime.WithHTTPPathPattern("/api/v1/goim/online/room"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -515,7 +515,7 @@ func RegisterLogicHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTotal")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTotal", runtime.WithHTTPPathPattern("/api/v1/goim/online/total"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -577,7 +577,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushKeys")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushKeys", runtime.WithHTTPPathPattern("/api/v1/goim/push/keys"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -597,7 +597,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushMids")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushMids", runtime.WithHTTPPathPattern("/api/v1/goim/push/mids"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -617,7 +617,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushRoom")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushRoom", runtime.WithHTTPPathPattern("/api/v1/goim/push/room"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -637,7 +637,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushAll")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/PushAll", runtime.WithHTTPPathPattern("/api/v1/goim/push/all"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -657,7 +657,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesWeighted")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesWeighted", runtime.WithHTTPPathPattern("/api/v1/goim/nodes/weighted"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -677,7 +677,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesInstances")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/NodesInstances", runtime.WithHTTPPathPattern("/api/v1/goim/nodes/instances"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -697,7 +697,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTop")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTop", runtime.WithHTTPPathPattern("/api/v1/goim/online/top"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -717,7 +717,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineRoom")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineRoom", runtime.WithHTTPPathPattern("/api/v1/goim/online/room"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -737,7 +737,7 @@ func RegisterLogicHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTotal")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.logic.grpc.Logic/OnlineTotal", runtime.WithHTTPPathPattern("/api/v1/goim/online/total"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

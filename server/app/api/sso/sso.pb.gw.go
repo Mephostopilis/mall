@@ -1705,7 +1705,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GenerateCaptchaHandler")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GenerateCaptchaHandler", runtime.WithHTTPPathPattern("/admin/v1/getCaptcha"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1728,7 +1728,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/Login")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/Login", runtime.WithHTTPPathPattern("/admin/login"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1751,7 +1751,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/RefreshToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/RefreshToken", runtime.WithHTTPPathPattern("/admin/refresh_token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1774,7 +1774,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetInfo")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetInfo", runtime.WithHTTPPathPattern("/admin/v1/getinfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1797,7 +1797,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/Logout")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/Logout", runtime.WithHTTPPathPattern("/admin/v1/logout"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1820,7 +1820,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoAppList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoAppList", runtime.WithHTTPPathPattern("/admin/v1/ssoappsList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1843,7 +1843,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoApp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1866,7 +1866,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/InsertSsoApp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/InsertSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1889,7 +1889,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoApp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1912,7 +1912,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoApp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1935,7 +1935,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoTokenList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoTokenList", runtime.WithHTTPPathPattern("/admin/v1/ssotokensList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1958,7 +1958,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1981,7 +1981,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/InsertSsoToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/InsertSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2004,7 +2004,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2027,7 +2027,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2050,7 +2050,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/CreateLoginLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/CreateLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2073,7 +2073,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateLoginLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2096,7 +2096,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteLoginLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2119,7 +2119,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetLoginLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog/{infoId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2142,7 +2142,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/ListLoginLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/ListLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginloglist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2165,7 +2165,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/CreateRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/CreateRole", runtime.WithHTTPPathPattern("/admin/v1/role/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2188,7 +2188,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateRole", runtime.WithHTTPPathPattern("/admin/v1/role"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2211,7 +2211,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteRole", runtime.WithHTTPPathPattern("/admin/v1/role"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2234,7 +2234,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetRole", runtime.WithHTTPPathPattern("/admin/v1/role/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2257,7 +2257,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/ListRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/ListRole", runtime.WithHTTPPathPattern("/admin/v1/rolelist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2280,7 +2280,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/CreateSysUser")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/CreateSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2303,7 +2303,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateSysUser")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/UpdateSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2326,7 +2326,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteSysUser")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/DeleteSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2349,7 +2349,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSysUser")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2372,7 +2372,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSysUserInit")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSysUserInit", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2395,7 +2395,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/ListSysUser")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/ListSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUserList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2418,7 +2418,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/InsetSysUserAvatar")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/InsetSysUserAvatar", runtime.WithHTTPPathPattern("/admin/v1/user/avatar"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2441,7 +2441,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/SysUserUpdatePwd")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/SysUserUpdatePwd", runtime.WithHTTPPathPattern("/admin/v1/user/pwd"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2464,7 +2464,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSysUserProfile")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Admin/GetSysUserProfile", runtime.WithHTTPPathPattern("/admin/v1/user/profile"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2496,7 +2496,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2519,7 +2519,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/GenerateCaptchaHandler")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/GenerateCaptchaHandler", runtime.WithHTTPPathPattern("/api/v1/getCaptcha"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2542,7 +2542,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/SMSCode")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/SMSCode", runtime.WithHTTPPathPattern("/api/v1/sms"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2565,7 +2565,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/Register")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/Register", runtime.WithHTTPPathPattern("/api/v1/register"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2588,7 +2588,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/LoginGoogle")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/LoginGoogle", runtime.WithHTTPPathPattern("/api/v1/login/google"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2611,7 +2611,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/Login")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/Login", runtime.WithHTTPPathPattern("/api/v1/login"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2634,7 +2634,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/RefreshToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/RefreshToken", runtime.WithHTTPPathPattern("/api/v1/refresh_token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2657,7 +2657,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/Logout")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/Logout", runtime.WithHTTPPathPattern("/api/v1/logout"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2680,7 +2680,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/InsetSysUserAvatar")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/InsetSysUserAvatar", runtime.WithHTTPPathPattern("/api/v1/user/avatar"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2703,7 +2703,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/SysUserUpdatePwd")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/SysUserUpdatePwd", runtime.WithHTTPPathPattern("/api/v1/user/pwd"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2726,7 +2726,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/GetSysUserProfile")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Api/GetSysUserProfile", runtime.WithHTTPPathPattern("/api/v1/user/profile"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2758,7 +2758,7 @@ func RegisterAuthHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/Authorize")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/Authorize", runtime.WithHTTPPathPattern("/api/v1/authorize"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2781,7 +2781,7 @@ func RegisterAuthHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/Token")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/Token", runtime.WithHTTPPathPattern("/api/v1/token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2804,7 +2804,7 @@ func RegisterAuthHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/RefreshToken")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/RefreshToken", runtime.WithHTTPPathPattern("/api/v1/token/refresh"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2827,7 +2827,7 @@ func RegisterAuthHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/GetUserInfo")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sso.Auth/GetUserInfo", runtime.WithHTTPPathPattern("/api/v1/user/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2889,7 +2889,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GenerateCaptchaHandler")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GenerateCaptchaHandler", runtime.WithHTTPPathPattern("/admin/v1/getCaptcha"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2909,7 +2909,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/Login")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/Login", runtime.WithHTTPPathPattern("/admin/login"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2929,7 +2929,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/RefreshToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/RefreshToken", runtime.WithHTTPPathPattern("/admin/refresh_token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2949,7 +2949,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetInfo")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetInfo", runtime.WithHTTPPathPattern("/admin/v1/getinfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2969,7 +2969,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/Logout")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/Logout", runtime.WithHTTPPathPattern("/admin/v1/logout"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2989,7 +2989,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoAppList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoAppList", runtime.WithHTTPPathPattern("/admin/v1/ssoappsList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3009,7 +3009,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoApp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3029,7 +3029,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/InsertSsoApp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/InsertSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3049,7 +3049,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoApp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3069,7 +3069,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoApp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoApp", runtime.WithHTTPPathPattern("/admin/v1/ssoapps"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3089,7 +3089,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoTokenList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoTokenList", runtime.WithHTTPPathPattern("/admin/v1/ssotokensList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3109,7 +3109,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3129,7 +3129,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/InsertSsoToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/InsertSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3149,7 +3149,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3169,7 +3169,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteSsoToken", runtime.WithHTTPPathPattern("/admin/v1/ssotokens"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3189,7 +3189,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/CreateLoginLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/CreateLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3209,7 +3209,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateLoginLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3229,7 +3229,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteLoginLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3249,7 +3249,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetLoginLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginlog/{infoId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3269,7 +3269,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/ListLoginLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/ListLoginLog", runtime.WithHTTPPathPattern("/admin/v1/loginloglist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3289,7 +3289,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/CreateRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/CreateRole", runtime.WithHTTPPathPattern("/admin/v1/role/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3309,7 +3309,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateRole", runtime.WithHTTPPathPattern("/admin/v1/role"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3329,7 +3329,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteRole", runtime.WithHTTPPathPattern("/admin/v1/role"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3349,7 +3349,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetRole", runtime.WithHTTPPathPattern("/admin/v1/role/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3369,7 +3369,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/ListRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/ListRole", runtime.WithHTTPPathPattern("/admin/v1/rolelist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3389,7 +3389,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/CreateSysUser")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/CreateSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3409,7 +3409,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateSysUser")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/UpdateSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3429,7 +3429,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteSysUser")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/DeleteSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3449,7 +3449,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSysUser")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUser/{userId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3469,7 +3469,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSysUserInit")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSysUserInit", runtime.WithHTTPPathPattern("/admin/v1/sysUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3489,7 +3489,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/ListSysUser")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/ListSysUser", runtime.WithHTTPPathPattern("/admin/v1/sysUserList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3509,7 +3509,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/InsetSysUserAvatar")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/InsetSysUserAvatar", runtime.WithHTTPPathPattern("/admin/v1/user/avatar"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3529,7 +3529,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/SysUserUpdatePwd")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/SysUserUpdatePwd", runtime.WithHTTPPathPattern("/admin/v1/user/pwd"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3549,7 +3549,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSysUserProfile")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Admin/GetSysUserProfile", runtime.WithHTTPPathPattern("/admin/v1/user/profile"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3750,7 +3750,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3770,7 +3770,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/GenerateCaptchaHandler")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/GenerateCaptchaHandler", runtime.WithHTTPPathPattern("/api/v1/getCaptcha"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3790,7 +3790,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/SMSCode")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/SMSCode", runtime.WithHTTPPathPattern("/api/v1/sms"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3810,7 +3810,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/Register")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/Register", runtime.WithHTTPPathPattern("/api/v1/register"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3830,7 +3830,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/LoginGoogle")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/LoginGoogle", runtime.WithHTTPPathPattern("/api/v1/login/google"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3850,7 +3850,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/Login")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/Login", runtime.WithHTTPPathPattern("/api/v1/login"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3870,7 +3870,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/RefreshToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/RefreshToken", runtime.WithHTTPPathPattern("/api/v1/refresh_token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3890,7 +3890,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/Logout")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/Logout", runtime.WithHTTPPathPattern("/api/v1/logout"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3910,7 +3910,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/InsetSysUserAvatar")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/InsetSysUserAvatar", runtime.WithHTTPPathPattern("/api/v1/user/avatar"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3930,7 +3930,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/SysUserUpdatePwd")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/SysUserUpdatePwd", runtime.WithHTTPPathPattern("/api/v1/user/pwd"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3950,7 +3950,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/GetSysUserProfile")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Api/GetSysUserProfile", runtime.WithHTTPPathPattern("/api/v1/user/profile"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4059,7 +4059,7 @@ func RegisterAuthHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/Authorize")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/Authorize", runtime.WithHTTPPathPattern("/api/v1/authorize"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4079,7 +4079,7 @@ func RegisterAuthHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/Token")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/Token", runtime.WithHTTPPathPattern("/api/v1/token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4099,7 +4099,7 @@ func RegisterAuthHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/RefreshToken")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/RefreshToken", runtime.WithHTTPPathPattern("/api/v1/token/refresh"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4119,7 +4119,7 @@ func RegisterAuthHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/GetUserInfo")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sso.Auth/GetUserInfo", runtime.WithHTTPPathPattern("/api/v1/user/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

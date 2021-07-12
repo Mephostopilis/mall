@@ -555,7 +555,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/ListOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/ListOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorderList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -578,7 +578,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/GetOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/GetOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -601,7 +601,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/CreateOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/CreateOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -624,7 +624,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/UpdateOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/UpdateOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -647,7 +647,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/DeleteOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/DeleteOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -670,7 +670,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/ListCompanyAddress")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/ListCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddressList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -693,7 +693,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/GetCompanyAddress")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/GetCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -716,7 +716,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/CreateCompanyAddress")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/CreateCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -739,7 +739,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/UpdateCompanyAddress")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/UpdateCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -762,7 +762,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/DeleteCompanyAddress")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Admin/DeleteCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -794,7 +794,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/oms/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -817,7 +817,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/ListOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/ListOrder", runtime.WithHTTPPathPattern("/api/v1/oms/orderList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -840,7 +840,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/GetOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/GetOrder", runtime.WithHTTPPathPattern("/api/v1/oms/order/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -863,7 +863,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/CreateOrder")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/CreateOrder", runtime.WithHTTPPathPattern("/api/v1/oms/order"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -886,7 +886,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/AlipayCallback")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pay.Api/AlipayCallback", runtime.WithHTTPPathPattern("/api/v1/oms/order"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -948,7 +948,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/ListOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/ListOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorderList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -968,7 +968,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/GetOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/GetOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -988,7 +988,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/CreateOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/CreateOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1008,7 +1008,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/UpdateOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/UpdateOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1028,7 +1028,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/DeleteOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/DeleteOrder", runtime.WithHTTPPathPattern("/admin/v1/omsorder/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1048,7 +1048,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/ListCompanyAddress")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/ListCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddressList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1068,7 +1068,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/GetCompanyAddress")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/GetCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1088,7 +1088,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/CreateCompanyAddress")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/CreateCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1108,7 +1108,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/UpdateCompanyAddress")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/UpdateCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1128,7 +1128,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/DeleteCompanyAddress")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Admin/DeleteCompanyAddress", runtime.WithHTTPPathPattern("/admin/v1/omscompanyaddress/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1233,7 +1233,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/oms/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1253,7 +1253,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/ListOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/ListOrder", runtime.WithHTTPPathPattern("/api/v1/oms/orderList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1273,7 +1273,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/GetOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/GetOrder", runtime.WithHTTPPathPattern("/api/v1/oms/order/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1293,7 +1293,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/CreateOrder")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/CreateOrder", runtime.WithHTTPPathPattern("/api/v1/oms/order"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1313,7 +1313,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/AlipayCallback")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pay.Api/AlipayCallback", runtime.WithHTTPPathPattern("/api/v1/oms/order"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

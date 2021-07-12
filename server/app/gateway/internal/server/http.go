@@ -16,10 +16,10 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
-	"github.com/go-kratos/kratos/v2/middleware/status"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/go-kratos/swagger-api/openapiv2"
 	gwruntime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 )
 
@@ -39,32 +39,10 @@ func (s *httpServer) ServeHTTP(res xhttp.ResponseWriter, req *xhttp.Request) {
 
 // NewHTTPServer new a HTTP server.
 func NewHTTPServer(c *conf.Server, logger log.Logger) *http.Server {
-	// middleware
-	// 全局中間件
-	// csrf := bm.CSRF([]string{"127.0.0.1", "192.168.21.95"}, []string{"/api"})
-	// engine.Use(csrf)
-	// httpSrv.Use(middleware.RequestId())
-	// httpTransport.Use(httpServer, middleware.Options())
-	// cors := bm.CORS([]string{"127.0.0.1:9527", "127.0.0.1:9527/admin", "127.0.0.1:9527/api/v1"})
-	// engine.Use(cors)
-
-	var opts = []http.ServerOption{}
-	if c.Http.Network != "" {
-		opts = append(opts, http.Network(c.Http.Network))
-	}
-	if c.Http.Address != "" {
-		opts = append(opts, http.Address(c.Http.Address))
-	}
-	if c.Http.Timeout != nil {
-		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
-	}
-	opts = append(opts, http.Logger(logger))
-	httpSrv := http.NewServer(opts...)
 
 	m := grpc.WithMiddleware(
 		middleware.Chain(
 			recovery.Recovery(),
-			status.Client(),
 			tracing.Client(),
 			logging.Client(logging.WithLogger(logger)),
 		),
@@ -108,9 +86,22 @@ func NewHTTPServer(c *conf.Server, logger log.Logger) *http.Server {
 	}
 	cmspb.RegisterApiHandlerClient(ctx, mux, cmsc)
 
+	var opts = []http.ServerOption{}
+	if c.Http.Network != "" {
+		opts = append(opts, http.Network(c.Http.Network))
+	}
+	if c.Http.Address != "" {
+		opts = append(opts, http.Address(c.Http.Address))
+	}
+	if c.Http.Timeout != nil {
+		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
+	}
+	opts = append(opts, http.Logger(logger))
+	httpSrv := http.NewServer(opts...)
 	httpSrv.HandlePrefix("/api/v1", mux)
-	httpSrv.HandlePrefix("/api/swagger/", xhttp.StripPrefix("/api/swagger/", xhttp.FileServer(xhttp.Dir("../../swagger-ui/dist"))))
-	httpSrv.HandlePrefix("/api/docs/", xhttp.StripPrefix("/api/docs/", xhttp.FileServer(xhttp.Dir("../../../api"))))
+
+	h := openapiv2.NewHandler()
+	httpSrv.HandlePrefix("/q/", h)
 
 	httpSrv.HandleFunc("/api/start", func(w xhttp.ResponseWriter, r *xhttp.Request) {
 		w.Write([]byte("hello kratos!"))

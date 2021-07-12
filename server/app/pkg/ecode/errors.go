@@ -1,65 +1,45 @@
 package ecode
 
-// import (
-// 	"strings"
+import (
+	"encoding/json"
+	"fmt"
 
-// 	pkgerr "github.com/pkg/errors"
-// )
+	"github.com/go-kratos/kratos/v2/errors"
+	"github.com/go-redis/redis/v8"
+	"gorm.io/gorm"
+)
 
-// // FormatErr 格式字符串
-// func FormatErr(err error) error {
-// 	e := pkgerr.Cause(err)
-// 	switch e {
-// 	default:
-// 		es := e.Error()
-// 		switch {
-// 		case strings.HasPrefix(es, "read"):
-// 			return ReadTimeout
-// 		case strings.HasPrefix(es, "dial"):
-// 			return DialTimeout
-// 		case strings.HasPrefix(es, "write"):
-// 			return WriteTimeout
-// 		case strings.Contains(es, "EOF"):
-// 			return EOF
-// 		case strings.Contains(es, "reset"):
-// 			return Reset
-// 		case strings.Contains(es, "broken"):
-// 			return BrokenPipe
-// 		case strings.HasPrefix(es, "rpc error:"):
-// 			return RpcConnectionClosed
-// 		case strings.Contains(es, "hashedPassword is not the hash of the given password"):
-// 			return ErrPassword
-// 		default:
-// 			return UnexpectedErr
-// 		}
-// 	}
-// }
+// FromError 格式字符串
+func WrapError(err error) error {
+	if err == nil {
+		return nil
+	}
+	if se := new(errors.Error); errors.As(err, &se) {
+		return se
+	}
+	if errors.Is(err, redis.Nil) {
+		return RedisNil()
+	}
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return GormErrRecordNotFound(err)
+	}
+	var jsonSyntaxError *json.SyntaxError
+	if errors.As(err, &jsonSyntaxError) {
+		return JsonSyntaxError(err.(*json.SyntaxError))
+	}
+	return Unknown("", "", err.Error())
+}
 
-// // FormatMgoErr 格式字符串
-// func FormatMgoErr(err error) error {
-// 	e := pkgerr.Cause(err)
-// 	switch e {
-// 	default:
-// 		es := e.Error()
-// 		switch {
-// 		case strings.HasPrefix(es, "read"):
-// 			return ReadTimeout
-// 		case strings.HasPrefix(es, "dial"):
-// 			return DialTimeout
-// 		case strings.HasPrefix(es, "write"):
-// 			return WriteTimeout
-// 		case strings.Contains(es, "EOF"):
-// 			return EOF
-// 		case strings.Contains(es, "reset"):
-// 			return Reset
-// 		case strings.Contains(es, "broken"):
-// 			return BrokenPipe
-// 		case strings.HasPrefix(es, "rpc error:"):
-// 			return RpcConnectionClosed
-// 		case strings.Contains(es, "hashedPassword is not the hash of the given password"):
-// 			return ErrPassword
-// 		default:
-// 			return UnexpectedErr
-// 		}
-// 	}
-// }
+// Newf New(code fmt.Sprintf(format, a...))
+func Newf(code int, reason, format string, a ...interface{}) *errors.Error {
+	// const size = 64 << 10
+	// buf := make([]byte, size)
+	// buf = buf[:runtime.Stack(buf, false)]
+	// pl := fmt.Sprintf("%s\n", buf)
+	se := errors.New(code, reason, fmt.Sprintf(format, a...))
+	// md := map[string]string{
+	// 	"stack": pl,
+	// }
+	// se = se.WithMetadata(md)
+	return se
+}

@@ -19,8 +19,7 @@ proto:
            --proto_path=$(KRATOS)/api \
            --proto_path=$(KRATOS)/third_party \
            --proto_path=$(GOPATH)/src \
-           --proto_path=/mnt/f/3rd_party/protobuf/src \
-           --proto_path=/mnt/d/Documents/protobuf/src \
+           --proto_path=$(PWD)/../third_party \
            --go_out=paths=source_relative:. \
            --go-grpc_out=paths=source_relative:. \
            --go-http_out=paths=source_relative:. \

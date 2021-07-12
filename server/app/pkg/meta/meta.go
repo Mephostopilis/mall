@@ -4,6 +4,7 @@ import (
 	"context"
 
 	ssopb "edu/api/sso"
+	"edu/pkg/ecode"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"google.golang.org/grpc/metadata"
@@ -13,12 +14,12 @@ import (
 func GetDataPermissions(ctx context.Context) (permission ssopb.DataPermission, err error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("permision")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {

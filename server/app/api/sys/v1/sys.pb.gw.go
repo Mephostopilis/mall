@@ -3483,7 +3483,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource", runtime.WithHTTPPathPattern("/admin/v1/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3506,7 +3506,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3529,7 +3529,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource", runtime.WithHTTPPathPattern("/admin/v1/config/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3552,7 +3552,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3575,7 +3575,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListResource")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListResource", runtime.WithHTTPPathPattern("/admin/v1/resourceList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3598,7 +3598,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateConfig")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateConfig", runtime.WithHTTPPathPattern("/admin/v1/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3621,7 +3621,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateConfig")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateConfig", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3644,7 +3644,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteConfig")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteConfig", runtime.WithHTTPPathPattern("/admin/v1/config/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3667,7 +3667,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfig")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfig", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3690,7 +3690,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfigByConfigKey")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfigByConfigKey", runtime.WithHTTPPathPattern("/admin/v1/configKey/{configKey}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3713,7 +3713,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListConfig")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListConfig", runtime.WithHTTPPathPattern("/admin/v1/configList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3736,7 +3736,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateDept")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateDept", runtime.WithHTTPPathPattern("/admin/v1/dept"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3759,7 +3759,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDept")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDept", runtime.WithHTTPPathPattern("/admin/v1/dept"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3782,7 +3782,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDept")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDept", runtime.WithHTTPPathPattern("/admin/v1/dept/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3805,7 +3805,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDept")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDept", runtime.WithHTTPPathPattern("/admin/v1/dept/{deptId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3828,7 +3828,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTree")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTree", runtime.WithHTTPPathPattern("/admin/v1/deptTree"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3851,7 +3851,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListDept")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListDept", runtime.WithHTTPPathPattern("/admin/v1/deptList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3874,7 +3874,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTreeRoleselect")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTreeRoleselect", runtime.WithHTTPPathPattern("/admin/v1/roleDeptTreeselect/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3897,7 +3897,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateMenu", runtime.WithHTTPPathPattern("/admin/v1/menu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3920,7 +3920,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateMenu", runtime.WithHTTPPathPattern("/admin/v1/menu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3943,7 +3943,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteMenu", runtime.WithHTTPPathPattern("/admin/v1/menu/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3966,7 +3966,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenu", runtime.WithHTTPPathPattern("/admin/v1/menu/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3989,7 +3989,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeRoleselect")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeRoleselect", runtime.WithHTTPPathPattern("/admin/v1/roleMenuTreeselect/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4012,7 +4012,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeelect")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeelect", runtime.WithHTTPPathPattern("/admin/v1/menuTreeselect"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4035,7 +4035,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListMenu", runtime.WithHTTPPathPattern("/admin/v1/menulist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4058,7 +4058,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuRole", runtime.WithHTTPPathPattern("/admin/v1/menurole"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4081,7 +4081,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuIDS")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuIDS", runtime.WithHTTPPathPattern("/admin/v1/menuids"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4104,7 +4104,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateOperLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4127,7 +4127,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateOperLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4150,7 +4150,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteOperLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4173,7 +4173,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetOperLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog/{operId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4196,7 +4196,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListOperLog")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListOperLog", runtime.WithHTTPPathPattern("/admin/v1/operloglist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4219,7 +4219,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreatePost")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreatePost", runtime.WithHTTPPathPattern("/admin/v1/post"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4242,7 +4242,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdatePost")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdatePost", runtime.WithHTTPPathPattern("/admin/v1/post/{postId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4265,7 +4265,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeletePost")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeletePost", runtime.WithHTTPPathPattern("/admin/v1/post/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4288,7 +4288,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetPost")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetPost", runtime.WithHTTPPathPattern("/admin/v1/post/{postId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4311,7 +4311,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListPost")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListPost", runtime.WithHTTPPathPattern("/admin/v1/postlist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4334,7 +4334,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateRoleMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4357,7 +4357,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateRoleMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4380,7 +4380,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteRoleMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4403,7 +4403,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetRoleMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4426,7 +4426,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListRoleMenu")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenulist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4449,7 +4449,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSetting")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSetting", runtime.WithHTTPPathPattern("/admin/v1/public/setting"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4472,7 +4472,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSetting")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSetting", runtime.WithHTTPPathPattern("/admin/v1/setting"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4495,7 +4495,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSysjob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4518,7 +4518,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysjob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4541,7 +4541,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysjob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4564,7 +4564,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysjob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4587,7 +4587,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListSysjob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/ListSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4610,7 +4610,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/StartJob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/StartJob", runtime.WithHTTPPathPattern("/admin/v1/job/start/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4633,7 +4633,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/RemoveJob")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/RemoveJob", runtime.WithHTTPPathPattern("/admin/v1/job/remove/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4656,7 +4656,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataList", runtime.WithHTTPPathPattern("/admin/v1/dict/datalist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4679,7 +4679,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataListByDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataListByDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/databytype/{dictType}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4702,7 +4702,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictData")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data/{dictCode}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4725,7 +4725,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictData")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4748,7 +4748,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictData")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4771,7 +4771,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictData")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4794,7 +4794,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeList", runtime.WithHTTPPathPattern("/admin/v1/dict/typelist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4817,7 +4817,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type/{dictId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4840,7 +4840,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeOptionSelect")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeOptionSelect", runtime.WithHTTPPathPattern("/admin/v1/dict/typeoptionselect"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4863,7 +4863,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4886,7 +4886,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4909,7 +4909,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4932,7 +4932,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetServerInfo")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetServerInfo", runtime.WithHTTPPathPattern("/admin/v1/tools/serverInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4955,7 +4955,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTableList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTableList", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/page"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4978,7 +4978,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTables")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTables", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5001,7 +5001,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/InsertSysTable")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/InsertSysTable", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5024,7 +5024,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysTable")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysTable", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5047,7 +5047,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysTables")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysTables", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5070,7 +5070,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysColumn")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysColumn", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/column/info/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5093,7 +5093,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysColumn")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysColumn", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/column/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5116,7 +5116,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBTableList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBTableList", runtime.WithHTTPPathPattern("/admin/v1/tools/db/tables/page"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5139,7 +5139,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBColumnList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBColumnList", runtime.WithHTTPPathPattern("/admin/v1/tools/db/columns/page"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5162,7 +5162,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/Preview")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/Preview", runtime.WithHTTPPathPattern("/admin/v1/tools/gen/preview/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5185,7 +5185,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GenCode")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GenCode", runtime.WithHTTPPathPattern("/admin/v1/tools/gen/toproject/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5208,7 +5208,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GenMenuAndApi")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GenMenuAndApi", runtime.WithHTTPPathPattern("/admin/v1/tools/gen/todb/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5240,7 +5240,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictDataListByDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictDataListByDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/databytype/{dictType}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5263,7 +5263,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictData")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictData", runtime.WithHTTPPathPattern("/api/v1/dict/data/{dictCode}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5286,7 +5286,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictTypeList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictTypeList", runtime.WithHTTPPathPattern("/api/v1/dict/typelist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5309,7 +5309,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictType")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Api/GetDictType", runtime.WithHTTPPathPattern("/api/v1/dict/type/{dictId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5371,7 +5371,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource", runtime.WithHTTPPathPattern("/admin/v1/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5391,7 +5391,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5411,7 +5411,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource", runtime.WithHTTPPathPattern("/admin/v1/config/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5431,7 +5431,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5451,7 +5451,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListResource")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListResource", runtime.WithHTTPPathPattern("/admin/v1/resourceList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5471,7 +5471,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateConfig", runtime.WithHTTPPathPattern("/admin/v1/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5491,7 +5491,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateConfig", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5511,7 +5511,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteConfig", runtime.WithHTTPPathPattern("/admin/v1/config/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5531,7 +5531,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfig", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5551,7 +5551,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfigByConfigKey")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetConfigByConfigKey", runtime.WithHTTPPathPattern("/admin/v1/configKey/{configKey}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5571,7 +5571,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListConfig", runtime.WithHTTPPathPattern("/admin/v1/configList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5591,7 +5591,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateDept")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateDept", runtime.WithHTTPPathPattern("/admin/v1/dept"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5611,7 +5611,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDept")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDept", runtime.WithHTTPPathPattern("/admin/v1/dept"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5631,7 +5631,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDept")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDept", runtime.WithHTTPPathPattern("/admin/v1/dept/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5651,7 +5651,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDept")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDept", runtime.WithHTTPPathPattern("/admin/v1/dept/{deptId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5671,7 +5671,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTree")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTree", runtime.WithHTTPPathPattern("/admin/v1/deptTree"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5691,7 +5691,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListDept")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListDept", runtime.WithHTTPPathPattern("/admin/v1/deptList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5711,7 +5711,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTreeRoleselect")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDeptTreeRoleselect", runtime.WithHTTPPathPattern("/admin/v1/roleDeptTreeselect/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5731,7 +5731,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateMenu", runtime.WithHTTPPathPattern("/admin/v1/menu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5751,7 +5751,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateMenu", runtime.WithHTTPPathPattern("/admin/v1/menu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5771,7 +5771,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteMenu", runtime.WithHTTPPathPattern("/admin/v1/menu/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5791,7 +5791,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenu", runtime.WithHTTPPathPattern("/admin/v1/menu/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5811,7 +5811,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeRoleselect")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeRoleselect", runtime.WithHTTPPathPattern("/admin/v1/roleMenuTreeselect/{roleId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5831,7 +5831,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeelect")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuTreeelect", runtime.WithHTTPPathPattern("/admin/v1/menuTreeselect"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5851,7 +5851,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListMenu", runtime.WithHTTPPathPattern("/admin/v1/menulist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5871,7 +5871,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuRole", runtime.WithHTTPPathPattern("/admin/v1/menurole"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5891,7 +5891,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuIDS")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetMenuIDS", runtime.WithHTTPPathPattern("/admin/v1/menuids"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5911,7 +5911,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateOperLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5931,7 +5931,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateOperLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5951,7 +5951,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteOperLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5971,7 +5971,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetOperLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetOperLog", runtime.WithHTTPPathPattern("/admin/v1/operlog/{operId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5991,7 +5991,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListOperLog")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListOperLog", runtime.WithHTTPPathPattern("/admin/v1/operloglist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6011,7 +6011,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreatePost")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreatePost", runtime.WithHTTPPathPattern("/admin/v1/post"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6031,7 +6031,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdatePost")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdatePost", runtime.WithHTTPPathPattern("/admin/v1/post/{postId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6051,7 +6051,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeletePost")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeletePost", runtime.WithHTTPPathPattern("/admin/v1/post/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6071,7 +6071,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetPost")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetPost", runtime.WithHTTPPathPattern("/admin/v1/post/{postId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6091,7 +6091,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListPost")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListPost", runtime.WithHTTPPathPattern("/admin/v1/postlist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6111,7 +6111,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateRoleMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6131,7 +6131,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateRoleMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6151,7 +6151,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteRoleMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6171,7 +6171,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetRoleMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenu"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6191,7 +6191,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListRoleMenu")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListRoleMenu", runtime.WithHTTPPathPattern("/admin/v1/rolemenulist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6211,7 +6211,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSetting")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSetting", runtime.WithHTTPPathPattern("/admin/v1/public/setting"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6231,7 +6231,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSetting")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSetting", runtime.WithHTTPPathPattern("/admin/v1/setting"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6251,7 +6251,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSysjob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6271,7 +6271,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysjob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6291,7 +6291,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysjob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6311,7 +6311,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysjob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6331,7 +6331,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListSysjob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/ListSysjob", runtime.WithHTTPPathPattern("/admin/v1/sysjob"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6351,7 +6351,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/StartJob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/StartJob", runtime.WithHTTPPathPattern("/admin/v1/job/start/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6371,7 +6371,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/RemoveJob")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/RemoveJob", runtime.WithHTTPPathPattern("/admin/v1/job/remove/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6391,7 +6391,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataList", runtime.WithHTTPPathPattern("/admin/v1/dict/datalist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6411,7 +6411,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataListByDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictDataListByDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/databytype/{dictType}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6431,7 +6431,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictData")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data/{dictCode}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6451,7 +6451,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictData")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6471,7 +6471,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictData")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6491,7 +6491,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictData")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictData", runtime.WithHTTPPathPattern("/admin/v1/dict/data/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6511,7 +6511,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeList", runtime.WithHTTPPathPattern("/admin/v1/dict/typelist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6531,7 +6531,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type/{dictId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6551,7 +6551,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeOptionSelect")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDictTypeOptionSelect", runtime.WithHTTPPathPattern("/admin/v1/dict/typeoptionselect"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6571,7 +6571,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/InsertDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6591,7 +6591,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6611,7 +6611,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/type/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6631,7 +6631,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetServerInfo")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetServerInfo", runtime.WithHTTPPathPattern("/admin/v1/tools/serverInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6651,7 +6651,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTableList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTableList", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/page"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6671,7 +6671,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTables")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysTables", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6691,7 +6691,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/InsertSysTable")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/InsertSysTable", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6711,7 +6711,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysTable")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysTable", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6731,7 +6731,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysTables")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteSysTables", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/tables/info/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6751,7 +6751,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysColumn")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetSysColumn", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/column/info/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6771,7 +6771,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysColumn")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateSysColumn", runtime.WithHTTPPathPattern("/admin/v1/tools/sys/column/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6791,7 +6791,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBTableList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBTableList", runtime.WithHTTPPathPattern("/admin/v1/tools/db/tables/page"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6811,7 +6811,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBColumnList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetDBColumnList", runtime.WithHTTPPathPattern("/admin/v1/tools/db/columns/page"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6831,7 +6831,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/Preview")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/Preview", runtime.WithHTTPPathPattern("/admin/v1/tools/gen/preview/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6851,7 +6851,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GenCode")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GenCode", runtime.WithHTTPPathPattern("/admin/v1/tools/gen/toproject/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6871,7 +6871,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GenMenuAndApi")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GenMenuAndApi", runtime.WithHTTPPathPattern("/admin/v1/tools/gen/todb/{tableId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -7240,7 +7240,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictDataListByDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictDataListByDictType", runtime.WithHTTPPathPattern("/admin/v1/dict/databytype/{dictType}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -7260,7 +7260,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictData")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictData", runtime.WithHTTPPathPattern("/api/v1/dict/data/{dictCode}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -7280,7 +7280,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictTypeList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictTypeList", runtime.WithHTTPPathPattern("/api/v1/dict/typelist"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -7300,7 +7300,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictType")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Api/GetDictType", runtime.WithHTTPPathPattern("/api/v1/dict/type/{dictId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

@@ -1475,7 +1475,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbumList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1498,7 +1498,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1521,7 +1521,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1544,7 +1544,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1567,7 +1567,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1590,7 +1590,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListBrand")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrandList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1613,7 +1613,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetBrand")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1636,7 +1636,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateBrand")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1659,7 +1659,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateBrand")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1682,7 +1682,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteBrand")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1705,7 +1705,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategoryList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1728,7 +1728,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductCategoryTree")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductCategoryTree", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategorytreeList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1751,7 +1751,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProductCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1774,7 +1774,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProductCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1797,7 +1797,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProductCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1820,7 +1820,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProductCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1843,7 +1843,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProduct")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproductList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1866,7 +1866,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProduct")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1889,7 +1889,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProduct")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1912,7 +1912,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProduct")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1935,7 +1935,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProduct")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1958,7 +1958,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductAttribute")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributeList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1981,7 +1981,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProductAttribute")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2004,7 +2004,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttribute")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2027,7 +2027,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttribute")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2050,7 +2050,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttribute")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2073,7 +2073,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductAttributeCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/ListProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategoryList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2096,7 +2096,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProductAttributeCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/GetProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2119,7 +2119,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttributeCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2142,7 +2142,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttributeCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2165,7 +2165,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttributeCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2197,7 +2197,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/cms/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2220,7 +2220,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Api/ListAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Api/ListAlbum", runtime.WithHTTPPathPattern("/api/v1/cms/albumList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2243,7 +2243,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Api/GetAlbum")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.pms.Api/GetAlbum", runtime.WithHTTPPathPattern("/api/v1/cms/album/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2305,7 +2305,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbumList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2325,7 +2325,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2345,7 +2345,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2365,7 +2365,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2385,7 +2385,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteAlbum", runtime.WithHTTPPathPattern("/admin/v1/pmsalbum/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2405,7 +2405,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListBrand")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrandList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2425,7 +2425,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetBrand")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2445,7 +2445,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateBrand")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2465,7 +2465,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateBrand")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2485,7 +2485,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteBrand")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteBrand", runtime.WithHTTPPathPattern("/admin/v1/pmsbrand/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2505,7 +2505,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategoryList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2525,7 +2525,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductCategoryTree")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductCategoryTree", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategorytreeList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2545,7 +2545,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProductCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2565,7 +2565,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProductCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2585,7 +2585,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProductCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2605,7 +2605,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProductCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProductCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductcategory/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2625,7 +2625,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProduct")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproductList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2645,7 +2645,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProduct")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2665,7 +2665,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProduct")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2685,7 +2685,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProduct")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2705,7 +2705,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProduct")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProduct", runtime.WithHTTPPathPattern("/admin/v1/pmsproduct/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2725,7 +2725,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductAttribute")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributeList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2745,7 +2745,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProductAttribute")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2765,7 +2765,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttribute")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2785,7 +2785,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttribute")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2805,7 +2805,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttribute")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttribute", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattribute/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2825,7 +2825,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductAttributeCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/ListProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategoryList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2845,7 +2845,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProductAttributeCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/GetProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2865,7 +2865,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttributeCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/CreateProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2885,7 +2885,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttributeCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/UpdateProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2905,7 +2905,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttributeCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Admin/DeleteProductAttributeCategory", runtime.WithHTTPPathPattern("/admin/v1/pmsproductattributecategory/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3094,7 +3094,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/cms/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3114,7 +3114,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Api/ListAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Api/ListAlbum", runtime.WithHTTPPathPattern("/api/v1/cms/albumList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3134,7 +3134,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Api/GetAlbum")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.pms.Api/GetAlbum", runtime.WithHTTPPathPattern("/api/v1/cms/album/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

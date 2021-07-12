@@ -1015,7 +1015,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelpList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1038,7 +1038,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp/{helpId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1061,7 +1061,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1084,7 +1084,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1107,7 +1107,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1130,7 +1130,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListHelpCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategoryList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1153,7 +1153,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetHelpCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1176,7 +1176,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateHelpCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1199,7 +1199,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateHelpCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1222,7 +1222,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteHelpCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1245,7 +1245,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListSubject")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubjectList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1268,7 +1268,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetSubject")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1291,7 +1291,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateSubject")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1314,7 +1314,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateSubject")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1337,7 +1337,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteSubject")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1360,7 +1360,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListSubjectCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/ListSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubjectList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1383,7 +1383,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetSubjectCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/GetSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1406,7 +1406,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateSubjectCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/CreateSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1429,7 +1429,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateSubjectCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/UpdateSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1452,7 +1452,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteSubjectCategory")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Admin/DeleteSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1484,7 +1484,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/cms/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1507,7 +1507,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Api/ListHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Api/ListHelp", runtime.WithHTTPPathPattern("/api/v1/cms/helpList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1530,7 +1530,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Api/GetHelp")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.cms.Api/GetHelp", runtime.WithHTTPPathPattern("/api/v1/cms/help/{helpId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1592,7 +1592,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelpList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1612,7 +1612,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp/{helpId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1632,7 +1632,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1652,7 +1652,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1672,7 +1672,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteHelp", runtime.WithHTTPPathPattern("/admin/v1/cmshelp/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1692,7 +1692,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListHelpCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategoryList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1712,7 +1712,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetHelpCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1732,7 +1732,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateHelpCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1752,7 +1752,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateHelpCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1772,7 +1772,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteHelpCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteHelpCategory", runtime.WithHTTPPathPattern("/admin/v1/cmshelpcategory/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1792,7 +1792,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListSubject")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubjectList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1812,7 +1812,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetSubject")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1832,7 +1832,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateSubject")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1852,7 +1852,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateSubject")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1872,7 +1872,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteSubject")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteSubject", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1892,7 +1892,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListSubjectCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/ListSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubjectList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1912,7 +1912,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetSubjectCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/GetSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1932,7 +1932,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateSubjectCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/CreateSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1952,7 +1952,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateSubjectCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/UpdateSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1972,7 +1972,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteSubjectCategory")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Admin/DeleteSubjectCategory", runtime.WithHTTPPathPattern("/admin/v1/cmssubject/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2117,7 +2117,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/cms/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2137,7 +2137,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Api/ListHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Api/ListHelp", runtime.WithHTTPPathPattern("/api/v1/cms/helpList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2157,7 +2157,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Api/GetHelp")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.cms.Api/GetHelp", runtime.WithHTTPPathPattern("/api/v1/cms/help/{helpId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

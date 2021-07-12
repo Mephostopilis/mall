@@ -35,7 +35,7 @@ func New(conf *Config, logger log.Logger) *Auth {
 	}
 	auth := &Auth{
 		conf: conf,
-		log:  log.NewHelper("auth", logger),
+		log:  log.NewHelper(log.With(logger, "module", "auth")),
 	}
 	return auth
 }

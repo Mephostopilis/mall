@@ -19,10 +19,10 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
-	"github.com/go-kratos/kratos/v2/middleware/status"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/go-kratos/swagger-api/openapiv2"
 	"github.com/gorilla/handlers"
 	gwruntime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 )
@@ -43,25 +43,11 @@ func (s *httpServer) ServeHTTP(res xhttp.ResponseWriter, req *xhttp.Request) {
 
 // NewHTTPServer new a HTTP server.
 func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *http.Server {
-	var opts = []http.ServerOption{}
-	if c.Http.Network != "" {
-		opts = append(opts, http.Network(c.Http.Network))
-	}
-	if c.Http.Address != "" {
-		opts = append(opts, http.Address(c.Http.Address))
-	}
-	if c.Http.Timeout != nil {
-		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
-	}
-	opts = append(opts, http.Logger(logger))
-	httpSrv := http.NewServer(opts...)
-
 	m := grpc.WithMiddleware(
 		middleware.Chain(
 			recovery.Recovery(),
-			status.Client(),
 			tracing.Client(),
-			logging.Client(logging.WithLogger(logger)),
+			logging.Client(logger),
 		),
 	)
 
@@ -128,14 +114,26 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 	}
 	memberpb.RegisterAdminHandlerClient(ctx, gr, memberc)
 
+	var opts = []http.ServerOption{}
+	if c.Http.Network != "" {
+		opts = append(opts, http.Network(c.Http.Network))
+	}
+	if c.Http.Address != "" {
+		opts = append(opts, http.Address(c.Http.Address))
+	}
+	if c.Http.Timeout != nil {
+		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
+	}
+	opts = append(opts, http.Logger(logger))
+	httpSrv := http.NewServer(opts...)
 	httpSrv.HandlePrefix("/admin/v1", cors(gr))
 	httpSrv.HandlePrefix("/admin/login", cors(gr))
 	httpSrv.HandlePrefix("/admin/refresh_token", cors(gr))
-	httpSrv.HandlePrefix("/admin/swagger/", xhttp.StripPrefix("/admin/swagger/", xhttp.FileServer(xhttp.Dir("../../swagger-ui/dist"))))
-	httpSrv.HandlePrefix("/admin/docs/", xhttp.StripPrefix("/admin/docs/", xhttp.FileServer(xhttp.Dir("../../../api"))))
+
+	h := openapiv2.NewHandler()
+	httpSrv.HandlePrefix("/q/", h)
 	httpSrv.HandlePrefix("/form-generator/", xhttp.StripPrefix("/form-generator/", xhttp.FileServer(xhttp.Dir("../../static/form-generator"))))
 
-	httpSrv.HandleFunc("/admin/doc/*", swaggerServer(logger, "../../doc/"))
 	httpSrv.HandleFunc("/admin/start", func(w xhttp.ResponseWriter, r *xhttp.Request) {
 		w.Write([]byte("hello kratos!"))
 	})

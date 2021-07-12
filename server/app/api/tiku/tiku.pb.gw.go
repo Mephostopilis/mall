@@ -751,7 +751,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetChoiceList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetChoiceList", runtime.WithHTTPPathPattern("/admin/v1/tiku/choicesList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -774,7 +774,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetChoice")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -797,7 +797,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/InsertChoice")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/InsertChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -820,7 +820,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/UpdateChoice")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/UpdateChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -843,7 +843,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/DeleteChoice")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/DeleteChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -866,7 +866,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetExerciseList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetExerciseList", runtime.WithHTTPPathPattern("/admin/v1/tiku/exerciseList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -889,7 +889,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetExercise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/GetExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -912,7 +912,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/InsertExercise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/InsertExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -935,7 +935,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/UpdateExercise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/UpdateExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -958,7 +958,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/DeleteExercise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Admin/DeleteExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -990,7 +990,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/tiku/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1013,7 +1013,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/Ping")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/Ping", runtime.WithHTTPPathPattern("/api/v1/tiku/public/ping"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1036,7 +1036,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetChoiceList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetChoiceList", runtime.WithHTTPPathPattern("/api/v1/tiku/choicesList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1059,7 +1059,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetChoice")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetChoice", runtime.WithHTTPPathPattern("/api/v1/tiku/choice/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1082,7 +1082,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/AnswerChoice")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/AnswerChoice", runtime.WithHTTPPathPattern("/api/v1/tiku/choice/answer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1105,7 +1105,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetExerciseList")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetExerciseList", runtime.WithHTTPPathPattern("/admin/v1/tiku/exerciseList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1128,7 +1128,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetExercise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/GetExercise", runtime.WithHTTPPathPattern("/api/v1/tiku/exercise/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1151,7 +1151,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/AnswerExercise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.tiku.Api/AnswerExercise", runtime.WithHTTPPathPattern("/api/v1/tiku/exercise/answer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1213,7 +1213,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetChoiceList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetChoiceList", runtime.WithHTTPPathPattern("/admin/v1/tiku/choicesList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1233,7 +1233,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetChoice")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1253,7 +1253,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/InsertChoice")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/InsertChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1273,7 +1273,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/UpdateChoice")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/UpdateChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1293,7 +1293,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/DeleteChoice")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/DeleteChoice", runtime.WithHTTPPathPattern("/admin/v1/tiku/choices/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1313,7 +1313,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetExerciseList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetExerciseList", runtime.WithHTTPPathPattern("/admin/v1/tiku/exerciseList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1333,7 +1333,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetExercise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/GetExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1353,7 +1353,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/InsertExercise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/InsertExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1373,7 +1373,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/UpdateExercise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/UpdateExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1393,7 +1393,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/DeleteExercise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Admin/DeleteExercise", runtime.WithHTTPPathPattern("/admin/v1/tiku/exercise/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1498,7 +1498,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/SayHelloURL")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/SayHelloURL", runtime.WithHTTPPathPattern("/api/v1/tiku/say_hello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1518,7 +1518,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/Ping")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/Ping", runtime.WithHTTPPathPattern("/api/v1/tiku/public/ping"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1538,7 +1538,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetChoiceList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetChoiceList", runtime.WithHTTPPathPattern("/api/v1/tiku/choicesList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1558,7 +1558,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetChoice")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetChoice", runtime.WithHTTPPathPattern("/api/v1/tiku/choice/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1578,7 +1578,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/AnswerChoice")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/AnswerChoice", runtime.WithHTTPPathPattern("/api/v1/tiku/choice/answer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1598,7 +1598,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetExerciseList")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetExerciseList", runtime.WithHTTPPathPattern("/admin/v1/tiku/exerciseList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1618,7 +1618,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetExercise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/GetExercise", runtime.WithHTTPPathPattern("/api/v1/tiku/exercise/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1638,7 +1638,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/AnswerExercise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.tiku.Api/AnswerExercise", runtime.WithHTTPPathPattern("/api/v1/tiku/exercise/answer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

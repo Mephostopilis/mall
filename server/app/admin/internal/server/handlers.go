@@ -10,7 +10,7 @@ import (
 
 // swaggerServer returns swagger specification files located under "/swagger/"
 func swaggerServer(logger log.Logger, dir string) http.HandlerFunc {
-	log := log.NewHelper("handlers/swagger", logger)
+	log := log.NewHelper(log.With(logger, "moduel", "handlers/swagger"))
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !strings.HasSuffix(r.URL.Path, ".swagger.json") {
 			log.Errorf("Not Found: %s", r.URL.Path)
