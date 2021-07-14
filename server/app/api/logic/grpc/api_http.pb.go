@@ -45,7 +45,7 @@ func RegisterLogicHTTPServer(s *http.Server, srv LogicHTTPServer) {
 func _Logic_PushKeys0_HTTP_Handler(srv LogicHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PushKeysReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.logic.grpc.Logic/PushKeys")
@@ -64,7 +64,7 @@ func _Logic_PushKeys0_HTTP_Handler(srv LogicHTTPServer) func(ctx http.Context) e
 func _Logic_PushMids0_HTTP_Handler(srv LogicHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PushMidsReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.logic.grpc.Logic/PushMids")
@@ -102,7 +102,7 @@ func _Logic_PushRoom0_HTTP_Handler(srv LogicHTTPServer) func(ctx http.Context) e
 func _Logic_PushAll0_HTTP_Handler(srv LogicHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PushAllReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.logic.grpc.Logic/PushAll")
@@ -301,10 +301,10 @@ func (c *LogicHTTPClientImpl) OnlineTotal(ctx context.Context, in *OnlineTotalRe
 func (c *LogicHTTPClientImpl) PushAll(ctx context.Context, in *PushAllReq, opts ...http.CallOption) (*PushAllReply, error) {
 	var out PushAllReply
 	pattern := "/api/v1/goim/push/all"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.logic.grpc.Logic/PushAll"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -314,10 +314,10 @@ func (c *LogicHTTPClientImpl) PushAll(ctx context.Context, in *PushAllReq, opts 
 func (c *LogicHTTPClientImpl) PushKeys(ctx context.Context, in *PushKeysReq, opts ...http.CallOption) (*PushKeysReply, error) {
 	var out PushKeysReply
 	pattern := "/api/v1/goim/push/keys"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.logic.grpc.Logic/PushKeys"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -327,10 +327,10 @@ func (c *LogicHTTPClientImpl) PushKeys(ctx context.Context, in *PushKeysReq, opt
 func (c *LogicHTTPClientImpl) PushMids(ctx context.Context, in *PushMidsReq, opts ...http.CallOption) (*PushMidsReply, error) {
 	var out PushMidsReply
 	pattern := "/api/v1/goim/push/mids"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.logic.grpc.Logic/PushMids"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

@@ -88,7 +88,7 @@ func _Admin_GetOrder0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 func _Admin_CreateOrder0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Order
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.oms.Admin/CreateOrder")
@@ -107,7 +107,7 @@ func _Admin_CreateOrder0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_UpdateOrder0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Order
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.oms.Admin/UpdateOrder")
@@ -189,7 +189,7 @@ func _Admin_GetCompanyAddress0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.C
 func _Admin_CreateCompanyAddress0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CompanyAddress
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.oms.Admin/CreateCompanyAddress")
@@ -208,7 +208,7 @@ func _Admin_CreateCompanyAddress0_HTTP_Handler(srv AdminHTTPServer) func(ctx htt
 func _Admin_UpdateCompanyAddress0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CompanyAddress
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.oms.Admin/UpdateCompanyAddress")
@@ -270,10 +270,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateCompanyAddress(ctx context.Context, in *CompanyAddress, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omscompanyaddress"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.oms.Admin/CreateCompanyAddress"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -283,10 +283,10 @@ func (c *AdminHTTPClientImpl) CreateCompanyAddress(ctx context.Context, in *Comp
 func (c *AdminHTTPClientImpl) CreateOrder(ctx context.Context, in *Order, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omsorder"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.oms.Admin/CreateOrder"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,10 +374,10 @@ func (c *AdminHTTPClientImpl) ListOrder(ctx context.Context, in *ListOrderReques
 func (c *AdminHTTPClientImpl) UpdateCompanyAddress(ctx context.Context, in *CompanyAddress, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omscompanyaddress"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.oms.Admin/UpdateCompanyAddress"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -387,10 +387,10 @@ func (c *AdminHTTPClientImpl) UpdateCompanyAddress(ctx context.Context, in *Comp
 func (c *AdminHTTPClientImpl) UpdateOrder(ctx context.Context, in *Order, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omsorder"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.oms.Admin/UpdateOrder"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -401,34 +401,13 @@ type ApiHTTPServer interface {
 	CreateOrder(context.Context, *Order) (*CreateOrderReply, error)
 	GetOrder(context.Context, *GetOrderRequest) (*GetOrderReply, error)
 	ListOrder(context.Context, *ListOrderRequest) (*ListOrderReply, error)
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 }
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/oms/say_hello", _Api_SayHelloURL2_HTTP_Handler(srv))
 	r.GET("/api/v1/oms/orderList", _Api_ListOrder1_HTTP_Handler(srv))
 	r.GET("/api/v1/oms/order/{id}", _Api_GetOrder1_HTTP_Handler(srv))
 	r.POST("/api/v1/oms/order", _Api_CreateOrder1_HTTP_Handler(srv))
-}
-
-func _Api_SayHelloURL2_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in HelloReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.oms.Api/SayHelloURL")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SayHelloURL(ctx, req.(*HelloReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*HelloResp)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _Api_ListOrder1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
@@ -475,7 +454,7 @@ func _Api_GetOrder1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error
 func _Api_CreateOrder1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Order
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.oms.Api/CreateOrder")
@@ -495,7 +474,6 @@ type ApiHTTPClient interface {
 	CreateOrder(ctx context.Context, req *Order, opts ...http.CallOption) (rsp *CreateOrderReply, err error)
 	GetOrder(ctx context.Context, req *GetOrderRequest, opts ...http.CallOption) (rsp *GetOrderReply, err error)
 	ListOrder(ctx context.Context, req *ListOrderRequest, opts ...http.CallOption) (rsp *ListOrderReply, err error)
-	SayHelloURL(ctx context.Context, req *HelloReq, opts ...http.CallOption) (rsp *HelloResp, err error)
 }
 
 type ApiHTTPClientImpl struct {
@@ -509,10 +487,10 @@ func NewApiHTTPClient(client *http.Client) ApiHTTPClient {
 func (c *ApiHTTPClientImpl) CreateOrder(ctx context.Context, in *Order, opts ...http.CallOption) (*CreateOrderReply, error) {
 	var out CreateOrderReply
 	pattern := "/api/v1/oms/order"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.oms.Api/CreateOrder"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -537,19 +515,6 @@ func (c *ApiHTTPClientImpl) ListOrder(ctx context.Context, in *ListOrderRequest,
 	pattern := "/api/v1/oms/orderList"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.oms.Api/ListOrder"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *ApiHTTPClientImpl) SayHelloURL(ctx context.Context, in *HelloReq, opts ...http.CallOption) (*HelloResp, error) {
-	var out HelloResp
-	pattern := "/api/v1/oms/say_hello"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.oms.Api/SayHelloURL"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

@@ -21,7 +21,7 @@ func NewGreeterUsecase(c *conf.App, logger log.Logger) *GreeterUsecase {
 	})
 	return &GreeterUsecase{
 		sf:  sf,
-		log: log.NewHelper("usecase/greeter", logger),
+		log: log.NewHelper(log.With(logger, "module", "usecase/greeter")),
 	}
 }
 

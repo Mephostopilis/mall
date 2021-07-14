@@ -14,9 +14,6 @@ func NewApiService() *ApiService {
 	return &ApiService{}
 }
 
-func (s *ApiService) SayHelloURL(ctx context.Context, req *pb.HelloReq) (*pb.HelloResp, error) {
-	return &pb.HelloResp{}, nil
-}
 func (s *ApiService) ListOrder(ctx context.Context, req *pb.ListOrderRequest) (*pb.ListOrderReply, error) {
 	return &pb.ListOrderReply{}, nil
 }

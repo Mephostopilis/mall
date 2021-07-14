@@ -39,7 +39,7 @@ type JWTUsecase struct {
 
 // New 分配
 func NewJWTUsecase(c *conf.App, logger log.Logger, d dao.Dao) (*JWTUsecase, error) {
-	log := log.NewHelper("usecase/jwtauth", logger)
+	log := log.NewHelper(log.With(logger, "module", "usecase/jwtauth"))
 	du := c.Jwt.Timeout.AsDuration()
 	mw, err := jwtauth.New(
 		&jwtauth.Jwt{Secret: c.Jwt.Secret, Timeout: du},

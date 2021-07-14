@@ -23,7 +23,7 @@ func InitWhitelist(c *conf.Server_Whitelist, logger log.Logger) (err error) {
 	)
 	if _, err := os.OpenFile(c.WhiteLog, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0644); err == nil {
 		whitelist = new(Whitelist)
-		whitelist.log = log.NewHelper("biz/whitelist", logger)
+		whitelist.log = log.NewHelper(log.With(logger, "module", "biz/whitelist"))
 		whitelist.list = make(map[int64]struct{})
 		for _, mid = range c.Whitelist {
 			whitelist.list[mid] = struct{}{}

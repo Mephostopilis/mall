@@ -7,6 +7,9 @@
 package oms
 
 import (
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/go-kratos/kratos/v2/errors"
+	_ "github.com/longXboy/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -20,100 +23,6 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-
-type HelloReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-}
-
-func (x *HelloReq) Reset() {
-	*x = HelloReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *HelloReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HelloReq) ProtoMessage() {}
-
-func (x *HelloReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HelloReq.ProtoReflect.Descriptor instead.
-func (*HelloReq) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *HelloReq) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type HelloResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Content string `protobuf:"bytes,1,opt,name=Content,proto3" json:"Content,omitempty"`
-}
-
-func (x *HelloResp) Reset() {
-	*x = HelloResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *HelloResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HelloResp) ProtoMessage() {}
-
-func (x *HelloResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HelloResp.ProtoReflect.Descriptor instead.
-func (*HelloResp) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *HelloResp) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
 
 type ListOrderRequest struct {
 	state         protoimpl.MessageState
@@ -130,7 +39,7 @@ type ListOrderRequest struct {
 func (x *ListOrderRequest) Reset() {
 	*x = ListOrderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[2]
+		mi := &file_api_oms_oms_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -143,7 +52,7 @@ func (x *ListOrderRequest) String() string {
 func (*ListOrderRequest) ProtoMessage() {}
 
 func (x *ListOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[2]
+	mi := &file_api_oms_oms_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -156,7 +65,7 @@ func (x *ListOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOrderRequest.ProtoReflect.Descriptor instead.
 func (*ListOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{2}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ListOrderRequest) GetPageSize() int32 {
@@ -203,7 +112,7 @@ type ListOrderReply struct {
 func (x *ListOrderReply) Reset() {
 	*x = ListOrderReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[3]
+		mi := &file_api_oms_oms_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -216,7 +125,7 @@ func (x *ListOrderReply) String() string {
 func (*ListOrderReply) ProtoMessage() {}
 
 func (x *ListOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[3]
+	mi := &file_api_oms_oms_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +138,7 @@ func (x *ListOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOrderReply.ProtoReflect.Descriptor instead.
 func (*ListOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{3}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{1}
 }
 
 type GetOrderRequest struct {
@@ -243,7 +152,7 @@ type GetOrderRequest struct {
 func (x *GetOrderRequest) Reset() {
 	*x = GetOrderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[4]
+		mi := &file_api_oms_oms_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -256,7 +165,7 @@ func (x *GetOrderRequest) String() string {
 func (*GetOrderRequest) ProtoMessage() {}
 
 func (x *GetOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[4]
+	mi := &file_api_oms_oms_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -269,7 +178,7 @@ func (x *GetOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderRequest.ProtoReflect.Descriptor instead.
 func (*GetOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{4}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetOrderRequest) GetId() int32 {
@@ -288,7 +197,7 @@ type GetOrderReply struct {
 func (x *GetOrderReply) Reset() {
 	*x = GetOrderReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[5]
+		mi := &file_api_oms_oms_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -301,7 +210,7 @@ func (x *GetOrderReply) String() string {
 func (*GetOrderReply) ProtoMessage() {}
 
 func (x *GetOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[5]
+	mi := &file_api_oms_oms_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -314,7 +223,7 @@ func (x *GetOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderReply.ProtoReflect.Descriptor instead.
 func (*GetOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{5}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{3}
 }
 
 type CreateOrderRequest struct {
@@ -326,7 +235,7 @@ type CreateOrderRequest struct {
 func (x *CreateOrderRequest) Reset() {
 	*x = CreateOrderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[6]
+		mi := &file_api_oms_oms_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -339,7 +248,7 @@ func (x *CreateOrderRequest) String() string {
 func (*CreateOrderRequest) ProtoMessage() {}
 
 func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[6]
+	mi := &file_api_oms_oms_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -352,7 +261,7 @@ func (x *CreateOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrderRequest.ProtoReflect.Descriptor instead.
 func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{6}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{4}
 }
 
 type CreateOrderReply struct {
@@ -364,7 +273,7 @@ type CreateOrderReply struct {
 func (x *CreateOrderReply) Reset() {
 	*x = CreateOrderReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[7]
+		mi := &file_api_oms_oms_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -377,7 +286,7 @@ func (x *CreateOrderReply) String() string {
 func (*CreateOrderReply) ProtoMessage() {}
 
 func (x *CreateOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[7]
+	mi := &file_api_oms_oms_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -390,7 +299,7 @@ func (x *CreateOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrderReply.ProtoReflect.Descriptor instead.
 func (*CreateOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{7}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{5}
 }
 
 type UpdateOrderRequest struct {
@@ -402,7 +311,7 @@ type UpdateOrderRequest struct {
 func (x *UpdateOrderRequest) Reset() {
 	*x = UpdateOrderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[8]
+		mi := &file_api_oms_oms_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -415,7 +324,7 @@ func (x *UpdateOrderRequest) String() string {
 func (*UpdateOrderRequest) ProtoMessage() {}
 
 func (x *UpdateOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[8]
+	mi := &file_api_oms_oms_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -428,7 +337,7 @@ func (x *UpdateOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOrderRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{8}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{6}
 }
 
 type UpdateOrderReply struct {
@@ -440,7 +349,7 @@ type UpdateOrderReply struct {
 func (x *UpdateOrderReply) Reset() {
 	*x = UpdateOrderReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[9]
+		mi := &file_api_oms_oms_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -453,7 +362,7 @@ func (x *UpdateOrderReply) String() string {
 func (*UpdateOrderReply) ProtoMessage() {}
 
 func (x *UpdateOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[9]
+	mi := &file_api_oms_oms_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -466,7 +375,7 @@ func (x *UpdateOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOrderReply.ProtoReflect.Descriptor instead.
 func (*UpdateOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{9}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{7}
 }
 
 type DeleteOrderRequest struct {
@@ -480,7 +389,7 @@ type DeleteOrderRequest struct {
 func (x *DeleteOrderRequest) Reset() {
 	*x = DeleteOrderRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[10]
+		mi := &file_api_oms_oms_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -493,7 +402,7 @@ func (x *DeleteOrderRequest) String() string {
 func (*DeleteOrderRequest) ProtoMessage() {}
 
 func (x *DeleteOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[10]
+	mi := &file_api_oms_oms_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +415,7 @@ func (x *DeleteOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOrderRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{10}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteOrderRequest) GetIds() string {
@@ -525,7 +434,7 @@ type DeleteOrderReply struct {
 func (x *DeleteOrderReply) Reset() {
 	*x = DeleteOrderReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[11]
+		mi := &file_api_oms_oms_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -538,7 +447,7 @@ func (x *DeleteOrderReply) String() string {
 func (*DeleteOrderReply) ProtoMessage() {}
 
 func (x *DeleteOrderReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[11]
+	mi := &file_api_oms_oms_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,7 +460,7 @@ func (x *DeleteOrderReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOrderReply.ProtoReflect.Descriptor instead.
 func (*DeleteOrderReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{11}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{9}
 }
 
 type ListCompanyAddressRequest struct {
@@ -569,7 +478,7 @@ type ListCompanyAddressRequest struct {
 func (x *ListCompanyAddressRequest) Reset() {
 	*x = ListCompanyAddressRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[12]
+		mi := &file_api_oms_oms_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -582,7 +491,7 @@ func (x *ListCompanyAddressRequest) String() string {
 func (*ListCompanyAddressRequest) ProtoMessage() {}
 
 func (x *ListCompanyAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[12]
+	mi := &file_api_oms_oms_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,7 +504,7 @@ func (x *ListCompanyAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCompanyAddressRequest.ProtoReflect.Descriptor instead.
 func (*ListCompanyAddressRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{12}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListCompanyAddressRequest) GetPageSize() int32 {
@@ -642,7 +551,7 @@ type ListCompanyAddressReply struct {
 func (x *ListCompanyAddressReply) Reset() {
 	*x = ListCompanyAddressReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[13]
+		mi := &file_api_oms_oms_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -655,7 +564,7 @@ func (x *ListCompanyAddressReply) String() string {
 func (*ListCompanyAddressReply) ProtoMessage() {}
 
 func (x *ListCompanyAddressReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[13]
+	mi := &file_api_oms_oms_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -668,7 +577,7 @@ func (x *ListCompanyAddressReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCompanyAddressReply.ProtoReflect.Descriptor instead.
 func (*ListCompanyAddressReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{13}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{11}
 }
 
 type GetCompanyAddressRequest struct {
@@ -682,7 +591,7 @@ type GetCompanyAddressRequest struct {
 func (x *GetCompanyAddressRequest) Reset() {
 	*x = GetCompanyAddressRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[14]
+		mi := &file_api_oms_oms_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -695,7 +604,7 @@ func (x *GetCompanyAddressRequest) String() string {
 func (*GetCompanyAddressRequest) ProtoMessage() {}
 
 func (x *GetCompanyAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[14]
+	mi := &file_api_oms_oms_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -708,7 +617,7 @@ func (x *GetCompanyAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCompanyAddressRequest.ProtoReflect.Descriptor instead.
 func (*GetCompanyAddressRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{14}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetCompanyAddressRequest) GetId() int32 {
@@ -727,7 +636,7 @@ type GetCompanyAddressReply struct {
 func (x *GetCompanyAddressReply) Reset() {
 	*x = GetCompanyAddressReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[15]
+		mi := &file_api_oms_oms_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -740,7 +649,7 @@ func (x *GetCompanyAddressReply) String() string {
 func (*GetCompanyAddressReply) ProtoMessage() {}
 
 func (x *GetCompanyAddressReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[15]
+	mi := &file_api_oms_oms_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -753,7 +662,7 @@ func (x *GetCompanyAddressReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCompanyAddressReply.ProtoReflect.Descriptor instead.
 func (*GetCompanyAddressReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{15}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{13}
 }
 
 type CreateCompanyAddressRequest struct {
@@ -765,7 +674,7 @@ type CreateCompanyAddressRequest struct {
 func (x *CreateCompanyAddressRequest) Reset() {
 	*x = CreateCompanyAddressRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[16]
+		mi := &file_api_oms_oms_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -778,7 +687,7 @@ func (x *CreateCompanyAddressRequest) String() string {
 func (*CreateCompanyAddressRequest) ProtoMessage() {}
 
 func (x *CreateCompanyAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[16]
+	mi := &file_api_oms_oms_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -791,7 +700,7 @@ func (x *CreateCompanyAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCompanyAddressRequest.ProtoReflect.Descriptor instead.
 func (*CreateCompanyAddressRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{16}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{14}
 }
 
 type CreateCompanyAddressReply struct {
@@ -803,7 +712,7 @@ type CreateCompanyAddressReply struct {
 func (x *CreateCompanyAddressReply) Reset() {
 	*x = CreateCompanyAddressReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[17]
+		mi := &file_api_oms_oms_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -816,7 +725,7 @@ func (x *CreateCompanyAddressReply) String() string {
 func (*CreateCompanyAddressReply) ProtoMessage() {}
 
 func (x *CreateCompanyAddressReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[17]
+	mi := &file_api_oms_oms_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -829,7 +738,7 @@ func (x *CreateCompanyAddressReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCompanyAddressReply.ProtoReflect.Descriptor instead.
 func (*CreateCompanyAddressReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{17}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{15}
 }
 
 type UpdateCompanyAddressRequest struct {
@@ -841,7 +750,7 @@ type UpdateCompanyAddressRequest struct {
 func (x *UpdateCompanyAddressRequest) Reset() {
 	*x = UpdateCompanyAddressRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[18]
+		mi := &file_api_oms_oms_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -854,7 +763,7 @@ func (x *UpdateCompanyAddressRequest) String() string {
 func (*UpdateCompanyAddressRequest) ProtoMessage() {}
 
 func (x *UpdateCompanyAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[18]
+	mi := &file_api_oms_oms_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -867,7 +776,7 @@ func (x *UpdateCompanyAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCompanyAddressRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCompanyAddressRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{18}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{16}
 }
 
 type UpdateCompanyAddressReply struct {
@@ -879,7 +788,7 @@ type UpdateCompanyAddressReply struct {
 func (x *UpdateCompanyAddressReply) Reset() {
 	*x = UpdateCompanyAddressReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[19]
+		mi := &file_api_oms_oms_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -892,7 +801,7 @@ func (x *UpdateCompanyAddressReply) String() string {
 func (*UpdateCompanyAddressReply) ProtoMessage() {}
 
 func (x *UpdateCompanyAddressReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[19]
+	mi := &file_api_oms_oms_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -905,7 +814,7 @@ func (x *UpdateCompanyAddressReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCompanyAddressReply.ProtoReflect.Descriptor instead.
 func (*UpdateCompanyAddressReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{19}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{17}
 }
 
 type DeleteCompanyAddressRequest struct {
@@ -919,7 +828,7 @@ type DeleteCompanyAddressRequest struct {
 func (x *DeleteCompanyAddressRequest) Reset() {
 	*x = DeleteCompanyAddressRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[20]
+		mi := &file_api_oms_oms_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -932,7 +841,7 @@ func (x *DeleteCompanyAddressRequest) String() string {
 func (*DeleteCompanyAddressRequest) ProtoMessage() {}
 
 func (x *DeleteCompanyAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[20]
+	mi := &file_api_oms_oms_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +854,7 @@ func (x *DeleteCompanyAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCompanyAddressRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCompanyAddressRequest) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{20}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DeleteCompanyAddressRequest) GetIds() string {
@@ -964,7 +873,7 @@ type DeleteCompanyAddressReply struct {
 func (x *DeleteCompanyAddressReply) Reset() {
 	*x = DeleteCompanyAddressReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_oms_oms_proto_msgTypes[21]
+		mi := &file_api_oms_oms_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -977,7 +886,7 @@ func (x *DeleteCompanyAddressReply) String() string {
 func (*DeleteCompanyAddressReply) ProtoMessage() {}
 
 func (x *DeleteCompanyAddressReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_oms_oms_proto_msgTypes[21]
+	mi := &file_api_oms_oms_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -990,7 +899,7 @@ func (x *DeleteCompanyAddressReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCompanyAddressReply.ProtoReflect.Descriptor instead.
 func (*DeleteCompanyAddressReply) Descriptor() ([]byte, []int) {
-	return file_api_oms_oms_proto_rawDescGZIP(), []int{21}
+	return file_api_oms_oms_proto_rawDescGZIP(), []int{19}
 }
 
 var File_api_oms_oms_proto protoreflect.FileDescriptor
@@ -1000,12 +909,13 @@ var file_api_oms_oms_proto_rawDesc = []byte{
 	0x6f, 0x74, 0x6f, 0x12, 0x07, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x1a, 0x11, 0x61, 0x70,
 	0x69, 0x2f, 0x6f, 0x6d, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
 	0x1c, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f,
-	0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1e, 0x0a,
-	0x08, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x25, 0x0a,
-	0x09, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x18, 0x0a, 0x07, 0x43, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x43, 0x6f, 0x6e,
-	0x74, 0x65, 0x6e, 0x74, 0x22, 0xaa, 0x01, 0x0a, 0x10, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64,
+	0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x76,
+	0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x2d, 0x67,
+	0x65, 0x6e, 0x2d, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x76, 0x32, 0x2f, 0x6f, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x73, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0xaa, 0x01, 0x0a, 0x10, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x67,
 	0x65, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x61, 0x67,
 	0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x49, 0x6e, 0x64,
@@ -1059,7 +969,7 @@ var file_api_oms_oms_proto_rawDesc = []byte{
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x03, 0x69, 0x64, 0x73, 0x22, 0x1b, 0x0a, 0x19, 0x44, 0x65, 0x6c, 0x65, 0x74,
 	0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x32, 0xf2, 0x07, 0x0a, 0x05, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x59,
+	0x65, 0x70, 0x6c, 0x79, 0x32, 0xfe, 0x07, 0x0a, 0x05, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x59,
 	0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x19, 0x2e, 0x61, 0x70,
 	0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73,
@@ -1071,83 +981,79 @@ var file_api_oms_oms_proto_rawDesc = []byte{
 	0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70,
 	0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x12, 0x17, 0x2f, 0x61, 0x64, 0x6d,
 	0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x2f, 0x7b,
-	0x69, 0x64, 0x7d, 0x12, 0x4c, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64,
+	0x69, 0x64, 0x7d, 0x12, 0x4f, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x12, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69,
-	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1a, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x14, 0x22, 0x12, 0x2f,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x17, 0x22, 0x12, 0x2f,
 	0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x6f, 0x72, 0x64, 0x65,
-	0x72, 0x12, 0x4c, 0x0a, 0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72,
-	0x12, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72,
-	0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x22, 0x1a, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x14, 0x1a, 0x12, 0x2f, 0x61, 0x64,
-	0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x12,
-	0x5f, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x1b,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f,
-	0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x20,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x2a, 0x18, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76,
-	0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x2f, 0x7b, 0x69, 0x64, 0x73, 0x7d,
-	0x12, 0x74, 0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x22, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73,
-	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69,
-	0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x27, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x21, 0x12, 0x1f, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31,
-	0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61, 0x64, 0x64, 0x72, 0x65,
-	0x73, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x73, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6d,
-	0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x21, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c,
-	0x79, 0x22, 0x28, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x22, 0x12, 0x20, 0x2f, 0x61, 0x64, 0x6d, 0x69,
-	0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x67, 0x0a, 0x14, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x12, 0x17, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x43, 0x6f,
-	0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x1a, 0x11, 0x2e, 0x61,
-	0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
-	0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x22, 0x1b, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f,
-	0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x12, 0x67, 0x0a, 0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f,
-	0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x17, 0x2e, 0x61,
-	0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e,
-	0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d,
-	0x1a, 0x1b, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63,
-	0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x7a, 0x0a,
-	0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x29,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x23, 0x2a, 0x21, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76,
-	0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x2f, 0x7b, 0x69, 0x64, 0x73, 0x7d, 0x32, 0xed, 0x02, 0x0a, 0x03, 0x41, 0x70,
-	0x69, 0x12, 0x53, 0x0a, 0x0b, 0x53, 0x61, 0x79, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x55, 0x52, 0x4c,
-	0x12, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f,
-	0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x48, 0x65,
-	0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x22, 0x1d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x17, 0x12,
-	0x15, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x2f, 0x73, 0x61, 0x79,
-	0x5f, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x5e, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72,
-	0x64, 0x65, 0x72, 0x12, 0x19, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4c, 0x69,
-	0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64,
-	0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x17, 0x12,
-	0x15, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x2f, 0x6f, 0x72, 0x64,
-	0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x5c, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64,
-	0x65, 0x72, 0x12, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x47, 0x65, 0x74,
-	0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61,
-	0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x22, 0x1e, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x18, 0x12, 0x16, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x2f,
-	0x7b, 0x69, 0x64, 0x7d, 0x12, 0x53, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72,
+	0x72, 0x3a, 0x01, 0x2a, 0x12, 0x4f, 0x0a, 0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x72,
 	0x64, 0x65, 0x72, 0x12, 0x0e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4f, 0x72,
-	0x64, 0x65, 0x72, 0x1a, 0x19, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x19,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x13, 0x22, 0x11, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
-	0x6f, 0x6d, 0x73, 0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x42, 0x1c, 0x0a, 0x07, 0x61, 0x70, 0x69,
-	0x2e, 0x6f, 0x6d, 0x73, 0x50, 0x01, 0x5a, 0x0f, 0x65, 0x64, 0x75, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x6f, 0x6d, 0x73, 0x3b, 0x6f, 0x6d, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x65, 0x72, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70,
+	0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x17, 0x1a, 0x12,
+	0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x6f, 0x72, 0x64,
+	0x65, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0x5f, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f,
+	0x72, 0x64, 0x65, 0x72, 0x12, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x2a, 0x18, 0x2f, 0x61,
+	0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x6f, 0x72, 0x64, 0x65, 0x72,
+	0x2f, 0x7b, 0x69, 0x64, 0x73, 0x7d, 0x12, 0x74, 0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f,
+	0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x22, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x61,
+	0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x27, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x21, 0x12, 0x1f, 0x2f, 0x61, 0x64,
+	0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e,
+	0x79, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x73, 0x0a, 0x11,
+	0x47, 0x65, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x12, 0x21, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x43,
+	0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41,
+	0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x28, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x22, 0x12,
+	0x20, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f,
+	0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x2f, 0x7b, 0x69, 0x64,
+	0x7d, 0x12, 0x6a, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61,
+	0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x17, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x6f, 0x6d, 0x73, 0x2e, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x26, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20, 0x22, 0x1b, 0x2f,
+	0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70,
+	0x61, 0x6e, 0x79, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x3a, 0x01, 0x2a, 0x12, 0x6a, 0x0a,
+	0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x17, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e,
+	0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x1a, 0x11,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x22, 0x26, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20, 0x1a, 0x1b, 0x2f, 0x61, 0x64, 0x6d, 0x69,
+	0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x3a, 0x01, 0x2a, 0x12, 0x7a, 0x0a, 0x14, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x43, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d,
+	0x73, 0x2e, 0x41, 0x70, 0x69, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x29, 0x82, 0xd3, 0xe4, 0x93,
+	0x02, 0x23, 0x2a, 0x21, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d,
+	0x73, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x2f,
+	0x7b, 0x69, 0x64, 0x73, 0x7d, 0x32, 0x9b, 0x02, 0x0a, 0x03, 0x41, 0x70, 0x69, 0x12, 0x5e, 0x0a,
+	0x09, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x19, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e,
+	0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d,
+	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x17, 0x12, 0x15, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
+	0x6f, 0x6d, 0x73, 0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x5c, 0x0a,
+	0x08, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x6f, 0x6d, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x47, 0x65,
+	0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1e, 0x82, 0xd3, 0xe4,
+	0x93, 0x02, 0x18, 0x12, 0x16, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73,
+	0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x56, 0x0a, 0x0b, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x0e, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x1a, 0x19, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x6f, 0x6d, 0x73, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x22, 0x11, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x6d, 0x73, 0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72,
+	0x3a, 0x01, 0x2a, 0x42, 0x1c, 0x0a, 0x07, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x6d, 0x73, 0x50, 0x01,
+	0x5a, 0x0f, 0x65, 0x64, 0x75, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x6d, 0x73, 0x3b, 0x6f, 0x6d,
+	0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1162,65 +1068,61 @@ func file_api_oms_oms_proto_rawDescGZIP() []byte {
 	return file_api_oms_oms_proto_rawDescData
 }
 
-var file_api_oms_oms_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_api_oms_oms_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_api_oms_oms_proto_goTypes = []interface{}{
-	(*HelloReq)(nil),                    // 0: api.oms.HelloReq
-	(*HelloResp)(nil),                   // 1: api.oms.HelloResp
-	(*ListOrderRequest)(nil),            // 2: api.oms.ListOrderRequest
-	(*ListOrderReply)(nil),              // 3: api.oms.ListOrderReply
-	(*GetOrderRequest)(nil),             // 4: api.oms.GetOrderRequest
-	(*GetOrderReply)(nil),               // 5: api.oms.GetOrderReply
-	(*CreateOrderRequest)(nil),          // 6: api.oms.CreateOrderRequest
-	(*CreateOrderReply)(nil),            // 7: api.oms.CreateOrderReply
-	(*UpdateOrderRequest)(nil),          // 8: api.oms.UpdateOrderRequest
-	(*UpdateOrderReply)(nil),            // 9: api.oms.UpdateOrderReply
-	(*DeleteOrderRequest)(nil),          // 10: api.oms.DeleteOrderRequest
-	(*DeleteOrderReply)(nil),            // 11: api.oms.DeleteOrderReply
-	(*ListCompanyAddressRequest)(nil),   // 12: api.oms.ListCompanyAddressRequest
-	(*ListCompanyAddressReply)(nil),     // 13: api.oms.ListCompanyAddressReply
-	(*GetCompanyAddressRequest)(nil),    // 14: api.oms.GetCompanyAddressRequest
-	(*GetCompanyAddressReply)(nil),      // 15: api.oms.GetCompanyAddressReply
-	(*CreateCompanyAddressRequest)(nil), // 16: api.oms.CreateCompanyAddressRequest
-	(*CreateCompanyAddressReply)(nil),   // 17: api.oms.CreateCompanyAddressReply
-	(*UpdateCompanyAddressRequest)(nil), // 18: api.oms.UpdateCompanyAddressRequest
-	(*UpdateCompanyAddressReply)(nil),   // 19: api.oms.UpdateCompanyAddressReply
-	(*DeleteCompanyAddressRequest)(nil), // 20: api.oms.DeleteCompanyAddressRequest
-	(*DeleteCompanyAddressReply)(nil),   // 21: api.oms.DeleteCompanyAddressReply
-	(*Order)(nil),                       // 22: api.oms.Order
-	(*CompanyAddress)(nil),              // 23: api.oms.CompanyAddress
-	(*ApiReply)(nil),                    // 24: api.oms.ApiReply
+	(*ListOrderRequest)(nil),            // 0: api.oms.ListOrderRequest
+	(*ListOrderReply)(nil),              // 1: api.oms.ListOrderReply
+	(*GetOrderRequest)(nil),             // 2: api.oms.GetOrderRequest
+	(*GetOrderReply)(nil),               // 3: api.oms.GetOrderReply
+	(*CreateOrderRequest)(nil),          // 4: api.oms.CreateOrderRequest
+	(*CreateOrderReply)(nil),            // 5: api.oms.CreateOrderReply
+	(*UpdateOrderRequest)(nil),          // 6: api.oms.UpdateOrderRequest
+	(*UpdateOrderReply)(nil),            // 7: api.oms.UpdateOrderReply
+	(*DeleteOrderRequest)(nil),          // 8: api.oms.DeleteOrderRequest
+	(*DeleteOrderReply)(nil),            // 9: api.oms.DeleteOrderReply
+	(*ListCompanyAddressRequest)(nil),   // 10: api.oms.ListCompanyAddressRequest
+	(*ListCompanyAddressReply)(nil),     // 11: api.oms.ListCompanyAddressReply
+	(*GetCompanyAddressRequest)(nil),    // 12: api.oms.GetCompanyAddressRequest
+	(*GetCompanyAddressReply)(nil),      // 13: api.oms.GetCompanyAddressReply
+	(*CreateCompanyAddressRequest)(nil), // 14: api.oms.CreateCompanyAddressRequest
+	(*CreateCompanyAddressReply)(nil),   // 15: api.oms.CreateCompanyAddressReply
+	(*UpdateCompanyAddressRequest)(nil), // 16: api.oms.UpdateCompanyAddressRequest
+	(*UpdateCompanyAddressReply)(nil),   // 17: api.oms.UpdateCompanyAddressReply
+	(*DeleteCompanyAddressRequest)(nil), // 18: api.oms.DeleteCompanyAddressRequest
+	(*DeleteCompanyAddressReply)(nil),   // 19: api.oms.DeleteCompanyAddressReply
+	(*Order)(nil),                       // 20: api.oms.Order
+	(*CompanyAddress)(nil),              // 21: api.oms.CompanyAddress
+	(*ApiReply)(nil),                    // 22: api.oms.ApiReply
 }
 var file_api_oms_oms_proto_depIdxs = []int32{
-	2,  // 0: api.oms.Admin.ListOrder:input_type -> api.oms.ListOrderRequest
-	4,  // 1: api.oms.Admin.GetOrder:input_type -> api.oms.GetOrderRequest
-	22, // 2: api.oms.Admin.CreateOrder:input_type -> api.oms.Order
-	22, // 3: api.oms.Admin.UpdateOrder:input_type -> api.oms.Order
-	10, // 4: api.oms.Admin.DeleteOrder:input_type -> api.oms.DeleteOrderRequest
-	12, // 5: api.oms.Admin.ListCompanyAddress:input_type -> api.oms.ListCompanyAddressRequest
-	14, // 6: api.oms.Admin.GetCompanyAddress:input_type -> api.oms.GetCompanyAddressRequest
-	23, // 7: api.oms.Admin.CreateCompanyAddress:input_type -> api.oms.CompanyAddress
-	23, // 8: api.oms.Admin.UpdateCompanyAddress:input_type -> api.oms.CompanyAddress
-	20, // 9: api.oms.Admin.DeleteCompanyAddress:input_type -> api.oms.DeleteCompanyAddressRequest
-	0,  // 10: api.oms.Api.SayHelloURL:input_type -> api.oms.HelloReq
-	2,  // 11: api.oms.Api.ListOrder:input_type -> api.oms.ListOrderRequest
-	4,  // 12: api.oms.Api.GetOrder:input_type -> api.oms.GetOrderRequest
-	22, // 13: api.oms.Api.CreateOrder:input_type -> api.oms.Order
-	24, // 14: api.oms.Admin.ListOrder:output_type -> api.oms.ApiReply
-	24, // 15: api.oms.Admin.GetOrder:output_type -> api.oms.ApiReply
-	24, // 16: api.oms.Admin.CreateOrder:output_type -> api.oms.ApiReply
-	24, // 17: api.oms.Admin.UpdateOrder:output_type -> api.oms.ApiReply
-	24, // 18: api.oms.Admin.DeleteOrder:output_type -> api.oms.ApiReply
-	24, // 19: api.oms.Admin.ListCompanyAddress:output_type -> api.oms.ApiReply
-	24, // 20: api.oms.Admin.GetCompanyAddress:output_type -> api.oms.ApiReply
-	24, // 21: api.oms.Admin.CreateCompanyAddress:output_type -> api.oms.ApiReply
-	24, // 22: api.oms.Admin.UpdateCompanyAddress:output_type -> api.oms.ApiReply
-	24, // 23: api.oms.Admin.DeleteCompanyAddress:output_type -> api.oms.ApiReply
-	1,  // 24: api.oms.Api.SayHelloURL:output_type -> api.oms.HelloResp
-	3,  // 25: api.oms.Api.ListOrder:output_type -> api.oms.ListOrderReply
-	5,  // 26: api.oms.Api.GetOrder:output_type -> api.oms.GetOrderReply
-	7,  // 27: api.oms.Api.CreateOrder:output_type -> api.oms.CreateOrderReply
-	14, // [14:28] is the sub-list for method output_type
-	0,  // [0:14] is the sub-list for method input_type
+	0,  // 0: api.oms.Admin.ListOrder:input_type -> api.oms.ListOrderRequest
+	2,  // 1: api.oms.Admin.GetOrder:input_type -> api.oms.GetOrderRequest
+	20, // 2: api.oms.Admin.CreateOrder:input_type -> api.oms.Order
+	20, // 3: api.oms.Admin.UpdateOrder:input_type -> api.oms.Order
+	8,  // 4: api.oms.Admin.DeleteOrder:input_type -> api.oms.DeleteOrderRequest
+	10, // 5: api.oms.Admin.ListCompanyAddress:input_type -> api.oms.ListCompanyAddressRequest
+	12, // 6: api.oms.Admin.GetCompanyAddress:input_type -> api.oms.GetCompanyAddressRequest
+	21, // 7: api.oms.Admin.CreateCompanyAddress:input_type -> api.oms.CompanyAddress
+	21, // 8: api.oms.Admin.UpdateCompanyAddress:input_type -> api.oms.CompanyAddress
+	18, // 9: api.oms.Admin.DeleteCompanyAddress:input_type -> api.oms.DeleteCompanyAddressRequest
+	0,  // 10: api.oms.Api.ListOrder:input_type -> api.oms.ListOrderRequest
+	2,  // 11: api.oms.Api.GetOrder:input_type -> api.oms.GetOrderRequest
+	20, // 12: api.oms.Api.CreateOrder:input_type -> api.oms.Order
+	22, // 13: api.oms.Admin.ListOrder:output_type -> api.oms.ApiReply
+	22, // 14: api.oms.Admin.GetOrder:output_type -> api.oms.ApiReply
+	22, // 15: api.oms.Admin.CreateOrder:output_type -> api.oms.ApiReply
+	22, // 16: api.oms.Admin.UpdateOrder:output_type -> api.oms.ApiReply
+	22, // 17: api.oms.Admin.DeleteOrder:output_type -> api.oms.ApiReply
+	22, // 18: api.oms.Admin.ListCompanyAddress:output_type -> api.oms.ApiReply
+	22, // 19: api.oms.Admin.GetCompanyAddress:output_type -> api.oms.ApiReply
+	22, // 20: api.oms.Admin.CreateCompanyAddress:output_type -> api.oms.ApiReply
+	22, // 21: api.oms.Admin.UpdateCompanyAddress:output_type -> api.oms.ApiReply
+	22, // 22: api.oms.Admin.DeleteCompanyAddress:output_type -> api.oms.ApiReply
+	1,  // 23: api.oms.Api.ListOrder:output_type -> api.oms.ListOrderReply
+	3,  // 24: api.oms.Api.GetOrder:output_type -> api.oms.GetOrderReply
+	5,  // 25: api.oms.Api.CreateOrder:output_type -> api.oms.CreateOrderReply
+	13, // [13:26] is the sub-list for method output_type
+	0,  // [0:13] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -1234,30 +1136,6 @@ func file_api_oms_oms_proto_init() {
 	file_api_oms_api_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_api_oms_oms_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_api_oms_oms_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_api_oms_oms_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListOrderRequest); i {
 			case 0:
 				return &v.state
@@ -1269,7 +1147,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListOrderReply); i {
 			case 0:
 				return &v.state
@@ -1281,7 +1159,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetOrderRequest); i {
 			case 0:
 				return &v.state
@@ -1293,7 +1171,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetOrderReply); i {
 			case 0:
 				return &v.state
@@ -1305,7 +1183,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateOrderRequest); i {
 			case 0:
 				return &v.state
@@ -1317,7 +1195,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateOrderReply); i {
 			case 0:
 				return &v.state
@@ -1329,7 +1207,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateOrderRequest); i {
 			case 0:
 				return &v.state
@@ -1341,7 +1219,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateOrderReply); i {
 			case 0:
 				return &v.state
@@ -1353,7 +1231,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteOrderRequest); i {
 			case 0:
 				return &v.state
@@ -1365,7 +1243,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteOrderReply); i {
 			case 0:
 				return &v.state
@@ -1377,7 +1255,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCompanyAddressRequest); i {
 			case 0:
 				return &v.state
@@ -1389,7 +1267,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCompanyAddressReply); i {
 			case 0:
 				return &v.state
@@ -1401,7 +1279,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetCompanyAddressRequest); i {
 			case 0:
 				return &v.state
@@ -1413,7 +1291,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetCompanyAddressReply); i {
 			case 0:
 				return &v.state
@@ -1425,7 +1303,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateCompanyAddressRequest); i {
 			case 0:
 				return &v.state
@@ -1437,7 +1315,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateCompanyAddressReply); i {
 			case 0:
 				return &v.state
@@ -1449,7 +1327,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCompanyAddressRequest); i {
 			case 0:
 				return &v.state
@@ -1461,7 +1339,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCompanyAddressReply); i {
 			case 0:
 				return &v.state
@@ -1473,7 +1351,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCompanyAddressRequest); i {
 			case 0:
 				return &v.state
@@ -1485,7 +1363,7 @@ func file_api_oms_oms_proto_init() {
 				return nil
 			}
 		}
-		file_api_oms_oms_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_api_oms_oms_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCompanyAddressReply); i {
 			case 0:
 				return &v.state
@@ -1504,7 +1382,7 @@ func file_api_oms_oms_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_oms_oms_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

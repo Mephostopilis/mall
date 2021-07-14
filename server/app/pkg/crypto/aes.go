@@ -11,7 +11,6 @@ import (
 )
 
 func EncryptWithAES(key, message string) (string, error) {
-
 	hash := md5.New()
 	hash.Write([]byte(key))
 	keyData := hash.Sum(nil)
@@ -81,7 +80,7 @@ func DecryptPrivWithAES(key, message string) (encry string, err error) {
 
 	block, err := aes.NewCipher(keyData)
 	if err != nil {
-		err = ecode.ErrAesNewCipher
+		err = ecode.WrapError(err)
 		return
 	}
 
@@ -102,7 +101,7 @@ func DecryptPrivWithAES1(key, message string) (d string, err error) {
 
 	block, err := aes.NewCipher(keyData)
 	if err != nil {
-		err = ecode.ErrAesNewCipher
+		err = ecode.WrapError(err)
 		return
 	}
 

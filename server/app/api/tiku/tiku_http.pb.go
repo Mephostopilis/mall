@@ -410,7 +410,7 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/tiku/say_hello", _Api_SayHelloURL8_HTTP_Handler(srv))
+	r.GET("/api/v1/tiku/say_hello", _Api_SayHelloURL6_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/public/ping", _Api_Ping0_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/choicesList", _Api_GetChoiceList1_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/choice/{id}", _Api_GetChoice1_HTTP_Handler(srv))
@@ -420,7 +420,7 @@ func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r.PUT("/api/v1/tiku/exercise/answer", _Api_AnswerExercise0_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL8_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL6_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

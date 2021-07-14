@@ -88,7 +88,7 @@ func _Admin_GetOrder2_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 func _Admin_CreateOrder2_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Order
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pay.Admin/CreateOrder")
@@ -107,7 +107,7 @@ func _Admin_CreateOrder2_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_UpdateOrder1_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Order
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pay.Admin/UpdateOrder")
@@ -189,7 +189,7 @@ func _Admin_GetCompanyAddress1_HTTP_Handler(srv AdminHTTPServer) func(ctx http.C
 func _Admin_CreateCompanyAddress1_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CompanyAddress
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pay.Admin/CreateCompanyAddress")
@@ -208,7 +208,7 @@ func _Admin_CreateCompanyAddress1_HTTP_Handler(srv AdminHTTPServer) func(ctx htt
 func _Admin_UpdateCompanyAddress1_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CompanyAddress
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pay.Admin/UpdateCompanyAddress")
@@ -270,10 +270,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateCompanyAddress(ctx context.Context, in *CompanyAddress, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omscompanyaddress"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pay.Admin/CreateCompanyAddress"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -283,10 +283,10 @@ func (c *AdminHTTPClientImpl) CreateCompanyAddress(ctx context.Context, in *Comp
 func (c *AdminHTTPClientImpl) CreateOrder(ctx context.Context, in *Order, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omsorder"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pay.Admin/CreateOrder"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,10 +374,10 @@ func (c *AdminHTTPClientImpl) ListOrder(ctx context.Context, in *ListOrderReques
 func (c *AdminHTTPClientImpl) UpdateCompanyAddress(ctx context.Context, in *CompanyAddress, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omscompanyaddress"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pay.Admin/UpdateCompanyAddress"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -387,10 +387,10 @@ func (c *AdminHTTPClientImpl) UpdateCompanyAddress(ctx context.Context, in *Comp
 func (c *AdminHTTPClientImpl) UpdateOrder(ctx context.Context, in *Order, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/omsorder"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pay.Admin/UpdateOrder"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -407,14 +407,14 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/oms/say_hello", _Api_SayHelloURL3_HTTP_Handler(srv))
+	r.GET("/api/v1/oms/say_hello", _Api_SayHelloURL1_HTTP_Handler(srv))
 	r.GET("/api/v1/oms/orderList", _Api_ListOrder3_HTTP_Handler(srv))
 	r.GET("/api/v1/oms/order/{id}", _Api_GetOrder3_HTTP_Handler(srv))
 	r.POST("/api/v1/oms/order", _Api_CreateOrder3_HTTP_Handler(srv))
 	r.POST("/api/v1/oms/order", _Api_AlipayCallback0_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL3_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

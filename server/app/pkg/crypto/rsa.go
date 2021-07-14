@@ -4,19 +4,14 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
+	"edu/pkg/ecode"
 	"encoding/pem"
-
-	"github.com/go-kratos/kratos/v2/errors"
-)
-
-var (
-	ErrBadPublicKey = errors.ResourceExhausted("res", "public key is bad")
 )
 
 func RSAEncrypt(orgidata []byte, publickey []byte) (pb []byte, err error) {
 	block, _ := pem.Decode(publickey)
 	if block == nil {
-		err = ErrBadPublicKey
+		err = ecode.ErrBadPublicKey("public key [%s] is null", string(publickey))
 		return
 	}
 	pubInterface, err := x509.ParsePKIXPublicKey(block.Bytes)
@@ -31,7 +26,7 @@ func RSAEncrypt(orgidata []byte, publickey []byte) (pb []byte, err error) {
 func RSADecrypt(cipertext, privatekey []byte) (pb []byte, err error) {
 	block, _ := pem.Decode(privatekey)
 	if block == nil {
-		err = ErrBadPublicKey
+		err = ecode.ErrBadPublicKey("public key [%s] is null", string(privatekey))
 		return
 	}
 	priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)

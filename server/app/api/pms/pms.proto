@@ -4,6 +4,9 @@ package api.pms;
 
 import "api/pms/api.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
 option go_package = "edu/api/pms;pms";
 option java_multiple_files = true;
@@ -23,11 +26,13 @@ service Admin {
     rpc CreateAlbum (Album) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/pmsalbum"
+            body: "*"
         };
     };
     rpc UpdateAlbum (Album) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/pmsalbum"
+            body: "*"
         };
     };
     rpc DeleteAlbum (DeleteAlbumRequest) returns (ApiReply) {
@@ -48,11 +53,13 @@ service Admin {
     rpc CreateBrand (Brand) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/pmsbrand"
+            body: "*"
         };
     };
     rpc UpdateBrand (Brand) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/pmsbrand"
+            body: "*"
         };
     };
     rpc DeleteBrand (DeleteBrandRequest) returns (ApiReply) {
@@ -78,11 +85,13 @@ service Admin {
     rpc CreateProductCategory (ProductCategory) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/pmsproductcategory"
+            body: "*"
         };
     };
     rpc UpdateProductCategory (ProductCategory) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/pmsproductcategory"
+            body: "*"
         };
     };
     rpc DeleteProductCategory (DeleteProductCategoryRequest) returns (ApiReply) {
@@ -103,11 +112,13 @@ service Admin {
     rpc CreateProduct (Product) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/pmsproduct"
+            body: "*"
         };
     };
     rpc UpdateProduct (Product) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/pmsproduct"
+            body: "*"
         };
     };
     rpc DeleteProduct (DeleteProductRequest) returns (ApiReply) {
@@ -128,11 +139,13 @@ service Admin {
     rpc CreateProductAttribute (ProductAttribute) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/pmsproductattribute"
+            body: "*"
         };
     };
     rpc UpdateProductAttribute (ProductAttribute) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/pmsproductattribute"
+            body: "*"
         };
     };
     rpc DeleteProductAttribute (DeleteProductAttributeRequest) returns (ApiReply) {
@@ -153,11 +166,13 @@ service Admin {
     rpc CreateProductAttributeCategory (ProductAttributeCategory) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/pmsproductattributecategory"
+            body: "*"
         };
     };
     rpc UpdateProductAttributeCategory (ProductAttributeCategory) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/pmsproductattributecategory"
+            body: "*"
         };
     };
     rpc DeleteProductAttributeCategory (DeleteProductAttributeCategoryRequest) returns (ApiReply) {

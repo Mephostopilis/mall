@@ -21,7 +21,7 @@ const (
 
 // InitTCP listen all tcp.bind and start accept connections.
 func InitTCP(logger log.Logger, server *Server, addrs []string, accept int) (err error) {
-	log := log.NewHelper("biz/tcp", logger)
+	log := log.NewHelper(log.With(logger, "module", "biz/tcp"))
 	var (
 		bind     string
 		listener *net.TCPListener

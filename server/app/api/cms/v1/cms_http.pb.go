@@ -2,7 +2,7 @@
 // versions:
 // protoc-gen-go-http v2.0.0
 
-package cms
+package v1
 
 import (
 	context "context"
@@ -18,6 +18,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 type AdminHTTPServer interface {
+	BatchGetHelp(context.Context, *BatchGetHelpRequest) (*ApiReply, error)
 	CreateHelp(context.Context, *Help) (*ApiReply, error)
 	CreateHelpCategory(context.Context, *HelpCategory) (*ApiReply, error)
 	CreateSubject(context.Context, *Subject) (*ApiReply, error)
@@ -43,6 +44,7 @@ type AdminHTTPServer interface {
 func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r := s.Route("/")
 	r.GET("/admin/v1/cmshelpList", _Admin_ListHelp0_HTTP_Handler(srv))
+	r.GET("/admin/v1/cmshelp/batch", _Admin_BatchGetHelp0_HTTP_Handler(srv))
 	r.GET("/admin/v1/cmshelp/{helpId}", _Admin_GetHelp0_HTTP_Handler(srv))
 	r.POST("/admin/v1/cmshelp", _Admin_CreateHelp0_HTTP_Handler(srv))
 	r.PUT("/admin/v1/cmshelp", _Admin_UpdateHelp0_HTTP_Handler(srv))
@@ -70,9 +72,28 @@ func _Admin_ListHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/ListHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/ListHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListHelp(ctx, req.(*ListHelpRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ApiReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Admin_BatchGetHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BatchGetHelpRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/api.cms.v1.Admin/BatchGetHelp")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.BatchGetHelp(ctx, req.(*BatchGetHelpRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -92,7 +113,7 @@ func _Admin_GetHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) er
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/GetHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/GetHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetHelp(ctx, req.(*GetHelpRequest))
 		})
@@ -108,10 +129,10 @@ func _Admin_GetHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) er
 func _Admin_CreateHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Help
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/CreateHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/CreateHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateHelp(ctx, req.(*Help))
 		})
@@ -127,10 +148,10 @@ func _Admin_CreateHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_UpdateHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Help
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/UpdateHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/UpdateHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateHelp(ctx, req.(*Help))
 		})
@@ -152,7 +173,7 @@ func _Admin_DeleteHelp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/DeleteHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/DeleteHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteHelp(ctx, req.(*DeleteHelpRequest))
 		})
@@ -171,7 +192,7 @@ func _Admin_ListHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Co
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/ListHelpCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/ListHelpCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListHelpCategory(ctx, req.(*ListHelpCategoryRequest))
 		})
@@ -193,7 +214,7 @@ func _Admin_GetHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Con
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/GetHelpCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/GetHelpCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetHelpCategory(ctx, req.(*GetHelpCategoryRequest))
 		})
@@ -209,10 +230,10 @@ func _Admin_GetHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Con
 func _Admin_CreateHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelpCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/CreateHelpCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/CreateHelpCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateHelpCategory(ctx, req.(*HelpCategory))
 		})
@@ -228,10 +249,10 @@ func _Admin_CreateHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 func _Admin_UpdateHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelpCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/UpdateHelpCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/UpdateHelpCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateHelpCategory(ctx, req.(*HelpCategory))
 		})
@@ -253,7 +274,7 @@ func _Admin_DeleteHelpCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/DeleteHelpCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/DeleteHelpCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteHelpCategory(ctx, req.(*DeleteHelpCategoryRequest))
 		})
@@ -272,7 +293,7 @@ func _Admin_ListSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/ListSubject")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/ListSubject")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListSubject(ctx, req.(*ListSubjectRequest))
 		})
@@ -294,7 +315,7 @@ func _Admin_GetSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/GetSubject")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/GetSubject")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetSubject(ctx, req.(*GetSubjectRequest))
 		})
@@ -310,10 +331,10 @@ func _Admin_GetSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_CreateSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Subject
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/CreateSubject")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/CreateSubject")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateSubject(ctx, req.(*Subject))
 		})
@@ -329,10 +350,10 @@ func _Admin_CreateSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 func _Admin_UpdateSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Subject
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/UpdateSubject")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/UpdateSubject")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateSubject(ctx, req.(*Subject))
 		})
@@ -354,7 +375,7 @@ func _Admin_DeleteSubject0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/DeleteSubject")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/DeleteSubject")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteSubject(ctx, req.(*DeleteSubjectRequest))
 		})
@@ -373,7 +394,7 @@ func _Admin_ListSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/ListSubjectCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/ListSubjectCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListSubjectCategory(ctx, req.(*ListSubjectCategoryRequest))
 		})
@@ -395,7 +416,7 @@ func _Admin_GetSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/GetSubjectCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/GetSubjectCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetSubjectCategory(ctx, req.(*GetSubjectCategoryRequest))
 		})
@@ -411,10 +432,10 @@ func _Admin_GetSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 func _Admin_CreateSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SubjectCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/CreateSubjectCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/CreateSubjectCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateSubjectCategory(ctx, req.(*SubjectCategory))
 		})
@@ -430,10 +451,10 @@ func _Admin_CreateSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx ht
 func _Admin_UpdateSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SubjectCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/UpdateSubjectCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/UpdateSubjectCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateSubjectCategory(ctx, req.(*SubjectCategory))
 		})
@@ -455,7 +476,7 @@ func _Admin_DeleteSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx ht
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Admin/DeleteSubjectCategory")
+		http.SetOperation(ctx, "/api.cms.v1.Admin/DeleteSubjectCategory")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteSubjectCategory(ctx, req.(*DeleteSubjectCategoryRequest))
 		})
@@ -469,6 +490,7 @@ func _Admin_DeleteSubjectCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx ht
 }
 
 type AdminHTTPClient interface {
+	BatchGetHelp(ctx context.Context, req *BatchGetHelpRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateHelp(ctx context.Context, req *Help, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateHelpCategory(ctx context.Context, req *HelpCategory, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateSubject(ctx context.Context, req *Subject, opts ...http.CallOption) (rsp *ApiReply, err error)
@@ -499,13 +521,26 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 	return &AdminHTTPClientImpl{client}
 }
 
+func (c *AdminHTTPClientImpl) BatchGetHelp(ctx context.Context, in *BatchGetHelpRequest, opts ...http.CallOption) (*ApiReply, error) {
+	var out ApiReply
+	pattern := "/admin/v1/cmshelp/batch"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/BatchGetHelp"))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *AdminHTTPClientImpl) CreateHelp(ctx context.Context, in *Help, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmshelp"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/CreateHelp"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/CreateHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -515,10 +550,10 @@ func (c *AdminHTTPClientImpl) CreateHelp(ctx context.Context, in *Help, opts ...
 func (c *AdminHTTPClientImpl) CreateHelpCategory(ctx context.Context, in *HelpCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmshelpcategory"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/CreateHelpCategory"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/CreateHelpCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -528,10 +563,10 @@ func (c *AdminHTTPClientImpl) CreateHelpCategory(ctx context.Context, in *HelpCa
 func (c *AdminHTTPClientImpl) CreateSubject(ctx context.Context, in *Subject, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/CreateSubject"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/CreateSubject"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -541,10 +576,10 @@ func (c *AdminHTTPClientImpl) CreateSubject(ctx context.Context, in *Subject, op
 func (c *AdminHTTPClientImpl) CreateSubjectCategory(ctx context.Context, in *SubjectCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/CreateSubjectCategory"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/CreateSubjectCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -555,7 +590,7 @@ func (c *AdminHTTPClientImpl) DeleteHelp(ctx context.Context, in *DeleteHelpRequ
 	var out ApiReply
 	pattern := "/admin/v1/cmshelp/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/DeleteHelp"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/DeleteHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -568,7 +603,7 @@ func (c *AdminHTTPClientImpl) DeleteHelpCategory(ctx context.Context, in *Delete
 	var out ApiReply
 	pattern := "/admin/v1/cmshelpcategory/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/DeleteHelpCategory"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/DeleteHelpCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -581,7 +616,7 @@ func (c *AdminHTTPClientImpl) DeleteSubject(ctx context.Context, in *DeleteSubje
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/DeleteSubject"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/DeleteSubject"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -594,7 +629,7 @@ func (c *AdminHTTPClientImpl) DeleteSubjectCategory(ctx context.Context, in *Del
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/DeleteSubjectCategory"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/DeleteSubjectCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -607,7 +642,7 @@ func (c *AdminHTTPClientImpl) GetHelp(ctx context.Context, in *GetHelpRequest, o
 	var out ApiReply
 	pattern := "/admin/v1/cmshelp/{helpId}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/GetHelp"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/GetHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -620,7 +655,7 @@ func (c *AdminHTTPClientImpl) GetHelpCategory(ctx context.Context, in *GetHelpCa
 	var out ApiReply
 	pattern := "/admin/v1/cmshelpcategory/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/GetHelpCategory"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/GetHelpCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -633,7 +668,7 @@ func (c *AdminHTTPClientImpl) GetSubject(ctx context.Context, in *GetSubjectRequ
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/GetSubject"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/GetSubject"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -646,7 +681,7 @@ func (c *AdminHTTPClientImpl) GetSubjectCategory(ctx context.Context, in *GetSub
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/GetSubjectCategory"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/GetSubjectCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -659,7 +694,7 @@ func (c *AdminHTTPClientImpl) ListHelp(ctx context.Context, in *ListHelpRequest,
 	var out ApiReply
 	pattern := "/admin/v1/cmshelpList"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/ListHelp"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/ListHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -672,7 +707,7 @@ func (c *AdminHTTPClientImpl) ListHelpCategory(ctx context.Context, in *ListHelp
 	var out ApiReply
 	pattern := "/admin/v1/cmshelpcategoryList"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/ListHelpCategory"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/ListHelpCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -685,7 +720,7 @@ func (c *AdminHTTPClientImpl) ListSubject(ctx context.Context, in *ListSubjectRe
 	var out ApiReply
 	pattern := "/admin/v1/cmssubjectList"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/ListSubject"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/ListSubject"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -698,7 +733,7 @@ func (c *AdminHTTPClientImpl) ListSubjectCategory(ctx context.Context, in *ListS
 	var out ApiReply
 	pattern := "/admin/v1/cmssubjectList"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/ListSubjectCategory"))
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/ListSubjectCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -710,10 +745,10 @@ func (c *AdminHTTPClientImpl) ListSubjectCategory(ctx context.Context, in *ListS
 func (c *AdminHTTPClientImpl) UpdateHelp(ctx context.Context, in *Help, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmshelp"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/UpdateHelp"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/UpdateHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -723,10 +758,10 @@ func (c *AdminHTTPClientImpl) UpdateHelp(ctx context.Context, in *Help, opts ...
 func (c *AdminHTTPClientImpl) UpdateHelpCategory(ctx context.Context, in *HelpCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmshelpcategory"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/UpdateHelpCategory"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/UpdateHelpCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -736,10 +771,10 @@ func (c *AdminHTTPClientImpl) UpdateHelpCategory(ctx context.Context, in *HelpCa
 func (c *AdminHTTPClientImpl) UpdateSubject(ctx context.Context, in *Subject, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/UpdateSubject"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/UpdateSubject"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -749,10 +784,10 @@ func (c *AdminHTTPClientImpl) UpdateSubject(ctx context.Context, in *Subject, op
 func (c *AdminHTTPClientImpl) UpdateSubjectCategory(ctx context.Context, in *SubjectCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/cmssubject"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Admin/UpdateSubjectCategory"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.cms.v1.Admin/UpdateSubjectCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -762,33 +797,12 @@ func (c *AdminHTTPClientImpl) UpdateSubjectCategory(ctx context.Context, in *Sub
 type ApiHTTPServer interface {
 	GetHelp(context.Context, *GetHelpRequest) (*GetHelpReply, error)
 	ListHelp(context.Context, *ListHelpRequest) (*ListHelpReply, error)
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 }
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/cms/say_hello", _Api_SayHelloURL0_HTTP_Handler(srv))
 	r.GET("/api/v1/cms/helpList", _Api_ListHelp1_HTTP_Handler(srv))
 	r.GET("/api/v1/cms/help/{helpId}", _Api_GetHelp1_HTTP_Handler(srv))
-}
-
-func _Api_SayHelloURL0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in HelloReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.cms.Api/SayHelloURL")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SayHelloURL(ctx, req.(*HelloReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*HelloResp)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _Api_ListHelp1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
@@ -797,7 +811,7 @@ func _Api_ListHelp1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Api/ListHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Api/ListHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListHelp(ctx, req.(*ListHelpRequest))
 		})
@@ -819,7 +833,7 @@ func _Api_GetHelp1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error 
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.cms.Api/GetHelp")
+		http.SetOperation(ctx, "/api.cms.v1.Api/GetHelp")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetHelp(ctx, req.(*GetHelpRequest))
 		})
@@ -835,7 +849,6 @@ func _Api_GetHelp1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error 
 type ApiHTTPClient interface {
 	GetHelp(ctx context.Context, req *GetHelpRequest, opts ...http.CallOption) (rsp *GetHelpReply, err error)
 	ListHelp(ctx context.Context, req *ListHelpRequest, opts ...http.CallOption) (rsp *ListHelpReply, err error)
-	SayHelloURL(ctx context.Context, req *HelloReq, opts ...http.CallOption) (rsp *HelloResp, err error)
 }
 
 type ApiHTTPClientImpl struct {
@@ -850,7 +863,7 @@ func (c *ApiHTTPClientImpl) GetHelp(ctx context.Context, in *GetHelpRequest, opt
 	var out GetHelpReply
 	pattern := "/api/v1/cms/help/{helpId}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Api/GetHelp"))
+	opts = append(opts, http.Operation("/api.cms.v1.Api/GetHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -863,20 +876,7 @@ func (c *ApiHTTPClientImpl) ListHelp(ctx context.Context, in *ListHelpRequest, o
 	var out ListHelpReply
 	pattern := "/api/v1/cms/helpList"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Api/ListHelp"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *ApiHTTPClientImpl) SayHelloURL(ctx context.Context, in *HelloReq, opts ...http.CallOption) (*HelloResp, error) {
-	var out HelloResp
-	pattern := "/api/v1/cms/say_hello"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.cms.Api/SayHelloURL"))
+	opts = append(opts, http.Operation("/api.cms.v1.Api/ListHelp"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

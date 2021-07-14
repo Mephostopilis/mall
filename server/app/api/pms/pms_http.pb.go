@@ -130,7 +130,7 @@ func _Admin_GetAlbum0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 func _Admin_CreateAlbum0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Album
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/CreateAlbum")
@@ -149,7 +149,7 @@ func _Admin_CreateAlbum0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_UpdateAlbum0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Album
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/UpdateAlbum")
@@ -231,7 +231,7 @@ func _Admin_GetBrand0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 func _Admin_CreateBrand0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Brand
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/CreateBrand")
@@ -250,7 +250,7 @@ func _Admin_CreateBrand0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_UpdateBrand0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Brand
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/UpdateBrand")
@@ -351,7 +351,7 @@ func _Admin_GetProductCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 func _Admin_CreateProductCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ProductCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/CreateProductCategory")
@@ -370,7 +370,7 @@ func _Admin_CreateProductCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx ht
 func _Admin_UpdateProductCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ProductCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/UpdateProductCategory")
@@ -452,7 +452,7 @@ func _Admin_GetProduct0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_CreateProduct0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Product
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/CreateProduct")
@@ -471,7 +471,7 @@ func _Admin_CreateProduct0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 func _Admin_UpdateProduct0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Product
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/UpdateProduct")
@@ -553,7 +553,7 @@ func _Admin_GetProductAttribute0_HTTP_Handler(srv AdminHTTPServer) func(ctx http
 func _Admin_CreateProductAttribute0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ProductAttribute
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/CreateProductAttribute")
@@ -572,7 +572,7 @@ func _Admin_CreateProductAttribute0_HTTP_Handler(srv AdminHTTPServer) func(ctx h
 func _Admin_UpdateProductAttribute0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ProductAttribute
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/UpdateProductAttribute")
@@ -654,7 +654,7 @@ func _Admin_GetProductAttributeCategory0_HTTP_Handler(srv AdminHTTPServer) func(
 func _Admin_CreateProductAttributeCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ProductAttributeCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/CreateProductAttributeCategory")
@@ -673,7 +673,7 @@ func _Admin_CreateProductAttributeCategory0_HTTP_Handler(srv AdminHTTPServer) fu
 func _Admin_UpdateProductAttributeCategory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ProductAttributeCategory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.pms.Admin/UpdateProductAttributeCategory")
@@ -756,10 +756,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateAlbum(ctx context.Context, in *Album, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsalbum"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/CreateAlbum"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -769,10 +769,10 @@ func (c *AdminHTTPClientImpl) CreateAlbum(ctx context.Context, in *Album, opts .
 func (c *AdminHTTPClientImpl) CreateBrand(ctx context.Context, in *Brand, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsbrand"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/CreateBrand"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -782,10 +782,10 @@ func (c *AdminHTTPClientImpl) CreateBrand(ctx context.Context, in *Brand, opts .
 func (c *AdminHTTPClientImpl) CreateProduct(ctx context.Context, in *Product, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproduct"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/CreateProduct"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -795,10 +795,10 @@ func (c *AdminHTTPClientImpl) CreateProduct(ctx context.Context, in *Product, op
 func (c *AdminHTTPClientImpl) CreateProductAttribute(ctx context.Context, in *ProductAttribute, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproductattribute"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/CreateProductAttribute"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -808,10 +808,10 @@ func (c *AdminHTTPClientImpl) CreateProductAttribute(ctx context.Context, in *Pr
 func (c *AdminHTTPClientImpl) CreateProductAttributeCategory(ctx context.Context, in *ProductAttributeCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproductattributecategory"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/CreateProductAttributeCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -821,10 +821,10 @@ func (c *AdminHTTPClientImpl) CreateProductAttributeCategory(ctx context.Context
 func (c *AdminHTTPClientImpl) CreateProductCategory(ctx context.Context, in *ProductCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproductcategory"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/CreateProductCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1081,10 +1081,10 @@ func (c *AdminHTTPClientImpl) ListProductCategoryTree(ctx context.Context, in *L
 func (c *AdminHTTPClientImpl) UpdateAlbum(ctx context.Context, in *Album, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsalbum"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/UpdateAlbum"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1094,10 +1094,10 @@ func (c *AdminHTTPClientImpl) UpdateAlbum(ctx context.Context, in *Album, opts .
 func (c *AdminHTTPClientImpl) UpdateBrand(ctx context.Context, in *Brand, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsbrand"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/UpdateBrand"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1107,10 +1107,10 @@ func (c *AdminHTTPClientImpl) UpdateBrand(ctx context.Context, in *Brand, opts .
 func (c *AdminHTTPClientImpl) UpdateProduct(ctx context.Context, in *Product, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproduct"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/UpdateProduct"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1120,10 +1120,10 @@ func (c *AdminHTTPClientImpl) UpdateProduct(ctx context.Context, in *Product, op
 func (c *AdminHTTPClientImpl) UpdateProductAttribute(ctx context.Context, in *ProductAttribute, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproductattribute"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/UpdateProductAttribute"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1133,10 +1133,10 @@ func (c *AdminHTTPClientImpl) UpdateProductAttribute(ctx context.Context, in *Pr
 func (c *AdminHTTPClientImpl) UpdateProductAttributeCategory(ctx context.Context, in *ProductAttributeCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproductattributecategory"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/UpdateProductAttributeCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1146,10 +1146,10 @@ func (c *AdminHTTPClientImpl) UpdateProductAttributeCategory(ctx context.Context
 func (c *AdminHTTPClientImpl) UpdateProductCategory(ctx context.Context, in *ProductCategory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/pmsproductcategory"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.pms.Admin/UpdateProductCategory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1164,12 +1164,12 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/cms/say_hello", _Api_SayHelloURL4_HTTP_Handler(srv))
+	r.GET("/api/v1/cms/say_hello", _Api_SayHelloURL2_HTTP_Handler(srv))
 	r.GET("/api/v1/cms/albumList", _Api_ListAlbum1_HTTP_Handler(srv))
 	r.GET("/api/v1/cms/album/{id}", _Api_GetAlbum1_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL4_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL2_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

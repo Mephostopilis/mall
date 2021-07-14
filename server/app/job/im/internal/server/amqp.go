@@ -12,7 +12,6 @@ import (
 	"edu/job/im/internal/conf"
 	"edu/pkg/tools"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/streadway/amqp"
 	"google.golang.org/protobuf/proto"
@@ -29,7 +28,7 @@ type AmqpConsumer struct {
 }
 
 func NewAmqpConsumer(c *conf.Server, logger log.Logger, uc *biz.Job) (consumer *AmqpConsumer, err error) {
-	log := log.NewHelper("amqp/consumer", logger)
+	log := log.NewHelper(log.With(logger, "module", "amqp/consumer"))
 	connection, err := amqp.Dial("amqp://admin:123456@127.0.0.1:5672/my_vhost")
 	if err != nil {
 		log.Errorf("rabbit刷新连接失败, %v", err)
@@ -56,19 +55,14 @@ func NewAmqpConsumer(c *conf.Server, logger log.Logger, uc *biz.Job) (consumer *
 	return
 }
 
-func (s *AmqpConsumer) Endpoint() (ep string, err error) {
-	err = errors.Unimplemented("amqp", "not imp")
-	return
-}
-
-func (s *AmqpConsumer) Start() error {
+func (s *AmqpConsumer) Start(context.Context) error {
 	s.wg.Add(1)
 	go s.run(s.ctx, "test.rabbit")
 	s.log.Infof("start amqp consumer.")
 	return nil
 }
 
-func (s *AmqpConsumer) Stop() error {
+func (s *AmqpConsumer) Stop(context.Context) error {
 	s.cf()
 	s.wg.Wait()
 	s.log.Infof("stop amqp consumer.")

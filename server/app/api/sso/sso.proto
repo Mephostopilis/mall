@@ -5,6 +5,9 @@ package api.sso;
 import "api/sso/api.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
 option go_package = "edu/api/sso;sso";
 option java_multiple_files = true;
@@ -19,6 +22,7 @@ service Admin {
     rpc Login (LoginRequest) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/login"
+            body: "*"
         };
     };
     rpc RefreshToken (RefreshTokenRequest) returns (ApiReply) {
@@ -34,6 +38,7 @@ service Admin {
     rpc Logout(LogoutReq) returns (LogoutResp) {
         option (google.api.http) = {
             post: "/admin/v1/logout"
+            body: "*"
         };
     };
     rpc GetSsoAppList (GetSsoAppListRequest) returns (ApiReply) {
@@ -49,11 +54,13 @@ service Admin {
     rpc InsertSsoApp (App) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/ssoapps"
+            body: "*"
         };
     };
     rpc UpdateSsoApp (App) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/ssoapps"
+            body: "*"
         };
     };
     rpc DeleteSsoApp (DeleteSsoAppRequest) returns (ApiReply) {
@@ -74,11 +81,13 @@ service Admin {
     rpc InsertSsoToken (Token) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/ssotokens"
+            body: "*"
         };
     };
     rpc UpdateSsoToken (Token) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/ssotokens"
+            body: "*"
         };
     };
     rpc DeleteSsoToken (DeleteSsoTokenRequest) returns (ApiReply) {
@@ -89,11 +98,13 @@ service Admin {
     rpc CreateLoginLog (LoginLog) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/loginlog"
+            body: "*"
         };
     };
     rpc UpdateLoginLog (LoginLog) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/loginlog"
+            body: "*"
         };
     };
     rpc DeleteLoginLog (DeleteLoginLogRequest) returns (ApiReply) {
@@ -114,11 +125,13 @@ service Admin {
     rpc CreateRole (Role) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/role/{roleId}"
+            body: "*"
         };
     };
     rpc UpdateRole (Role) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/role"
+            body: "*"
         };
     };
     rpc DeleteRole (DeleteRoleRequest) returns (ApiReply) {
@@ -139,11 +152,13 @@ service Admin {
     rpc CreateSysUser (SysUser) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/sysUser"
+            body: "*"
         };
     };
     rpc UpdateSysUser (SysUser) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/sysUser"
+            body: "*"
         };
     };
     rpc DeleteSysUser (DeleteSysUserRequest) returns (ApiReply) {
@@ -169,11 +184,13 @@ service Admin {
     rpc InsetSysUserAvatar (InsetSysUserAvatarRequest) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/user/avatar"
+            body: "*"
         };
     };
     rpc SysUserUpdatePwd (SysUserUpdatePwdRequest) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/user/pwd"
+            body: "*"
         };
     };
     rpc GetSysUserProfile (GetSysUserProfileRequest) returns (ApiReply) {

@@ -70,7 +70,7 @@ func NewGreeterUsecase(repo dao.Dao, logger log.Logger) *GreeterUsecase {
 		uuidc:   uuidc,
 		sysc:    sysc,
 		manager: manager,
-		log:     log.NewHelper("usecase/greeter", logger),
+		log:     log.NewHelper(log.With(logger, "module", "usecase/greeter")),
 		oc:      server.NewConfig(),
 	}
 }

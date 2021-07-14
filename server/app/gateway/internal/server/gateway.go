@@ -11,6 +11,7 @@ import (
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/transport/http/binding"
 	gwruntime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"google.golang.org/grpc/codes"
 )
 
 const (
@@ -59,17 +60,11 @@ func encodeResponse(w http.ResponseWriter, r *http.Request, v interface{}) error
 
 // encodeError encodes the error to the HTTP response.
 func encodeError(w http.ResponseWriter, r *http.Request, err error) {
-	se, ok := errors.FromError(err)
-	if !ok {
-		se = &errors.StatusError{
-			Code:    2,
-			Message: err.Error(),
-		}
-	}
+	se := errors.FromError(err)
 	codec := codecForRequest(r)
 	data, _ := codec.Marshal(se)
 	w.Header().Set(contentTypeHeader, contentType(codec.Name()))
-	w.WriteHeader(se.HTTPStatus())
+	w.WriteHeader(int(codes.Code(se.Code)))
 	_, _ = w.Write(data)
 }
 

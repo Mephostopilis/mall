@@ -1,7 +1,7 @@
 package server
 
 import (
-	pb "edu/api/cms"
+	pb "edu/api/cms/v1"
 
 	"edu/service/cms/internal/conf"
 	"edu/service/cms/internal/service"
@@ -21,7 +21,7 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *
 			middleware.Chain(
 				recovery.Recovery(recovery.WithLogger(logger)),
 				tracing.Server(),
-				logging.Server(logging.WithLogger(logger)),
+				logging.Server(logger),
 			),
 		),
 	}

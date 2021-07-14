@@ -12,6 +12,7 @@ import (
 	"github.com/go-kratos/kratos/v2/config/file"
 	"github.com/google/uuid"
 	etcd "go.etcd.io/etcd/client/v3"
+	"go.uber.org/zap/zapcore"
 	"gopkg.in/yaml.v2"
 )
 
@@ -52,7 +53,8 @@ func main() {
 		panic(err)
 	}
 
-	logger := pkglog.NewZapLogger()
+	logger := pkglog.NewZapLogger(bc.Logger.Path, bc.Service.Name, bc.Logger.Stdout, zapcore.Level(bc.Logger.Level))
+	defer logger.Close()
 
 	// uuid
 	id, err := uuid.NewUUID()

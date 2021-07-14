@@ -45,7 +45,7 @@ func New(c *conf.App, logger log.Logger, r *etcd.Registry, d dao.Dao) (l *Logic)
 		dis:          r,
 		loadBalancer: NewLoadBalancer(),
 		regions:      make(map[string]string),
-		log:          log.NewHelper("biz/logic", logger),
+		log:          log.NewHelper(log.With(logger, "module", "biz/logic")),
 	}
 	l.initRegions()
 	l.initNodes()

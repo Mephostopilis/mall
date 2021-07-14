@@ -97,6 +97,12 @@ message Reg {
   Instance instance = 2;
 }
 
+message Logger {
+  string path = 1;
+  bool stdout = 2;
+  int32 level = 3;
+}
+
 message App {
   message Jwt {
     string secret = 1;
@@ -126,8 +132,4 @@ message App {
   Gen gen = 2;
   Database tools = 3;
   Tiku tiku = 4;
-}
-
-message Logger {
-  string path = 1;
 }

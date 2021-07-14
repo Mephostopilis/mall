@@ -14,6 +14,7 @@ import (
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
 	etcd "go.etcd.io/etcd/client/v3"
+	"go.uber.org/zap/zapcore"
 	"gopkg.in/yaml.v2"
 )
 
@@ -56,8 +57,8 @@ func main() {
 		panic(err)
 	}
 
-	// logger := log.NewStdLogger(os.Stdout)
-	logger := pkglog.NewZapLogger()
+	logger := pkglog.NewZapLogger(bc.Logger.Path, bc.Service.Name, bc.Logger.Stdout, zapcore.Level(bc.Logger.Level))
+	defer logger.Close()
 
 	if err := migrate.MigrateUp(bc.Data, logger); err != nil {
 		panic(err)

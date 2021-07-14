@@ -18,7 +18,7 @@ import (
 
 // InitWebsocket listen all tcp.bind and start accept connections.
 func InitWebsocket(logger log.Logger, server *Server, addrs []string, accept int) (err error) {
-	log := log.NewHelper("biz/websocket", logger)
+	log := log.NewHelper(log.With(logger, "module", "biz/websocket"))
 	var (
 		bind     string
 		listener *net.TCPListener

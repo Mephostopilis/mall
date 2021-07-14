@@ -4,6 +4,9 @@ package api.tiku;
 
 import "api/tiku/api.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
 option go_package = "edu/api/tiku;tiku";
 option java_multiple_files = true;

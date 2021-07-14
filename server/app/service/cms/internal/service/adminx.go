@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "edu/api/cms"
+	pb "edu/api/cms/v1"
 	"edu/service/cms/internal/biz"
 
 	"github.com/golang/protobuf/ptypes"

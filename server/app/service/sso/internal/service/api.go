@@ -19,7 +19,7 @@ type ApiService struct {
 }
 
 func NewApiService(d dao.Dao, jwtuc *biz.JWTUsecase, uc *biz.GreeterUsecase, logger log.Logger) *ApiService {
-	log := log.NewHelper("service/api", logger)
+	log := log.NewHelper(log.With(logger, "module", "service/api"))
 	return &ApiService{
 		dao:   d,
 		jwtuc: jwtuc,

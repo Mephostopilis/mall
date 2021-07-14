@@ -17,7 +17,7 @@ type ApiService struct {
 }
 
 func NewApiService(logger log.Logger, uc *biz.TikuUsecase) *ApiService {
-	log := log.NewHelper("service", logger)
+	log := log.NewHelper(log.With(logger, "module", "service"))
 	s := &ApiService{
 		uc:  uc,
 		log: log,

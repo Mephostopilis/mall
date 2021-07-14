@@ -114,7 +114,7 @@ func _Admin_GenerateCaptchaHandler0_HTTP_Handler(srv AdminHTTPServer) func(ctx h
 func _Admin_Login0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/Login")
@@ -171,7 +171,7 @@ func _Admin_GetInfo0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) er
 func _Admin_Logout0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LogoutReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/Logout")
@@ -231,7 +231,7 @@ func _Admin_GetSsoApp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) 
 func _Admin_InsertSsoApp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in App
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/InsertSsoApp")
@@ -250,7 +250,7 @@ func _Admin_InsertSsoApp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateSsoApp0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in App
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/UpdateSsoApp")
@@ -329,7 +329,7 @@ func _Admin_GetSsoToken0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_InsertSsoToken0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Token
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/InsertSsoToken")
@@ -348,7 +348,7 @@ func _Admin_InsertSsoToken0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateSsoToken0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Token
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/UpdateSsoToken")
@@ -386,7 +386,7 @@ func _Admin_DeleteSsoToken0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_CreateLoginLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginLog
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/CreateLoginLog")
@@ -405,7 +405,7 @@ func _Admin_CreateLoginLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateLoginLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginLog
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/UpdateLoginLog")
@@ -484,7 +484,7 @@ func _Admin_ListLoginLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_CreateRole0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Role
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
@@ -506,7 +506,7 @@ func _Admin_CreateRole0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_UpdateRole0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Role
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/UpdateRole")
@@ -585,7 +585,7 @@ func _Admin_ListRole0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 func _Admin_CreateSysUser0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysUser
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/CreateSysUser")
@@ -604,7 +604,7 @@ func _Admin_CreateSysUser0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 func _Admin_UpdateSysUser0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysUser
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/UpdateSysUser")
@@ -702,7 +702,7 @@ func _Admin_ListSysUser0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_InsetSysUserAvatar0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in InsetSysUserAvatarRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/InsetSysUserAvatar")
@@ -721,7 +721,7 @@ func _Admin_InsetSysUserAvatar0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 func _Admin_SysUserUpdatePwd0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysUserUpdatePwdRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.Admin/SysUserUpdatePwd")
@@ -804,10 +804,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateLoginLog(ctx context.Context, in *LoginLog, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/loginlog"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/CreateLoginLog"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -817,10 +817,10 @@ func (c *AdminHTTPClientImpl) CreateLoginLog(ctx context.Context, in *LoginLog, 
 func (c *AdminHTTPClientImpl) CreateRole(ctx context.Context, in *Role, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/role/{roleId}"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/CreateRole"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -830,10 +830,10 @@ func (c *AdminHTTPClientImpl) CreateRole(ctx context.Context, in *Role, opts ...
 func (c *AdminHTTPClientImpl) CreateSysUser(ctx context.Context, in *SysUser, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/sysUser"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/CreateSysUser"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1051,10 +1051,10 @@ func (c *AdminHTTPClientImpl) GetSysUserProfile(ctx context.Context, in *GetSysU
 func (c *AdminHTTPClientImpl) InsertSsoApp(ctx context.Context, in *App, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/ssoapps"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/InsertSsoApp"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1064,10 +1064,10 @@ func (c *AdminHTTPClientImpl) InsertSsoApp(ctx context.Context, in *App, opts ..
 func (c *AdminHTTPClientImpl) InsertSsoToken(ctx context.Context, in *Token, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/ssotokens"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/InsertSsoToken"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1077,10 +1077,10 @@ func (c *AdminHTTPClientImpl) InsertSsoToken(ctx context.Context, in *Token, opt
 func (c *AdminHTTPClientImpl) InsetSysUserAvatar(ctx context.Context, in *InsetSysUserAvatarRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/user/avatar"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/InsetSysUserAvatar"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1129,10 +1129,10 @@ func (c *AdminHTTPClientImpl) ListSysUser(ctx context.Context, in *ListSysUserRe
 func (c *AdminHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/login"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/Login"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1142,10 +1142,10 @@ func (c *AdminHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts 
 func (c *AdminHTTPClientImpl) Logout(ctx context.Context, in *LogoutReq, opts ...http.CallOption) (*LogoutResp, error) {
 	var out LogoutResp
 	pattern := "/admin/v1/logout"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/Logout"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1168,10 +1168,10 @@ func (c *AdminHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshToken
 func (c *AdminHTTPClientImpl) SysUserUpdatePwd(ctx context.Context, in *SysUserUpdatePwdRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/user/pwd"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/SysUserUpdatePwd"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1181,10 +1181,10 @@ func (c *AdminHTTPClientImpl) SysUserUpdatePwd(ctx context.Context, in *SysUserU
 func (c *AdminHTTPClientImpl) UpdateLoginLog(ctx context.Context, in *LoginLog, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/loginlog"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/UpdateLoginLog"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1194,10 +1194,10 @@ func (c *AdminHTTPClientImpl) UpdateLoginLog(ctx context.Context, in *LoginLog, 
 func (c *AdminHTTPClientImpl) UpdateRole(ctx context.Context, in *Role, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/role"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/UpdateRole"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1207,10 +1207,10 @@ func (c *AdminHTTPClientImpl) UpdateRole(ctx context.Context, in *Role, opts ...
 func (c *AdminHTTPClientImpl) UpdateSsoApp(ctx context.Context, in *App, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/ssoapps"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/UpdateSsoApp"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1220,10 +1220,10 @@ func (c *AdminHTTPClientImpl) UpdateSsoApp(ctx context.Context, in *App, opts ..
 func (c *AdminHTTPClientImpl) UpdateSsoToken(ctx context.Context, in *Token, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/ssotokens"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/UpdateSsoToken"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1233,10 +1233,10 @@ func (c *AdminHTTPClientImpl) UpdateSsoToken(ctx context.Context, in *Token, opt
 func (c *AdminHTTPClientImpl) UpdateSysUser(ctx context.Context, in *SysUser, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/sysUser"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.Admin/UpdateSysUser"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1259,7 +1259,7 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/say_hello", _Api_SayHelloURL7_HTTP_Handler(srv))
+	r.GET("/api/v1/say_hello", _Api_SayHelloURL5_HTTP_Handler(srv))
 	r.GET("/api/v1/getCaptcha", _Api_GenerateCaptchaHandler1_HTTP_Handler(srv))
 	r.GET("/api/v1/sms", _Api_SMSCode0_HTTP_Handler(srv))
 	r.POST("/api/v1/register", _Api_Register0_HTTP_Handler(srv))
@@ -1272,7 +1272,7 @@ func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r.GET("/api/v1/user/profile", _Api_GetSysUserProfile1_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL7_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL5_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

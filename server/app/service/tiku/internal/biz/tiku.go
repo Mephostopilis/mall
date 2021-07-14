@@ -26,7 +26,7 @@ type TikuUsecase struct {
 }
 
 func NewTikuUsecase(c *conf.App, logger log.Logger, d dao.Dao, r *registry.Registry) (*TikuUsecase, error) {
-	log := log.NewHelper("usecase/tiku", logger)
+	log := log.NewHelper(log.With(logger, "module", "usecase/tiku"))
 	uuidc, err := uuidpb.NewUUID(context.Background(), grpc.WithDiscovery(r))
 	if err != nil {
 		return nil, err

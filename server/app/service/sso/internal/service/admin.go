@@ -23,7 +23,7 @@ type AdminService struct {
 }
 
 func NewAdminService(logger log.Logger, d dao.Dao, uc *biz.GreeterUsecase, jwtuc *biz.JWTUsecase) *AdminService {
-	log := log.NewHelper("service/admin", logger)
+	log := log.NewHelper(log.With(logger, "module", "service/admin"))
 	s := &AdminService{
 		adao:  d,
 		uc:    uc,

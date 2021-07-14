@@ -78,12 +78,12 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/sms/say_hello", _Api_SayHelloURL5_HTTP_Handler(srv))
+	r.GET("/api/v1/sms/say_hello", _Api_SayHelloURL3_HTTP_Handler(srv))
 	r.GET("/api/v1/sms/couponList", _Api_ListCoupon1_HTTP_Handler(srv))
 	r.GET("/api/v1/sms/coupon/{id}", _Api_GetCoupon0_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL5_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL3_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

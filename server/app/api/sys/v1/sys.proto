@@ -7,6 +7,9 @@ import "google/api/annotations.proto";
 // import "google/protobuf/empty.proto";
 // import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
 option go_package = "edu/api/sys/v1;v1";
 option java_multiple_files = true;
@@ -41,11 +44,13 @@ service Admin {
     rpc CreateConfig (SysConfig) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/config"
+            body: "*"
         };
     };
     rpc UpdateConfig (SysConfig) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/config/{configId}"
+            body: "*"
         };
     };
     rpc DeleteConfig (DeleteConfigRequest) returns (ApiReply) {
@@ -76,6 +81,7 @@ service Admin {
     rpc UpdateDept (Dept) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/dept"
+            body: "*"
         };
     };
     rpc DeleteDept (DeleteDeptRequest) returns (ApiReply) {
@@ -106,11 +112,13 @@ service Admin {
     rpc CreateMenu (Menu) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/menu"
+            body: "*"
         };
     };
     rpc UpdateMenu (Menu) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/menu"
+            body: "*"
         };
     };
     rpc DeleteMenu (DeleteMenuRequest) returns (ApiReply) {
@@ -151,11 +159,13 @@ service Admin {
     rpc CreateOperLog (OperLog) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/operlog"
+            body: "*"
         };
     };
     rpc UpdateOperLog (OperLog) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/operlog"
+            body: "*"
         };
     };
     rpc DeleteOperLog (DeleteOperLogRequest) returns (ApiReply) {
@@ -176,11 +186,13 @@ service Admin {
     rpc CreatePost (Post) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/post"
+            body: "*"
         };
     };
     rpc UpdatePost (Post) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/post/{postId}"
+            body: "*"
         };
     };
     rpc DeletePost (DeletePostRequest) returns (ApiReply) {
@@ -201,11 +213,13 @@ service Admin {
     rpc CreateRoleMenu (Menu) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/rolemenu"
+            body: "*"
         };
     };
     rpc UpdateRoleMenu (Menu) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/rolemenu"
+            body: "*"
         };
     };
     rpc DeleteRoleMenu (DeleteRoleMenuRequest) returns (ApiReply) {
@@ -231,16 +245,19 @@ service Admin {
     rpc CreateSetting (SysSetting) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/setting"
+            body: "*"
         };
     };
     rpc CreateSysjob (Job) returns (ApiReply){
         option (google.api.http) = {
             post: "/admin/v1/sysjob"
+            body: "*"
         };
     };
     rpc UpdateSysjob (Job) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/sysjob"
+            body: "*"
         };
     };
     rpc DeleteSysjob (DeleteSysjobRequest) returns (ApiReply) {
@@ -286,11 +303,13 @@ service Admin {
     rpc InsertDictData(DictData) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/dict/data"
+            body: "*"
         };
     };
     rpc UpdateDictData(DictData) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/dict/data"
+            body: "*"
         };
     };
     rpc DeleteDictData(DeleteDictDataRequest) returns (ApiReply) {
@@ -316,11 +335,13 @@ service Admin {
     rpc InsertDictType (DictType) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/dict/type"
+            body: "*"
         };
     };
     rpc UpdateDictType (DictType) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/dict/type"
+            body: "*"
         };
     };
     rpc DeleteDictType (DeleteDictTypeRequest) returns (ApiReply) {
@@ -346,11 +367,13 @@ service Admin {
     rpc InsertSysTable (InsertSysTableRequest) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/tools/sys/tables/info"
+            body: "*"
         };
     };
     rpc UpdateSysTable (SysTable) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/tools/sys/tables/info"
+            body: "*"
         };
     };
     rpc DeleteSysTables (DeleteSysTablesRequest) returns (ApiReply) {
@@ -366,6 +389,7 @@ service Admin {
     rpc UpdateSysColumn (SysColumn) returns (ApiReply) {
         option (google.api.http) = {
             put: "/admin/v1/tools/sys/column/info"
+            body: "*"
         };
     };
     rpc GetDBTableList (GetDBTableListRequest) returns (ApiReply) {

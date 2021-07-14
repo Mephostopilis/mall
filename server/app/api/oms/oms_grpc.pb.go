@@ -428,9 +428,6 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
-	// rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
-	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
-	SayHelloURL(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloResp, error)
 	ListOrder(ctx context.Context, in *ListOrderRequest, opts ...grpc.CallOption) (*ListOrderReply, error)
 	GetOrder(ctx context.Context, in *GetOrderRequest, opts ...grpc.CallOption) (*GetOrderReply, error)
 	CreateOrder(ctx context.Context, in *Order, opts ...grpc.CallOption) (*CreateOrderReply, error)
@@ -442,15 +439,6 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
-}
-
-func (c *apiClient) SayHelloURL(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloResp, error) {
-	out := new(HelloResp)
-	err := c.cc.Invoke(ctx, "/api.oms.Api/SayHelloURL", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *apiClient) ListOrder(ctx context.Context, in *ListOrderRequest, opts ...grpc.CallOption) (*ListOrderReply, error) {
@@ -484,9 +472,6 @@ func (c *apiClient) CreateOrder(ctx context.Context, in *Order, opts ...grpc.Cal
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
-	// rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
-	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 	ListOrder(context.Context, *ListOrderRequest) (*ListOrderReply, error)
 	GetOrder(context.Context, *GetOrderRequest) (*GetOrderReply, error)
 	CreateOrder(context.Context, *Order) (*CreateOrderReply, error)
@@ -497,9 +482,6 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
-func (UnimplementedApiServer) SayHelloURL(context.Context, *HelloReq) (*HelloResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHelloURL not implemented")
-}
 func (UnimplementedApiServer) ListOrder(context.Context, *ListOrderRequest) (*ListOrderReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrder not implemented")
 }
@@ -520,24 +502,6 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
-}
-
-func _Api_SayHelloURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).SayHelloURL(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.oms.Api/SayHelloURL",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).SayHelloURL(ctx, req.(*HelloReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_ListOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -601,10 +565,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.oms.Api",
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SayHelloURL",
-			Handler:    _Api_SayHelloURL_Handler,
-		},
 		{
 			MethodName: "ListOrder",
 			Handler:    _Api_ListOrder_Handler,

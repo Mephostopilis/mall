@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "edu/api/cms"
+	pb "edu/api/cms/v1"
 	"edu/service/cms/internal/biz"
 )
 
@@ -16,9 +16,6 @@ func NewCmsService(uc *biz.GreeterUsecase) *ApiService {
 	return &ApiService{}
 }
 
-func (s *ApiService) SayHelloURL(ctx context.Context, req *pb.HelloReq) (*pb.HelloResp, error) {
-	return &pb.HelloResp{}, nil
-}
 func (s *ApiService) ListHelp(ctx context.Context, req *pb.ListHelpRequest) (*pb.ListHelpReply, error) {
 	return &pb.ListHelpReply{}, nil
 }

@@ -5,7 +5,7 @@ import (
 	xhttp "net/http"
 
 	"edu/admin/internal/conf"
-	cmspb "edu/api/cms"
+	cmspb "edu/api/cms/v1"
 	memberpb "edu/api/member"
 	omspb "edu/api/oms"
 	pmspb "edu/api/pms"
@@ -20,6 +20,7 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
+	"github.com/go-kratos/kratos/v2/middleware/validate"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/go-kratos/swagger-api/openapiv2"
@@ -114,7 +115,16 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 	}
 	memberpb.RegisterAdminHandlerClient(ctx, gr, memberc)
 
-	var opts = []http.ServerOption{}
+	var opts = []http.ServerOption{
+		http.Middleware(
+			middleware.Chain(
+				recovery.Recovery(recovery.WithLogger(logger)),
+				tracing.Server(),
+				logging.Server(logger),
+				validate.Validator(),
+			),
+		),
+	}
 	if c.Http.Network != "" {
 		opts = append(opts, http.Network(c.Http.Network))
 	}

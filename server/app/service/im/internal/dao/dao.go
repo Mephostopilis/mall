@@ -56,7 +56,7 @@ func New(c *conf.Data, logger log.Logger) Dao {
 }
 
 func newDao(c *conf.Data, logger log.Logger) (d *dao, cf func(), err error) {
-	log := log.NewHelper("dao", logger)
+	log := log.NewHelper(log.With(logger, "module", "dao"))
 	conn, err := amqp.Dial("amqp://admin:123456@127.0.0.1:5673/my_vhost")
 	if err != nil {
 		log.Errorf("err = %v", err)

@@ -2,6 +2,7 @@ package server
 
 import (
 	pb "edu/api/comet/grpc"
+	"edu/pkg/middleware/handleerr"
 
 	"edu/comet/internal/conf"
 	"edu/comet/internal/service"
@@ -20,8 +21,9 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.CometService) *
 		grpc.Middleware(
 			middleware.Chain(
 				recovery.Recovery(recovery.WithLogger(logger)),
+				handleerr.Server(),
 				tracing.Server(),
-				logging.Server(logging.WithLogger(logger)),
+				logging.Server(logger),
 			),
 		),
 	}

@@ -5,6 +5,9 @@ package api.sms;
 import "api/sms/api.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
 option go_package = "edu/api/sms;sms";
 option java_multiple_files = true;
@@ -24,11 +27,13 @@ service Admin {
     rpc CreateCoupon (Coupon) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/smscoupon"
+            body: "*"
         };
     };
     rpc UpdateCoupon (Coupon) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/smscoupon"
+            body: "*"
         };
     };
     rpc DeleteCoupon (DeleteCouponRequest) returns (ApiReply) {
@@ -49,11 +54,13 @@ service Admin {
     rpc CreateCouponHistory (CouponHistory) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/smscouponhistory"
+            body: "*"
         };
     };
     rpc UpdateCouponHistory (CouponHistory) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/smscouponhistory"
+            body: "*"
         };
     };
     rpc DeleteCouponHistory (DeleteCouponHistoryRequest) returns (ApiReply) {

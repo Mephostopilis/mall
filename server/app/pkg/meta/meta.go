@@ -7,12 +7,12 @@ import (
 	"edu/pkg/ecode"
 
 	"github.com/go-kratos/kratos/v2/errors"
-	"google.golang.org/grpc/metadata"
+	"github.com/go-kratos/kratos/v2/metadata"
 	"google.golang.org/protobuf/proto"
 )
 
 func GetDataPermissions(ctx context.Context) (permission ssopb.DataPermission, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
+	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
 		err = ecode.Unknown("meta", "error")
 		return

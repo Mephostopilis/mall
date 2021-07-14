@@ -1,18 +1,69 @@
 syntax = "proto3";
 
-package api.cms;
+package api.cms.v1;
 
-import "api/cms/api.proto";
+import "api/cms/v1/api.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
-option go_package = "edu/api/cms;cms";
+option go_package = "edu/api/cms/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.cms";
+option java_package = "api.cms.v1";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+	info: {
+		title: "address服务";
+		version: "1.0";
+	};
+	schemes: HTTP;
+	schemes: HTTPS;
+	schemes: WSS;
+	consumes: "application/json";
+	consumes: "application/x-foo-mime";
+	produces: "application/json";
+	produces: "application/x-foo-mime";
+	security_definitions: {
+		security: {
+			key: "BasicAuth";
+			value: {
+				type: TYPE_BASIC;
+			}
+		}
+	}
+	responses: {
+		key: "500";
+		value: {
+			description: "Server error";
+			headers: {
+				key: "X-Correlation-Id"
+				value: {
+					description: "Unique event identifier for server requests"
+					type: "string"
+					format: "uuid"
+					default: "\"2438ac3c-37eb-4902-adef-ed16b4431030\""
+					pattern: "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
+				}
+			};
+			schema: {
+				json_schema: {
+					ref: ".errors.Error";
+				}
+			}
+		}
+	}
+};
 
 service Admin {
     rpc ListHelp (ListHelpRequest) returns (ApiReply) {
         option (google.api.http) = {
             get: "/admin/v1/cmshelpList"
+        };
+    };
+    rpc BatchGetHelp (BatchGetHelpRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/cmshelp/batch"
         };
     };
     rpc GetHelp (GetHelpRequest) returns (ApiReply) {
@@ -23,11 +74,13 @@ service Admin {
     rpc CreateHelp (Help) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/cmshelp"
+            body: "*"
         };
     };
     rpc UpdateHelp (Help) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/cmshelp"
+            body: "*"
         };
     };
     rpc DeleteHelp (DeleteHelpRequest) returns (ApiReply) {
@@ -48,11 +101,13 @@ service Admin {
     rpc CreateHelpCategory (HelpCategory) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/cmshelpcategory"
+            body: "*"
         };
     };
     rpc UpdateHelpCategory (HelpCategory) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/cmshelpcategory"
+            body: "*"
         };
     };
     rpc DeleteHelpCategory (DeleteHelpCategoryRequest) returns (ApiReply) {
@@ -73,11 +128,13 @@ service Admin {
     rpc CreateSubject (Subject) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/cmssubject"
+            body: "*"
         };
     };
     rpc UpdateSubject (Subject) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/cmssubject"
+            body: "*"
         };
     };
     rpc DeleteSubject (DeleteSubjectRequest) returns (ApiReply) {
@@ -98,11 +155,13 @@ service Admin {
     rpc CreateSubjectCategory (SubjectCategory) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/cmssubject"
+            body: "*"
         };
     };
     rpc UpdateSubjectCategory (SubjectCategory) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/cmssubject"
+            body: "*"
         };
     };
     rpc DeleteSubjectCategory (DeleteSubjectCategoryRequest) returns (ApiReply) {
@@ -113,13 +172,6 @@ service Admin {
 }
 
 service Api {
-    // rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
-	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
-	rpc SayHelloURL(HelloReq) returns (HelloResp) {
-        option (google.api.http) = {
-            get:"/api/v1/cms/say_hello"
-        };
-    };
     rpc ListHelp (ListHelpRequest) returns (ListHelpReply) {
         option (google.api.http) = {
             get: "/api/v1/cms/helpList"
@@ -132,14 +184,6 @@ service Api {
     };
 }
 
-message HelloReq {
-	string name = 1;
-}
-
-message HelloResp {
-    string Content = 1;
-}
-
 message ListHelpRequest {
     int32 pageSize = 1;
     int32 pageIndex = 2;
@@ -148,6 +192,9 @@ message ListHelpRequest {
     string configType = 5;
 }
 message ListHelpReply {}
+
+message BatchGetHelpRequest {}
+message BatchGetHelpReply {}
 
 message GetHelpRequest {
     uint64 helpId = 1;

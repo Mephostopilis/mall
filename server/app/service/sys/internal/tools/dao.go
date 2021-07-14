@@ -40,7 +40,7 @@ func New(c *conf.App, logger log.Logger) (d Dao, err error) {
 }
 
 func newDao(c *conf.App, logger log.Logger) (d *dao, err error) {
-	log := log.NewHelper("dao/tools", logger)
+	log := log.NewHelper(log.With(logger, "module", "dao/tools"))
 	db, err := gorm.Open(mysql.New(
 		mysql.Config{
 			DSN: c.Tools.Source,

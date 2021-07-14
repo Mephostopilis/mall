@@ -18,7 +18,7 @@ type UUIDService struct {
 func NewUUIDService(logger log.Logger, uc *biz.GreeterUsecase) *UUIDService {
 	return &UUIDService{
 		uc:  uc,
-		log: log.NewHelper("service", logger),
+		log: log.NewHelper(log.With(logger, "module", "service")),
 	}
 }
 

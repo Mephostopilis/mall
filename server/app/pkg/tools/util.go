@@ -8,8 +8,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/ethereum/go-ethereum/common"
 )
 
 //时间格式转时间戳
@@ -195,8 +193,8 @@ func Str2Str(f string, m int) string {
 }
 
 //String2Hex 将字符串转十六进制
-func String2Hex(value string) string {
-	int := new(big.Int)
-	int.SetString(value, 0)
-	return common.Bytes2Hex(int.Bytes())
-}
+// func String2Hex(value string) string {
+// 	int := new(big.Int)
+// 	int.SetString(value, 0)
+// 	return common.Bytes2Hex(int.Bytes())
+// }

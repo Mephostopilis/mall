@@ -10,7 +10,8 @@ message Bootstrap {
   Server server = 2;
   Data data = 3;
   Reg reg = 4;
-  App app = 5;
+  Logger logger = 5;
+  App app = 6;
 }
 
 message Service {
@@ -67,6 +68,12 @@ message Reg {
   }
   Etcd etcd = 1;
   Instance instance = 2;
+}
+
+message Logger {
+  string path = 1;
+  bool stdout = 2;
+  int32 level = 3;
 }
 
 message App {

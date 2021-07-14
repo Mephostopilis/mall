@@ -16,7 +16,7 @@ type AdminService struct {
 }
 
 func NewAdminService(genConf *conf.App, logger log.Logger, adao dao.Dao, uc *biz.AdminUsecase) *AdminService {
-	log := log.NewHelper("service/admin", logger)
+	log := log.NewHelper(log.With(logger, "module", "service/admin"))
 	return &AdminService{
 		log: log,
 		uc:  uc,

@@ -4,7 +4,7 @@ import (
 	"context"
 	xhttp "net/http"
 
-	cmspb "edu/api/cms"
+	cmspb "edu/api/cms/v1"
 	memberpb "edu/api/member"
 	pmspb "edu/api/pms"
 	ssopb "edu/api/sso"
@@ -44,7 +44,7 @@ func NewHTTPServer(c *conf.Server, logger log.Logger) *http.Server {
 		middleware.Chain(
 			recovery.Recovery(),
 			tracing.Client(),
-			logging.Client(logging.WithLogger(logger)),
+			logging.Client(logger),
 		),
 	)
 

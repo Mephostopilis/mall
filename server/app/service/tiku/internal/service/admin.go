@@ -20,7 +20,7 @@ type AdminService struct {
 }
 
 func NewAdminService(logger log.Logger, uc *biz.TikuUsecase) *AdminService {
-	log := log.NewHelper("service/admin", logger)
+	log := log.NewHelper(log.With(logger, "module", "service/admin"))
 	s := &AdminService{
 		uc:  uc,
 		log: log,

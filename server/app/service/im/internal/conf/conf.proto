@@ -10,7 +10,8 @@ message Bootstrap {
   Server server = 2;
   Data data = 3;
   Reg reg = 4;
-  App app = 5;
+  Logger logger = 5;
+  App app = 6;
 }
 
 message Service {
@@ -63,15 +64,13 @@ message Reg {
     repeated string endpoints = 1;
     google.protobuf.Duration dialTimeout = 2;
   }
-  message Instance {
-    string zone = 1;
-    string env = 2;
-    string hostname = 3;
-    string appid = 4;
-    repeated string addrs = 5;
-  }
   Etcd etcd = 1;
-  Instance instance = 2;
+}
+
+message Logger {
+  string path = 1;
+  bool stdout = 2;
+  int32 level = 3;
 }
 
 message App {

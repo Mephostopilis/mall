@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 
-	pb "edu/api/cms"
+	pb "edu/api/cms/v1"
 	uuidpb "edu/api/uuid"
 	"edu/pkg/strings"
 	"edu/service/cms/internal/dao"
@@ -29,7 +29,7 @@ func NewGreeterUsecase(logger log.Logger, d dao.Dao, r *registry.Registry) (*Gre
 	return &GreeterUsecase{
 		uuidc: cc,
 		d:     d,
-		log:   log.NewHelper("usecase/greeter", logger),
+		log:   log.NewHelper(log.With(logger, "module", "usecase/greeter")),
 	}, nil
 }
 

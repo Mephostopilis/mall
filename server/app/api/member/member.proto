@@ -4,6 +4,9 @@ package api.member;
 
 import "api/member/api.proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
 
 option go_package = "edu/api/member;member";
 option java_multiple_files = true;
@@ -23,11 +26,13 @@ service Admin {
     rpc CreateMember (Member) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/member"
+            body: "*"
         };
     };
     rpc UpdateMember (Member) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/member"
+            body: "*"
         };
     };
     rpc DeleteMember (DeleteMemberRequest) returns (ApiReply) {
@@ -48,11 +53,13 @@ service Admin {
     rpc CreateMemberAssets (MemberAssets) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/memberassets"
+            body: "*"
         };
     };
     rpc UpdateMemberAssets (MemberAssets) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/memberassets"
+            body: "*"
         };
     };
     rpc DeleteMemberAssets (DeleteMemberAssetsRequest) returns (ApiReply) {

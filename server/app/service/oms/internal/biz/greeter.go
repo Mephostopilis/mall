@@ -25,6 +25,6 @@ func NewGreeterUsecase(logger log.Logger, d dao.Dao, r *registry.Registry) (*Gre
 	return &GreeterUsecase{
 		d:     d,
 		uuidc: cc,
-		log:   log.NewHelper("usecase/greeter", logger),
+		log:   log.NewHelper(log.With(logger, "module", "usecase/greeter")),
 	}, nil
 }

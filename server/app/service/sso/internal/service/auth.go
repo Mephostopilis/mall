@@ -18,7 +18,7 @@ type AuthService struct {
 }
 
 func NewAuthService(logger log.Logger, d dao.Dao, uc *biz.GreeterUsecase) *AuthService {
-	log := log.NewHelper("service/auth", logger)
+	log := log.NewHelper(log.With(logger, "module", "service/auth"))
 	s := &AuthService{
 		adao: d,
 		uc:   uc,

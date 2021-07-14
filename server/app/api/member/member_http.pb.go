@@ -88,7 +88,7 @@ func _Admin_GetMember0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) 
 func _Admin_CreateMember0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Member
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.member.Admin/CreateMember")
@@ -107,7 +107,7 @@ func _Admin_CreateMember0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateMember0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Member
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.member.Admin/UpdateMember")
@@ -189,7 +189,7 @@ func _Admin_GetMemberAssets0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Con
 func _Admin_CreateMemberAssets0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in MemberAssets
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.member.Admin/CreateMemberAssets")
@@ -208,7 +208,7 @@ func _Admin_CreateMemberAssets0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.
 func _Admin_UpdateMemberAssets0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in MemberAssets
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.member.Admin/UpdateMemberAssets")
@@ -270,10 +270,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateMember(ctx context.Context, in *Member, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/member"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.member.Admin/CreateMember"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -283,10 +283,10 @@ func (c *AdminHTTPClientImpl) CreateMember(ctx context.Context, in *Member, opts
 func (c *AdminHTTPClientImpl) CreateMemberAssets(ctx context.Context, in *MemberAssets, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/memberassets"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.member.Admin/CreateMemberAssets"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,10 +374,10 @@ func (c *AdminHTTPClientImpl) ListMemberAssets(ctx context.Context, in *ListMemb
 func (c *AdminHTTPClientImpl) UpdateMember(ctx context.Context, in *Member, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/member"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.member.Admin/UpdateMember"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -387,10 +387,10 @@ func (c *AdminHTTPClientImpl) UpdateMember(ctx context.Context, in *Member, opts
 func (c *AdminHTTPClientImpl) UpdateMemberAssets(ctx context.Context, in *MemberAssets, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/memberassets"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.member.Admin/UpdateMemberAssets"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -404,11 +404,11 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/oms/say_hello", _Api_SayHelloURL1_HTTP_Handler(srv))
+	r.GET("/api/v1/oms/say_hello", _Api_SayHelloURL0_HTTP_Handler(srv))
 	r.GET("/api/v1/member/{id}", _Api_GetMember1_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

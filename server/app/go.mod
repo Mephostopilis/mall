@@ -3,6 +3,7 @@ module edu
 go 1.15
 
 require (
+	github.com/StackExchange/wmi v1.2.0 // indirect
 	github.com/astaxie/beego v1.12.3
 	github.com/blevesearch/bleve v1.0.14
 	github.com/blevesearch/segment v0.9.0
@@ -11,12 +12,13 @@ require (
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/elazarl/goproxy v0.0.0-20210110162100-a92cc753f88e // indirect
-	github.com/ethereum/go-ethereum v1.9.24
+	github.com/envoyproxy/protoc-gen-validate v0.1.0
 	github.com/go-ego/gse v0.66.7
 	github.com/go-kratos/etcd v0.0.0-20210311162832-e0fdc8177742
 	github.com/go-kratos/kratos/v2 v2.0.0
 	github.com/go-kratos/swagger-api v0.1.8
 	github.com/go-oauth2/oauth2/v4 v4.1.2
+	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/go-redis/redis/v8 v8.11.0
 	github.com/golang-migrate/migrate/v4 v4.8.0
 	github.com/golang/mock v1.5.0 // indirect
@@ -24,9 +26,9 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/google/wire v0.5.0
 	github.com/gorilla/handlers v1.5.1
-	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0
+	github.com/longXboy/grpc-gateway/v2 v2.0.0-20210707031540-bd2d73d86cee
 	github.com/milkbobo/gopay v0.0.0-20201210063808-7d4b4028f17a
 	github.com/mojocn/base64Captcha v1.3.1
 	github.com/mssola/user_agent v0.5.2

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "api/tiku/api.proto",
+    "title": "api/cms/v1/api.proto",
     "version": "version not set"
   },
   "consumes": [

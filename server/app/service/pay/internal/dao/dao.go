@@ -34,7 +34,7 @@ func New(c *conf.Data, logger log.Logger) (d Dao, err error) {
 }
 
 func newDao(c *conf.Data, logger log.Logger) (d *dao, err error) {
-	log := log.NewHelper("dao", logger)
+	log := log.NewHelper(log.With(logger, "module", "dao"))
 	db, err := gorm.Open(mysql.Open(c.Database.Source), &gorm.Config{})
 	if err != nil {
 		log.Error("get account fail")

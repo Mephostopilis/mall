@@ -283,7 +283,7 @@ func _Admin_ListResource0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_CreateConfig0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysConfig
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateConfig")
@@ -302,7 +302,7 @@ func _Admin_CreateConfig0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateConfig0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysConfig
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
@@ -428,7 +428,7 @@ func _Admin_CreateDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_UpdateDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Dept
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateDept")
@@ -551,7 +551,7 @@ func _Admin_GetDeptTreeRoleselect0_HTTP_Handler(srv AdminHTTPServer) func(ctx ht
 func _Admin_CreateMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Menu
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateMenu")
@@ -570,7 +570,7 @@ func _Admin_CreateMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_UpdateMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Menu
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateMenu")
@@ -731,7 +731,7 @@ func _Admin_GetMenuIDS0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_CreateOperLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in OperLog
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateOperLog")
@@ -750,7 +750,7 @@ func _Admin_CreateOperLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 func _Admin_UpdateOperLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in OperLog
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateOperLog")
@@ -829,7 +829,7 @@ func _Admin_ListOperLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_CreatePost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Post
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreatePost")
@@ -848,7 +848,7 @@ func _Admin_CreatePost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_UpdatePost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Post
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
@@ -933,7 +933,7 @@ func _Admin_ListPost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) e
 func _Admin_CreateRoleMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Menu
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateRoleMenu")
@@ -952,7 +952,7 @@ func _Admin_CreateRoleMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateRoleMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Menu
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateRoleMenu")
@@ -1047,7 +1047,7 @@ func _Admin_GetSetting0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 func _Admin_CreateSetting0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysSetting
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateSetting")
@@ -1066,7 +1066,7 @@ func _Admin_CreateSetting0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 func _Admin_CreateSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Job
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateSysjob")
@@ -1085,7 +1085,7 @@ func _Admin_CreateSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Job
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateSysjob")
@@ -1274,7 +1274,7 @@ func _Admin_GetDictData0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_InsertDictData0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DictData
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/InsertDictData")
@@ -1293,7 +1293,7 @@ func _Admin_InsertDictData0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateDictData0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DictData
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateDictData")
@@ -1394,7 +1394,7 @@ func _Admin_GetDictTypeOptionSelect0_HTTP_Handler(srv AdminHTTPServer) func(ctx 
 func _Admin_InsertDictType0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DictType
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/InsertDictType")
@@ -1413,7 +1413,7 @@ func _Admin_InsertDictType0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateDictType0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DictType
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateDictType")
@@ -1514,7 +1514,7 @@ func _Admin_GetSysTables0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_InsertSysTable0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in InsertSysTableRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/InsertSysTable")
@@ -1533,7 +1533,7 @@ func _Admin_InsertSysTable0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateSysTable0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysTable
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateSysTable")
@@ -1596,7 +1596,7 @@ func _Admin_GetSysColumn0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateSysColumn0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysColumn
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateSysColumn")
@@ -1806,10 +1806,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateConfig(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateConfig"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1832,10 +1832,10 @@ func (c *AdminHTTPClientImpl) CreateDept(ctx context.Context, in *Dept, opts ...
 func (c *AdminHTTPClientImpl) CreateMenu(ctx context.Context, in *Menu, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/menu"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateMenu"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1845,10 +1845,10 @@ func (c *AdminHTTPClientImpl) CreateMenu(ctx context.Context, in *Menu, opts ...
 func (c *AdminHTTPClientImpl) CreateOperLog(ctx context.Context, in *OperLog, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/operlog"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateOperLog"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1858,10 +1858,10 @@ func (c *AdminHTTPClientImpl) CreateOperLog(ctx context.Context, in *OperLog, op
 func (c *AdminHTTPClientImpl) CreatePost(ctx context.Context, in *Post, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/post"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreatePost"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1884,10 +1884,10 @@ func (c *AdminHTTPClientImpl) CreateResource(ctx context.Context, in *SysConfig,
 func (c *AdminHTTPClientImpl) CreateRoleMenu(ctx context.Context, in *Menu, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/rolemenu"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateRoleMenu"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1897,10 +1897,10 @@ func (c *AdminHTTPClientImpl) CreateRoleMenu(ctx context.Context, in *Menu, opts
 func (c *AdminHTTPClientImpl) CreateSetting(ctx context.Context, in *SysSetting, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/setting"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateSetting"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1910,10 +1910,10 @@ func (c *AdminHTTPClientImpl) CreateSetting(ctx context.Context, in *SysSetting,
 func (c *AdminHTTPClientImpl) CreateSysjob(ctx context.Context, in *Job, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/sysjob"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateSysjob"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2456,10 +2456,10 @@ func (c *AdminHTTPClientImpl) GetSysjob(ctx context.Context, in *GetSysjobReques
 func (c *AdminHTTPClientImpl) InsertDictData(ctx context.Context, in *DictData, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/dict/data"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/InsertDictData"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2469,10 +2469,10 @@ func (c *AdminHTTPClientImpl) InsertDictData(ctx context.Context, in *DictData, 
 func (c *AdminHTTPClientImpl) InsertDictType(ctx context.Context, in *DictType, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/dict/type"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/InsertDictType"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2482,10 +2482,10 @@ func (c *AdminHTTPClientImpl) InsertDictType(ctx context.Context, in *DictType, 
 func (c *AdminHTTPClientImpl) InsertSysTable(ctx context.Context, in *InsertSysTableRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tools/sys/tables/info"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/InsertSysTable"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2638,10 +2638,10 @@ func (c *AdminHTTPClientImpl) StartJob(ctx context.Context, in *StartJobRequest,
 func (c *AdminHTTPClientImpl) UpdateConfig(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{configId}"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateConfig"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2651,10 +2651,10 @@ func (c *AdminHTTPClientImpl) UpdateConfig(ctx context.Context, in *SysConfig, o
 func (c *AdminHTTPClientImpl) UpdateDept(ctx context.Context, in *Dept, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/dept"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateDept"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2664,10 +2664,10 @@ func (c *AdminHTTPClientImpl) UpdateDept(ctx context.Context, in *Dept, opts ...
 func (c *AdminHTTPClientImpl) UpdateDictData(ctx context.Context, in *DictData, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/dict/data"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateDictData"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2677,10 +2677,10 @@ func (c *AdminHTTPClientImpl) UpdateDictData(ctx context.Context, in *DictData, 
 func (c *AdminHTTPClientImpl) UpdateDictType(ctx context.Context, in *DictType, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/dict/type"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateDictType"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2690,10 +2690,10 @@ func (c *AdminHTTPClientImpl) UpdateDictType(ctx context.Context, in *DictType, 
 func (c *AdminHTTPClientImpl) UpdateMenu(ctx context.Context, in *Menu, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/menu"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateMenu"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2703,10 +2703,10 @@ func (c *AdminHTTPClientImpl) UpdateMenu(ctx context.Context, in *Menu, opts ...
 func (c *AdminHTTPClientImpl) UpdateOperLog(ctx context.Context, in *OperLog, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/operlog"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateOperLog"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2716,10 +2716,10 @@ func (c *AdminHTTPClientImpl) UpdateOperLog(ctx context.Context, in *OperLog, op
 func (c *AdminHTTPClientImpl) UpdatePost(ctx context.Context, in *Post, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/post/{postId}"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdatePost"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2742,10 +2742,10 @@ func (c *AdminHTTPClientImpl) UpdateResource(ctx context.Context, in *SysConfig,
 func (c *AdminHTTPClientImpl) UpdateRoleMenu(ctx context.Context, in *Menu, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/rolemenu"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateRoleMenu"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2755,10 +2755,10 @@ func (c *AdminHTTPClientImpl) UpdateRoleMenu(ctx context.Context, in *Menu, opts
 func (c *AdminHTTPClientImpl) UpdateSysColumn(ctx context.Context, in *SysColumn, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tools/sys/column/info"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateSysColumn"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2768,10 +2768,10 @@ func (c *AdminHTTPClientImpl) UpdateSysColumn(ctx context.Context, in *SysColumn
 func (c *AdminHTTPClientImpl) UpdateSysTable(ctx context.Context, in *SysTable, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tools/sys/tables/info"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateSysTable"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2781,10 +2781,10 @@ func (c *AdminHTTPClientImpl) UpdateSysTable(ctx context.Context, in *SysTable, 
 func (c *AdminHTTPClientImpl) UpdateSysjob(ctx context.Context, in *Job, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/sysjob"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateSysjob"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

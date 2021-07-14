@@ -7,7 +7,7 @@ import (
 )
 
 func Unknown(domain, reason, format string, a ...interface{}) error {
-	return (InternalServer("Unknown", fmt.Sprintf(format, a...)))
+	return InternalServer("Unknown", fmt.Sprintf(format, a...))
 }
 
 // main ecode interval is [0,990000]
@@ -44,10 +44,6 @@ func ErrForbidden(domain, reason, format string, a ...interface{}) error {
 
 func ErrUpdateSysUser(domain, reason, format string, a ...interface{}) error {
 	return (InternalServer("11103", "")) // ErrForbidden when HTTP status 403 is give
-}
-
-func ErrAesNewCipher(domain, reason, format string, a ...interface{}) error {
-	return (InternalServer("11104", "")) // ErrForbidden when HTTP status 403 is give
 }
 
 func AdminTableEmpty(domain, reason, format string, a ...interface{}) error {
@@ -155,10 +151,19 @@ func UserNotExist(domain, reason, format string, a ...interface{}) error {
 }
 
 func ErrSignService(format string, a ...interface{}) error {
-	return (InternalServer("11131", fmt.Sprintf(format, a...)))
+	return InternalServer("11131", fmt.Sprintf(format, a...))
 }
 
 func IsErrSignService(err error) bool {
+	se := errors.FromError(err)
+	return se.Reason == "11131" && se.Code == 500
+}
+
+func ErrBadPublicKey(format string, a ...interface{}) error {
+	return InternalServer("11131", fmt.Sprintf(format, a...))
+}
+
+func IsErrBadPublicKey(err error) bool {
 	se := errors.FromError(err)
 	return se.Reason == "11131" && se.Code == 500
 }

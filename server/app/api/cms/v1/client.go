@@ -1,4 +1,4 @@
-package cms
+package v1
 
 import (
 	"context"
@@ -9,17 +9,14 @@ import (
 )
 
 // AppID .
-const AppID = "discovery:///cms"
-const target = "127.0.0.1:9005"
+const appID = "discovery:///cms"
 
 // NewClient new grpc client
 func NewApi(ctx context.Context, opts ...grpctransport.ClientOption) (ApiClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(AppID))
+	t = append(t, grpctransport.WithEndpoint(appID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err
@@ -32,7 +29,7 @@ func NewApi(ctx context.Context, opts ...grpctransport.ClientOption) (ApiClient,
 // NewClient new grpc client
 func NewAdmin(ctx context.Context, opts ...grpctransport.ClientOption) (AdminClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
+	t = append(t, grpctransport.WithEndpoint(appID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
 	for _, o := range opts {
 		t = append(t, o)
@@ -49,7 +46,7 @@ func NewAdmin(ctx context.Context, opts ...grpctransport.ClientOption) (AdminCli
 // NewGrpcConn new grpc client
 func NewGrpcConn(ctx context.Context, opts ...grpctransport.ClientOption) (*grpc.ClientConn, error) {
 	cc, err := grpctransport.DialInsecure(ctx,
-		grpctransport.WithEndpoint(target),
+		grpctransport.WithEndpoint(appID),
 		// grpctransport.WithOptions(grpc.WithInsecure()),
 	)
 	if err != nil {

@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package api.cms;
+package api.cms.v1;
 
 import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "edu/api/cms;cms";
+option go_package = "edu/api/cms/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.cms";
+option java_package = "api.cms.v1";
 
 message ApiReply {
     int32 code = 1;

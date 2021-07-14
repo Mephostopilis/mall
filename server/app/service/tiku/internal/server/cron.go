@@ -22,7 +22,7 @@ type cronSrv struct {
 
 // NewCron 新cron
 func NewCron(logger log.Logger, uc *biz.TikuUsecase) (d CronSrv, err error) {
-	log := log.NewHelper("server/cron", logger)
+	log := log.NewHelper(log.With(logger, "module", "server/cron"))
 	cr := cron.New()
 	s := &cronSrv{
 		cr:  cr,

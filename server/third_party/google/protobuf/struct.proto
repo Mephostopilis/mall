@@ -30,88 +30,66 @@
 
 syntax = "proto3";
 
-package proto_util_converter.testing;
+package google.protobuf;
 
-import "google/protobuf/struct.proto";
+option csharp_namespace = "Google.Protobuf.WellKnownTypes";
+option cc_enable_arenas = true;
+option go_package = "google.golang.org/protobuf/types/known/structpb";
+option java_package = "com.google.protobuf";
+option java_outer_classname = "StructProto";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
 
-message StructTestCases {
-  StructWrapper empty_value = 1;
-  StructWrapper empty_value2 = 2;
-  StructWrapper null_value = 3;
-  StructWrapper simple_struct = 4;
-  StructWrapper longer_struct = 5;
-  StructWrapper struct_with_nested_struct = 6;
-  StructWrapper struct_with_nested_list = 7;
-  StructWrapper struct_with_list_of_nulls = 8;
-  StructWrapper struct_with_list_of_lists = 9;
-  StructWrapper struct_with_list_of_structs = 10;
-  StructWrapper struct_with_empty_list = 11;
-  StructWrapper struct_with_list_with_empty_struct = 12;
-  google.protobuf.Struct top_level_struct = 13;
-  google.protobuf.Struct top_level_struct_with_empty_list = 14;
-  google.protobuf.Struct top_level_struct_with_list_with_empty_struct = 15;
-  ValueWrapper value_wrapper_simple = 16;
-  ValueWrapper value_wrapper_with_struct = 17;
-  ValueWrapper value_wrapper_with_list = 18;
-  ValueWrapper value_wrapper_with_empty_list = 19;
-  ValueWrapper value_wrapper_with_list_with_empty_struct = 20;
-  ListValueWrapper list_value_wrapper = 21;
-  ListValueWrapper list_value_wrapper_with_empty_list = 22;
-  ListValueWrapper list_value_wrapper_with_list_with_empty_struct = 23;
-  google.protobuf.Value top_level_value_simple = 24;
-  google.protobuf.Value top_level_value_with_struct = 25;
-  google.protobuf.Value top_level_value_with_list = 26;
-  google.protobuf.Value top_level_value_with_empty_list = 27;
-  google.protobuf.Value top_level_value_with_list_with_empty_struct = 28;
-  google.protobuf.ListValue top_level_listvalue = 29;
-  google.protobuf.ListValue top_level_empty_listvalue = 30;
-  google.protobuf.ListValue top_level_listvalue_with_empty_struct = 31;
-  RepeatedValueWrapper repeated_value = 32;
-  RepeatedValueWrapper repeated_value_nested_list = 33;
-  RepeatedValueWrapper repeated_value_nested_list2 = 34;
-  RepeatedValueWrapper repeated_value_nested_list3 = 35;
-  RepeatedListValueWrapper repeated_listvalue = 36;
-  MapOfStruct map_of_struct = 37;
-  MapOfStruct map_of_struct_value = 38;
-  MapOfStruct map_of_listvalue = 39;
+// `Struct` represents a structured data value, consisting of fields
+// which map to dynamically typed values. In some languages, `Struct`
+// might be supported by a native representation. For example, in
+// scripting languages like JS a struct is represented as an
+// object. The details of that representation are described together
+// with the proto support for the language.
+//
+// The JSON representation for `Struct` is JSON object.
+message Struct {
+  // Unordered map of dynamically typed values.
+  map<string, Value> fields = 1;
 }
 
-message StructWrapper {
-  google.protobuf.Struct struct = 1;
+// `Value` represents a dynamically typed value which can be either
+// null, a number, a string, a boolean, a recursive struct value, or a
+// list of values. A producer of value is expected to set one of that
+// variants, absence of any variant indicates an error.
+//
+// The JSON representation for `Value` is JSON value.
+message Value {
+  // The kind of value.
+  oneof kind {
+    // Represents a null value.
+    NullValue null_value = 1;
+    // Represents a double value.
+    double number_value = 2;
+    // Represents a string value.
+    string string_value = 3;
+    // Represents a boolean value.
+    bool bool_value = 4;
+    // Represents a structured value.
+    Struct struct_value = 5;
+    // Represents a repeated `Value`.
+    ListValue list_value = 6;
+  }
 }
 
-message ValueWrapper {
-  google.protobuf.Value value = 1;
+// `NullValue` is a singleton enumeration to represent the null value for the
+// `Value` type union.
+//
+//  The JSON representation for `NullValue` is JSON `null`.
+enum NullValue {
+  // Null value.
+  NULL_VALUE = 0;
 }
 
-message RepeatedValueWrapper {
-  repeated google.protobuf.Value values = 1;
-}
-
-message ListValueWrapper {
-  google.protobuf.ListValue shopping_list = 1;
-}
-
-message RepeatedListValueWrapper {
-  repeated google.protobuf.ListValue dimensions = 1;
-}
-
-message MapOfStruct {
-  map<string, google.protobuf.Struct> struct_map = 1;
-  map<string, google.protobuf.Value> value_map = 2;
-  map<string, google.protobuf.ListValue> listvalue_map = 3;
-}
-
-// Hack to test return types with Struct as top-level message. Struct typers
-// cannot be directly used in API requests. Hence using Dummy as request type.
-message Dummy {
-  string text = 1;
-}
-
-service StructTestService {
-  rpc Call(Dummy) returns (StructTestCases);
-}
-
-message StructType {
-  google.protobuf.Struct object = 1;
+// `ListValue` is a wrapper around a repeated field of values.
+//
+// The JSON representation for `ListValue` is JSON array.
+message ListValue {
+  // Repeated field of dynamically typed values.
+  repeated Value values = 1;
 }

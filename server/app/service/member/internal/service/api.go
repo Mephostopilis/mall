@@ -15,7 +15,7 @@ type ApiService struct {
 
 func NewApiService(logger log.Logger) *ApiService {
 	return &ApiService{
-		log: log.NewHelper("service/api", logger),
+		log: log.NewHelper(log.With(logger, "module", "service/api")),
 	}
 }
 

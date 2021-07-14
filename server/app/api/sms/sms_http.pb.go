@@ -88,7 +88,7 @@ func _Admin_GetCoupon1_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) 
 func _Admin_CreateCoupon0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Coupon
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sms.Admin/CreateCoupon")
@@ -107,7 +107,7 @@ func _Admin_CreateCoupon0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateCoupon0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Coupon
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sms.Admin/UpdateCoupon")
@@ -189,7 +189,7 @@ func _Admin_GetCouponHistory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Co
 func _Admin_CreateCouponHistory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CouponHistory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sms.Admin/CreateCouponHistory")
@@ -208,7 +208,7 @@ func _Admin_CreateCouponHistory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http
 func _Admin_UpdateCouponHistory0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CouponHistory
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sms.Admin/UpdateCouponHistory")
@@ -270,10 +270,10 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 func (c *AdminHTTPClientImpl) CreateCoupon(ctx context.Context, in *Coupon, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/smscoupon"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sms.Admin/CreateCoupon"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -283,10 +283,10 @@ func (c *AdminHTTPClientImpl) CreateCoupon(ctx context.Context, in *Coupon, opts
 func (c *AdminHTTPClientImpl) CreateCouponHistory(ctx context.Context, in *CouponHistory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/smscouponhistory"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sms.Admin/CreateCouponHistory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,10 +374,10 @@ func (c *AdminHTTPClientImpl) ListCouponHistory(ctx context.Context, in *ListCou
 func (c *AdminHTTPClientImpl) UpdateCoupon(ctx context.Context, in *Coupon, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/smscoupon"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sms.Admin/UpdateCoupon"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -387,10 +387,10 @@ func (c *AdminHTTPClientImpl) UpdateCoupon(ctx context.Context, in *Coupon, opts
 func (c *AdminHTTPClientImpl) UpdateCouponHistory(ctx context.Context, in *CouponHistory, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/smscouponhistory"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sms.Admin/UpdateCouponHistory"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -405,12 +405,12 @@ type ApiHTTPServer interface {
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/sms/say_hello", _Api_SayHelloURL6_HTTP_Handler(srv))
+	r.GET("/api/v1/sms/say_hello", _Api_SayHelloURL4_HTTP_Handler(srv))
 	r.GET("/api/v1/sms/couponList", _Api_ListCoupon3_HTTP_Handler(srv))
 	r.GET("/api/v1/sms/coupon/{id}", _Api_GetCoupon2_HTTP_Handler(srv))
 }
 
-func _Api_SayHelloURL6_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+func _Api_SayHelloURL4_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in HelloReq
 		if err := ctx.BindQuery(&in); err != nil {

@@ -21,7 +21,7 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.LogicService) *
 			middleware.Chain(
 				recovery.Recovery(recovery.WithLogger(logger)),
 				tracing.Server(),
-				logging.Server(logging.WithLogger(logger)),
+				logging.Server(logger),
 			),
 		),
 	}
