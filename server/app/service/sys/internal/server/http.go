@@ -17,7 +17,15 @@ import (
 
 // NewHTTPServer new a HTTP server.
 func NewHTTPServer(c *conf.Server, logger log.Logger, a *service.AdminService, s *service.ApiService) *http.Server {
-	var opts = []http.ServerOption{}
+	var opts = []http.ServerOption{
+		http.Middleware(
+			middleware.Chain(
+				recovery.Recovery(),
+				tracing.Server(),
+				logging.Server(logger),
+			),
+		),
+	}
 	if c.Http.Network != "" {
 		opts = append(opts, http.Network(c.Http.Network))
 	}
@@ -29,14 +37,6 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, a *service.AdminService, s
 	}
 	opts = append(opts, http.Logger(logger))
 	httpSrv := http.NewServer(opts...)
-
-	m := http.Middleware(
-		middleware.Chain(
-			recovery.Recovery(),
-			tracing.Server(),
-			logging.Server(logger),
-		),
-	)
 
 	pb.RegisterAdminHTTPServer(httpSrv, a)
 	pb.RegisterApiHTTPServer(httpSrv, s)

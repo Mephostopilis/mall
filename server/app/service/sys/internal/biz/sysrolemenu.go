@@ -3,17 +3,16 @@ package biz
 import (
 	"context"
 
-	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
+	"edu/pkg/meta"
 	"edu/service/sys/internal/model"
 )
 
 func (uc *AdminUsecase) DeleteRoleMenu(ctx context.Context, token string, req *pb.DeleteRoleMenuRequest) (reply *pb.ApiReply, err error) {
-	out, err := uc.mw.ValidationToken(token)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(ssopb.DataPermission)
 	var t model.SysRoleMenu
 	_, err = uc.d.DeleteRoleMenu(&t, int(dp.RoleId), int(req.MenuId))
 	if err != nil {

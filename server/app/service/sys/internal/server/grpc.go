@@ -15,7 +15,7 @@ import (
 )
 
 // NewGRPCServer new a gRPC server.
-func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *service.AdminService, m *service.SysService) *grpc.Server {
+func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *service.AdminService) *grpc.Server {
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			middleware.Chain(

@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
 	"edu/pkg/strings"
@@ -95,11 +94,10 @@ func (uc *AdminUsecase) GetDictType(ctx context.Context, req *pb.GetDictTypeRequ
 }
 
 func (uc *AdminUsecase) InsertDictType(ctx context.Context, token string, req *pb.DictType) (err error) {
-	out, err := uc.mw.ValidationToken(token)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	data := model.SysDictType{
 		DictName: req.DictName,
 		DictType: req.DictType,

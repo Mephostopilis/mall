@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
 	"edu/service/sys/internal/model"
@@ -119,15 +118,10 @@ func (uc *AdminUsecase) ListMenu(ctx context.Context, token string, req *pb.List
 }
 
 func (uc *AdminUsecase) ListMenuByRole(ctx context.Context, e *model.Menu, rolename string) (list []*pb.Menu, err error) {
-	token, err := meta.GetToken(ctx)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	out, err := uc.mw.ValidationToken(token)
-	if err != nil {
-		return
-	}
-	dp := out.(*ssopb.DataPermission)
 	menulist, err := uc.d.GetMenusByRoleName(e, dp.RoleKey)
 	list = make([]*pb.Menu, 0)
 	for i := 0; i < len(menulist); i++ {
@@ -153,11 +147,10 @@ func (uc *AdminUsecase) GetMenu(ctx context.Context, req *pb.GetMenuRequest) (mu
 }
 
 func (uc *AdminUsecase) CreateMenu(ctx context.Context, tok string, req *pb.Menu) (err error) {
-	out, err := uc.mw.ValidationToken(tok)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	data := model.Menu{
 		MenuId:     req.MenuId,
 		MenuName:   req.MenuName,
@@ -189,11 +182,10 @@ func (uc *AdminUsecase) CreateMenu(ctx context.Context, tok string, req *pb.Menu
 }
 
 func (uc *AdminUsecase) UpdateMenu(ctx context.Context, token string, req *pb.Menu) (err error) {
-	out, err := uc.mw.ValidationToken(token)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	data := model.Menu{
 		MenuId:     req.MenuId,
 		MenuName:   req.MenuName,

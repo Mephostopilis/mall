@@ -30,16 +30,8 @@ func InitApp(confService *conf.Service, confServer *conf.Server, data *conf.Data
 	}
 	apiService := service.NewApiService(adminUsecase)
 	adminService := service.NewAdminService(app, logger, daoDao, adminUsecase)
-	sysService := service.NewSysService(adminUsecase)
-	grpcServer := server.NewGRPCServer(confServer, logger, apiService, adminService, sysService)
-	jobUsecase, err := biz.NewJobUsecase(logger, daoDao)
-	if err != nil {
-		return nil, err
-	}
-	cronSrv, err := server.NewCronServer(logger, jobUsecase)
-	if err != nil {
-		return nil, err
-	}
-	kratosApp := newApp(confService, logger, grpcServer, cronSrv, registryRegistry)
+	grpcServer := server.NewGRPCServer(confServer, logger, apiService, adminService)
+	httpServer := server.NewHTTPServer(confServer, logger, adminService, apiService)
+	kratosApp := newApp(confService, logger, grpcServer, httpServer, registryRegistry)
 	return kratosApp, nil
 }

@@ -7,6 +7,7 @@ import (
 
 	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
+	"edu/pkg/meta"
 	stringsx "edu/pkg/strings"
 	"edu/service/sys/internal/model"
 	"edu/service/sys/internal/tools"
@@ -234,11 +235,10 @@ func (uc *AdminUsecase) GetSysTables(ctx context.Context, req *pb.GetSysTablesRe
 }
 
 func (uc *AdminUsecase) InsertSysTable(ctx context.Context, tok string, req *pb.InsertSysTableRequest) (err error) {
-	out, err := uc.mw.ValidationToken(tok)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	d, err := tools.New(uc.cfg, uc.logger)
 	if err != nil {
 		return
@@ -247,7 +247,7 @@ func (uc *AdminUsecase) InsertSysTable(ctx context.Context, tok string, req *pb.
 	tablesList := strings.Split(req.Tables, ",")
 	for i := 0; i < len(tablesList); i++ {
 		tbname := tablesList[i]
-		data, err1 := uc.genTableInit(ctx, dp, d, tbname)
+		data, err1 := uc.genTableInit(ctx, &dp, d, tbname)
 		if err1 != nil {
 			err = err1
 			return
@@ -261,11 +261,10 @@ func (uc *AdminUsecase) InsertSysTable(ctx context.Context, tok string, req *pb.
 }
 
 func (uc *AdminUsecase) UpdateSysTable(ctx context.Context, tok string, req *pb.SysTable) (err error) {
-	out, err := uc.mw.ValidationToken(tok)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	data := model.SysTables{
 		TableId:             req.TableId,
 		TBName:              req.TableName,
