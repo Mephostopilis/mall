@@ -1,6 +1,7 @@
 package dao
 
 import (
+	pb "edu/api/sso/v1"
 	"edu/pkg/ecode"
 
 	"edu/service/sso/internal/model"
@@ -35,7 +36,7 @@ func (d *dao) GetSysUserInfo(e *model.SysUser) (userView model.SysUser, err erro
 	}
 
 	if err = table.First(&userView).Error; err != nil {
-		err = ecode.ErrGetSysUser
+		err = ecode.WrapError(err)
 		return
 	}
 	return
@@ -82,7 +83,7 @@ func (d *dao) InsertSysUser(e *model.SysUser) (id uint64, err error) {
 	var count int64
 	d.orm.Table(e.TableName()).Where("username = ?", e.Username).Count(&count)
 	if count > 0 {
-		err = ecode.ErrUsername
+		err = pb.ErrUsername("")
 		return
 	}
 

@@ -1,9 +1,9 @@
 package tools
 
 import (
+	"edu/pkg/ecode"
 	"edu/service/sys/internal/model"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"gorm.io/gorm"
 )
 
@@ -11,7 +11,7 @@ func (d *dao) GetDBColumnsPage(dbname string, e *model.DBColumns, pageSize int, 
 	table := d.orm.Table("`COLUMNS`")
 	table = table.Where("table_schema= ? ", dbname)
 	if e.TableName != "" {
-		err = errors.Unknown("table name cannot be empty！", "")
+		err = ecode.Unknown("table name cannot be empty！", "")
 		return
 	}
 	table = table.Where("TABLE_NAME = ?", e.TableName)
@@ -30,7 +30,7 @@ func (d *dao) GetDBColumnsList(dbname string, e *model.DBColumns) (doc []model.D
 
 	table := new(gorm.DB)
 	if e.TableName == "" {
-		return nil, errors.Unknown("table name cannot be empty！", "")
+		return nil, ecode.Unknown("table name cannot be empty！", "")
 	}
 
 	table = d.orm.Table("information_schema.columns")

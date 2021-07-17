@@ -1,9 +1,8 @@
 package dao
 
 import (
+	pb "edu/api/sys/v1"
 	"edu/service/sys/internal/model"
-
-	"github.com/go-kratos/kratos/v2/errors"
 )
 
 func (d *dao) GetDictDataByCode(e *model.SysDictData) (model.SysDictData, error) {
@@ -79,7 +78,7 @@ func (d *dao) CreateDictData(e *model.SysDictData) (model.SysDictData, error) {
 	i := int64(0)
 	d.orm.Table(e.TableName()).Where("dict_label=? or (dict_label=? and dict_value = ?)", e.DictLabel, e.DictValue).Count(&i)
 	if i > 0 {
-		return doc, errors.OutOfRange("out", "字典标签或者字典键值已经存在！")
+		return doc, pb.ErrOutOfRange("out", "字典标签或者字典键值已经存在！")
 	}
 
 	result := d.orm.Table(e.TableName()).Create(&e)
@@ -97,11 +96,11 @@ func (d *dao) UpdateDictData(e *model.SysDictData, id int) (update model.SysDict
 	}
 
 	if e.DictLabel != "" && e.DictLabel != update.DictLabel {
-		return update, errors.OutOfRange("out", "标签不允许修改！")
+		return update, pb.ErrOutOfRange("out", "标签不允许修改！")
 	}
 
 	if e.DictValue != "" && e.DictValue != update.DictValue {
-		return update, errors.OutOfRange("out", "键值不允许修改！")
+		return update, pb.ErrOutOfRange("out", "键值不允许修改！")
 	}
 
 	//参数1:是要修改的数据

@@ -17,7 +17,7 @@ type AdminUsecase struct {
 }
 
 func NewAdminUsecase(c *conf.App, logger log.Logger, repo dao.Dao) (*AdminUsecase, error) {
-	log := log.NewHelper("usecase/admin", logger)
+	log := log.NewHelper(log.With(logger, "module", "usecase/admin"))
 	mw, err := jwtauth.New(
 		&jwtauth.Jwt{Secret: c.Jwt.Secret, Timeout: c.Jwt.Timeout.AsDuration()},
 		logger,

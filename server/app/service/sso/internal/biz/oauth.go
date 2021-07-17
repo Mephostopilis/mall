@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	pb "edu/api/sso"
+	pb "edu/api/sso/v1"
 	"edu/pkg/ecode"
 
 	"github.com/go-oauth2/oauth2/v4"
@@ -56,10 +56,10 @@ func (s *GreeterUsecase) checkResponseType(rt oauth2.ResponseType) bool {
 func (s *GreeterUsecase) ValidationAuthorizeRequest(ctx context.Context, req *pb.AuthorizeReq) (err error) {
 	resType := oauth2.ResponseType(req.ResponseType)
 	if resType.String() == "" {
-		err = ecode.ErrUnsupportedResponseType
+		err = pb.ErrUnsupportedResponseType("")
 		return
 	} else if allowed := s.checkResponseType(resType); !allowed {
-		err = ecode.ErrUnauthorizedClient
+		err = pb.ErrUnauthorizedClient("")
 		return
 	}
 	return
@@ -78,7 +78,7 @@ func (s *GreeterUsecase) GetAuthorizeToken(ctx context.Context, req *pb.Authoriz
 	if err != nil {
 		return nil, err
 	} else if !allowed {
-		return nil, ecode.ErrUnauthorizedClient
+		return nil, pb.ErrUnauthorizedClient("")
 	}
 
 	// check the client allows the authorized scope
@@ -86,7 +86,7 @@ func (s *GreeterUsecase) GetAuthorizeToken(ctx context.Context, req *pb.Authoriz
 	if err != nil {
 		return nil, err
 	} else if !allowed {
-		return nil, ecode.ErrInvalidScope
+		return nil, pb.ErrInvalidScope("")
 	}
 
 	tgr := &oauth2.TokenGenerateRequest{
@@ -118,10 +118,9 @@ func (s *GreeterUsecase) HandleAuthorizeRequest(ctx context.Context, req *pb.Aut
 	// user authorization
 	userID, err := s.onUserAuthorizationHandler(ctx, req)
 	if err != nil {
-		err = ecode.ErrInvalidUserId
 		return
 	} else if userID == "" {
-		err = ecode.ErrInvalidUserId
+		err = pb.ErrInvalidUserId("")
 		return
 	}
 
@@ -161,12 +160,12 @@ func (s *GreeterUsecase) HandleAuthorizeRequest(ctx context.Context, req *pb.Aut
 func (s *GreeterUsecase) ValidationTokenRequest(ctx context.Context, req *pb.TokenReq) (gt oauth2.GrantType, tgr *oauth2.TokenGenerateRequest, err error) {
 	rt := oauth2.ResponseType(req.ResponseType)
 	if rt != oauth2.Token {
-		err = ecode.ErrUnsupportedResponseType
+		err = pb.ErrUnsupportedResponseType("")
 		return
 	}
 	gt = oauth2.GrantType(req.GrantType)
 	if gt.String() == "" {
-		err = ecode.ErrUnsupportedGrantType
+		err = pb.ErrUnsupportedGrantType("")
 		return
 	}
 	clientID := req.ClientID
@@ -182,14 +181,14 @@ func (s *GreeterUsecase) ValidationTokenRequest(ctx context.Context, req *pb.Tok
 		tgr.Code = req.Code
 		if tgr.RedirectURI == "" ||
 			tgr.Code == "" {
-			err = ecode.ErrInvalidRequest
+			err = pb.ErrInvalidRequest("")
 			return
 		}
 	case oauth2.PasswordCredentials:
 		tgr.Scope = req.Scope
 		username, password := req.Username, req.Password
 		if username == "" || password == "" {
-			return "", nil, ecode.ErrInvalidUsername
+			return "", nil, pb.ErrInvalidUsername("")
 		}
 
 		// 针对password模式检测scope与grant_type
@@ -207,7 +206,7 @@ func (s *GreeterUsecase) ValidationTokenRequest(ctx context.Context, req *pb.Tok
 		if err != nil {
 			return
 		} else if !allowed {
-			err = ecode.ErrInvalidScope
+			err = pb.ErrInvalidScope("")
 			return
 		}
 
@@ -216,7 +215,7 @@ func (s *GreeterUsecase) ValidationTokenRequest(ctx context.Context, req *pb.Tok
 			err = xerr
 			return
 		} else if userID == "" {
-			err = ecode.ErrInvalidUid
+			err = pb.ErrInvalidUid("")
 			return
 		}
 		tgr.UserID = userID
@@ -224,7 +223,7 @@ func (s *GreeterUsecase) ValidationTokenRequest(ctx context.Context, req *pb.Tok
 		tgr.Scope = req.Scope
 	case oauth2.Refreshing:
 		if req.RefreshToken == "" {
-			err = ecode.ErrInvalidRequest
+			err = pb.ErrInvalidRequest("")
 			return
 		}
 		tgr.Refresh = req.RefreshToken
@@ -247,14 +246,14 @@ func (s *GreeterUsecase) checkGrantType(gt oauth2.GrantType) bool {
 func (s *GreeterUsecase) GetAccessToken(ctx context.Context, gt oauth2.GrantType, tgr *oauth2.TokenGenerateRequest) (ti oauth2.TokenInfo, err error) {
 	if allowed := s.checkGrantType(gt); !allowed {
 		s.log.Errorf("gt = %s", gt)
-		err = ecode.ErrUnauthorizedClient
+		err = pb.ErrUnauthorizedClient("")
 		return
 	}
 	allowed, err := s.onClientAuthorizedHandler(ctx, tgr.ClientID, gt)
 	if err != nil {
 		return
 	} else if !allowed {
-		err = ecode.ErrUnauthorizedClient
+		err = pb.ErrUnauthorizedClient("")
 		return
 	}
 
@@ -264,13 +263,13 @@ func (s *GreeterUsecase) GetAccessToken(ctx context.Context, gt oauth2.GrantType
 		if err != nil {
 			switch err {
 			case errors.ErrInvalidAuthorizeCode:
-				err = ecode.ErrInvalidAuthorizeCode
+				err = pb.ErrInvalidAuthorizeCode("")
 				return
 			case errors.ErrInvalidClient:
-				err = ecode.ErrInvalidClient
+				err = pb.ErrInvalidClient("")
 				return
 			default:
-				err = ecode.ErrUnsupportedErrType
+				err = pb.ErrUnsupportedErrType("")
 				return
 			}
 		}
@@ -280,7 +279,7 @@ func (s *GreeterUsecase) GetAccessToken(ctx context.Context, gt oauth2.GrantType
 		if err != nil {
 			return
 		} else if !allowed {
-			err = ecode.ErrInvalidScope
+			err = pb.ErrInvalidScope("")
 			return
 		}
 		return s.manager.GenerateAccessToken(ctx, gt, tgr)
@@ -290,10 +289,10 @@ func (s *GreeterUsecase) GetAccessToken(ctx context.Context, gt oauth2.GrantType
 			rti, e := s.manager.LoadRefreshToken(ctx, tgr.Refresh)
 			if e != nil {
 				if e == errors.ErrInvalidRefreshToken || e == errors.ErrExpiredRefreshToken {
-					err = ecode.ErrInvalidGrant
+					err = pb.ErrInvalidGrant("")
 					return
 				}
-				err = ecode.ErrUnsupportedErrType
+				err = pb.ErrUnsupportedErrType("")
 				return
 			}
 
@@ -301,7 +300,7 @@ func (s *GreeterUsecase) GetAccessToken(ctx context.Context, gt oauth2.GrantType
 			if err != nil {
 				return nil, err
 			} else if !allowed {
-				return nil, ecode.ErrInvalidScope
+				return nil, pb.ErrInvalidScope("")
 			}
 		}
 
@@ -314,7 +313,7 @@ func (s *GreeterUsecase) GetAccessToken(ctx context.Context, gt oauth2.GrantType
 		}
 		return ti, nil
 	}
-	return nil, ecode.ErrUnsupportedGrantType
+	return nil, pb.ErrUnsupportedGrantType("")
 }
 
 // GetTokenData token data
@@ -360,13 +359,11 @@ func (s *GreeterUsecase) HandleTokenRequest(ctx context.Context, req *pb.TokenRe
 func (s *GreeterUsecase) ValidationMidToken(ctx context.Context, req *pb.IntrospectReq) (resp *pb.IntrospectResp, err error) {
 	ti, err := s.manager.LoadAccessToken(ctx, req.AccessToken)
 	if err != nil {
-
-		err = ecode.ErrInvalidAccessToken
 		return
 	}
 	id, err := strconv.Atoi(ti.GetUserID())
 	if err != nil {
-		err = ecode.UserNotExist
+		err = ecode.WrapError(err)
 		return
 	}
 	mid := uint64(id)

@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "edu/api/sso"
+	pb "edu/api/sso/v1"
 )
 
 func (s *AdminService) GetSsoApp(ctx context.Context, req *pb.GetSsoAppRequest) (reply *pb.ApiReply, err error) {

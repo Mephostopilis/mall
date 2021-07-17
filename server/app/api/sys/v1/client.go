@@ -5,7 +5,6 @@ import (
 	"time"
 
 	grpctransport "github.com/go-kratos/kratos/v2/transport/grpc"
-	"google.golang.org/grpc"
 )
 
 // AppID .
@@ -47,38 +46,21 @@ func NewApi(ctx context.Context, opts ...grpctransport.ClientOption) (ApiClient,
 }
 
 // NewSys new grpc client
-func NewSys(ctx context.Context, opts ...grpctransport.ClientOption) (SysClient, error) {
-	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
-	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
-	cc, err := grpctransport.DialInsecure(ctx, t...)
-	if err != nil {
-		return nil, err
-	}
-	// cc, err := client.Dial(context.Background(), fmt.Sprintf("discovery://default/%s", AppID))
-	// cc, err := client.Dial(context.Background(), fmt.Sprintf("etcd://default/%s", AppID))
-	return NewSysClient(cc), nil
-}
-
-// NewGrpcConn new grpc client
-func NewGrpcConn(ctx context.Context, opts ...grpctransport.ClientOption) (*grpc.ClientConn, error) {
-	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
-	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
-	cc, err := grpctransport.DialInsecure(ctx, t...)
-	if err != nil {
-		return nil, err
-	}
-	// cc, err := client.Dial(context.Background(), fmt.Sprintf("discovery://default/%s", AppID))
-	// cc, err := client.Dial(context.Background(), fmt.Sprintf("etcd://default/%s", AppID))
-	return cc, nil
-}
+// func NewSys(ctx context.Context, opts ...grpctransport.ClientOption) (SysClient, error) {
+// 	t := make([]grpctransport.ClientOption, 0)
+// 	t = append(t, grpctransport.WithEndpoint(target))
+// 	t = append(t, grpctransport.WithTimeout(time.Minute))
+// 	for _, o := range opts {
+// 		t = append(t, o)
+// 	}
+// 	cc, err := grpctransport.DialInsecure(ctx, t...)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	// cc, err := client.Dial(context.Background(), fmt.Sprintf("discovery://default/%s", AppID))
+// 	// cc, err := client.Dial(context.Background(), fmt.Sprintf("etcd://default/%s", AppID))
+// 	return NewSysClient(cc), nil
+// }
 
 // 生成 gRPC 代码
 //go:generate kratos tool protoc --grpc --bm api.proto

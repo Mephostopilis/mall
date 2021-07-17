@@ -1,9 +1,9 @@
 package tools
 
 import (
+	"edu/pkg/ecode"
 	"edu/service/sys/internal/model"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"gorm.io/gorm"
 )
 
@@ -32,7 +32,7 @@ func (d *dao) GetDBTables(dbname string, e *model.DBTables) (doc model.DBTables,
 	table = d.orm.Table("tables")
 	table = table.Where("table_schema= ? ", dbname)
 	if e.TableName == "" {
-		return doc, errors.Unknown("table name cannot be empty", "")
+		return doc, ecode.Unknown("table name cannot be empty", "")
 	}
 	table = table.Where("TABLE_NAME = ?", e.TableName)
 

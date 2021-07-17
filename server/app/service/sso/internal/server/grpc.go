@@ -1,7 +1,7 @@
 package server
 
 import (
-	pb "edu/api/sso"
+	pb "edu/api/sso/v1"
 
 	"edu/service/sso/internal/conf"
 	"edu/service/sso/internal/service"
@@ -36,7 +36,7 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *
 	}
 	opts = append(opts, grpc.Logger(logger))
 	srv := grpc.NewServer(opts...)
-	pb.RegisterApiServer(srv, s)
+	// pb.RegisterApiServer(srv, s)
 	pb.RegisterAdminServer(srv, a)
 	pb.RegisterSsoServer(srv, m)
 	return srv

@@ -1,9 +1,8 @@
 package dao
 
 import (
+	pb "edu/api/sso/v1"
 	"edu/service/sso/internal/model"
-
-	"github.com/go-kratos/kratos/v2/errors"
 )
 
 func (d *dao) GetSysRolePage(role *model.SysRole, pageSize int, pageIndex int) ([]model.SysRole, int64, error) {
@@ -69,9 +68,11 @@ func (d *dao) GetSysRoleList(role *model.SysRole) (SysRole []model.SysRole, err 
 
 func (d *dao) InsertSysRole(role *model.SysRole) (id int, err error) {
 	i := int64(0)
-	d.orm.Table(role.TableName()).Where("role_name=? or role_key = ?", role.RoleName, role.RoleKey).Count(&i)
+	if err = d.orm.Table(role.TableName()).Where("role_name=? or role_key = ?", role.RoleName, role.RoleKey).Count(&i).Error; err != nil {
+		return
+	}
 	if i > 0 {
-		return 0, errors.OutOfRange("table", "角色名称或者角色标识已经存在！")
+		return 0, pb.ErrOutOfRange("角色名称或者角色标识已经存在！")
 	}
 	role.UpdateBy = ""
 	result := d.orm.Table(role.TableName()).Create(&role)
@@ -104,11 +105,11 @@ func (d *dao) UpdateSysRole(role *model.SysRole, id int) (update model.SysRole, 
 	}
 
 	if role.RoleName != "" && role.RoleName != update.RoleName {
-		return update, errors.OutOfRange("table", "角色名称不允许修改！")
+		return update, pb.ErrOutOfRange("角色名称不允许修改！")
 	}
 
 	if role.RoleKey != "" && role.RoleKey != update.RoleKey {
-		return update, errors.OutOfRange("table", "角色标识不允许修改！")
+		return update, pb.ErrOutOfRange("角色标识不允许修改！")
 	}
 
 	//参数1:是要修改的数据

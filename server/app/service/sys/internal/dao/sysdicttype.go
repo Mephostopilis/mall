@@ -1,9 +1,8 @@
 package dao
 
 import (
+	pb "edu/api/sys/v1"
 	"edu/service/sys/internal/model"
-
-	"github.com/go-kratos/kratos/v2/errors"
 )
 
 func (d *dao) CreateDictType(e *model.SysDictType) (model.SysDictType, error) {
@@ -12,7 +11,7 @@ func (d *dao) CreateDictType(e *model.SysDictType) (model.SysDictType, error) {
 	i := int64(0)
 	d.orm.Table(e.TableName()).Where("dict_name=? or dict_type = ?", e.DictName, e.DictType).Count(&i)
 	if i > 0 {
-		return doc, errors.OutOfRange("table", "字典名称或者字典类型已经存在！")
+		return doc, pb.ErrOutOfRange("table", "字典名称或者字典类型已经存在！")
 	}
 
 	result := d.orm.Table(e.TableName()).Create(&e)
@@ -98,11 +97,11 @@ func (d *dao) UpdateDictType(e *model.SysDictType, id int) (update model.SysDict
 	}
 
 	if e.DictName != "" && e.DictName != update.DictName {
-		return update, errors.OutOfRange("table", "名称不允许修改！")
+		return update, pb.ErrOutOfRange("table", "名称不允许修改！")
 	}
 
 	if e.DictType != "" && e.DictType != update.DictType {
-		return update, errors.OutOfRange("table", "类型不允许修改！")
+		return update, pb.ErrOutOfRange("table", "类型不允许修改！")
 	}
 
 	//参数1:是要修改的数据

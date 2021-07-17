@@ -4,15 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
+	"edu/pkg/meta"
 	"edu/pkg/strings"
 	"edu/service/sys/internal/model"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -117,18 +115,8 @@ func (uc *AdminUsecase) InsertDictType(ctx context.Context, token string, req *p
 }
 
 func (uc *AdminUsecase) UpdateDictType(ctx context.Context, req *pb.DictType) (err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
+	permission, err := meta.GetDataPermissions(ctx)
+	if err != nil {
 		return
 	}
 	data := model.SysDictType{
@@ -147,18 +135,8 @@ func (uc *AdminUsecase) UpdateDictType(ctx context.Context, req *pb.DictType) (e
 }
 
 func (uc *AdminUsecase) DeleteDictType(ctx context.Context, req *pb.DeleteDictTypeRequest) (err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
+	permission, err := meta.GetDataPermissions(ctx)
+	if err != nil {
 		return
 	}
 	var data model.SysDictType

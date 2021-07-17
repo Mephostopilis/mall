@@ -37,7 +37,7 @@ func IsErrDontFixConfigName(err error) bool {
 }
 
 func ErrDontFixConfigKey(format string, a ...interface{}) error {
-	return errors.InternalServer("12502", fmt.Sprintf(format, a...))
+	return ecode.InternalServer("12502", fmt.Sprintf(format, a...))
 }
 
 func IsErrDontFixConfigKey(err error) bool {
@@ -51,7 +51,7 @@ func IsErrDontFixConfigKey(err error) bool {
 }
 
 func ErrExistConfig(format string, a ...interface{}) error {
-	return errors.InternalServer("12503", fmt.Sprintf(format, a...))
+	return ecode.InternalServer("12503", fmt.Sprintf(format, a...))
 }
 
 func IsErrExistConfig(err error) bool {
@@ -65,7 +65,7 @@ func IsErrExistConfig(err error) bool {
 }
 
 func ErrDontFixDictDataLable(format string, a ...interface{}) error {
-	return errors.InternalServer("12504", fmt.Sprintf(format, a...))
+	return ecode.InternalServer("12504", fmt.Sprintf(format, a...))
 }
 
 func IsErrDontFixDictDataLable(err error) bool {
@@ -79,7 +79,7 @@ func IsErrDontFixDictDataLable(err error) bool {
 }
 
 func ErrDontFixDictDataValue(format string, a ...interface{}) error {
-	return errors.InternalServer("12505", fmt.Sprintf(format, a...))
+	return ecode.InternalServer("12505", fmt.Sprintf(format, a...))
 }
 
 func IsErrDontFixDictDataValue(err error) bool {
@@ -90,4 +90,22 @@ func IsErrDontFixDictDataValue(err error) bool {
 		}
 	}
 	return false
+}
+
+func ErrOutOfRange(format string, a ...interface{}) error {
+	return ecode.InternalServer("ErrOutOfRange", fmt.Sprintf(format, a...))
+}
+
+func IsErrOutOfRange(err error) bool {
+	se := errors.FromError(err)
+	return se.Reason == "ErrOutOfRange" && se.Code == 500
+}
+
+func UnexpectedErr(format string, a ...interface{}) error {
+	return ecode.InternalServer("UnexpectedErr", fmt.Sprintf(format, a...))
+}
+
+func IsUnexpectedErr(err error) bool {
+	se := errors.FromError(err)
+	return se.Reason == "UnexpectedErr" && se.Code == 500
 }

@@ -31,7 +31,7 @@ type Bootstrap struct {
 	Data    *Data    `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
 	Reg     *Reg     `protobuf:"bytes,4,opt,name=reg,proto3" json:"reg,omitempty"`
 	Logger  *Logger  `protobuf:"bytes,5,opt,name=logger,proto3" json:"logger,omitempty"`
-	App     *App     `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"`
+	Jwt     *Jwt     `protobuf:"bytes,6,opt,name=jwt,proto3" json:"jwt,omitempty"`
 }
 
 func (x *Bootstrap) Reset() {
@@ -101,9 +101,9 @@ func (x *Bootstrap) GetLogger() *Logger {
 	return nil
 }
 
-func (x *Bootstrap) GetApp() *App {
+func (x *Bootstrap) GetJwt() *Jwt {
 	if x != nil {
-		return x.App
+		return x.Jwt
 	}
 	return nil
 }
@@ -391,16 +391,17 @@ func (x *Logger) GetLevel() int32 {
 	return 0
 }
 
-type App struct {
+type Jwt struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Jwt *App_Jwt `protobuf:"bytes,1,opt,name=jwt,proto3" json:"jwt,omitempty"`
+	Secret  string               `protobuf:"bytes,1,opt,name=secret,proto3" json:"secret,omitempty"`
+	Timeout *durationpb.Duration `protobuf:"bytes,2,opt,name=timeout,proto3" json:"timeout,omitempty"`
 }
 
-func (x *App) Reset() {
-	*x = App{}
+func (x *Jwt) Reset() {
+	*x = Jwt{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_service_sso_internal_conf_conf_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -408,13 +409,13 @@ func (x *App) Reset() {
 	}
 }
 
-func (x *App) String() string {
+func (x *Jwt) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*App) ProtoMessage() {}
+func (*Jwt) ProtoMessage() {}
 
-func (x *App) ProtoReflect() protoreflect.Message {
+func (x *Jwt) ProtoReflect() protoreflect.Message {
 	mi := &file_service_sso_internal_conf_conf_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -426,14 +427,21 @@ func (x *App) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use App.ProtoReflect.Descriptor instead.
-func (*App) Descriptor() ([]byte, []int) {
+// Deprecated: Use Jwt.ProtoReflect.Descriptor instead.
+func (*Jwt) Descriptor() ([]byte, []int) {
 	return file_service_sso_internal_conf_conf_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *App) GetJwt() *App_Jwt {
+func (x *Jwt) GetSecret() string {
 	if x != nil {
-		return x.Jwt
+		return x.Secret
+	}
+	return ""
+}
+
+func (x *Jwt) GetTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.Timeout
 	}
 	return nil
 }
@@ -800,61 +808,6 @@ func (x *Reg_Etcd) GetDialTimeout() *durationpb.Duration {
 	return nil
 }
 
-type App_Jwt struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Secret  string               `protobuf:"bytes,1,opt,name=secret,proto3" json:"secret,omitempty"`
-	Timeout *durationpb.Duration `protobuf:"bytes,2,opt,name=timeout,proto3" json:"timeout,omitempty"`
-}
-
-func (x *App_Jwt) Reset() {
-	*x = App_Jwt{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_service_sso_internal_conf_conf_proto_msgTypes[13]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *App_Jwt) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*App_Jwt) ProtoMessage() {}
-
-func (x *App_Jwt) ProtoReflect() protoreflect.Message {
-	mi := &file_service_sso_internal_conf_conf_proto_msgTypes[13]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use App_Jwt.ProtoReflect.Descriptor instead.
-func (*App_Jwt) Descriptor() ([]byte, []int) {
-	return file_service_sso_internal_conf_conf_proto_rawDescGZIP(), []int{6, 0}
-}
-
-func (x *App_Jwt) GetSecret() string {
-	if x != nil {
-		return x.Secret
-	}
-	return ""
-}
-
-func (x *App_Jwt) GetTimeout() *durationpb.Duration {
-	if x != nil {
-		return x.Timeout
-	}
-	return nil
-}
-
 var File_service_sso_internal_conf_conf_proto protoreflect.FileDescriptor
 
 var file_service_sso_internal_conf_conf_proto_rawDesc = []byte{
@@ -876,9 +829,9 @@ var file_service_sso_internal_conf_conf_proto_rawDesc = []byte{
 	0x66, 0x2e, 0x52, 0x65, 0x67, 0x52, 0x03, 0x72, 0x65, 0x67, 0x12, 0x28, 0x0a, 0x06, 0x6c, 0x6f,
 	0x67, 0x67, 0x65, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x73, 0x73, 0x6f,
 	0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x2e, 0x4c, 0x6f, 0x67, 0x67, 0x65, 0x72, 0x52, 0x06, 0x6c, 0x6f,
-	0x67, 0x67, 0x65, 0x72, 0x12, 0x1f, 0x0a, 0x03, 0x61, 0x70, 0x70, 0x18, 0x06, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x0d, 0x2e, 0x73, 0x73, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x2e, 0x41, 0x70, 0x70,
-	0x52, 0x03, 0x61, 0x70, 0x70, 0x22, 0x37, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x67, 0x67, 0x65, 0x72, 0x12, 0x1f, 0x0a, 0x03, 0x6a, 0x77, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0d, 0x2e, 0x73, 0x73, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x2e, 0x4a, 0x77, 0x74,
+	0x52, 0x03, 0x6a, 0x77, 0x74, 0x22, 0x37, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0xc0,
@@ -946,18 +899,15 @@ var file_service_sso_internal_conf_conf_proto_rawDesc = []byte{
 	0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x12, 0x16, 0x0a,
 	0x06, 0x73, 0x74, 0x64, 0x6f, 0x75, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73,
 	0x74, 0x64, 0x6f, 0x75, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x22, 0x7e, 0x0a, 0x03, 0x41,
-	0x70, 0x70, 0x12, 0x23, 0x0a, 0x03, 0x6a, 0x77, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x11, 0x2e, 0x73, 0x73, 0x6f, 0x2e, 0x63, 0x6f, 0x6e, 0x66, 0x2e, 0x41, 0x70, 0x70, 0x2e, 0x4a,
-	0x77, 0x74, 0x52, 0x03, 0x6a, 0x77, 0x74, 0x1a, 0x52, 0x0a, 0x03, 0x4a, 0x77, 0x74, 0x12, 0x16,
-	0x0a, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x12, 0x33, 0x0a, 0x07, 0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75,
-	0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x52, 0x07, 0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x42, 0x1c, 0x5a, 0x1a, 0x65,
-	0x64, 0x75, 0x2f, 0x73, 0x73, 0x6f, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f,
-	0x63, 0x6f, 0x6e, 0x66, 0x3b, 0x63, 0x6f, 0x6e, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x22, 0x52, 0x0a, 0x03, 0x4a,
+	0x77, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x12, 0x33, 0x0a, 0x07, 0x74, 0x69,
+	0x6d, 0x65, 0x6f, 0x75, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x75,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x07, 0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x42,
+	0x1c, 0x5a, 0x1a, 0x65, 0x64, 0x75, 0x2f, 0x73, 0x73, 0x6f, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72,
+	0x6e, 0x61, 0x6c, 0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x3b, 0x63, 0x6f, 0x6e, 0x66, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -972,7 +922,7 @@ func file_service_sso_internal_conf_conf_proto_rawDescGZIP() []byte {
 	return file_service_sso_internal_conf_conf_proto_rawDescData
 }
 
-var file_service_sso_internal_conf_conf_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_service_sso_internal_conf_conf_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_service_sso_internal_conf_conf_proto_goTypes = []interface{}{
 	(*Bootstrap)(nil),           // 0: sso.conf.Bootstrap
 	(*Service)(nil),             // 1: sso.conf.Service
@@ -980,15 +930,14 @@ var file_service_sso_internal_conf_conf_proto_goTypes = []interface{}{
 	(*Data)(nil),                // 3: sso.conf.Data
 	(*Reg)(nil),                 // 4: sso.conf.Reg
 	(*Logger)(nil),              // 5: sso.conf.Logger
-	(*App)(nil),                 // 6: sso.conf.App
+	(*Jwt)(nil),                 // 6: sso.conf.Jwt
 	(*Server_HTTP)(nil),         // 7: sso.conf.Server.HTTP
 	(*Server_GRPC)(nil),         // 8: sso.conf.Server.GRPC
 	(*Data_Database)(nil),       // 9: sso.conf.Data.Database
 	(*Data_Redis)(nil),          // 10: sso.conf.Data.Redis
 	(*Data_Migrate)(nil),        // 11: sso.conf.Data.Migrate
 	(*Reg_Etcd)(nil),            // 12: sso.conf.Reg.Etcd
-	(*App_Jwt)(nil),             // 13: sso.conf.App.Jwt
-	(*durationpb.Duration)(nil), // 14: google.protobuf.Duration
+	(*durationpb.Duration)(nil), // 13: google.protobuf.Duration
 }
 var file_service_sso_internal_conf_conf_proto_depIdxs = []int32{
 	1,  // 0: sso.conf.Bootstrap.service:type_name -> sso.conf.Service
@@ -996,26 +945,25 @@ var file_service_sso_internal_conf_conf_proto_depIdxs = []int32{
 	3,  // 2: sso.conf.Bootstrap.data:type_name -> sso.conf.Data
 	4,  // 3: sso.conf.Bootstrap.reg:type_name -> sso.conf.Reg
 	5,  // 4: sso.conf.Bootstrap.logger:type_name -> sso.conf.Logger
-	6,  // 5: sso.conf.Bootstrap.app:type_name -> sso.conf.App
+	6,  // 5: sso.conf.Bootstrap.jwt:type_name -> sso.conf.Jwt
 	7,  // 6: sso.conf.Server.http:type_name -> sso.conf.Server.HTTP
 	8,  // 7: sso.conf.Server.grpc:type_name -> sso.conf.Server.GRPC
 	9,  // 8: sso.conf.Data.database:type_name -> sso.conf.Data.Database
 	10, // 9: sso.conf.Data.redis:type_name -> sso.conf.Data.Redis
 	11, // 10: sso.conf.Data.migrate:type_name -> sso.conf.Data.Migrate
 	12, // 11: sso.conf.Reg.etcd:type_name -> sso.conf.Reg.Etcd
-	13, // 12: sso.conf.App.jwt:type_name -> sso.conf.App.Jwt
-	14, // 13: sso.conf.Server.HTTP.timeout:type_name -> google.protobuf.Duration
-	14, // 14: sso.conf.Server.GRPC.timeout:type_name -> google.protobuf.Duration
-	14, // 15: sso.conf.Data.Redis.read_timeout:type_name -> google.protobuf.Duration
-	14, // 16: sso.conf.Data.Redis.write_timeout:type_name -> google.protobuf.Duration
-	14, // 17: sso.conf.Data.Redis.dial_timeout:type_name -> google.protobuf.Duration
-	14, // 18: sso.conf.Reg.Etcd.dialTimeout:type_name -> google.protobuf.Duration
-	14, // 19: sso.conf.App.Jwt.timeout:type_name -> google.protobuf.Duration
-	20, // [20:20] is the sub-list for method output_type
-	20, // [20:20] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	13, // 12: sso.conf.Jwt.timeout:type_name -> google.protobuf.Duration
+	13, // 13: sso.conf.Server.HTTP.timeout:type_name -> google.protobuf.Duration
+	13, // 14: sso.conf.Server.GRPC.timeout:type_name -> google.protobuf.Duration
+	13, // 15: sso.conf.Data.Redis.read_timeout:type_name -> google.protobuf.Duration
+	13, // 16: sso.conf.Data.Redis.write_timeout:type_name -> google.protobuf.Duration
+	13, // 17: sso.conf.Data.Redis.dial_timeout:type_name -> google.protobuf.Duration
+	13, // 18: sso.conf.Reg.Etcd.dialTimeout:type_name -> google.protobuf.Duration
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_service_sso_internal_conf_conf_proto_init() }
@@ -1097,7 +1045,7 @@ func file_service_sso_internal_conf_conf_proto_init() {
 			}
 		}
 		file_service_sso_internal_conf_conf_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*App); i {
+			switch v := v.(*Jwt); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1180,18 +1128,6 @@ func file_service_sso_internal_conf_conf_proto_init() {
 				return nil
 			}
 		}
-		file_service_sso_internal_conf_conf_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*App_Jwt); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1199,7 +1135,7 @@ func file_service_sso_internal_conf_conf_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_service_sso_internal_conf_conf_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

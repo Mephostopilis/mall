@@ -3,10 +3,9 @@ package meta
 import (
 	"context"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	"edu/pkg/ecode"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/metadata"
 	"google.golang.org/protobuf/proto"
 )
@@ -22,54 +21,54 @@ func GetDataPermissions(ctx context.Context) (permission ssopb.DataPermission, e
 		err = ecode.Unknown("meta", "error")
 		return
 	}
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
+	if err = proto.Unmarshal([]byte(v), &permission); err != nil {
 		return
 	}
 	return
 }
 
 func GetToken(ctx context.Context) (token string, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
+	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("token")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
-	token = v[0]
+	token = v
 	return
 }
 
 func GetUA(ctx context.Context) (ua string, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
+	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("ua")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
-	ua = v[0]
+	ua = v
 	return
 }
 
 func GetRemoteAddr(ctx context.Context) (remoteAddr string, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
+	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("remote_addr")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
-	remoteAddr = v[0]
+	remoteAddr = v
 	return
 }
 

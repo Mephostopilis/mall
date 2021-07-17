@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "edu/api/sso"
+	pb "edu/api/sso/v1"
 
 	"edu/pkg/meta"
 )

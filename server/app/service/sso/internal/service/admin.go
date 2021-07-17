@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	pb "edu/api/sso"
+	pb "edu/api/sso/v1"
 	"edu/pkg/captcha"
 	"edu/pkg/meta"
 	"edu/service/sso/internal/biz"

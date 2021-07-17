@@ -4,7 +4,6 @@ import (
 	"context"
 
 	pb "edu/api/sys/v1"
-	"edu/pkg/ecode"
 
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -19,10 +18,6 @@ import (
 // @Success 200 {object} pb.ApiReply "{"code": 200, "data": [...]}"
 // @Router /admin/tools/v1/db/columns/page [get]
 func (s *AdminService) GetDBColumnList(ctx context.Context, req *pb.GetDBColumnListRequest) (reply *pb.ApiReply, err error) {
-	if req.TableName == "" {
-		err = ecode.AdminTableEmpty
-		return
-	}
 	result, count, err := s.uc.GetDBColumnList(ctx, req)
 	if err != nil {
 		return

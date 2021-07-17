@@ -21,7 +21,7 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *
 			middleware.Chain(
 				recovery.Recovery(),
 				tracing.Server(),
-				logging.Server(logging.WithLogger(logger)),
+				logging.Server(logger),
 			),
 		),
 	}
@@ -38,6 +38,6 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *
 	srv := grpc.NewServer(opts...)
 	pb.RegisterApiServer(srv, s)
 	pb.RegisterAdminServer(srv, a)
-	pb.RegisterSysServer(srv, m)
+	// pb.RegisterSysServer(srv, m)
 	return srv
 }

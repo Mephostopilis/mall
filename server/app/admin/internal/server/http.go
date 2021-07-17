@@ -10,7 +10,7 @@ import (
 	omspb "edu/api/oms"
 	pmspb "edu/api/pms"
 	smspb "edu/api/sms"
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	syspb "edu/api/sys/v1"
 	tikupb "edu/api/tiku"
 

@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
 	"edu/service/sys/internal/model"
 )

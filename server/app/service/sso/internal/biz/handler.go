@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	pb "edu/api/sso"
+	pb "edu/api/sso/v1"
 	"edu/service/sso/internal/model"
 
 	"github.com/go-oauth2/oauth2/v4"

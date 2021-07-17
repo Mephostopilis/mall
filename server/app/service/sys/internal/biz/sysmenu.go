@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
 	"edu/service/sys/internal/model"

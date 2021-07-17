@@ -29,13 +29,6 @@ type AdminClient interface {
 	GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	GetConfigByConfigKey(ctx context.Context, in *GetConfigByConfigKeyRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	ListConfig(ctx context.Context, in *ListConfigRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	CreateDept(ctx context.Context, in *Dept, opts ...grpc.CallOption) (*ApiReply, error)
-	UpdateDept(ctx context.Context, in *Dept, opts ...grpc.CallOption) (*ApiReply, error)
-	DeleteDept(ctx context.Context, in *DeleteDeptRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	GetDept(ctx context.Context, in *GetDeptRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	GetDeptTree(ctx context.Context, in *GetDeptTreeRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	ListDept(ctx context.Context, in *ListDeptRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	GetDeptTreeRoleselect(ctx context.Context, in *GetDeptTreeRoleselectRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	CreateMenu(ctx context.Context, in *Menu, opts ...grpc.CallOption) (*ApiReply, error)
 	UpdateMenu(ctx context.Context, in *Menu, opts ...grpc.CallOption) (*ApiReply, error)
 	DeleteMenu(ctx context.Context, in *DeleteMenuRequest, opts ...grpc.CallOption) (*ApiReply, error)
@@ -50,11 +43,6 @@ type AdminClient interface {
 	DeleteOperLog(ctx context.Context, in *DeleteOperLogRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	GetOperLog(ctx context.Context, in *GetOperLogRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	ListOperLog(ctx context.Context, in *ListOperLogRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	CreatePost(ctx context.Context, in *Post, opts ...grpc.CallOption) (*ApiReply, error)
-	UpdatePost(ctx context.Context, in *Post, opts ...grpc.CallOption) (*ApiReply, error)
-	DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	GetPost(ctx context.Context, in *GetPostRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	ListPost(ctx context.Context, in *ListPostRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	CreateRoleMenu(ctx context.Context, in *Menu, opts ...grpc.CallOption) (*ApiReply, error)
 	UpdateRoleMenu(ctx context.Context, in *Menu, opts ...grpc.CallOption) (*ApiReply, error)
 	DeleteRoleMenu(ctx context.Context, in *DeleteRoleMenuRequest, opts ...grpc.CallOption) (*ApiReply, error)
@@ -62,13 +50,6 @@ type AdminClient interface {
 	ListRoleMenu(ctx context.Context, in *ListRoleMenuRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	GetSetting(ctx context.Context, in *GetSettingRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	CreateSetting(ctx context.Context, in *SysSetting, opts ...grpc.CallOption) (*ApiReply, error)
-	CreateSysjob(ctx context.Context, in *Job, opts ...grpc.CallOption) (*ApiReply, error)
-	UpdateSysjob(ctx context.Context, in *Job, opts ...grpc.CallOption) (*ApiReply, error)
-	DeleteSysjob(ctx context.Context, in *DeleteSysjobRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	GetSysjob(ctx context.Context, in *GetSysjobRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	ListSysjob(ctx context.Context, in *ListSysjobRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	StartJob(ctx context.Context, in *StartJobRequest, opts ...grpc.CallOption) (*ApiReply, error)
-	RemoveJob(ctx context.Context, in *RemoveJobRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	GetDictDataList(ctx context.Context, in *GetDictDataListRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	GetDictDataListByDictType(ctx context.Context, in *GetDictDataListByDictTypeRequest, opts ...grpc.CallOption) (*ApiReply, error)
 	GetDictData(ctx context.Context, in *GetDictDataRequest, opts ...grpc.CallOption) (*ApiReply, error)
@@ -203,69 +184,6 @@ func (c *adminClient) ListConfig(ctx context.Context, in *ListConfigRequest, opt
 	return out, nil
 }
 
-func (c *adminClient) CreateDept(ctx context.Context, in *Dept, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/CreateDept", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) UpdateDept(ctx context.Context, in *Dept, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/UpdateDept", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) DeleteDept(ctx context.Context, in *DeleteDeptRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/DeleteDept", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) GetDept(ctx context.Context, in *GetDeptRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/GetDept", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) GetDeptTree(ctx context.Context, in *GetDeptTreeRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/GetDeptTree", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) ListDept(ctx context.Context, in *ListDeptRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/ListDept", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) GetDeptTreeRoleselect(ctx context.Context, in *GetDeptTreeRoleselectRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/GetDeptTreeRoleselect", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *adminClient) CreateMenu(ctx context.Context, in *Menu, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
 	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/CreateMenu", in, out, opts...)
@@ -392,51 +310,6 @@ func (c *adminClient) ListOperLog(ctx context.Context, in *ListOperLogRequest, o
 	return out, nil
 }
 
-func (c *adminClient) CreatePost(ctx context.Context, in *Post, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/CreatePost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) UpdatePost(ctx context.Context, in *Post, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/UpdatePost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/DeletePost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) GetPost(ctx context.Context, in *GetPostRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/GetPost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) ListPost(ctx context.Context, in *ListPostRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/ListPost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *adminClient) CreateRoleMenu(ctx context.Context, in *Menu, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
 	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/CreateRoleMenu", in, out, opts...)
@@ -494,69 +367,6 @@ func (c *adminClient) GetSetting(ctx context.Context, in *GetSettingRequest, opt
 func (c *adminClient) CreateSetting(ctx context.Context, in *SysSetting, opts ...grpc.CallOption) (*ApiReply, error) {
 	out := new(ApiReply)
 	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/CreateSetting", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) CreateSysjob(ctx context.Context, in *Job, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/CreateSysjob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) UpdateSysjob(ctx context.Context, in *Job, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/UpdateSysjob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) DeleteSysjob(ctx context.Context, in *DeleteSysjobRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/DeleteSysjob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) GetSysjob(ctx context.Context, in *GetSysjobRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/GetSysjob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) ListSysjob(ctx context.Context, in *ListSysjobRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/ListSysjob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) StartJob(ctx context.Context, in *StartJobRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/StartJob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminClient) RemoveJob(ctx context.Context, in *RemoveJobRequest, opts ...grpc.CallOption) (*ApiReply, error) {
-	out := new(ApiReply)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Admin/RemoveJob", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -803,13 +613,6 @@ type AdminServer interface {
 	GetConfig(context.Context, *GetConfigRequest) (*ApiReply, error)
 	GetConfigByConfigKey(context.Context, *GetConfigByConfigKeyRequest) (*ApiReply, error)
 	ListConfig(context.Context, *ListConfigRequest) (*ApiReply, error)
-	CreateDept(context.Context, *Dept) (*ApiReply, error)
-	UpdateDept(context.Context, *Dept) (*ApiReply, error)
-	DeleteDept(context.Context, *DeleteDeptRequest) (*ApiReply, error)
-	GetDept(context.Context, *GetDeptRequest) (*ApiReply, error)
-	GetDeptTree(context.Context, *GetDeptTreeRequest) (*ApiReply, error)
-	ListDept(context.Context, *ListDeptRequest) (*ApiReply, error)
-	GetDeptTreeRoleselect(context.Context, *GetDeptTreeRoleselectRequest) (*ApiReply, error)
 	CreateMenu(context.Context, *Menu) (*ApiReply, error)
 	UpdateMenu(context.Context, *Menu) (*ApiReply, error)
 	DeleteMenu(context.Context, *DeleteMenuRequest) (*ApiReply, error)
@@ -824,11 +627,6 @@ type AdminServer interface {
 	DeleteOperLog(context.Context, *DeleteOperLogRequest) (*ApiReply, error)
 	GetOperLog(context.Context, *GetOperLogRequest) (*ApiReply, error)
 	ListOperLog(context.Context, *ListOperLogRequest) (*ApiReply, error)
-	CreatePost(context.Context, *Post) (*ApiReply, error)
-	UpdatePost(context.Context, *Post) (*ApiReply, error)
-	DeletePost(context.Context, *DeletePostRequest) (*ApiReply, error)
-	GetPost(context.Context, *GetPostRequest) (*ApiReply, error)
-	ListPost(context.Context, *ListPostRequest) (*ApiReply, error)
 	CreateRoleMenu(context.Context, *Menu) (*ApiReply, error)
 	UpdateRoleMenu(context.Context, *Menu) (*ApiReply, error)
 	DeleteRoleMenu(context.Context, *DeleteRoleMenuRequest) (*ApiReply, error)
@@ -836,13 +634,6 @@ type AdminServer interface {
 	ListRoleMenu(context.Context, *ListRoleMenuRequest) (*ApiReply, error)
 	GetSetting(context.Context, *GetSettingRequest) (*ApiReply, error)
 	CreateSetting(context.Context, *SysSetting) (*ApiReply, error)
-	CreateSysjob(context.Context, *Job) (*ApiReply, error)
-	UpdateSysjob(context.Context, *Job) (*ApiReply, error)
-	DeleteSysjob(context.Context, *DeleteSysjobRequest) (*ApiReply, error)
-	GetSysjob(context.Context, *GetSysjobRequest) (*ApiReply, error)
-	ListSysjob(context.Context, *ListSysjobRequest) (*ApiReply, error)
-	StartJob(context.Context, *StartJobRequest) (*ApiReply, error)
-	RemoveJob(context.Context, *RemoveJobRequest) (*ApiReply, error)
 	GetDictDataList(context.Context, *GetDictDataListRequest) (*ApiReply, error)
 	GetDictDataListByDictType(context.Context, *GetDictDataListByDictTypeRequest) (*ApiReply, error)
 	GetDictData(context.Context, *GetDictDataRequest) (*ApiReply, error)
@@ -908,27 +699,6 @@ func (UnimplementedAdminServer) GetConfigByConfigKey(context.Context, *GetConfig
 func (UnimplementedAdminServer) ListConfig(context.Context, *ListConfigRequest) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListConfig not implemented")
 }
-func (UnimplementedAdminServer) CreateDept(context.Context, *Dept) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateDept not implemented")
-}
-func (UnimplementedAdminServer) UpdateDept(context.Context, *Dept) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateDept not implemented")
-}
-func (UnimplementedAdminServer) DeleteDept(context.Context, *DeleteDeptRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteDept not implemented")
-}
-func (UnimplementedAdminServer) GetDept(context.Context, *GetDeptRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDept not implemented")
-}
-func (UnimplementedAdminServer) GetDeptTree(context.Context, *GetDeptTreeRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDeptTree not implemented")
-}
-func (UnimplementedAdminServer) ListDept(context.Context, *ListDeptRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListDept not implemented")
-}
-func (UnimplementedAdminServer) GetDeptTreeRoleselect(context.Context, *GetDeptTreeRoleselectRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDeptTreeRoleselect not implemented")
-}
 func (UnimplementedAdminServer) CreateMenu(context.Context, *Menu) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMenu not implemented")
 }
@@ -971,21 +741,6 @@ func (UnimplementedAdminServer) GetOperLog(context.Context, *GetOperLogRequest) 
 func (UnimplementedAdminServer) ListOperLog(context.Context, *ListOperLogRequest) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperLog not implemented")
 }
-func (UnimplementedAdminServer) CreatePost(context.Context, *Post) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePost not implemented")
-}
-func (UnimplementedAdminServer) UpdatePost(context.Context, *Post) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePost not implemented")
-}
-func (UnimplementedAdminServer) DeletePost(context.Context, *DeletePostRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePost not implemented")
-}
-func (UnimplementedAdminServer) GetPost(context.Context, *GetPostRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPost not implemented")
-}
-func (UnimplementedAdminServer) ListPost(context.Context, *ListPostRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPost not implemented")
-}
 func (UnimplementedAdminServer) CreateRoleMenu(context.Context, *Menu) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRoleMenu not implemented")
 }
@@ -1006,27 +761,6 @@ func (UnimplementedAdminServer) GetSetting(context.Context, *GetSettingRequest) 
 }
 func (UnimplementedAdminServer) CreateSetting(context.Context, *SysSetting) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSetting not implemented")
-}
-func (UnimplementedAdminServer) CreateSysjob(context.Context, *Job) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateSysjob not implemented")
-}
-func (UnimplementedAdminServer) UpdateSysjob(context.Context, *Job) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSysjob not implemented")
-}
-func (UnimplementedAdminServer) DeleteSysjob(context.Context, *DeleteSysjobRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteSysjob not implemented")
-}
-func (UnimplementedAdminServer) GetSysjob(context.Context, *GetSysjobRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSysjob not implemented")
-}
-func (UnimplementedAdminServer) ListSysjob(context.Context, *ListSysjobRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSysjob not implemented")
-}
-func (UnimplementedAdminServer) StartJob(context.Context, *StartJobRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartJob not implemented")
-}
-func (UnimplementedAdminServer) RemoveJob(context.Context, *RemoveJobRequest) (*ApiReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveJob not implemented")
 }
 func (UnimplementedAdminServer) GetDictDataList(context.Context, *GetDictDataListRequest) (*ApiReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDictDataList not implemented")
@@ -1314,132 +1048,6 @@ func _Admin_ListConfig_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_CreateDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Dept)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).CreateDept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/CreateDept",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).CreateDept(ctx, req.(*Dept))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_UpdateDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Dept)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).UpdateDept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/UpdateDept",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).UpdateDept(ctx, req.(*Dept))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_DeleteDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteDeptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).DeleteDept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/DeleteDept",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).DeleteDept(ctx, req.(*DeleteDeptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_GetDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDeptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).GetDept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/GetDept",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetDept(ctx, req.(*GetDeptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_GetDeptTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDeptTreeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).GetDeptTree(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/GetDeptTree",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetDeptTree(ctx, req.(*GetDeptTreeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_ListDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListDeptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).ListDept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/ListDept",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).ListDept(ctx, req.(*ListDeptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_GetDeptTreeRoleselect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDeptTreeRoleselectRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).GetDeptTreeRoleselect(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/GetDeptTreeRoleselect",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetDeptTreeRoleselect(ctx, req.(*GetDeptTreeRoleselectRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Admin_CreateMenu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Menu)
 	if err := dec(in); err != nil {
@@ -1692,96 +1300,6 @@ func _Admin_ListOperLog_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_CreatePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Post)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).CreatePost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/CreatePost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).CreatePost(ctx, req.(*Post))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_UpdatePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Post)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).UpdatePost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/UpdatePost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).UpdatePost(ctx, req.(*Post))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_DeletePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeletePostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).DeletePost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/DeletePost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).DeletePost(ctx, req.(*DeletePostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_GetPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).GetPost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/GetPost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetPost(ctx, req.(*GetPostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_ListPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).ListPost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/ListPost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).ListPost(ctx, req.(*ListPostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Admin_CreateRoleMenu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Menu)
 	if err := dec(in); err != nil {
@@ -1904,132 +1422,6 @@ func _Admin_CreateSetting_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AdminServer).CreateSetting(ctx, req.(*SysSetting))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_CreateSysjob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Job)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).CreateSysjob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/CreateSysjob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).CreateSysjob(ctx, req.(*Job))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_UpdateSysjob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Job)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).UpdateSysjob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/UpdateSysjob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).UpdateSysjob(ctx, req.(*Job))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_DeleteSysjob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteSysjobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).DeleteSysjob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/DeleteSysjob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).DeleteSysjob(ctx, req.(*DeleteSysjobRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_GetSysjob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSysjobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).GetSysjob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/GetSysjob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetSysjob(ctx, req.(*GetSysjobRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_ListSysjob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSysjobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).ListSysjob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/ListSysjob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).ListSysjob(ctx, req.(*ListSysjobRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_StartJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartJobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).StartJob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/StartJob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).StartJob(ctx, req.(*StartJobRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Admin_RemoveJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveJobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServer).RemoveJob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Admin/RemoveJob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).RemoveJob(ctx, req.(*RemoveJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2536,34 +1928,6 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Admin_ListConfig_Handler,
 		},
 		{
-			MethodName: "CreateDept",
-			Handler:    _Admin_CreateDept_Handler,
-		},
-		{
-			MethodName: "UpdateDept",
-			Handler:    _Admin_UpdateDept_Handler,
-		},
-		{
-			MethodName: "DeleteDept",
-			Handler:    _Admin_DeleteDept_Handler,
-		},
-		{
-			MethodName: "GetDept",
-			Handler:    _Admin_GetDept_Handler,
-		},
-		{
-			MethodName: "GetDeptTree",
-			Handler:    _Admin_GetDeptTree_Handler,
-		},
-		{
-			MethodName: "ListDept",
-			Handler:    _Admin_ListDept_Handler,
-		},
-		{
-			MethodName: "GetDeptTreeRoleselect",
-			Handler:    _Admin_GetDeptTreeRoleselect_Handler,
-		},
-		{
 			MethodName: "CreateMenu",
 			Handler:    _Admin_CreateMenu_Handler,
 		},
@@ -2620,26 +1984,6 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Admin_ListOperLog_Handler,
 		},
 		{
-			MethodName: "CreatePost",
-			Handler:    _Admin_CreatePost_Handler,
-		},
-		{
-			MethodName: "UpdatePost",
-			Handler:    _Admin_UpdatePost_Handler,
-		},
-		{
-			MethodName: "DeletePost",
-			Handler:    _Admin_DeletePost_Handler,
-		},
-		{
-			MethodName: "GetPost",
-			Handler:    _Admin_GetPost_Handler,
-		},
-		{
-			MethodName: "ListPost",
-			Handler:    _Admin_ListPost_Handler,
-		},
-		{
 			MethodName: "CreateRoleMenu",
 			Handler:    _Admin_CreateRoleMenu_Handler,
 		},
@@ -2666,34 +2010,6 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSetting",
 			Handler:    _Admin_CreateSetting_Handler,
-		},
-		{
-			MethodName: "CreateSysjob",
-			Handler:    _Admin_CreateSysjob_Handler,
-		},
-		{
-			MethodName: "UpdateSysjob",
-			Handler:    _Admin_UpdateSysjob_Handler,
-		},
-		{
-			MethodName: "DeleteSysjob",
-			Handler:    _Admin_DeleteSysjob_Handler,
-		},
-		{
-			MethodName: "GetSysjob",
-			Handler:    _Admin_GetSysjob_Handler,
-		},
-		{
-			MethodName: "ListSysjob",
-			Handler:    _Admin_ListSysjob_Handler,
-		},
-		{
-			MethodName: "StartJob",
-			Handler:    _Admin_StartJob_Handler,
-		},
-		{
-			MethodName: "RemoveJob",
-			Handler:    _Admin_RemoveJob_Handler,
 		},
 		{
 			MethodName: "GetDictDataList",
@@ -2988,128 +2304,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDictType",
 			Handler:    _Api_GetDictType_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/sys/v1/sys.proto",
-}
-
-// SysClient is the client API for Sys service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SysClient interface {
-	GetDept(ctx context.Context, in *GetDeptRequest, opts ...grpc.CallOption) (*Dept, error)
-	GetPost(ctx context.Context, in *GetPostRequest, opts ...grpc.CallOption) (*Post, error)
-}
-
-type sysClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewSysClient(cc grpc.ClientConnInterface) SysClient {
-	return &sysClient{cc}
-}
-
-func (c *sysClient) GetDept(ctx context.Context, in *GetDeptRequest, opts ...grpc.CallOption) (*Dept, error) {
-	out := new(Dept)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Sys/GetDept", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sysClient) GetPost(ctx context.Context, in *GetPostRequest, opts ...grpc.CallOption) (*Post, error) {
-	out := new(Post)
-	err := c.cc.Invoke(ctx, "/api.sys.v1.Sys/GetPost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// SysServer is the server API for Sys service.
-// All implementations must embed UnimplementedSysServer
-// for forward compatibility
-type SysServer interface {
-	GetDept(context.Context, *GetDeptRequest) (*Dept, error)
-	GetPost(context.Context, *GetPostRequest) (*Post, error)
-	mustEmbedUnimplementedSysServer()
-}
-
-// UnimplementedSysServer must be embedded to have forward compatible implementations.
-type UnimplementedSysServer struct {
-}
-
-func (UnimplementedSysServer) GetDept(context.Context, *GetDeptRequest) (*Dept, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDept not implemented")
-}
-func (UnimplementedSysServer) GetPost(context.Context, *GetPostRequest) (*Post, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPost not implemented")
-}
-func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
-
-// UnsafeSysServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SysServer will
-// result in compilation errors.
-type UnsafeSysServer interface {
-	mustEmbedUnimplementedSysServer()
-}
-
-func RegisterSysServer(s grpc.ServiceRegistrar, srv SysServer) {
-	s.RegisterService(&Sys_ServiceDesc, srv)
-}
-
-func _Sys_GetDept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDeptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).GetDept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Sys/GetDept",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).GetDept(ctx, req.(*GetDeptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Sys_GetPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SysServer).GetPost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sys.v1.Sys/GetPost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServer).GetPost(ctx, req.(*GetPostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// Sys_ServiceDesc is the grpc.ServiceDesc for Sys service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var Sys_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.sys.v1.Sys",
-	HandlerType: (*SysServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetDept",
-			Handler:    _Sys_GetDept_Handler,
-		},
-		{
-			MethodName: "GetPost",
-			Handler:    _Sys_GetPost_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

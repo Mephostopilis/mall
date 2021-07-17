@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	pb "edu/api/tiku"
 	uuidpb "edu/api/uuid"
 	"edu/pkg/jwtauth"

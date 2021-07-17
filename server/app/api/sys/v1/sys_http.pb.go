@@ -19,34 +19,25 @@ const _ = http.SupportPackageIsVersion1
 
 type AdminHTTPServer interface {
 	CreateConfig(context.Context, *SysConfig) (*ApiReply, error)
-	CreateDept(context.Context, *Dept) (*ApiReply, error)
 	CreateMenu(context.Context, *Menu) (*ApiReply, error)
 	CreateOperLog(context.Context, *OperLog) (*ApiReply, error)
-	CreatePost(context.Context, *Post) (*ApiReply, error)
 	CreateResource(context.Context, *SysConfig) (*ApiReply, error)
 	CreateRoleMenu(context.Context, *Menu) (*ApiReply, error)
 	CreateSetting(context.Context, *SysSetting) (*ApiReply, error)
-	CreateSysjob(context.Context, *Job) (*ApiReply, error)
 	DeleteConfig(context.Context, *DeleteConfigRequest) (*ApiReply, error)
-	DeleteDept(context.Context, *DeleteDeptRequest) (*ApiReply, error)
 	DeleteDictData(context.Context, *DeleteDictDataRequest) (*ApiReply, error)
 	DeleteDictType(context.Context, *DeleteDictTypeRequest) (*ApiReply, error)
 	DeleteMenu(context.Context, *DeleteMenuRequest) (*ApiReply, error)
 	DeleteOperLog(context.Context, *DeleteOperLogRequest) (*ApiReply, error)
-	DeletePost(context.Context, *DeletePostRequest) (*ApiReply, error)
 	DeleteResource(context.Context, *DeleteConfigRequest) (*ApiReply, error)
 	DeleteRoleMenu(context.Context, *DeleteRoleMenuRequest) (*ApiReply, error)
 	DeleteSysTables(context.Context, *DeleteSysTablesRequest) (*ApiReply, error)
-	DeleteSysjob(context.Context, *DeleteSysjobRequest) (*ApiReply, error)
 	GenCode(context.Context, *GenCodeRequest) (*ApiReply, error)
 	GenMenuAndApi(context.Context, *GenMenuAndApiRequest) (*ApiReply, error)
 	GetConfig(context.Context, *GetConfigRequest) (*ApiReply, error)
 	GetConfigByConfigKey(context.Context, *GetConfigByConfigKeyRequest) (*ApiReply, error)
 	GetDBColumnList(context.Context, *GetDBColumnListRequest) (*ApiReply, error)
 	GetDBTableList(context.Context, *GetDBTableListRequest) (*ApiReply, error)
-	GetDept(context.Context, *GetDeptRequest) (*ApiReply, error)
-	GetDeptTree(context.Context, *GetDeptTreeRequest) (*ApiReply, error)
-	GetDeptTreeRoleselect(context.Context, *GetDeptTreeRoleselectRequest) (*ApiReply, error)
 	GetDictData(context.Context, *GetDictDataRequest) (*ApiReply, error)
 	GetDictDataList(context.Context, *GetDictDataListRequest) (*ApiReply, error)
 	GetDictDataListByDictType(context.Context, *GetDictDataListByDictTypeRequest) (*ApiReply, error)
@@ -59,7 +50,6 @@ type AdminHTTPServer interface {
 	GetMenuTreeRoleselect(context.Context, *GetMenuTreeRoleselectRequest) (*ApiReply, error)
 	GetMenuTreeelect(context.Context, *GetMenuTreeelectRequest) (*ApiReply, error)
 	GetOperLog(context.Context, *GetOperLogRequest) (*ApiReply, error)
-	GetPost(context.Context, *GetPostRequest) (*ApiReply, error)
 	GetResource(context.Context, *GetConfigRequest) (*ApiReply, error)
 	GetRoleMenu(context.Context, *GetRoleMenuRequest) (*ApiReply, error)
 	GetServerInfo(context.Context, *GetServerInfoRequest) (*ApiReply, error)
@@ -67,33 +57,24 @@ type AdminHTTPServer interface {
 	GetSysColumn(context.Context, *GetSysColumnRequest) (*ApiReply, error)
 	GetSysTableList(context.Context, *GetSysTableListRequest) (*ApiReply, error)
 	GetSysTables(context.Context, *GetSysTablesRequest) (*ApiReply, error)
-	GetSysjob(context.Context, *GetSysjobRequest) (*ApiReply, error)
 	InsertDictData(context.Context, *DictData) (*ApiReply, error)
 	InsertDictType(context.Context, *DictType) (*ApiReply, error)
 	InsertSysTable(context.Context, *InsertSysTableRequest) (*ApiReply, error)
 	ListConfig(context.Context, *ListConfigRequest) (*ApiReply, error)
-	ListDept(context.Context, *ListDeptRequest) (*ApiReply, error)
 	ListMenu(context.Context, *ListMenuRequest) (*ApiReply, error)
 	ListOperLog(context.Context, *ListOperLogRequest) (*ApiReply, error)
-	ListPost(context.Context, *ListPostRequest) (*ApiReply, error)
 	ListResource(context.Context, *ListResourceRequest) (*ApiReply, error)
 	ListRoleMenu(context.Context, *ListRoleMenuRequest) (*ApiReply, error)
-	ListSysjob(context.Context, *ListSysjobRequest) (*ApiReply, error)
 	Preview(context.Context, *PreviewRequest) (*ApiReply, error)
-	RemoveJob(context.Context, *RemoveJobRequest) (*ApiReply, error)
-	StartJob(context.Context, *StartJobRequest) (*ApiReply, error)
 	UpdateConfig(context.Context, *SysConfig) (*ApiReply, error)
-	UpdateDept(context.Context, *Dept) (*ApiReply, error)
 	UpdateDictData(context.Context, *DictData) (*ApiReply, error)
 	UpdateDictType(context.Context, *DictType) (*ApiReply, error)
 	UpdateMenu(context.Context, *Menu) (*ApiReply, error)
 	UpdateOperLog(context.Context, *OperLog) (*ApiReply, error)
-	UpdatePost(context.Context, *Post) (*ApiReply, error)
 	UpdateResource(context.Context, *SysConfig) (*ApiReply, error)
 	UpdateRoleMenu(context.Context, *Menu) (*ApiReply, error)
 	UpdateSysColumn(context.Context, *SysColumn) (*ApiReply, error)
 	UpdateSysTable(context.Context, *SysTable) (*ApiReply, error)
-	UpdateSysjob(context.Context, *Job) (*ApiReply, error)
 }
 
 func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
@@ -109,13 +90,6 @@ func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r.GET("/admin/v1/config/{configId}", _Admin_GetConfig0_HTTP_Handler(srv))
 	r.GET("/admin/v1/configKey/{configKey}", _Admin_GetConfigByConfigKey0_HTTP_Handler(srv))
 	r.GET("/admin/v1/configList", _Admin_ListConfig0_HTTP_Handler(srv))
-	r.POST("/admin/v1/dept", _Admin_CreateDept0_HTTP_Handler(srv))
-	r.PUT("/admin/v1/dept", _Admin_UpdateDept0_HTTP_Handler(srv))
-	r.DELETE("/admin/v1/dept/{ids}", _Admin_DeleteDept0_HTTP_Handler(srv))
-	r.GET("/admin/v1/dept/{deptId}", _Admin_GetDept0_HTTP_Handler(srv))
-	r.GET("/admin/v1/deptTree", _Admin_GetDeptTree0_HTTP_Handler(srv))
-	r.GET("/admin/v1/deptList", _Admin_ListDept0_HTTP_Handler(srv))
-	r.GET("/admin/v1/roleDeptTreeselect/{roleId}", _Admin_GetDeptTreeRoleselect0_HTTP_Handler(srv))
 	r.POST("/admin/v1/menu", _Admin_CreateMenu0_HTTP_Handler(srv))
 	r.PUT("/admin/v1/menu", _Admin_UpdateMenu0_HTTP_Handler(srv))
 	r.DELETE("/admin/v1/menu/{id}", _Admin_DeleteMenu0_HTTP_Handler(srv))
@@ -130,11 +104,6 @@ func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r.DELETE("/admin/v1/operlog", _Admin_DeleteOperLog0_HTTP_Handler(srv))
 	r.GET("/admin/v1/operlog/{operId}", _Admin_GetOperLog0_HTTP_Handler(srv))
 	r.GET("/admin/v1/operloglist", _Admin_ListOperLog0_HTTP_Handler(srv))
-	r.POST("/admin/v1/post", _Admin_CreatePost0_HTTP_Handler(srv))
-	r.PUT("/admin/v1/post/{postId}", _Admin_UpdatePost0_HTTP_Handler(srv))
-	r.DELETE("/admin/v1/post/{ids}", _Admin_DeletePost0_HTTP_Handler(srv))
-	r.GET("/admin/v1/post/{postId}", _Admin_GetPost0_HTTP_Handler(srv))
-	r.GET("/admin/v1/postlist", _Admin_ListPost0_HTTP_Handler(srv))
 	r.POST("/admin/v1/rolemenu", _Admin_CreateRoleMenu0_HTTP_Handler(srv))
 	r.PUT("/admin/v1/rolemenu", _Admin_UpdateRoleMenu0_HTTP_Handler(srv))
 	r.DELETE("/admin/v1/rolemenu", _Admin_DeleteRoleMenu0_HTTP_Handler(srv))
@@ -142,13 +111,6 @@ func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r.GET("/admin/v1/rolemenulist", _Admin_ListRoleMenu0_HTTP_Handler(srv))
 	r.GET("/admin/v1/public/setting", _Admin_GetSetting0_HTTP_Handler(srv))
 	r.POST("/admin/v1/setting", _Admin_CreateSetting0_HTTP_Handler(srv))
-	r.POST("/admin/v1/sysjob", _Admin_CreateSysjob0_HTTP_Handler(srv))
-	r.PUT("/admin/v1/sysjob", _Admin_UpdateSysjob0_HTTP_Handler(srv))
-	r.DELETE("/admin/v1/sysjob/{ids}", _Admin_DeleteSysjob0_HTTP_Handler(srv))
-	r.GET("/admin/v1/sysjob/{jobId}", _Admin_GetSysjob0_HTTP_Handler(srv))
-	r.GET("/admin/v1/sysjob", _Admin_ListSysjob0_HTTP_Handler(srv))
-	r.GET("/admin/v1/job/start/{jobId}", _Admin_StartJob0_HTTP_Handler(srv))
-	r.GET("/admin/v1/job/remove/{jobId}", _Admin_RemoveJob0_HTTP_Handler(srv))
 	r.GET("/admin/v1/dict/datalist", _Admin_GetDictDataList0_HTTP_Handler(srv))
 	r.GET("/admin/v1/dict/databytype/{dictType}", _Admin_GetDictDataListByDictType0_HTTP_Handler(srv))
 	r.GET("/admin/v1/dict/data/{dictCode}", _Admin_GetDictData0_HTTP_Handler(srv))
@@ -396,148 +358,6 @@ func _Admin_ListConfig0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context)
 		http.SetOperation(ctx, "/api.sys.v1.Admin/ListConfig")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListConfig(ctx, req.(*ListConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_CreateDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in Dept
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateDept")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateDept(ctx, req.(*Dept))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_UpdateDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in Dept
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateDept")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateDept(ctx, req.(*Dept))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_DeleteDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeleteDeptRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/DeleteDept")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteDept(ctx, req.(*DeleteDeptRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_GetDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetDeptRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/GetDept")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetDept(ctx, req.(*GetDeptRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_GetDeptTree0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetDeptTreeRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/GetDeptTree")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetDeptTree(ctx, req.(*GetDeptTreeRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_ListDept0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListDeptRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/ListDept")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListDept(ctx, req.(*ListDeptRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_GetDeptTreeRoleselect0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetDeptTreeRoleselectRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/GetDeptTreeRoleselect")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetDeptTreeRoleselect(ctx, req.(*GetDeptTreeRoleselectRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -826,110 +646,6 @@ func _Admin_ListOperLog0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 	}
 }
 
-func _Admin_CreatePost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in Post
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/CreatePost")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreatePost(ctx, req.(*Post))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_UpdatePost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in Post
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdatePost")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdatePost(ctx, req.(*Post))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_DeletePost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeletePostRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/DeletePost")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeletePost(ctx, req.(*DeletePostRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_GetPost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetPostRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/GetPost")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetPost(ctx, req.(*GetPostRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_ListPost0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListPostRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/ListPost")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListPost(ctx, req.(*ListPostRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _Admin_CreateRoleMenu0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Menu
@@ -1053,151 +769,6 @@ func _Admin_CreateSetting0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateSetting")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateSetting(ctx, req.(*SysSetting))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_CreateSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in Job
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateSysjob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateSysjob(ctx, req.(*Job))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_UpdateSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in Job
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/UpdateSysjob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateSysjob(ctx, req.(*Job))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_DeleteSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeleteSysjobRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/DeleteSysjob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteSysjob(ctx, req.(*DeleteSysjobRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_GetSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetSysjobRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/GetSysjob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetSysjob(ctx, req.(*GetSysjobRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_ListSysjob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListSysjobRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/ListSysjob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListSysjob(ctx, req.(*ListSysjobRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_StartJob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in StartJobRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/StartJob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.StartJob(ctx, req.(*StartJobRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ApiReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Admin_RemoveJob0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RemoveJobRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sys.v1.Admin/RemoveJob")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RemoveJob(ctx, req.(*RemoveJobRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -1718,34 +1289,25 @@ func _Admin_GenMenuAndApi0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Conte
 
 type AdminHTTPClient interface {
 	CreateConfig(ctx context.Context, req *SysConfig, opts ...http.CallOption) (rsp *ApiReply, err error)
-	CreateDept(ctx context.Context, req *Dept, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateMenu(ctx context.Context, req *Menu, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateOperLog(ctx context.Context, req *OperLog, opts ...http.CallOption) (rsp *ApiReply, err error)
-	CreatePost(ctx context.Context, req *Post, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateResource(ctx context.Context, req *SysConfig, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateRoleMenu(ctx context.Context, req *Menu, opts ...http.CallOption) (rsp *ApiReply, err error)
 	CreateSetting(ctx context.Context, req *SysSetting, opts ...http.CallOption) (rsp *ApiReply, err error)
-	CreateSysjob(ctx context.Context, req *Job, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteConfig(ctx context.Context, req *DeleteConfigRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	DeleteDept(ctx context.Context, req *DeleteDeptRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteDictData(ctx context.Context, req *DeleteDictDataRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteDictType(ctx context.Context, req *DeleteDictTypeRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteMenu(ctx context.Context, req *DeleteMenuRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteOperLog(ctx context.Context, req *DeleteOperLogRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	DeletePost(ctx context.Context, req *DeletePostRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteResource(ctx context.Context, req *DeleteConfigRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteRoleMenu(ctx context.Context, req *DeleteRoleMenuRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	DeleteSysTables(ctx context.Context, req *DeleteSysTablesRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	DeleteSysjob(ctx context.Context, req *DeleteSysjobRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GenCode(ctx context.Context, req *GenCodeRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GenMenuAndApi(ctx context.Context, req *GenMenuAndApiRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetConfig(ctx context.Context, req *GetConfigRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetConfigByConfigKey(ctx context.Context, req *GetConfigByConfigKeyRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetDBColumnList(ctx context.Context, req *GetDBColumnListRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetDBTableList(ctx context.Context, req *GetDBTableListRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	GetDept(ctx context.Context, req *GetDeptRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	GetDeptTree(ctx context.Context, req *GetDeptTreeRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	GetDeptTreeRoleselect(ctx context.Context, req *GetDeptTreeRoleselectRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetDictData(ctx context.Context, req *GetDictDataRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetDictDataList(ctx context.Context, req *GetDictDataListRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetDictDataListByDictType(ctx context.Context, req *GetDictDataListByDictTypeRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
@@ -1758,7 +1320,6 @@ type AdminHTTPClient interface {
 	GetMenuTreeRoleselect(ctx context.Context, req *GetMenuTreeRoleselectRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetMenuTreeelect(ctx context.Context, req *GetMenuTreeelectRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetOperLog(ctx context.Context, req *GetOperLogRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	GetPost(ctx context.Context, req *GetPostRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetResource(ctx context.Context, req *GetConfigRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetRoleMenu(ctx context.Context, req *GetRoleMenuRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetServerInfo(ctx context.Context, req *GetServerInfoRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
@@ -1766,33 +1327,24 @@ type AdminHTTPClient interface {
 	GetSysColumn(ctx context.Context, req *GetSysColumnRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetSysTableList(ctx context.Context, req *GetSysTableListRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	GetSysTables(ctx context.Context, req *GetSysTablesRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	GetSysjob(ctx context.Context, req *GetSysjobRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	InsertDictData(ctx context.Context, req *DictData, opts ...http.CallOption) (rsp *ApiReply, err error)
 	InsertDictType(ctx context.Context, req *DictType, opts ...http.CallOption) (rsp *ApiReply, err error)
 	InsertSysTable(ctx context.Context, req *InsertSysTableRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	ListConfig(ctx context.Context, req *ListConfigRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	ListDept(ctx context.Context, req *ListDeptRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	ListMenu(ctx context.Context, req *ListMenuRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	ListOperLog(ctx context.Context, req *ListOperLogRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	ListPost(ctx context.Context, req *ListPostRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	ListResource(ctx context.Context, req *ListResourceRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	ListRoleMenu(ctx context.Context, req *ListRoleMenuRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	ListSysjob(ctx context.Context, req *ListSysjobRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	Preview(ctx context.Context, req *PreviewRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	RemoveJob(ctx context.Context, req *RemoveJobRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
-	StartJob(ctx context.Context, req *StartJobRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateConfig(ctx context.Context, req *SysConfig, opts ...http.CallOption) (rsp *ApiReply, err error)
-	UpdateDept(ctx context.Context, req *Dept, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateDictData(ctx context.Context, req *DictData, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateDictType(ctx context.Context, req *DictType, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateMenu(ctx context.Context, req *Menu, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateOperLog(ctx context.Context, req *OperLog, opts ...http.CallOption) (rsp *ApiReply, err error)
-	UpdatePost(ctx context.Context, req *Post, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateResource(ctx context.Context, req *SysConfig, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateRoleMenu(ctx context.Context, req *Menu, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateSysColumn(ctx context.Context, req *SysColumn, opts ...http.CallOption) (rsp *ApiReply, err error)
 	UpdateSysTable(ctx context.Context, req *SysTable, opts ...http.CallOption) (rsp *ApiReply, err error)
-	UpdateSysjob(ctx context.Context, req *Job, opts ...http.CallOption) (rsp *ApiReply, err error)
 }
 
 type AdminHTTPClientImpl struct {
@@ -1810,19 +1362,6 @@ func (c *AdminHTTPClientImpl) CreateConfig(ctx context.Context, in *SysConfig, o
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateConfig"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) CreateDept(ctx context.Context, in *Dept, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/dept"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateDept"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1847,19 +1386,6 @@ func (c *AdminHTTPClientImpl) CreateOperLog(ctx context.Context, in *OperLog, op
 	pattern := "/admin/v1/operlog"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateOperLog"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) CreatePost(ctx context.Context, in *Post, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/post"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreatePost"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1907,37 +1433,11 @@ func (c *AdminHTTPClientImpl) CreateSetting(ctx context.Context, in *SysSetting,
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) CreateSysjob(ctx context.Context, in *Job, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/sysjob"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateSysjob"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) DeleteConfig(ctx context.Context, in *DeleteConfigRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/DeleteConfig"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) DeleteDept(ctx context.Context, in *DeleteDeptRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/dept/{ids}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/DeleteDept"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -1998,19 +1498,6 @@ func (c *AdminHTTPClientImpl) DeleteOperLog(ctx context.Context, in *DeleteOperL
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) DeletePost(ctx context.Context, in *DeletePostRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/post/{ids}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/DeletePost"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) DeleteResource(ctx context.Context, in *DeleteConfigRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{ids}"
@@ -2042,19 +1529,6 @@ func (c *AdminHTTPClientImpl) DeleteSysTables(ctx context.Context, in *DeleteSys
 	pattern := "/admin/v1/tools/sys/tables/info/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/DeleteSysTables"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) DeleteSysjob(ctx context.Context, in *DeleteSysjobRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/sysjob/{ids}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/DeleteSysjob"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -2133,45 +1607,6 @@ func (c *AdminHTTPClientImpl) GetDBTableList(ctx context.Context, in *GetDBTable
 	pattern := "/admin/v1/tools/db/tables/page"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetDBTableList"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) GetDept(ctx context.Context, in *GetDeptRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/dept/{deptId}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetDept"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) GetDeptTree(ctx context.Context, in *GetDeptTreeRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/deptTree"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetDeptTree"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) GetDeptTreeRoleselect(ctx context.Context, in *GetDeptTreeRoleselectRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/roleDeptTreeselect/{roleId}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetDeptTreeRoleselect"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -2336,19 +1771,6 @@ func (c *AdminHTTPClientImpl) GetOperLog(ctx context.Context, in *GetOperLogRequ
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) GetPost(ctx context.Context, in *GetPostRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/post/{postId}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetPost"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) GetResource(ctx context.Context, in *GetConfigRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{configId}"
@@ -2440,19 +1862,6 @@ func (c *AdminHTTPClientImpl) GetSysTables(ctx context.Context, in *GetSysTables
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) GetSysjob(ctx context.Context, in *GetSysjobRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/sysjob/{jobId}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetSysjob"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) InsertDictData(ctx context.Context, in *DictData, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/dict/data"
@@ -2505,19 +1914,6 @@ func (c *AdminHTTPClientImpl) ListConfig(ctx context.Context, in *ListConfigRequ
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) ListDept(ctx context.Context, in *ListDeptRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/deptList"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/ListDept"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) ListMenu(ctx context.Context, in *ListMenuRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/menulist"
@@ -2536,19 +1932,6 @@ func (c *AdminHTTPClientImpl) ListOperLog(ctx context.Context, in *ListOperLogRe
 	pattern := "/admin/v1/operloglist"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/ListOperLog"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) ListPost(ctx context.Context, in *ListPostRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/postlist"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/ListPost"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -2583,19 +1966,6 @@ func (c *AdminHTTPClientImpl) ListRoleMenu(ctx context.Context, in *ListRoleMenu
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) ListSysjob(ctx context.Context, in *ListSysjobRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/sysjob"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/ListSysjob"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) Preview(ctx context.Context, in *PreviewRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tools/gen/preview/{tableId}"
@@ -2609,50 +1979,11 @@ func (c *AdminHTTPClientImpl) Preview(ctx context.Context, in *PreviewRequest, o
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) RemoveJob(ctx context.Context, in *RemoveJobRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/job/remove/{jobId}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/RemoveJob"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) StartJob(ctx context.Context, in *StartJobRequest, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/job/start/{jobId}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/StartJob"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) UpdateConfig(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{configId}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateConfig"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) UpdateDept(ctx context.Context, in *Dept, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/dept"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateDept"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -2713,19 +2044,6 @@ func (c *AdminHTTPClientImpl) UpdateOperLog(ctx context.Context, in *OperLog, op
 	return &out, err
 }
 
-func (c *AdminHTTPClientImpl) UpdatePost(ctx context.Context, in *Post, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/post/{postId}"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdatePost"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *AdminHTTPClientImpl) UpdateResource(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{configId}"
@@ -2770,19 +2088,6 @@ func (c *AdminHTTPClientImpl) UpdateSysTable(ctx context.Context, in *SysTable, 
 	pattern := "/admin/v1/tools/sys/tables/info"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateSysTable"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AdminHTTPClientImpl) UpdateSysjob(ctx context.Context, in *Job, opts ...http.CallOption) (*ApiReply, error) {
-	var out ApiReply
-	pattern := "/admin/v1/sysjob"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateSysjob"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {

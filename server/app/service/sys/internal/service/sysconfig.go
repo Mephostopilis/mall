@@ -3,14 +3,10 @@ package service
 import (
 	"context"
 
-	ssopb "edu/api/sso"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
@@ -100,20 +96,6 @@ func (s *AdminService) GetConfigByConfigKey(ctx context.Context, req *pb.GetConf
 // @Router /api/v1/dict/data [post]
 // @Security Bearer
 func (s *AdminService) CreateConfig(ctx context.Context, req *pb.SysConfig) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
-		return
-	}
 	err = s.uc.CreateConfig(ctx, req)
 	if err != nil {
 		return
@@ -136,20 +118,6 @@ func (s *AdminService) CreateConfig(ctx context.Context, req *pb.SysConfig) (rep
 // @Router /api/v1/config [put]
 // @Security Bearer
 func (s *AdminService) UpdateConfig(ctx context.Context, req *pb.SysConfig) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
-		return
-	}
 	err = s.uc.UpdateConfig(ctx, req)
 	if err != nil {
 		return
@@ -169,20 +137,6 @@ func (s *AdminService) UpdateConfig(ctx context.Context, req *pb.SysConfig) (rep
 // @Success 200 {string} string	"{"code": -1, "message": "删除失败"}"
 // @Router /api/v1/config/{configId} [delete]
 func (s *AdminService) DeleteConfig(ctx context.Context, req *pb.DeleteConfigRequest) (reply *pb.ApiReply, err error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	if !ok {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
-		return
-	}
-	var permission ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
-		return
-	}
 	err = s.uc.DeleteConfig(ctx, req)
 	if err != nil {
 		return

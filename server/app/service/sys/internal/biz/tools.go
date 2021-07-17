@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
 	stringsx "edu/pkg/strings"
 	"edu/service/sys/internal/model"

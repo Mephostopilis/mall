@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	pb "edu/api/sso"
-	syspb "edu/api/sys/v1"
+	pb "edu/api/sso/v1"
 	uuidpb "edu/api/uuid"
 	"edu/pkg/ecode"
 	"edu/pkg/fastdfs"
@@ -28,7 +27,6 @@ import (
 type GreeterUsecase struct {
 	repo    dao.Dao
 	uuidc   uuidpb.UUIDClient
-	sysc    syspb.SysClient
 	log     *log.Helper
 	manager *manage.Manager
 	oc      *server.Config
@@ -37,10 +35,6 @@ type GreeterUsecase struct {
 func NewGreeterUsecase(repo dao.Dao, logger log.Logger) *GreeterUsecase {
 	ctx := context.Background()
 	uuidc, err := uuidpb.NewUUID(ctx)
-	if err != nil {
-		panic(err)
-	}
-	sysc, err := syspb.NewSys(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -68,7 +62,6 @@ func NewGreeterUsecase(repo dao.Dao, logger log.Logger) *GreeterUsecase {
 	return &GreeterUsecase{
 		repo:    repo,
 		uuidc:   uuidc,
-		sysc:    sysc,
 		manager: manager,
 		log:     log.NewHelper(log.With(logger, "module", "usecase/greeter")),
 		oc:      server.NewConfig(),
@@ -208,21 +201,21 @@ func (uc *GreeterUsecase) GetSysUserProfile(ctx context.Context, dp *pb.DataPerm
 	// }
 
 	//获取部门列表
-	dept, err := uc.sysc.GetDept(ctx, &syspb.GetDeptRequest{DeptId: int32(result.DeptId)})
-	if err != nil {
-		return
-	}
-	d.Dept = &pb.Dept{
-		DeptId:   int64(dept.DeptId),
-		ParentId: int64(dept.ParentId),
-		DeptPath: dept.DeptPath,
-		DeptName: dept.DeptName,
-		Sort:     int32(dept.Sort),
-		Leader:   dept.Leader,
-		Phone:    dept.Phone,
-		Email:    dept.Email,
-		Status:   dept.Status,
-	}
+	// dept, err := uc.sysc.GetDept(ctx, &syspb.GetDeptRequest{DeptId: int32(result.DeptId)})
+	// if err != nil {
+	// 	return
+	// }
+	// d.Dept = &pb.Dept{
+	// 	DeptId:   int64(dept.DeptId),
+	// 	ParentId: int64(dept.ParentId),
+	// 	DeptPath: dept.DeptPath,
+	// 	DeptName: dept.DeptName,
+	// 	Sort:     int32(dept.Sort),
+	// 	Leader:   dept.Leader,
+	// 	Phone:    dept.Phone,
+	// 	Email:    dept.Email,
+	// 	Status:   dept.Status,
+	// }
 
 	any, err1 := ptypes.MarshalAny(d)
 	if err1 != nil {
@@ -263,13 +256,11 @@ func (uc *GreeterUsecase) InsetSysUserAvatar(ctx context.Context, req *pb.InsetS
 func (uc *GreeterUsecase) SetSysUserPwd(ctx context.Context, uid uint64, req *pb.SysUserUpdatePwdRequest) (err error) {
 	user, err := uc.repo.GetSysUserInfo(&model.SysUser{SysUserId: model.SysUserId{UserId: uid}})
 	if err != nil {
-		uc.log.Error("获取用户数据失败(代码202)")
 		return
 	}
 	_, err = tools.CompareHashAndPassword(user.Password, req.OldPassword)
 	if err != nil {
-		uc.log.Errorf("err = %v", err)
-		err = ecode.ErrUpdateSysUser
+		err = ecode.WrapError(err)
 		return
 	}
 	_, err = uc.repo.UpdateSysUser(&model.SysUser{LoginM: model.LoginM{PassWord: model.PassWord{Password: req.NewPassword}}}, uid)

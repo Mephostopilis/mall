@@ -1,0 +1,694 @@
+syntax = "proto3";
+
+package api.sso.v1;
+
+import "api/sso/v1/api.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "errors.proto";
+
+option go_package = "edu/api/sso/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.sso";
+
+service Admin {
+    rpc GenerateCaptchaHandler (GenerateCaptchaHandlerRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/getCaptcha"
+        };
+    };
+    rpc Login (LoginRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/login"
+            body: "*"
+        };
+    };
+    rpc RefreshToken (RefreshTokenRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/refresh_token"
+        };
+    };
+    rpc GetInfo (GetInfoRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/getinfo"
+        };
+    };
+    rpc Logout(LogoutReq) returns (LogoutResp) {
+        option (google.api.http) = {
+            post: "/admin/v1/logout"
+            body: "*"
+        };
+    };
+    rpc GetSsoAppList (GetSsoAppListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/ssoappsList"
+        };
+    };
+    rpc GetSsoApp (GetSsoAppRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/ssoapps/{id}"
+        };
+    };
+    rpc InsertSsoApp (App) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/ssoapps"
+            body: "*"
+        };
+    };
+    rpc UpdateSsoApp (App) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/ssoapps"
+            body: "*"
+        };
+    };
+    rpc DeleteSsoApp (DeleteSsoAppRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/ssoapps"
+        };
+    };
+    rpc GetSsoTokenList (GetSsoTokenListRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/ssotokensList"
+        };
+    };
+    rpc GetSsoToken (GetSsoTokenRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/ssotokens/{id}"
+        };
+    };
+    rpc InsertSsoToken (Token) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/ssotokens"
+            body: "*"
+        };
+    };
+    rpc UpdateSsoToken (Token) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/ssotokens"
+            body: "*"
+        };
+    };
+    rpc DeleteSsoToken (DeleteSsoTokenRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/ssotokens"
+        };
+    };
+    rpc CreateLoginLog (LoginLog) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/loginlog"
+            body: "*"
+        };
+    };
+    rpc UpdateLoginLog (LoginLog) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/loginlog"
+            body: "*"
+        };
+    };
+    rpc DeleteLoginLog (DeleteLoginLogRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/loginlog"
+        };
+    };
+    rpc GetLoginLog (GetLoginLogRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/loginlog/{infoId}"
+        };
+    };
+    rpc ListLoginLog (ListLoginLogRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/loginloglist"
+        };
+    };
+    rpc CreateRole (Role) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/role/{roleId}"
+            body: "*"
+        };
+    };
+    rpc UpdateRole (Role) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/role"
+            body: "*"
+        };
+    };
+    rpc DeleteRole (DeleteRoleRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/role"
+        };
+    };
+    rpc GetRole (GetRoleRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/role/{roleId}"
+        };
+    };
+    rpc ListRole (ListRoleRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/rolelist"
+        };
+    };
+    rpc CreateSysUser (SysUser) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/sysUser"
+            body: "*"
+        };
+    };
+    rpc UpdateSysUser (SysUser) returns (ApiReply){
+        option (google.api.http) = {
+            put: "/admin/v1/sysUser"
+            body: "*"
+        };
+    };
+    rpc DeleteSysUser (DeleteSysUserRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            delete: "/admin/v1/sysUser"
+        };
+    };
+    rpc GetSysUser (GetSysUserRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/sysUser/{userId}"
+        };
+    };
+    rpc GetSysUserInit (GetSysUserInitRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/sysUser"
+        };
+    };
+    rpc ListSysUser (ListSysUserRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/sysUserList"
+        };
+    };
+    rpc InsetSysUserAvatar (InsetSysUserAvatarRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/admin/v1/user/avatar"
+            body: "*"
+        };
+    };
+    rpc SysUserUpdatePwd (SysUserUpdatePwdRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/admin/v1/user/pwd"
+            body: "*"
+        };
+    };
+    rpc GetSysUserProfile (GetSysUserProfileRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/admin/v1/user/profile"
+        };
+    };
+}
+
+service Api {
+    // rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
+	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
+	rpc SayHelloURL(HelloReq) returns (HelloResp) {
+        option (google.api.http) = {
+            get:"/api/v1/say_hello"
+        };
+    };
+    rpc GenerateCaptchaHandler (GenerateCaptchaHandlerRequest) returns (GenerateCaptchaHandlerReply) {
+        option (google.api.http) = {
+            get: "/api/v1/getCaptcha"
+        };
+    };
+    rpc SMSCode(SMSCodeReq) returns (SMSCodeResp) {
+        option (google.api.http) = {
+            get:"/api/v1/sms"
+        };
+    };
+    rpc Register(RegisterReq) returns (RegisterResp) {
+        option (google.api.http) = {
+            post:"/api/v1/register"
+        };
+    };
+    rpc LoginGoogle(LoginGoogleReq) returns (LoginGoogleResp) {
+        option (google.api.http) = {
+            post: "/api/v1/login/google"
+        };
+    };
+    rpc Login (LoginRequest) returns (LoginReply) {
+        option (google.api.http) = {
+            post:"/api/v1/login"
+        };
+    };
+    rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenReply) {
+        option (google.api.http) = {
+            get: "/api/v1/refresh_token"
+        };
+    };
+    rpc Logout(LogoutReq) returns (LogoutResp) {
+        option (google.api.http) = {
+            post: "/api/v1/logout"
+        };
+    };
+    rpc InsetSysUserAvatar (InsetSysUserAvatarRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            post: "/api/v1/user/avatar"
+        };
+    };
+    rpc SysUserUpdatePwd (SysUserUpdatePwdRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            put: "/api/v1/user/pwd"
+        };
+    };
+    rpc GetSysUserProfile (GetSysUserProfileRequest) returns (ApiReply) {
+        option (google.api.http) = {
+            get: "/api/v1/user/profile"
+        };
+    };
+}
+
+service Sso {
+    rpc Introspect(IntrospectReq) returns (IntrospectResp);
+}
+
+service Auth {
+    rpc Authorize(AuthorizeReq) returns (AuthorizeResp) {
+        option (google.api.http) = {
+            post:"/api/v1/authorize"
+        };
+    };
+    rpc Token (TokenReq) returns (TokenResp) {
+        option (google.api.http) = {
+            post:"/api/v1/token"
+        };
+    };
+    rpc RefreshToken (RefreshTokenReq) returns (RefreshTokenResp) {
+        option (google.api.http) = {
+            post:"/api/v1/token/refresh"
+        };
+    };
+    rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp) {
+        option (google.api.http) = {
+            post: "/api/v1/user/info"
+        };
+    };
+}
+
+message HelloReq {
+	string name = 1;
+}
+
+message HelloResp {
+    string Content = 1;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+    string code = 3;
+    string uuid = 4;
+}
+message LoginReply {
+    string token = 1;
+    google.protobuf.Timestamp expire = 2;
+}
+
+message RefreshTokenRequest {}
+message RefreshTokenReply {
+    string Token = 1;
+    google.protobuf.Timestamp Expire = 2;
+}
+
+message GenerateCaptchaHandlerRequest {}
+message GenerateCaptchaHandlerReply {
+    string id = 1;
+    string b64s = 2;
+}
+
+message DigitizeCapthaReq {}
+message DigitizeCapthaResp {
+    string id = 1;
+    string b64s = 2;
+}
+
+message SMSCodeReq {
+}
+message SMSCodeResp {
+}
+
+message RegisterReq {
+    string Username = 1;
+	string Password = 2;
+    string Confirm = 3;
+    string Mail = 4;
+    string Mobile = 5;
+	string Captcha = 6;
+}
+
+message RegisterResp {
+    uint64 Mid = 1;
+    string Mail = 2;
+    string Mobile = 3;
+}
+
+message LoginGoogleReq {
+}
+
+message LoginGoogleResp {
+  string Content = 1 ;
+}
+
+message LogoutReq {
+    string Name = 1 ;
+}
+
+message LogoutResp {
+    string Content = 1 ;
+}
+
+message GenIDReq {
+    int64 Id = 1;
+}
+
+message GenIDResp {
+    int64 Id = 1;
+}
+
+message AuthorizeReq {
+    string ResponseType = 1;
+	string ClientID = 2;
+	string Scope = 3;
+	string RedirectURI = 4;
+	string State = 5;
+	string AccessTokenExp  = 6;
+}
+
+message AuthorizeResp {
+    string Location = 1;
+    string Code = 2;
+    string State = 3;
+}
+
+message TokenReq {
+    string GrantType = 1;
+    string Scope = 2;
+    string ResponseType = 3;
+    string RedirectURI  = 4;
+	string ClientID     = 5;
+    string ClientSecret = 6;
+    string Code = 7;
+    string Username = 8;
+    string Password = 9;
+    string RefreshToken = 10;
+}
+
+message TokenResp {
+    string AccessToken = 1;
+    string TokenType = 2;
+    string ExpiresIn = 3;
+    string Scope = 4;
+    string RefreshToken = 5;
+    string OpenID = 6;
+    string Ext = 7;
+}
+
+message RefreshTokenReq {
+    string RefreshToken = 1;
+}
+
+message RefreshTokenResp {
+    string AccessToken = 1;
+    string TokenType = 2;
+    string ExpiresIn = 3;
+    string Scope = 4;
+    string RefreshToken = 5;
+    string Ext = 7;
+}
+
+message IntrospectReq {
+    string AccessToken = 1;
+}
+
+message IntrospectResp {
+    string dataScope = 1;
+	uint64 userId = 2;
+	uint64 roleId = 3;
+    string roleKey = 4;
+    uint64 deptId = 5;
+    uint64 postId = 6;
+}
+
+message User {
+    uint64 ID = 1 ;
+    string Name = 2 ;
+    int32 Vip = 3 ;
+    int32 VipMode = 4 ;
+    string VipRemaining = 5 ;
+    string Authority = 6 ;
+    string Avatar = 7 ;
+    string Email = 8 ;
+    string Signature = 9 ;
+    string Title = 10 ;
+    int32 NotifyCount = 11 ;
+    string Country = 12 ;
+    string Address = 13 ;
+    string Phone = 14 ;
+}
+
+message GetUserInfoReq {
+    string AccessToken = 1 ;
+    uint64 Mid = 2 ;
+}
+
+message GetUserInfoResp {
+    User U = 1 ;
+}
+
+message SetUserVipReq {
+    string AccessToken = 1 ;
+    int32 Vip = 2 ;
+    int32 VipMode = 3 ;
+    string VipDuration = 4 ;
+    uint64 Mid = 5 ;
+}
+
+message SetUserVipResp {
+    User U = 1 ;
+}
+
+message App {
+    string Id = 1;
+	string Secret = 2;
+	string Domain = 3;
+	string UserId = 4;
+	string Scope = 5;
+	string GrantType = 7;
+}
+
+message GetSsoAppListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string tableName = 3;
+}
+message GetSsoAppListReply {}
+
+message GetSsoAppRequest {
+    string id = 1;
+}
+message GetSsoAppReply {}
+
+message InsertSsoAppRequest {}
+message InsertSsoAppReply {}
+
+message UpdateSsoAppRequest {}
+message UpdateSsoAppReply {}
+
+message DeleteSsoAppRequest {
+    int32 id = 1;
+}
+message DeleteSsoAppReply {}
+
+message Token {
+    string Id = 1;
+}
+
+message GetSsoTokenListRequest {
+    int32 pageIndex = 1;
+    int32 pageSize = 2;
+    string tableName = 3;
+}
+message GetSsoTokenListReply {}
+
+message GetSsoTokenRequest {
+    string id = 1;
+}
+message GetSsoTokenReply {}
+
+message InsertSsoTokenRequest {}
+message InsertSsoTokenReply {}
+
+message UpdateSsoTokenRequest {}
+message UpdateSsoTokenReply {}
+
+message DeleteSsoTokenRequest {
+    string id = 1;
+}
+message DeleteSsoTokenReply {}
+
+message LoginLog {
+    int32 infoId = 1;
+	string username = 2;
+	string status = 3;
+	string ipaddr = 4;
+	string loginLocation = 5;
+	string browser = 6;
+	string os = 7;
+    string platform = 8;
+    google.protobuf.Timestamp loginTime = 9;
+}
+
+message CreateLoginLogRequest {}
+message CreateLoginLogReply {}
+
+message UpdateLoginLogRequest {}
+message UpdateLoginLogReply {}
+
+message DeleteLoginLogRequest {}
+message DeleteLoginLogReply {}
+
+message GetLoginLogRequest {
+    int32 infoId = 1;
+}
+message GetLoginLogReply {}
+
+message ListLoginLogRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string username = 3;
+    string status = 4;
+    string ipaddr = 5;
+}
+message ListLoginLogReply {}
+
+message Role {
+    int64 roleId = 1;
+	string roleName = 2;
+	string status = 3;
+	string roleKey = 4;
+	int32 roleSort = 5;
+	string flag = 6;
+	string remark = 7;
+    bool admin = 8;
+    google.protobuf.Timestamp createdAt = 9;
+}
+
+message CreateRoleRequest {}
+message CreateRoleReply {}
+
+message UpdateRoleRequest {}
+message UpdateRoleReply {}
+
+message UpdateRoleDataScopeRequest {}
+message UpdateRoleDataScopeReply {}
+
+message DeleteRoleRequest {
+    repeated int64 ids = 1;
+}
+message DeleteRoleReply {}
+
+message GetRoleRequest {
+    int64 roleId = 1;
+}
+message GetRoleReply {}
+
+message ListRoleRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string roleKey = 3;
+    string roleName = 4;
+    string status = 5;
+    google.protobuf.Timestamp createdAt = 6;
+}
+message ListRoleReply {}
+
+message SysUser {
+    int64 userId = 1;
+    string nickName = 2;
+    string phone = 3;
+    int32 roleId = 4;
+    string avatar = 5;
+    string sex = 6;
+    string email = 7;
+    int32 deptId = 8;
+    int32 postId = 9;
+    string remark = 10;
+    string status = 11;
+    google.protobuf.Timestamp createdAt = 12;
+    string username = 13;
+    string rolekey = 14;
+    string deptname = 15;
+}
+
+message CreateSysUserRequest {}
+message CreateSysUserReply {}
+
+message UpdateSysUserRequest {}
+message UpdateSysUserReply {}
+
+message DeleteSysUserRequest {}
+message DeleteSysUserReply {}
+
+message GetSysUserRequest {
+    int32 userId = 1;
+}
+message GetSysUserReply {
+    SysUser data = 1;
+    repeated int32 postIds = 2;
+    repeated int32 roleIds = 3;
+    repeated Role roles = 4;
+    repeated Post posts = 5;
+}
+
+message GetSysUserProfileRequest {}
+message GetSysUserProfileReply {
+    SysUser result = 1;
+    repeated int32 postIds = 2;
+    repeated int32 roleIds = 3;
+    repeated Role roles = 4;
+    repeated Post posts = 5;
+    Dept dept = 6;
+}
+
+message GetSysUserInitRequest {}
+message GetSysUserInitReply {
+    repeated Role roles = 1;
+    repeated Post posts = 2;
+}
+
+message ListSysUserRequest {
+    int32 pageSize = 1;
+    int32 pageIndex = 2;
+    string username = 3;
+    string status = 4;
+    string phone = 5;
+    int32 postId = 6;
+    int32 deptId = 7;
+}
+message ListSysUserReply {}
+
+message InsetSysUserAvatarRequest {
+    bytes avatar = 1;
+}
+message InsetSysUserAvatarReply {}
+
+message SysUserUpdatePwdRequest {
+    string oldPassword = 1;
+    string newPassword = 2;
+}
+message SysUserUpdatePwdReply {}
+
+message GetInfoRequest {}
+message GetInfoReply {
+    repeated string roles = 1;
+    repeated string permissions = 2;
+    repeated string buttons = 3;
+    string introduction = 4;
+    string avatar = 5;
+    string userName = 6;
+    int64 userId = 7;
+    int64 deptId = 8;
+    string name = 9;
+}

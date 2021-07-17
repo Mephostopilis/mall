@@ -2,11 +2,10 @@ package biz
 
 import (
 	"context"
+	"crypto/rsa"
 	"time"
 
-	pb "edu/api/sso"
-	"edu/pkg/ecode"
-	"edu/pkg/jwtauth"
+	pb "edu/api/sso/v1"
 	"edu/pkg/meta"
 	"edu/pkg/net/ip"
 	"edu/pkg/tools"
@@ -29,7 +28,51 @@ var (
 // Users can get a token by posting a json request to LoginHandler. The token then needs to be passed in
 // the Authentication header. Example: Authorization:Bearer XXX_TOKEN_XXX
 type JWTUsecase struct {
-	mw *jwtauth.GinJWTMiddleware
+	// Realm name to display to the user. Required.
+	Realm string
+
+	// signing algorithm - possible values are HS256, HS384, HS512
+	// Optional, default is HS256.
+	SigningAlgorithm string
+
+	// Secret key used for signing. Required.
+	Key []byte
+
+	// Duration that a jwt token is valid. Optional, defaults to one hour.
+	Timeout time.Duration
+
+	// This field allows clients to refresh their token until MaxRefresh has passed.
+	// Note that clients can refresh their token in the last moment of MaxRefresh.
+	// This means that the maximum validity timespan for a token is TokenTime + MaxRefresh.
+	// Optional, defaults to 0 meaning not refreshable.
+	MaxRefresh time.Duration
+
+	// Callback function that will be called during login.
+	// Using this function it is possible to add additional payload data to the webtoken.
+	// The data is then made available during requests via c.Get("JWT_PAYLOAD").
+	// Note that the payload is not encrypted.
+	// The attributes mentioned on jwt.io can't be used as keys for the map.
+	// Optional, by default no additional data will be set.
+	PayloadFunc PayloadHandler
+
+	// Set the identity handler function
+	IdentityFunc IdentityHandler
+
+	// TimeFunc provides the current time. You can override it to use another time value. This is useful for testing or if your server uses a different time zone than your tokens.
+	TimeFunc func() time.Time
+
+	// Private key file for asymmetric algorithms
+	PrivKeyFile string
+
+	// Public key file for asymmetric algorithms
+	PubKeyFile string
+
+	// Private key
+	privKey *rsa.PrivateKey
+
+	// Public key
+	pubKey *rsa.PublicKey
+
 	// log
 	log *log.Helper
 
@@ -38,19 +81,27 @@ type JWTUsecase struct {
 }
 
 // New 分配
-func NewJWTUsecase(c *conf.App, logger log.Logger, d dao.Dao) (*JWTUsecase, error) {
+func NewJWTUsecase(c *conf.Jwt, logger log.Logger, d dao.Dao) (*JWTUsecase, error) {
 	log := log.NewHelper(log.With(logger, "module", "usecase/jwtauth"))
-	du := c.Jwt.Timeout.AsDuration()
-	mw, err := jwtauth.New(
-		&jwtauth.Jwt{Secret: c.Jwt.Secret, Timeout: du},
-		logger,
-		jwtauth.DataPermissionToClaimsFunc,
-		jwtauth.ClaimsToDataPermissionFunc)
-	if err != nil {
-		return nil, err
-	}
+	du := c.Timeout.AsDuration()
+	// mw, err := jwtauth.New(
+	// 	&jwtauth.Jwt{Secret: c.Secret, Timeout: du},
+	// 	logger,
+	// 	jwtauth.DataPermissionToClaimsFunc,
+	// 	jwtauth.ClaimsToDataPermissionFunc)
+	// if err != nil {
+	// 	return nil, err
+	// }
 	uc := &JWTUsecase{
-		mw:  mw,
+		Realm:            "test zone",
+		SigningAlgorithm: "HS256",
+		Key:              []byte(c.Secret),
+		Timeout:          du,
+		MaxRefresh:       time.Hour,
+		PayloadFunc:      DataPermissionToClaimsFunc,
+		IdentityFunc:     ClaimsToDataPermissionFunc,
+		TimeFunc:         time.Now,
+
 		log: log,
 		dao: d,
 	}
@@ -59,7 +110,7 @@ func NewJWTUsecase(c *conf.App, logger log.Logger, d dao.Dao) (*JWTUsecase, erro
 
 // MiddlewareFunc makes GinJWTMiddleware implement the Middleware interface.
 func (mw *JWTUsecase) ValidationMidToken(ctx context.Context, token string) (pd *pb.DataPermission, err error) {
-	out, err := mw.mw.ValidationToken(token)
+	out, err := mw.ValidationToken(token)
 	if err != nil {
 		return
 	}
@@ -93,14 +144,14 @@ func (mw *JWTUsecase) authenticator(ctx context.Context, req *pb.LoginRequest) (
 	if loginVals.Username == "" {
 		// 数据解析失败
 		mw.log.Errorf("username is null")
-		return nil, nil, ecode.ErrMissingLoginValues
+		return nil, nil, pb.ErrMissingLoginValues("")
 	}
 	// 验证验证吗
 	if !captchaStore.Verify(loginVals.UUID, loginVals.Code, true) {
 		msg = "验证码错误"
 		status = "1"
 		mw.saveLoginLogToDB(ctx, status, msg, username)
-		return nil, nil, ecode.ErrInvalidVerificationode
+		return nil, nil, pb.ErrInvalidVerificationode("")
 	}
 	// 验证
 	user, role, err := mw.dao.GetJwtAuthUser(ctx, &loginVals)
@@ -156,7 +207,7 @@ func (mw *JWTUsecase) LoginHandler(ctx context.Context, req *pb.LoginRequest) (t
 	}
 
 	// Create the token
-	tokenString, expire, err = mw.mw.TokenGenerator(dp)
+	tokenString, expire, err = mw.TokenGenerator(dp)
 	return
 }
 
@@ -165,7 +216,7 @@ func (mw *JWTUsecase) LoginHandler(ctx context.Context, req *pb.LoginRequest) (t
 // Reply will be of the form {"token": "TOKEN"}.
 // 刷新token
 func (mw *JWTUsecase) RefreshHandler(ctx context.Context, token string) (string, time.Time, error) {
-	return mw.mw.RefreshToken(token)
+	return mw.RefreshToken(token)
 }
 
 // @Summary 退出登录

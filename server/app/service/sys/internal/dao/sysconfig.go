@@ -3,7 +3,7 @@ package dao
 import (
 	"context"
 
-	"edu/pkg/ecode"
+	pb "edu/api/sys/v1"
 	"edu/service/sys/internal/model"
 
 	"github.com/go-kratos/kratos/v2/errors"
@@ -75,11 +75,11 @@ func (d *dao) UpdateSysConfig(e *model.SysConfig, id int) (update model.SysConfi
 	}
 
 	if e.ConfigName != "" && e.ConfigName != update.ConfigName {
-		return update, ecode.UnexpectedErr
+		return update, pb.UnexpectedErr("configName is null")
 	}
 
 	if e.ConfigKey != "" && e.ConfigKey != update.ConfigKey {
-		return update, ecode.UnexpectedErr
+		return update, pb.UnexpectedErr("configName is null")
 	}
 
 	//参数1:是要修改的数据

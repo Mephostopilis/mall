@@ -7,7 +7,7 @@ import (
 	cmspb "edu/api/cms/v1"
 	memberpb "edu/api/member"
 	pmspb "edu/api/pms"
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	syspb "edu/api/sys/v1"
 	tikupb "edu/api/tiku"
 	"edu/gateway/internal/conf"

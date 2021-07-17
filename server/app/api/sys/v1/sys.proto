@@ -73,42 +73,6 @@ service Admin {
             get: "/admin/v1/configList"
         };
     };
-    rpc CreateDept (Dept) returns (ApiReply) {
-        option (google.api.http) = {
-            post: "/admin/v1/dept"
-        };
-    };
-    rpc UpdateDept (Dept) returns (ApiReply){
-        option (google.api.http) = {
-            put: "/admin/v1/dept"
-            body: "*"
-        };
-    };
-    rpc DeleteDept (DeleteDeptRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            delete: "/admin/v1/dept/{ids}"
-        };
-    };
-    rpc GetDept (GetDeptRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/dept/{deptId}"
-        };
-    };
-    rpc GetDeptTree (GetDeptTreeRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/deptTree"
-        };
-    };
-    rpc ListDept (ListDeptRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/deptList"
-        };
-    };
-    rpc GetDeptTreeRoleselect (GetDeptTreeRoleselectRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/roleDeptTreeselect/{roleId}"
-        };
-    };
     rpc CreateMenu (Menu) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/menu"
@@ -183,33 +147,6 @@ service Admin {
             get: "/admin/v1/operloglist"
         };
     };
-    rpc CreatePost (Post) returns (ApiReply) {
-        option (google.api.http) = {
-            post: "/admin/v1/post"
-            body: "*"
-        };
-    };
-    rpc UpdatePost (Post) returns (ApiReply){
-        option (google.api.http) = {
-            put: "/admin/v1/post/{postId}"
-            body: "*"
-        };
-    };
-    rpc DeletePost (DeletePostRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            delete: "/admin/v1/post/{ids}"
-        };
-    };
-    rpc GetPost (GetPostRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/post/{postId}"
-        };
-    };
-    rpc ListPost (ListPostRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/postlist"
-        };
-    };
     rpc CreateRoleMenu (Menu) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/rolemenu"
@@ -246,43 +183,6 @@ service Admin {
         option (google.api.http) = {
             post: "/admin/v1/setting"
             body: "*"
-        };
-    };
-    rpc CreateSysjob (Job) returns (ApiReply){
-        option (google.api.http) = {
-            post: "/admin/v1/sysjob"
-            body: "*"
-        };
-    };
-    rpc UpdateSysjob (Job) returns (ApiReply){
-        option (google.api.http) = {
-            put: "/admin/v1/sysjob"
-            body: "*"
-        };
-    };
-    rpc DeleteSysjob (DeleteSysjobRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            delete: "/admin/v1/sysjob/{ids}"
-        };
-    };
-    rpc GetSysjob (GetSysjobRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/sysjob/{jobId}"
-        };
-    };
-    rpc ListSysjob (ListSysjobRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/sysjob"
-        };
-    };
-    rpc StartJob (StartJobRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/job/start/{jobId}"
-        };
-    };
-    rpc RemoveJob (RemoveJobRequest) returns (ApiReply) {
-        option (google.api.http) = {
-            get: "/admin/v1/job/remove/{jobId}"
         };
     };
     rpc GetDictDataList (GetDictDataListRequest) returns (ApiReply) {
@@ -442,11 +342,6 @@ service Api {
     };
 }
 
-service Sys {
-    rpc GetDept (GetDeptRequest) returns (Dept);
-    rpc GetPost (GetPostRequest) returns (Post);
-}
-
 message SysResource {
     int32 id = 1;
     string v1 = 2;
@@ -521,66 +416,8 @@ message ListConfigRequest {
 }
 message ListConfigReply {}
 
-message Dept {
-    int64 deptId = 1;
-	int64 parentId = 2;
-	string deptPath = 3;
-	string deptName = 4;
-	int32 sort = 5;
-	string leader = 6;
-	string phone = 7;
-	string email = 8;
-	string status = 9;
-    google.protobuf.Timestamp createdAt = 10;
-    repeated Dept children = 11;
-}
-
-message DeptLable {
-    int32 id = 1;
-	string label = 2;
-	repeated DeptLable children = 3;
-}
-
-message CreateDeptRequest {}
-message CreateDeptReply {}
-
-message UpdateDeptRequest {}
-message UpdateDeptReply {}
-
-message DeleteDeptRequest {
-    string ids = 1;
-}
-message DeleteDeptReply {}
-
-message GetDeptRequest {
-    int32 deptId = 1;
-}
-message GetDeptReply {}
-
-message GetDeptTreeRequest {
-    string deptName = 1;
-    string status = 2;
-    int32 deptId = 3;
-}
-message GetDeptTreeReply {}
-
 message GetMenuTreeelectRequest {}
 message GetMenuTreeelectReply {}
-
-message ListDeptRequest {
-    string deptName = 1;
-    string status = 2;
-    int32 deptId = 3;
-}
-message ListDeptReply {}
-
-message GetDeptTreeRoleselectRequest {
-    int32 roleId = 1;
-}
-message GetDeptTreeRoleselectReply {
-    repeated DeptLable depts = 1;
-    repeated int32 checkedKeys = 2;
-}
 
 message Menu {
     int32 menuId = 1;
@@ -731,42 +568,6 @@ message ListOperLogRequest {
 }
 message ListOperLogReply {}
 
-message Post {
-    int32 postId = 1;
-	string postName = 2;
-	string postCode = 3;
-	int32 sort = 4;
-	string status = 5;
-	string remark = 6;
-    google.protobuf.Timestamp createdAt = 7;
-}
-
-message CreatePostRequest {}
-message CreatePostReply {}
-
-message UpdatePostRequest {}
-message UpdatePostReply {}
-
-message DeletePostRequest {
-    string ids = 1;
-}
-message DeletePostReply {}
-
-message GetPostRequest {
-    int32 postId = 1;
-}
-message GetPostReply {}
-
-message ListPostRequest {
-    int32 pageSize = 1;
-    int32 pageIndex = 2;
-    int32 postId = 3;
-    string postCode = 4;
-    string postName = 5;
-    string status = 6;
-}
-message ListPostReply {}
-
 message CreateRoleMenuRequest {}
 message CreateRoleMenuReply {}
 
@@ -833,19 +634,6 @@ message RemoveJobRequest {
     int32 jobId = 1;
 }
 message RemoveJobReply {}
-
-message Job {
-    int32 jobId = 1;
-	string jobName = 2;
-	string jobGroup = 3;
-	int32 JobType = 4;
-	string cronExpression = 5;
-	string invokeTarget = 6;
-	int32 MisfirePolicy = 7;
-	int32 Concurrent = 8;
-	int32 status = 9;
-	int32 entryId = 10;
-}
 
 message DictData {
     int32 dictCode = 1;
@@ -1019,7 +807,7 @@ message GetDBTableListReply {}
 message GetDBColumnListRequest {
     int32 pageIndex = 1;
     int32 pageSize = 2;
-    string tableName = 3;
+    string tableName = 3 [(validate.rules).string.min_len = 1];
 }
 message GetDBColumnListReply {}
 

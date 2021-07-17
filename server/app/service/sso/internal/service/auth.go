@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	pb "edu/api/sso"
 
+	pb "edu/api/sso/v1"
 	"edu/service/sso/internal/biz"
 	"edu/service/sso/internal/dao"
 

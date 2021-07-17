@@ -12,7 +12,7 @@ import (
 )
 
 func MigrateUp(c *conf.Data, logger log.Logger) error {
-	log := log.NewHelper("migrate", logger)
+	log := log.NewHelper(log.With(logger, "module", "migrate"))
 	db, err := sql.Open(c.Admin.Driver, c.Admin.Source)
 	if err != nil {
 		log.Errorf("err = %v", err)

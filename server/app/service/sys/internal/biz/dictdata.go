@@ -4,10 +4,10 @@ import (
 	"context"
 
 	pb "edu/api/sys/v1"
+	"edu/pkg/ecode"
 	"edu/pkg/strings"
 	"edu/service/sys/internal/model"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -101,12 +101,12 @@ func (uc *AdminUsecase) GetDictData(ctx context.Context, req *pb.GetDictDataRequ
 func (uc *AdminUsecase) InsertDictData(ctx context.Context, req *pb.DictData) (err error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("UserID")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	data := model.SysDictData{
@@ -142,12 +142,12 @@ func (uc *AdminUsecase) InsertDictData(ctx context.Context, req *pb.DictData) (e
 func (uc *AdminUsecase) UpdateDictData(ctx context.Context, req *pb.DictData) (err error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("UserID")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	data := model.SysDictData{
@@ -181,12 +181,12 @@ func (uc *AdminUsecase) UpdateDictData(ctx context.Context, req *pb.DictData) (e
 func (uc *AdminUsecase) DeleteDictData(ctx context.Context, req *pb.DeleteDictDataRequest) (err error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	v := md.Get("UserID")
 	if len(v) < 0 {
-		err = errors.Unknown("meta", "error")
+		err = ecode.Unknown("meta", "error")
 		return
 	}
 	var data model.SysDictData

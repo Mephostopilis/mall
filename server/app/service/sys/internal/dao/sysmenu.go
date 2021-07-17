@@ -3,9 +3,8 @@ package dao
 import (
 	"fmt"
 
+	pb "edu/api/sys/v1"
 	"edu/service/sys/internal/model"
-
-	"github.com/go-kratos/kratos/v2/errors"
 )
 
 func (d *dao) GetMenusByRoleName(e *model.Menu, rolename string) (Menus []model.Menu, err error) {
@@ -73,7 +72,7 @@ func (d *dao) initPaths(menu *model.Menu) (err error) {
 	if int(menu.ParentId) != 0 {
 		d.orm.Table("sys_menu").Where("menu_id = ?", menu.ParentId).First(parentMenu)
 		if parentMenu.Paths == "" {
-			err = errors.OutOfRange("table", "父级paths异常，请尝试对当前节点父级菜单进行更新操作！")
+			err = pb.ErrOutOfRange("table", "父级paths异常，请尝试对当前节点父级菜单进行更新操作！")
 			return
 		}
 		menu.Paths = parentMenu.Paths + "/" + fmt.Sprintf("%v", menu.MenuId)

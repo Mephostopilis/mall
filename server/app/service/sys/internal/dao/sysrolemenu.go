@@ -3,7 +3,7 @@ package dao
 import (
 	"fmt"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 
 	"edu/service/sys/internal/model"
 )

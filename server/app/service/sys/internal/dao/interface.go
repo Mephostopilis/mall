@@ -3,7 +3,7 @@ package dao
 import (
 	"context"
 
-	ssopb "edu/api/sso"
+	ssopb "edu/api/sso/v1"
 	"edu/service/sys/internal/model"
 )
 
@@ -21,13 +21,6 @@ type Dao interface {
 	UpdateSysConfig(e *model.SysConfig, id int) (update model.SysConfig, err error)
 	DeleteSysConfig(e *model.SysConfig, id int) (success bool, err error)
 	BatchDeleteSysConfig(e *model.SysConfig, ids []int) (Result bool, err error)
-
-	CreateSysDept(e *model.SysDept) (model.SysDept, error)
-	GetSysDept(e *model.SysDept) (model.SysDept, error)
-	GetSysDeptList(e *model.SysDept) ([]model.SysDept, error)
-	GetSysDeptPage(e *model.SysDept) ([]model.SysDept, error)
-	UpdateSysDept(e *model.SysDept, id int) (update model.SysDept, err error)
-	DeleteSysDept(e *model.SysDept, id int) (success bool, err error)
 
 	CreateDictData(e *model.SysDictData) (model.SysDictData, error)
 	GetDictDataByCode(e *model.SysDictData) (model.SysDictData, error)
@@ -75,19 +68,8 @@ type Dao interface {
 	DeleteRoleMenu(rm *model.SysRoleMenu, RoleId int, MenuID int) (bool, error)
 	InsertRoleMenu(rm *model.SysRoleMenu, roleId int, rolekey string, menuId []int) (bool, error)
 
-	CreatePost(e *model.SysPost) (model.SysPost, error)
-	GetPost(e *model.SysPost) (model.SysPost, error)
-	GetPostList(e *model.SysPost) ([]model.SysPost, error)
-	GetPostPage(e *model.SysPost, pageSize int, pageIndex int) ([]model.SysPost, int64, error)
-	UpdatePost(e *model.SysPost, id int) (update model.SysPost, err error)
-	DeletePost(e *model.SysPost, id int) (success bool, err error)
-	BatchDeletePost(e *model.SysPost, id []int) (Result bool, err error)
-
 	GetSysSetting(ctx context.Context, s *model.SysSetting) (create model.SysSetting, err error)
 	UpdateSysSetting(ctx context.Context, s *model.SysSetting) (update model.SysSetting, err error)
-
-	InsertSysDeptMenu(rm *model.SysDeptMenu, uid uint64, deptId int, menuIds []int) (bool, error)
-	DeleteSysDeptMenu(rm *model.SysDeptMenu, deptId int) (bool, error)
 
 	CreateDictType(e *model.SysDictType) (model.SysDictType, error)
 	GetDictType(e *model.SysDictType) (model.SysDictType, error)
