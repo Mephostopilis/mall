@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "job/im/internal/conf/conf.proto",
+    "title": "job/handleim/internal/conf/conf.proto",
     "version": "version not set"
   },
   "consumes": [

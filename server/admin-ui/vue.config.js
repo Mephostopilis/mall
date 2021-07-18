@@ -3,6 +3,7 @@ const path = require('path')
 const CompressionPlugin = require('compression-webpack-plugin')// 引入gzip压缩插件
 const defaultSettings = require('./src/settings.js')
 const autoprefixer = require('autoprefixer');
+// const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -16,8 +17,6 @@ const name = defaultSettings.title || 'vue Element Admin' // page title
 // You can change the port by the following method:
 // port = 9527 npm run dev OR npm run dev --port = 9527
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
-
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -51,7 +50,7 @@ module.exports = {
         deleteOriginalAssets: false, // 是否删除原文件
         minRatio: 0.8
       }),
-      new MonacoWebpackPlugin()
+      // new MonacoWebpackPlugin()
     ],
     name: name,
     resolve: {

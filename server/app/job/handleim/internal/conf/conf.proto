@@ -1,7 +1,7 @@
 syntax = "proto3";
-package job.conf;
+package job.handleim.internal.conf;
 
-option go_package = "edu/job/internal/conf;conf";
+option go_package = "edu/job/handleim/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 

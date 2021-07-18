@@ -1,0 +1,14 @@
+{"L":"INFO","T":"2021-07-18T18:18:05.594+0800","C":"v2@v2.0.0/app.go:90","M":"[HTTP] server listening on: [::]:8000"}
+{"L":"INFO","T":"2021-07-18T18:18:18.211+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sso.v1.Admin/GenerateCaptchaHandler","args":"","code":0,"reason":"","stack":"","latency":0.1050006}
+{"L":"INFO","T":"2021-07-18T18:18:18.248+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sys.v1.Admin/GetSetting","args":"","code":0,"reason":"","stack":"","latency":0.1419964}
+{"L":"INFO","T":"2021-07-18T18:18:23.846+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sso.v1.Admin/GenerateCaptchaHandler","args":"","code":0,"reason":"","stack":"","latency":0.0060021}
+{"L":"INFO","T":"2021-07-18T18:19:35.109+0800","C":"v2@v2.0.0/app.go:85","M":"[HTTP] server stopping"}
+{"L":"INFO","T":"2021-07-18T18:19:39.104+0800","C":"v2@v2.0.0/app.go:90","M":"[HTTP] server listening on: [::]:8000"}
+{"L":"INFO","T":"2021-07-18T18:24:10.463+0800","C":"v2@v2.0.0/app.go:85","M":"[HTTP] server stopping"}
+{"L":"INFO","T":"2021-07-18T18:24:19.285+0800","C":"v2@v2.0.0/app.go:90","M":"[HTTP] server listening on: [::]:8000"}
+{"L":"ERROR","T":"2021-07-18T18:24:47.586+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sys.v1.Admin/GetSetting","args":"","code":500,"reason":"","stack":"rpc error: code = Unavailable desc = last resolver error: produced zero addresses","latency":0}
+{"L":"INFO","T":"2021-07-18T18:24:47.600+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sso.v1.Admin/GenerateCaptchaHandler","args":"","code":0,"reason":"","stack":"","latency":0.0140051}
+{"L":"INFO","T":"2021-07-18T18:25:48.113+0800","C":"v2@v2.0.0/app.go:85","M":"[HTTP] server stopping"}
+{"L":"INFO","T":"2021-07-18T18:25:53.244+0800","C":"v2@v2.0.0/app.go:90","M":"[HTTP] server listening on: [::]:8000"}
+{"L":"ERROR","T":"2021-07-18T18:26:29.983+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sys.v1.Admin/GetSetting","args":"","code":500,"reason":"","stack":"rpc error: code = Unavailable desc = last resolver error: produced zero addresses","latency":0.0009991}
+{"L":"INFO","T":"2021-07-18T18:26:29.986+0800","C":"tracing/tracing.go:59","M":"","kind":"client","component":"grpc","operation":"/api.sso.v1.Admin/GenerateCaptchaHandler","args":"","code":0,"reason":"","stack":"","latency":0.0039995}

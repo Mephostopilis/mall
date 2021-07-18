@@ -9,16 +9,13 @@ import (
 
 // AppID .
 const AppID = "service.uuid"
-const target = "127.0.0.1:9004"
 
 // NewClient new grpc client
 func NewUUID(ctx context.Context, opts ...grpctransport.ClientOption) (UUIDClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
+	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err

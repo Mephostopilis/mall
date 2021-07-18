@@ -9,16 +9,13 @@ import (
 
 // AppID .
 const AppID = "discovery:///sys"
-const target = "127.0.0.1:9007"
 
 // NewSys new grpc client
 func NewAdmin(ctx context.Context, opts ...grpctransport.ClientOption) (AdminClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
+	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(2*time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err
@@ -31,7 +28,7 @@ func NewAdmin(ctx context.Context, opts ...grpctransport.ClientOption) (AdminCli
 // NewTools new grpc client
 func NewApi(ctx context.Context, opts ...grpctransport.ClientOption) (ApiClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(target))
+	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
 	for _, o := range opts {
 		t = append(t, o)

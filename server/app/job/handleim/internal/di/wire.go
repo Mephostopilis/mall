@@ -5,9 +5,9 @@
 package di
 
 import (
-	"edu/job/im/internal/biz"
-	"edu/job/im/internal/conf"
-	"edu/job/im/internal/server"
+	"edu/job/handleim/internal/biz"
+	"edu/job/handleim/internal/conf"
+	"edu/job/handleim/internal/server"
 
 	"github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2"
