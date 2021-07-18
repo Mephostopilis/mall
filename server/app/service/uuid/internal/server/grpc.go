@@ -2,6 +2,7 @@ package server
 
 import (
 	pb "edu/api/uuid"
+	"edu/pkg/middleware/handleerr"
 
 	"edu/service/uuid/internal/conf"
 	"edu/service/uuid/internal/service"
@@ -20,6 +21,7 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.UUIDService) *g
 		grpc.Middleware(
 			middleware.Chain(
 				recovery.Recovery(recovery.WithLogger(logger)),
+				handleerr.Server(),
 				tracing.Server(),
 				logging.Server(logger),
 			),

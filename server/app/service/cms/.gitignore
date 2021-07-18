@@ -14,5 +14,6 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-cmd/sso/sso
-cmd/sso/sso.exe
+logs
+cmd/cms/cms
+cmd/cms/cms.exe

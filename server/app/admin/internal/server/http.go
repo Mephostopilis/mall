@@ -13,6 +13,7 @@ import (
 	ssopb "edu/api/sso/v1"
 	syspb "edu/api/sys/v1"
 	tikupb "edu/api/tiku"
+	"edu/pkg/middleware/auth"
 
 	"github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2/log"
@@ -67,6 +68,7 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 		panic(err)
 	}
 	ssopb.RegisterAdminHandlerClient(ctx, gr, ssoc)
+
 	// sys
 	sysc, err := syspb.NewAdmin(ctx, m, grpc.WithDiscovery(r))
 	if err != nil {
@@ -115,6 +117,11 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 	}
 	memberpb.RegisterAdminHandlerClient(ctx, gr, memberc)
 
+	ssocc, err := ssopb.NewSso(ctx, m, grpc.WithDiscovery(r))
+	if err != nil {
+		panic(err)
+	}
+	au := auth.New(&auth.Config{DisableCSRF: false}, logger, ssocc)
 	var opts = []http.ServerOption{
 		http.Middleware(
 			middleware.Chain(
@@ -122,6 +129,7 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 				tracing.Server(),
 				logging.Server(logger),
 				validate.Validator(),
+				au.User,
 			),
 		),
 	}

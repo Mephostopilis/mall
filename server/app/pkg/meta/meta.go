@@ -13,12 +13,12 @@ import (
 func GetDataPermissions(ctx context.Context) (permission ssopb.DataPermission, err error) {
 	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = ecode.Unknown("meta", "error")
+		err = ecode.Unknown("不存在md")
 		return
 	}
 	v := md.Get("permision")
 	if len(v) < 0 {
-		err = ecode.Unknown("meta", "error")
+		err = ecode.Unknown("不存在permission")
 		return
 	}
 	if err = proto.Unmarshal([]byte(v), &permission); err != nil {
@@ -30,7 +30,7 @@ func GetDataPermissions(ctx context.Context) (permission ssopb.DataPermission, e
 func GetToken(ctx context.Context) (token string, err error) {
 	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = ecode.Unknown("meta", "error")
+		err = ecode.Unknown("不存在md")
 		return
 	}
 	v := md.Get("token")
@@ -45,7 +45,7 @@ func GetToken(ctx context.Context) (token string, err error) {
 func GetUA(ctx context.Context) (ua string, err error) {
 	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = ecode.Unknown("meta", "error")
+		err = ecode.Unknown("不存在md")
 		return
 	}
 	v := md.Get("ua")
@@ -60,7 +60,7 @@ func GetUA(ctx context.Context) (ua string, err error) {
 func GetRemoteAddr(ctx context.Context) (remoteAddr string, err error) {
 	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
-		err = ecode.Unknown("meta", "error")
+		err = ecode.Unknown("不存在md")
 		return
 	}
 	v := md.Get("remote_addr")

@@ -4,6 +4,7 @@ import (
 	xhttp "net/http"
 
 	pb "edu/api/sso/v1"
+	"edu/pkg/middleware/handleerr"
 	"edu/service/sso/internal/conf"
 	"edu/service/sso/internal/service"
 
@@ -21,6 +22,7 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, a *service.AdminService, s
 		http.Middleware(
 			middleware.Chain(
 				recovery.Recovery(),
+				handleerr.Server(),
 				tracing.Server(),
 				logging.Server(logger),
 			),

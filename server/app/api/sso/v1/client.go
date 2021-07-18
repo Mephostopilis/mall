@@ -15,9 +15,7 @@ func NewAdmin(ctx context.Context, opts ...grpctransport.ClientOption) (AdminCli
 	t := make([]grpctransport.ClientOption, 0)
 	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err
@@ -32,9 +30,7 @@ func NewApi(ctx context.Context, opts ...grpctransport.ClientOption) (ApiClient,
 	t := make([]grpctransport.ClientOption, 0)
 	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err
@@ -49,9 +45,7 @@ func NewSso(ctx context.Context, opts ...grpctransport.ClientOption) (SsoClient,
 	t := make([]grpctransport.ClientOption, 0)
 	t = append(t, grpctransport.WithEndpoint(AppID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err

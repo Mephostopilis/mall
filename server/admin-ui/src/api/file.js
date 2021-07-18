@@ -4,8 +4,8 @@ import qs from 'qs'
 export function upload(data) {
   return axios({
     method: 'post',
-    url: "http://127.0.0.1:8080/"
-    data: qs.stringify(data)
+    url: "http://127.0.0.1:8080/",
+    data: data
   })
 }
 

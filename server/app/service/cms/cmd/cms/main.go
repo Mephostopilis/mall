@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 
-	_ "edu/pkg/encoding/json"
 	pkglog "edu/pkg/log"
 	"edu/service/cms/internal/conf"
 	"edu/service/cms/internal/di"

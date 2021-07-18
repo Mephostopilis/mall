@@ -20,7 +20,7 @@ data:
 reg:
   etcd:
     endpoints:
-      - "119.27.191.44:2379"
+      - "127.0.0.1:2379"
     dialTimeout: 3s
 logger:
   # 日志存放路径

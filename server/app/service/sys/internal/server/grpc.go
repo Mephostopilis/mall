@@ -2,6 +2,7 @@ package server
 
 import (
 	pb "edu/api/sys/v1"
+	"edu/pkg/middleware/handleerr"
 
 	"edu/service/sys/internal/conf"
 	"edu/service/sys/internal/service"
@@ -20,6 +21,7 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, s *service.ApiService, a *
 		grpc.Middleware(
 			middleware.Chain(
 				recovery.Recovery(),
+				handleerr.Server(),
 				tracing.Server(),
 				logging.Server(logger),
 			),

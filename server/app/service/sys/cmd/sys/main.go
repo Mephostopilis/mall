@@ -3,12 +3,10 @@ package main
 import (
 	"flag"
 
+	pkglog "edu/pkg/log"
 	"edu/service/sys/internal/conf"
 	"edu/service/sys/internal/di"
 	"edu/service/sys/internal/migrate"
-
-	_ "edu/pkg/encoding/json"
-	pkglog "edu/pkg/log"
 
 	"github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2/config"

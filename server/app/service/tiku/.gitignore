@@ -14,5 +14,6 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+logs
 tiku/cmd/tiku
 tiku/cmd/tiku.exe

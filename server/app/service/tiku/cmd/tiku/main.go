@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 
+	pkglog "edu/pkg/log"
 	"edu/service/tiku/internal/conf"
 	"edu/service/tiku/internal/di"
 	"edu/service/tiku/internal/migrate"
-
-	pkglog "edu/pkg/log"
 
 	"github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2/config"
