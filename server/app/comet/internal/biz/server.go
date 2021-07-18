@@ -12,7 +12,6 @@ import (
 
 	etcd "github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/google/uuid"
 	"github.com/zhenjl/cityhash"
@@ -47,16 +46,6 @@ type Server struct {
 
 // NewServer returns a new Server.
 func NewServer(id uuid.UUID, csrv *conf.Service, c *conf.Server, logger log.Logger, r *etcd.Registry) (*Server, error) {
-	ins := &registry.ServiceInstance{
-		ID:        id.String(),
-		Name:      csrv.Name,
-		Version:   csrv.Version,
-		Metadata:  map[string]string{},
-		Endpoints: []string{c.Grpc.Address},
-	}
-	if err := r.Register(context.Background(), ins); err != nil {
-		return nil, err
-	}
 	logicClient, err := logic.NewClient(context.Background(), grpc.WithDiscovery(r))
 	if err != nil {
 		return nil, err

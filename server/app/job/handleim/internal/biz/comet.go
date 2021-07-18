@@ -8,7 +8,7 @@ import (
 	"time"
 
 	comet "edu/api/comet/grpc"
-	"edu/job/im/internal/conf"
+	"edu/job/handleim/internal/conf"
 
 	"github.com/go-kratos/kratos/v2/log"
 )

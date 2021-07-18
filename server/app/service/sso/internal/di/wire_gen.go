@@ -33,6 +33,7 @@ func InitApp(confService *conf.Service, confServer *conf.Server, data *conf.Data
 	adminService := service.NewAdminService(logger, daoDao, greeterUsecase, jwtUsecase)
 	ssoService := service.NewSsoService(greeterUsecase, jwtUsecase)
 	grpcServer := server.NewGRPCServer(confServer, logger, apiService, adminService, ssoService)
-	app := newApp(confService, logger, grpcServer, registryRegistry)
+	httpServer := server.NewHTTPServer(confServer, logger, adminService, apiService)
+	app := newApp(confService, logger, grpcServer, httpServer, registryRegistry)
 	return app, nil
 }

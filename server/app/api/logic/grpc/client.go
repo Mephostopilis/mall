@@ -8,17 +8,14 @@ import (
 )
 
 // AppID .
-const AppID = "discovery:///im"
-const target = "127.0.0.1:9007" // NOTE: example
+const appID = "discovery:///im"
 
 // NewClient new grpc client
 func NewClient(ctx context.Context, opts ...grpctransport.ClientOption) (LogicClient, error) {
 	t := make([]grpctransport.ClientOption, 0)
-	t = append(t, grpctransport.WithEndpoint(AppID))
+	t = append(t, grpctransport.WithEndpoint(appID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
-	for _, o := range opts {
-		t = append(t, o)
-	}
+	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err

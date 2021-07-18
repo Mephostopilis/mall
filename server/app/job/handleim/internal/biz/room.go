@@ -1,24 +1,17 @@
 package biz
 
 import (
-	"errors"
 	"time"
 
 	comet "edu/api/comet/grpc"
-	"edu/job/im/internal/conf"
+	pb "edu/api/handleim/v1"
+	"edu/job/handleim/internal/conf"
 	"edu/pkg/bytes"
 
 	"github.com/go-kratos/kratos/v2/log"
 )
 
 var (
-	// ErrComet commet error.
-	ErrComet = errors.New("comet rpc is not available")
-	// ErrCometFull comet chan full.
-	ErrCometFull = errors.New("comet proto chan full")
-	// ErrRoomFull room chan full.
-	ErrRoomFull = errors.New("room proto chan full")
-
 	roomReadyProto = new(comet.Proto)
 )
 
@@ -38,6 +31,7 @@ func NewRoom(job *Job, id string, c *conf.Server_Room) (r *Room) {
 		id:    id,
 		job:   job,
 		proto: make(chan *comet.Proto, c.Batch*2),
+		log:   log.NewHelper(log.With(job.logger, "module", "room")),
 	}
 	go r.pushproc(int(c.Batch), c.Signal.AsDuration())
 	return
@@ -53,7 +47,7 @@ func (r *Room) Push(op int32, msg []byte) (err error) {
 	select {
 	case r.proto <- p:
 	default:
-		err = ErrRoomFull
+		err = pb.ErrRoomFull
 	}
 	return
 }

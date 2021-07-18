@@ -1292,12 +1292,11 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
-	// rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
-	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
-	SayHelloURL(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloResp, error)
 	GenerateCaptchaHandler(ctx context.Context, in *GenerateCaptchaHandlerRequest, opts ...grpc.CallOption) (*GenerateCaptchaHandlerReply, error)
 	SMSCode(ctx context.Context, in *SMSCodeReq, opts ...grpc.CallOption) (*SMSCodeResp, error)
 	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
+	Authorize(ctx context.Context, in *AuthorizeReq, opts ...grpc.CallOption) (*AuthorizeResp, error)
+	Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenResp, error)
 	LoginGoogle(ctx context.Context, in *LoginGoogleReq, opts ...grpc.CallOption) (*LoginGoogleResp, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenReply, error)
@@ -1313,15 +1312,6 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
-}
-
-func (c *apiClient) SayHelloURL(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloResp, error) {
-	out := new(HelloResp)
-	err := c.cc.Invoke(ctx, "/api.sso.v1.Api/SayHelloURL", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *apiClient) GenerateCaptchaHandler(ctx context.Context, in *GenerateCaptchaHandlerRequest, opts ...grpc.CallOption) (*GenerateCaptchaHandlerReply, error) {
@@ -1345,6 +1335,24 @@ func (c *apiClient) SMSCode(ctx context.Context, in *SMSCodeReq, opts ...grpc.Ca
 func (c *apiClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
 	out := new(RegisterResp)
 	err := c.cc.Invoke(ctx, "/api.sso.v1.Api/Register", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) Authorize(ctx context.Context, in *AuthorizeReq, opts ...grpc.CallOption) (*AuthorizeResp, error) {
+	out := new(AuthorizeResp)
+	err := c.cc.Invoke(ctx, "/api.sso.v1.Api/Authorize", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenResp, error) {
+	out := new(TokenResp)
+	err := c.cc.Invoke(ctx, "/api.sso.v1.Api/Token", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1418,12 +1426,11 @@ func (c *apiClient) GetSysUserProfile(ctx context.Context, in *GetSysUserProfile
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
-	// rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
-	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 	GenerateCaptchaHandler(context.Context, *GenerateCaptchaHandlerRequest) (*GenerateCaptchaHandlerReply, error)
 	SMSCode(context.Context, *SMSCodeReq) (*SMSCodeResp, error)
 	Register(context.Context, *RegisterReq) (*RegisterResp, error)
+	Authorize(context.Context, *AuthorizeReq) (*AuthorizeResp, error)
+	Token(context.Context, *TokenReq) (*TokenResp, error)
 	LoginGoogle(context.Context, *LoginGoogleReq) (*LoginGoogleResp, error)
 	Login(context.Context, *LoginRequest) (*LoginReply, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenReply, error)
@@ -1438,9 +1445,6 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
-func (UnimplementedApiServer) SayHelloURL(context.Context, *HelloReq) (*HelloResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHelloURL not implemented")
-}
 func (UnimplementedApiServer) GenerateCaptchaHandler(context.Context, *GenerateCaptchaHandlerRequest) (*GenerateCaptchaHandlerReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateCaptchaHandler not implemented")
 }
@@ -1449,6 +1453,12 @@ func (UnimplementedApiServer) SMSCode(context.Context, *SMSCodeReq) (*SMSCodeRes
 }
 func (UnimplementedApiServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedApiServer) Authorize(context.Context, *AuthorizeReq) (*AuthorizeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
+}
+func (UnimplementedApiServer) Token(context.Context, *TokenReq) (*TokenResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
 }
 func (UnimplementedApiServer) LoginGoogle(context.Context, *LoginGoogleReq) (*LoginGoogleResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginGoogle not implemented")
@@ -1482,24 +1492,6 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
-}
-
-func _Api_SayHelloURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).SayHelloURL(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sso.v1.Api/SayHelloURL",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).SayHelloURL(ctx, req.(*HelloReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GenerateCaptchaHandler_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1552,6 +1544,42 @@ func _Api_Register_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).Register(ctx, req.(*RegisterReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthorizeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).Authorize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.sso.v1.Api/Authorize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).Authorize(ctx, req.(*AuthorizeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TokenReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).Token(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.sso.v1.Api/Token",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).Token(ctx, req.(*TokenReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1690,10 +1718,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHelloURL",
-			Handler:    _Api_SayHelloURL_Handler,
-		},
-		{
 			MethodName: "GenerateCaptchaHandler",
 			Handler:    _Api_GenerateCaptchaHandler_Handler,
 		},
@@ -1704,6 +1728,14 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Register",
 			Handler:    _Api_Register_Handler,
+		},
+		{
+			MethodName: "Authorize",
+			Handler:    _Api_Authorize_Handler,
+		},
+		{
+			MethodName: "Token",
+			Handler:    _Api_Token_Handler,
 		},
 		{
 			MethodName: "LoginGoogle",
@@ -1818,200 +1850,6 @@ var Sso_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Introspect",
 			Handler:    _Sso_Introspect_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/sso/v1/sso.proto",
-}
-
-// AuthClient is the client API for Auth service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AuthClient interface {
-	Authorize(ctx context.Context, in *AuthorizeReq, opts ...grpc.CallOption) (*AuthorizeResp, error)
-	Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenResp, error)
-	RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...grpc.CallOption) (*RefreshTokenResp, error)
-	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoResp, error)
-}
-
-type authClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewAuthClient(cc grpc.ClientConnInterface) AuthClient {
-	return &authClient{cc}
-}
-
-func (c *authClient) Authorize(ctx context.Context, in *AuthorizeReq, opts ...grpc.CallOption) (*AuthorizeResp, error) {
-	out := new(AuthorizeResp)
-	err := c.cc.Invoke(ctx, "/api.sso.v1.Auth/Authorize", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authClient) Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenResp, error) {
-	out := new(TokenResp)
-	err := c.cc.Invoke(ctx, "/api.sso.v1.Auth/Token", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authClient) RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...grpc.CallOption) (*RefreshTokenResp, error) {
-	out := new(RefreshTokenResp)
-	err := c.cc.Invoke(ctx, "/api.sso.v1.Auth/RefreshToken", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoResp, error) {
-	out := new(GetUserInfoResp)
-	err := c.cc.Invoke(ctx, "/api.sso.v1.Auth/GetUserInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// AuthServer is the server API for Auth service.
-// All implementations must embed UnimplementedAuthServer
-// for forward compatibility
-type AuthServer interface {
-	Authorize(context.Context, *AuthorizeReq) (*AuthorizeResp, error)
-	Token(context.Context, *TokenReq) (*TokenResp, error)
-	RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error)
-	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoResp, error)
-	mustEmbedUnimplementedAuthServer()
-}
-
-// UnimplementedAuthServer must be embedded to have forward compatible implementations.
-type UnimplementedAuthServer struct {
-}
-
-func (UnimplementedAuthServer) Authorize(context.Context, *AuthorizeReq) (*AuthorizeResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
-}
-func (UnimplementedAuthServer) Token(context.Context, *TokenReq) (*TokenResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
-}
-func (UnimplementedAuthServer) RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
-}
-func (UnimplementedAuthServer) GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
-}
-func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
-
-// UnsafeAuthServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AuthServer will
-// result in compilation errors.
-type UnsafeAuthServer interface {
-	mustEmbedUnimplementedAuthServer()
-}
-
-func RegisterAuthServer(s grpc.ServiceRegistrar, srv AuthServer) {
-	s.RegisterService(&Auth_ServiceDesc, srv)
-}
-
-func _Auth_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthorizeReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).Authorize(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sso.v1.Auth/Authorize",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).Authorize(ctx, req.(*AuthorizeReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Auth_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TokenReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).Token(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sso.v1.Auth/Token",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).Token(ctx, req.(*TokenReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Auth_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RefreshTokenReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).RefreshToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sso.v1.Auth/RefreshToken",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).RefreshToken(ctx, req.(*RefreshTokenReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Auth_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserInfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).GetUserInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.sso.v1.Auth/GetUserInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).GetUserInfo(ctx, req.(*GetUserInfoReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var Auth_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.sso.v1.Auth",
-	HandlerType: (*AuthServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Authorize",
-			Handler:    _Auth_Authorize_Handler,
-		},
-		{
-			MethodName: "Token",
-			Handler:    _Auth_Token_Handler,
-		},
-		{
-			MethodName: "RefreshToken",
-			Handler:    _Auth_RefreshToken_Handler,
-		},
-		{
-			MethodName: "GetUserInfo",
-			Handler:    _Auth_GetUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

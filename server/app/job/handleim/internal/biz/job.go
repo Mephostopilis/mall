@@ -3,7 +3,7 @@ package biz
 import (
 	"sync"
 
-	"edu/job/im/internal/conf"
+	"edu/job/handleim/internal/conf"
 
 	"github.com/go-kratos/etcd/registry"
 	"github.com/go-kratos/kratos/v2/log"
@@ -12,17 +12,20 @@ import (
 // Job is push job.
 type Job struct {
 	c            *conf.Server
+	log          *log.Helper
+	logger       log.Logger
 	cometServers map[string]*Comet
 	rooms        map[string]*Room
 	roomsMutex   sync.RWMutex
-	log          *log.Helper
 }
 
 // New new a push job.
 func New(c *conf.Server, logger log.Logger, r *registry.Registry) (*Job, error) {
+	log.NewHelper(log.With(logger, "module", "usecase/job"))
 	j := &Job{
-		c:     c,
-		rooms: make(map[string]*Room),
+		c:      c,
+		logger: logger,
+		rooms:  make(map[string]*Room),
 	}
 	// j.watchComet(c.Discovery)
 	return j, nil
@@ -30,6 +33,9 @@ func New(c *conf.Server, logger log.Logger, r *registry.Registry) (*Job, error) 
 
 // Close close resounces.
 func (j *Job) Close() error {
+	for _, v := range j.cometServers {
+		v.Close()
+	}
 	return nil
 }
 

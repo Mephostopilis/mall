@@ -8,8 +8,8 @@ import (
 	"time"
 
 	pb "edu/api/logic/grpc"
-	"edu/job/im/internal/biz"
-	"edu/job/im/internal/conf"
+	"edu/job/handleim/internal/biz"
+	"edu/job/handleim/internal/conf"
 	"edu/pkg/tools"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -65,6 +65,7 @@ func (s *AmqpConsumer) Start(context.Context) error {
 func (s *AmqpConsumer) Stop(context.Context) error {
 	s.cf()
 	s.wg.Wait()
+	s.uc.Close()
 	s.log.Infof("stop amqp consumer.")
 	return nil
 }
@@ -130,7 +131,7 @@ func (s *AmqpConsumer) handleMsg(ctx context.Context, msg *amqp.Delivery) error 
 		s.log.Errorf("proto.Unmarshal(%v) error(%v)", msg, err)
 		return err
 	}
-	if err := s.uc.Push(context.Background(), pushMsg); err != nil {
+	if err := s.uc.Push(ctx, pushMsg); err != nil {
 		s.log.Errorf("j.push(%v) error(%v)", pushMsg, err)
 		return err
 	}

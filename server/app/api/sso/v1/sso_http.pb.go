@@ -1244,6 +1244,7 @@ func (c *AdminHTTPClientImpl) UpdateSysUser(ctx context.Context, in *SysUser, op
 }
 
 type ApiHTTPServer interface {
+	Authorize(context.Context, *AuthorizeReq) (*AuthorizeResp, error)
 	GenerateCaptchaHandler(context.Context, *GenerateCaptchaHandlerRequest) (*GenerateCaptchaHandlerReply, error)
 	GetSysUserProfile(context.Context, *GetSysUserProfileRequest) (*ApiReply, error)
 	InsetSysUserAvatar(context.Context, *InsetSysUserAvatarRequest) (*ApiReply, error)
@@ -1253,16 +1254,17 @@ type ApiHTTPServer interface {
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenReply, error)
 	Register(context.Context, *RegisterReq) (*RegisterResp, error)
 	SMSCode(context.Context, *SMSCodeReq) (*SMSCodeResp, error)
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 	SysUserUpdatePwd(context.Context, *SysUserUpdatePwdRequest) (*ApiReply, error)
+	Token(context.Context, *TokenReq) (*TokenResp, error)
 }
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/say_hello", _Api_SayHelloURL5_HTTP_Handler(srv))
 	r.GET("/api/v1/getCaptcha", _Api_GenerateCaptchaHandler1_HTTP_Handler(srv))
 	r.GET("/api/v1/sms", _Api_SMSCode0_HTTP_Handler(srv))
 	r.POST("/api/v1/register", _Api_Register0_HTTP_Handler(srv))
+	r.POST("/api/v1/authorize", _Api_Authorize0_HTTP_Handler(srv))
+	r.POST("/api/v1/token", _Api_Token0_HTTP_Handler(srv))
 	r.POST("/api/v1/login/google", _Api_LoginGoogle0_HTTP_Handler(srv))
 	r.POST("/api/v1/login", _Api_Login1_HTTP_Handler(srv))
 	r.GET("/api/v1/refresh_token", _Api_RefreshToken1_HTTP_Handler(srv))
@@ -1270,25 +1272,6 @@ func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r.POST("/api/v1/user/avatar", _Api_InsetSysUserAvatar1_HTTP_Handler(srv))
 	r.PUT("/api/v1/user/pwd", _Api_SysUserUpdatePwd1_HTTP_Handler(srv))
 	r.GET("/api/v1/user/profile", _Api_GetSysUserProfile1_HTTP_Handler(srv))
-}
-
-func _Api_SayHelloURL5_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in HelloReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sso.v1.Api/SayHelloURL")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SayHelloURL(ctx, req.(*HelloReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*HelloResp)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _Api_GenerateCaptchaHandler1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
@@ -1332,7 +1315,7 @@ func _Api_SMSCode0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error 
 func _Api_Register0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in RegisterReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.v1.Api/Register")
@@ -1348,10 +1331,48 @@ func _Api_Register0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error
 	}
 }
 
+func _Api_Authorize0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AuthorizeReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/api.sso.v1.Api/Authorize")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Authorize(ctx, req.(*AuthorizeReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AuthorizeResp)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Api_Token0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in TokenReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/api.sso.v1.Api/Token")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Token(ctx, req.(*TokenReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*TokenResp)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Api_LoginGoogle0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginGoogleReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.v1.Api/LoginGoogle")
@@ -1370,7 +1391,7 @@ func _Api_LoginGoogle0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) er
 func _Api_Login1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.v1.Api/Login")
@@ -1408,7 +1429,7 @@ func _Api_RefreshToken1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) e
 func _Api_Logout1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LogoutReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.v1.Api/Logout")
@@ -1427,7 +1448,7 @@ func _Api_Logout1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 func _Api_InsetSysUserAvatar1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in InsetSysUserAvatarRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.v1.Api/InsetSysUserAvatar")
@@ -1446,7 +1467,7 @@ func _Api_InsetSysUserAvatar1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Cont
 func _Api_SysUserUpdatePwd1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysUserUpdatePwdRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sso.v1.Api/SysUserUpdatePwd")
@@ -1482,6 +1503,7 @@ func _Api_GetSysUserProfile1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Conte
 }
 
 type ApiHTTPClient interface {
+	Authorize(ctx context.Context, req *AuthorizeReq, opts ...http.CallOption) (rsp *AuthorizeResp, err error)
 	GenerateCaptchaHandler(ctx context.Context, req *GenerateCaptchaHandlerRequest, opts ...http.CallOption) (rsp *GenerateCaptchaHandlerReply, err error)
 	GetSysUserProfile(ctx context.Context, req *GetSysUserProfileRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
 	InsetSysUserAvatar(ctx context.Context, req *InsetSysUserAvatarRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
@@ -1491,8 +1513,8 @@ type ApiHTTPClient interface {
 	RefreshToken(ctx context.Context, req *RefreshTokenRequest, opts ...http.CallOption) (rsp *RefreshTokenReply, err error)
 	Register(ctx context.Context, req *RegisterReq, opts ...http.CallOption) (rsp *RegisterResp, err error)
 	SMSCode(ctx context.Context, req *SMSCodeReq, opts ...http.CallOption) (rsp *SMSCodeResp, err error)
-	SayHelloURL(ctx context.Context, req *HelloReq, opts ...http.CallOption) (rsp *HelloResp, err error)
 	SysUserUpdatePwd(ctx context.Context, req *SysUserUpdatePwdRequest, opts ...http.CallOption) (rsp *ApiReply, err error)
+	Token(ctx context.Context, req *TokenReq, opts ...http.CallOption) (rsp *TokenResp, err error)
 }
 
 type ApiHTTPClientImpl struct {
@@ -1501,6 +1523,19 @@ type ApiHTTPClientImpl struct {
 
 func NewApiHTTPClient(client *http.Client) ApiHTTPClient {
 	return &ApiHTTPClientImpl{client}
+}
+
+func (c *ApiHTTPClientImpl) Authorize(ctx context.Context, in *AuthorizeReq, opts ...http.CallOption) (*AuthorizeResp, error) {
+	var out AuthorizeResp
+	pattern := "/api/v1/authorize"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.sso.v1.Api/Authorize"))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *ApiHTTPClientImpl) GenerateCaptchaHandler(ctx context.Context, in *GenerateCaptchaHandlerRequest, opts ...http.CallOption) (*GenerateCaptchaHandlerReply, error) {
@@ -1532,10 +1567,10 @@ func (c *ApiHTTPClientImpl) GetSysUserProfile(ctx context.Context, in *GetSysUse
 func (c *ApiHTTPClientImpl) InsetSysUserAvatar(ctx context.Context, in *InsetSysUserAvatarRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/api/v1/user/avatar"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.v1.Api/InsetSysUserAvatar"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1545,10 +1580,10 @@ func (c *ApiHTTPClientImpl) InsetSysUserAvatar(ctx context.Context, in *InsetSys
 func (c *ApiHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginReply, error) {
 	var out LoginReply
 	pattern := "/api/v1/login"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.v1.Api/Login"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1558,10 +1593,10 @@ func (c *ApiHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ..
 func (c *ApiHTTPClientImpl) LoginGoogle(ctx context.Context, in *LoginGoogleReq, opts ...http.CallOption) (*LoginGoogleResp, error) {
 	var out LoginGoogleResp
 	pattern := "/api/v1/login/google"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.v1.Api/LoginGoogle"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1571,10 +1606,10 @@ func (c *ApiHTTPClientImpl) LoginGoogle(ctx context.Context, in *LoginGoogleReq,
 func (c *ApiHTTPClientImpl) Logout(ctx context.Context, in *LogoutReq, opts ...http.CallOption) (*LogoutResp, error) {
 	var out LogoutResp
 	pattern := "/api/v1/logout"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.v1.Api/Logout"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1597,10 +1632,10 @@ func (c *ApiHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenRe
 func (c *ApiHTTPClientImpl) Register(ctx context.Context, in *RegisterReq, opts ...http.CallOption) (*RegisterResp, error) {
 	var out RegisterResp
 	pattern := "/api/v1/register"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.v1.Api/Register"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1620,184 +1655,26 @@ func (c *ApiHTTPClientImpl) SMSCode(ctx context.Context, in *SMSCodeReq, opts ..
 	return &out, err
 }
 
-func (c *ApiHTTPClientImpl) SayHelloURL(ctx context.Context, in *HelloReq, opts ...http.CallOption) (*HelloResp, error) {
-	var out HelloResp
-	pattern := "/api/v1/say_hello"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sso.v1.Api/SayHelloURL"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
 func (c *ApiHTTPClientImpl) SysUserUpdatePwd(ctx context.Context, in *SysUserUpdatePwdRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/api/v1/user/pwd"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sso.v1.Api/SysUserUpdatePwd"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &out, err
 }
 
-type AuthHTTPServer interface {
-	Authorize(context.Context, *AuthorizeReq) (*AuthorizeResp, error)
-	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoResp, error)
-	RefreshToken(context.Context, *RefreshTokenReq) (*RefreshTokenResp, error)
-	Token(context.Context, *TokenReq) (*TokenResp, error)
-}
-
-func RegisterAuthHTTPServer(s *http.Server, srv AuthHTTPServer) {
-	r := s.Route("/")
-	r.POST("/api/v1/authorize", _Auth_Authorize0_HTTP_Handler(srv))
-	r.POST("/api/v1/token", _Auth_Token0_HTTP_Handler(srv))
-	r.POST("/api/v1/token/refresh", _Auth_RefreshToken2_HTTP_Handler(srv))
-	r.POST("/api/v1/user/info", _Auth_GetUserInfo0_HTTP_Handler(srv))
-}
-
-func _Auth_Authorize0_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AuthorizeReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sso.v1.Auth/Authorize")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Authorize(ctx, req.(*AuthorizeReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AuthorizeResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Auth_Token0_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in TokenReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sso.v1.Auth/Token")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Token(ctx, req.(*TokenReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*TokenResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Auth_RefreshToken2_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RefreshTokenReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sso.v1.Auth/RefreshToken")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RefreshToken(ctx, req.(*RefreshTokenReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*RefreshTokenResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Auth_GetUserInfo0_HTTP_Handler(srv AuthHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetUserInfoReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.sso.v1.Auth/GetUserInfo")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetUserInfo(ctx, req.(*GetUserInfoReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetUserInfoResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-type AuthHTTPClient interface {
-	Authorize(ctx context.Context, req *AuthorizeReq, opts ...http.CallOption) (rsp *AuthorizeResp, err error)
-	GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...http.CallOption) (rsp *GetUserInfoResp, err error)
-	RefreshToken(ctx context.Context, req *RefreshTokenReq, opts ...http.CallOption) (rsp *RefreshTokenResp, err error)
-	Token(ctx context.Context, req *TokenReq, opts ...http.CallOption) (rsp *TokenResp, err error)
-}
-
-type AuthHTTPClientImpl struct {
-	cc *http.Client
-}
-
-func NewAuthHTTPClient(client *http.Client) AuthHTTPClient {
-	return &AuthHTTPClientImpl{client}
-}
-
-func (c *AuthHTTPClientImpl) Authorize(ctx context.Context, in *AuthorizeReq, opts ...http.CallOption) (*AuthorizeResp, error) {
-	var out AuthorizeResp
-	pattern := "/api/v1/authorize"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sso.v1.Auth/Authorize"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AuthHTTPClientImpl) GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...http.CallOption) (*GetUserInfoResp, error) {
-	var out GetUserInfoResp
-	pattern := "/api/v1/user/info"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sso.v1.Auth/GetUserInfo"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AuthHTTPClientImpl) RefreshToken(ctx context.Context, in *RefreshTokenReq, opts ...http.CallOption) (*RefreshTokenResp, error) {
-	var out RefreshTokenResp
-	pattern := "/api/v1/token/refresh"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sso.v1.Auth/RefreshToken"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *AuthHTTPClientImpl) Token(ctx context.Context, in *TokenReq, opts ...http.CallOption) (*TokenResp, error) {
+func (c *ApiHTTPClientImpl) Token(ctx context.Context, in *TokenReq, opts ...http.CallOption) (*TokenResp, error) {
 	var out TokenResp
 	pattern := "/api/v1/token"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.sso.v1.Auth/Token"))
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/api.sso.v1.Api/Token"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

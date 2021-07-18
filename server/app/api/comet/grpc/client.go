@@ -5,6 +5,7 @@ import (
 	"time"
 
 	grpctransport "github.com/go-kratos/kratos/v2/transport/grpc"
+	"google.golang.org/grpc"
 )
 
 // AppID .
@@ -15,13 +16,14 @@ func NewClient(ctx context.Context, opts ...grpctransport.ClientOption) (CometCl
 	t := make([]grpctransport.ClientOption, 0)
 	t = append(t, grpctransport.WithEndpoint(appID))
 	t = append(t, grpctransport.WithTimeout(time.Minute))
+	t = append(t, grpctransport.WithOptions(
+		grpc.KeepaliveParams(),
+	))
 	t = append(t, opts...)
 	cc, err := grpctransport.DialInsecure(ctx, t...)
 	if err != nil {
 		return nil, err
 	}
-	// cc, err := client.Dial(context.Background(), fmt.Sprintf("discovery://default/%s", AppID))
-	// cc, err := client.Dial(context.Background(), fmt.Sprintf("etcd://default/%s", AppID))
 	return NewCometClient(cc), nil
 }
 

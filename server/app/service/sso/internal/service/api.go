@@ -28,8 +28,16 @@ func NewApiService(d dao.Dao, jwtuc *biz.JWTUsecase, uc *biz.GreeterUsecase, log
 	}
 }
 
-func (s *ApiService) SayHelloURL(ctx context.Context, req *pb.HelloReq) (*pb.HelloResp, error) {
-	return &pb.HelloResp{}, nil
+// Authorize 应用授权
+func (s *ApiService) Authorize(ctx context.Context, req *pb.AuthorizeReq) (reply *pb.AuthorizeResp, err error) {
+	reply, err = s.uc.HandleAuthorizeRequest(ctx, req)
+	return
+}
+
+// Token bm
+func (s *ApiService) Token(ctx context.Context, req *pb.TokenReq) (reply *pb.TokenResp, err error) {
+	reply, err = s.uc.HandleTokenRequest(ctx, req)
+	return
 }
 
 func (s *ApiService) InsetSysUserAvatar(ctx context.Context, req *pb.InsetSysUserAvatarRequest) (*pb.ApiReply, error) {

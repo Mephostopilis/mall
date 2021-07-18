@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 
-	"edu/job/im/internal/conf"
-	"edu/job/im/internal/di"
+	"edu/job/handleim/internal/conf"
+	"edu/job/handleim/internal/di"
 	pkglog "edu/pkg/log"
 
 	"github.com/go-kratos/etcd/registry"

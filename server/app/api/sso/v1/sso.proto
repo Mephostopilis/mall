@@ -201,13 +201,6 @@ service Admin {
 }
 
 service Api {
-    // rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);
-	// rpc SayHello (HelloReq) returns (.google.protobuf.Empty);
-	rpc SayHelloURL(HelloReq) returns (HelloResp) {
-        option (google.api.http) = {
-            get:"/api/v1/say_hello"
-        };
-    };
     rpc GenerateCaptchaHandler (GenerateCaptchaHandlerRequest) returns (GenerateCaptchaHandlerReply) {
         option (google.api.http) = {
             get: "/api/v1/getCaptcha"
@@ -221,16 +214,31 @@ service Api {
     rpc Register(RegisterReq) returns (RegisterResp) {
         option (google.api.http) = {
             post:"/api/v1/register"
+            body: "*"
+        };
+    };
+    rpc Authorize(AuthorizeReq) returns (AuthorizeResp) {
+        option (google.api.http) = {
+            post:"/api/v1/authorize"
+            body: "*"
+        };
+    };
+    rpc Token (TokenReq) returns (TokenResp) {
+        option (google.api.http) = {
+            post:"/api/v1/token"
+            body: "*"
         };
     };
     rpc LoginGoogle(LoginGoogleReq) returns (LoginGoogleResp) {
         option (google.api.http) = {
             post: "/api/v1/login/google"
+            body: "*"
         };
     };
     rpc Login (LoginRequest) returns (LoginReply) {
         option (google.api.http) = {
             post:"/api/v1/login"
+            body: "*"
         };
     };
     rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenReply) {
@@ -241,16 +249,19 @@ service Api {
     rpc Logout(LogoutReq) returns (LogoutResp) {
         option (google.api.http) = {
             post: "/api/v1/logout"
+            body: "*"
         };
     };
     rpc InsetSysUserAvatar (InsetSysUserAvatarRequest) returns (ApiReply) {
         option (google.api.http) = {
             post: "/api/v1/user/avatar"
+            body: "*"
         };
     };
     rpc SysUserUpdatePwd (SysUserUpdatePwdRequest) returns (ApiReply) {
         option (google.api.http) = {
             put: "/api/v1/user/pwd"
+            body: "*"
         };
     };
     rpc GetSysUserProfile (GetSysUserProfileRequest) returns (ApiReply) {
@@ -262,37 +273,6 @@ service Api {
 
 service Sso {
     rpc Introspect(IntrospectReq) returns (IntrospectResp);
-}
-
-service Auth {
-    rpc Authorize(AuthorizeReq) returns (AuthorizeResp) {
-        option (google.api.http) = {
-            post:"/api/v1/authorize"
-        };
-    };
-    rpc Token (TokenReq) returns (TokenResp) {
-        option (google.api.http) = {
-            post:"/api/v1/token"
-        };
-    };
-    rpc RefreshToken (RefreshTokenReq) returns (RefreshTokenResp) {
-        option (google.api.http) = {
-            post:"/api/v1/token/refresh"
-        };
-    };
-    rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp) {
-        option (google.api.http) = {
-            post: "/api/v1/user/info"
-        };
-    };
-}
-
-message HelloReq {
-	string name = 1;
-}
-
-message HelloResp {
-    string Content = 1;
 }
 
 message LoginRequest {

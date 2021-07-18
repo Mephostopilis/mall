@@ -13,9 +13,6 @@
     },
     {
       "name": "Sso"
-    },
-    {
-      "name": "Auth"
     }
   ],
   "consumes": [
@@ -1168,7 +1165,7 @@
     },
     "/api/v1/authorize": {
       "post": {
-        "operationId": "Auth_Authorize",
+        "operationId": "Api_Authorize",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1183,8 +1180,18 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1AuthorizeReq"
+            }
+          }
+        ],
         "tags": [
-          "Auth"
+          "Api"
         ]
       }
     },
@@ -1227,6 +1234,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LoginRequest"
+            }
+          }
+        ],
         "tags": [
           "Api"
         ]
@@ -1249,6 +1266,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LoginGoogleReq"
+            }
+          }
+        ],
         "tags": [
           "Api"
         ]
@@ -1271,6 +1298,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LogoutReq"
+            }
+          }
+        ],
         "tags": [
           "Api"
         ]
@@ -1315,35 +1352,14 @@
             }
           }
         },
-        "tags": [
-          "Api"
-        ]
-      }
-    },
-    "/api/v1/say_hello": {
-      "get": {
-        "summary": "rpc Ping (.google.protobuf.Empty) returns (.google.protobuf.Empty);\r\nrpc SayHello (HelloReq) returns (.google.protobuf.Empty);",
-        "operationId": "Api_SayHelloURL",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/ssov1HelloResp"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
         "parameters": [
           {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RegisterReq"
+            }
           }
         ],
         "tags": [
@@ -1375,7 +1391,7 @@
     },
     "/api/v1/token": {
       "post": {
-        "operationId": "Auth_Token",
+        "operationId": "Api_Token",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1390,30 +1406,18 @@
             }
           }
         },
-        "tags": [
-          "Auth"
-        ]
-      }
-    },
-    "/api/v1/token/refresh": {
-      "post": {
-        "operationId": "Auth_RefreshToken",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/v1RefreshTokenResp"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/v1TokenReq"
             }
           }
-        },
+        ],
         "tags": [
-          "Auth"
+          "Api"
         ]
       }
     },
@@ -1434,30 +1438,18 @@
             }
           }
         },
-        "tags": [
-          "Api"
-        ]
-      }
-    },
-    "/api/v1/user/info": {
-      "post": {
-        "operationId": "Auth_GetUserInfo",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/v1GetUserInfoResp"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/v1InsetSysUserAvatarRequest"
             }
           }
-        },
+        ],
         "tags": [
-          "Auth"
+          "Api"
         ]
       }
     },
@@ -1500,6 +1492,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SysUserUpdatePwdRequest"
+            }
+          }
+        ],
         "tags": [
           "Api"
         ]
@@ -1600,10 +1602,25 @@
         }
       }
     },
-    "ssov1HelloResp": {
+    "v1AuthorizeReq": {
       "type": "object",
       "properties": {
-        "Content": {
+        "ResponseType": {
+          "type": "string"
+        },
+        "ClientID": {
+          "type": "string"
+        },
+        "Scope": {
+          "type": "string"
+        },
+        "RedirectURI": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "AccessTokenExp": {
           "type": "string"
         }
       }
@@ -1630,14 +1647,6 @@
         },
         "b64s": {
           "type": "string"
-        }
-      }
-    },
-    "v1GetUserInfoResp": {
-      "type": "object",
-      "properties": {
-        "U": {
-          "$ref": "#/definitions/v1User"
         }
       }
     },
@@ -1676,6 +1685,9 @@
           "format": "uint64"
         }
       }
+    },
+    "v1LoginGoogleReq": {
+      "type": "object"
     },
     "v1LoginGoogleResp": {
       "type": "object",
@@ -1776,25 +1788,25 @@
         }
       }
     },
-    "v1RefreshTokenResp": {
+    "v1RegisterReq": {
       "type": "object",
       "properties": {
-        "AccessToken": {
+        "Username": {
           "type": "string"
         },
-        "TokenType": {
+        "Password": {
           "type": "string"
         },
-        "ExpiresIn": {
+        "Confirm": {
           "type": "string"
         },
-        "Scope": {
+        "Mail": {
           "type": "string"
         },
-        "RefreshToken": {
+        "Mobile": {
           "type": "string"
         },
-        "Ext": {
+        "Captcha": {
           "type": "string"
         }
       }
@@ -1926,6 +1938,41 @@
         }
       }
     },
+    "v1TokenReq": {
+      "type": "object",
+      "properties": {
+        "GrantType": {
+          "type": "string"
+        },
+        "Scope": {
+          "type": "string"
+        },
+        "ResponseType": {
+          "type": "string"
+        },
+        "RedirectURI": {
+          "type": "string"
+        },
+        "ClientID": {
+          "type": "string"
+        },
+        "ClientSecret": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "RefreshToken": {
+          "type": "string"
+        }
+      }
+    },
     "v1TokenResp": {
       "type": "object",
       "properties": {
@@ -1948,57 +1995,6 @@
           "type": "string"
         },
         "Ext": {
-          "type": "string"
-        }
-      }
-    },
-    "v1User": {
-      "type": "object",
-      "properties": {
-        "ID": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "Name": {
-          "type": "string"
-        },
-        "Vip": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "VipMode": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "VipRemaining": {
-          "type": "string"
-        },
-        "Authority": {
-          "type": "string"
-        },
-        "Avatar": {
-          "type": "string"
-        },
-        "Email": {
-          "type": "string"
-        },
-        "Signature": {
-          "type": "string"
-        },
-        "Title": {
-          "type": "string"
-        },
-        "NotifyCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Country": {
-          "type": "string"
-        },
-        "Address": {
-          "type": "string"
-        },
-        "Phone": {
           "type": "string"
         }
       }
