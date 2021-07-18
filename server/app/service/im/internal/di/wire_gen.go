@@ -24,6 +24,7 @@ func InitApp(confService *conf.Service, confServer *conf.Server, data *conf.Data
 	logic := biz.New(app, logger, registryRegistry, daoDao)
 	logicService := service.NewLogicService(logic)
 	grpcServer := server.NewGRPCServer(confServer, logger, logicService)
-	kratosApp := newApp(confService, logger, grpcServer, registryRegistry)
+	httpServer := server.NewHTTPServer(confServer, logger, logicService)
+	kratosApp := newApp(confService, logger, grpcServer, httpServer, registryRegistry)
 	return kratosApp, nil
 }

@@ -1,0 +1,4 @@
+{"L":"ERROR","T":"2021-07-18T10:35:58.464+0800","M":"err = dial tcp 127.0.0.1:3306: connectex: No connection could be made because the target machine actively refused it.","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:36:23.467+0800","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:36:23.486+0800","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:36:23.486+0800","M":"[HTTP] server listening on: [::]:8007"}

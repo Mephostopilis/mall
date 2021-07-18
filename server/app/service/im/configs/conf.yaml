@@ -20,15 +20,28 @@ data:
 reg:
   etcd:
     endpoints:
-      - "119.27.191.44:2379"
+      - "127.0.0.1:2379"
     dialTimeout: 3s
-  instance:
-    zone: "sh001"
-    env: "dev"
-    hostname: "test1"
-    appid: "service.sso"
-    addrs:
-      - "grpc://127.0.0.1:9102"
+logger:
+  # 日志存放路径
+  path: ../../logs
+  # 控制台日志
+  stdout: true
+  # 日志等级
+  level: -1
+  # 业务日志开关
+  # enabledbus: false
+  # 请求日志开关
+  # enabledreq: false
+  # 数据库日志开关 dev模式，将自动开启
+  # enableddb: false
+  # 自动任务日志开关 dev模式，将自动开启
+  # enabledjob: false
+rabbitMq:
+    address: amqp://admin:123456@127.0.0.1:5672/my_vhost
+    consumer:
+      queue:
+        - xx
 app:
   uuid:
     # 机器ID

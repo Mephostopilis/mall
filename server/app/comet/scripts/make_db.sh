@@ -1,4 +1,4 @@
-mysql -uroot -p#qwe$123 -h127.0.0.1 -e "drop database if exists edu_sso"
-mysql -uroot -p#qwe$123 -h127.0.0.1 -e "CREATE DATABASE edu_sso DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
+mysql -uroot -p#qwe$123 -h127.0.0.1 -e "drop database if exists edu_comet"
+mysql -uroot -p#qwe$123 -h127.0.0.1 -e "CREATE DATABASE edu_comet DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
 
 pause

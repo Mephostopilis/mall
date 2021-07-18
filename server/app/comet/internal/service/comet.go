@@ -6,7 +6,6 @@ import (
 
 	pb "edu/api/comet/grpc"
 	"edu/comet/internal/biz"
-	"edu/comet/internal/errors"
 )
 
 type CometService struct {
@@ -28,7 +27,7 @@ func (s *CometService) Close(ctx context.Context, req *pb.Empty) (*pb.Empty, err
 }
 func (s *CometService) PushMsg(ctx context.Context, req *pb.PushMsgReq) (reply *pb.PushMsgReply, err error) {
 	if len(req.Keys) == 0 || req.Proto == nil {
-		return nil, errors.ErrPushMsgArg
+		return nil, pb.ErrPushMsgArg
 	}
 	for _, key := range req.Keys {
 		if channel := s.uc.Bucket(key).Channel(key); channel != nil {
@@ -45,7 +44,7 @@ func (s *CometService) PushMsg(ctx context.Context, req *pb.PushMsgReq) (reply *
 
 func (s *CometService) Broadcast(ctx context.Context, req *pb.BroadcastReq) (*pb.BroadcastReply, error) {
 	if req.Proto == nil {
-		return nil, errors.ErrBroadCastArg
+		return nil, pb.ErrBroadCastArg
 	}
 	// TODO use broadcast queue
 	go func() {
@@ -62,7 +61,7 @@ func (s *CometService) Broadcast(ctx context.Context, req *pb.BroadcastReq) (*pb
 
 func (s *CometService) BroadcastRoom(ctx context.Context, req *pb.BroadcastRoomReq) (*pb.BroadcastRoomReply, error) {
 	if req.Proto == nil || req.RoomID == "" {
-		return nil, errors.ErrBroadCastRoomArg
+		return nil, pb.ErrBroadCastRoomArg
 	}
 	for _, bucket := range s.uc.Buckets() {
 		bucket.BroadcastRoom(req)

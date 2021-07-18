@@ -38,20 +38,7 @@ func NewZapLogger(path, prefix string, stdout bool, level zapcore.Level) *ZapLog
 		Compress:   false,                     // 是否压缩
 	}
 
-	// encoderConfig := zapcore.EncoderConfig{
-	// 	TimeKey:        "time",
-	// 	LevelKey:       "level",
-	// 	NameKey:        "logger",
-	// 	CallerKey:      "linenum",
-	// 	MessageKey:     "msg",
-	// 	StacktraceKey:  "stacktrace",
-	// 	LineEnding:     zapcore.DefaultLineEnding,
-	// 	EncodeLevel:    zapcore.LowercaseLevelEncoder,  // 小写编码器
-	// 	EncodeTime:     zapcore.ISO8601TimeEncoder,     // ISO8601 UTC 时间格式
-	// 	EncodeDuration: zapcore.SecondsDurationEncoder, //
-	// 	EncodeCaller:   zapcore.FullCallerEncoder,      // 全路径编码器
-	// 	EncodeName:     zapcore.FullNameEncoder,
-	// }
+	encoderConfig := zap.NewDevelopmentEncoderConfig()
 
 	// 设置日志级别
 	atomicLevel := zap.NewAtomicLevel()
@@ -63,21 +50,17 @@ func NewZapLogger(path, prefix string, stdout bool, level zapcore.Level) *ZapLog
 		writer = zapcore.NewMultiWriteSyncer(zapcore.AddSync(&hook))
 	}
 	core := zapcore.NewCore(
-		zapcore.NewJSONEncoder(zap.NewDevelopmentEncoderConfig()), // 编码器配置
+		zapcore.NewJSONEncoder(encoderConfig), // 编码器配置
 		writer,
 		atomicLevel, // 日志级别
 	)
 
 	// 开启开发模式，堆栈跟踪
-	caller := zap.AddCallerSkip(3)
-
-	// 开启文件及行号
-	development := zap.Development()
+	caller := zap.AddCaller()
+	skip := zap.AddCallerSkip(2)
 
 	// 构造日志
-	logger := zap.New(core, caller, development)
-
-	// logger := zap.NewDevelopment(caller)
+	logger := zap.New(core, caller, skip)
 	slogger := logger.Sugar()
 
 	ctx, cf := context.WithCancel(context.Background())

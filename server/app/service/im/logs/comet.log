@@ -1,0 +1,4 @@
+{"L":"ERROR","T":"2021-07-18T10:53:42.828+0800","C":"log/helper.go:86","M":"err = dial tcp 127.0.0.1:5673: connectex: No connection could be made because the target machine actively refused it.","module":"dao"}
+{"L":"ERROR","T":"2021-07-18T10:55:22.259+0800","C":"log/helper.go:86","M":"err = dial tcp 127.0.0.1:5673: connectex: No connection could be made because the target machine actively refused it.","module":"dao"}
+{"L":"INFO","T":"2021-07-18T10:55:29.194+0800","C":"http/server.go:221","M":"[HTTP] server listening on: [::]:8006"}
+{"L":"INFO","T":"2021-07-18T10:55:29.195+0800","C":"grpc/server.go:162","M":"[gRPC] server listening on: [::]:9006"}

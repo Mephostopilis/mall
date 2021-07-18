@@ -4,7 +4,6 @@ import (
 	"sync"
 
 	"edu/api/comet/grpc"
-	"edu/comet/internal/errors"
 )
 
 // Room is a room and store channel room info.
@@ -39,7 +38,7 @@ func (r *Room) Put(ch *Channel) (err error) {
 		r.next = ch // insert to header
 		r.Online++
 	} else {
-		err = errors.ErrRoomDroped
+		err = grpc.ErrRoomDroped
 	}
 	r.rLock.Unlock()
 	return

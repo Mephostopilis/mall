@@ -1,8 +1,7 @@
 package biz
 
 import (
-	"edu/api/comet/grpc"
-	"edu/comet/internal/errors"
+	pb "edu/api/comet/grpc"
 
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -17,7 +16,7 @@ type Ring struct {
 	// pad [40]byte
 	// write
 	wp   uint64
-	data []grpc.Proto
+	data []pb.Proto
 	log  *log.Helper
 }
 
@@ -41,15 +40,15 @@ func (r *Ring) init(num uint64) {
 		}
 		num = num << 1
 	}
-	r.data = make([]grpc.Proto, num)
+	r.data = make([]pb.Proto, num)
 	r.num = num
 	r.mask = r.num - 1
 }
 
 // Get get a proto from ring.
-func (r *Ring) Get() (proto *grpc.Proto, err error) {
+func (r *Ring) Get() (proto *pb.Proto, err error) {
 	if r.rp == r.wp {
-		return nil, errors.ErrRingEmpty
+		return nil, pb.ErrRingEmpty
 	}
 	proto = &r.data[r.rp&r.mask]
 	return
@@ -62,9 +61,9 @@ func (r *Ring) GetAdv() {
 }
 
 // Set get a proto to write.
-func (r *Ring) Set() (proto *grpc.Proto, err error) {
+func (r *Ring) Set() (proto *pb.Proto, err error) {
 	if r.wp-r.rp >= r.num {
-		return nil, errors.ErrRingFull
+		return nil, pb.ErrRingFull
 	}
 	proto = &r.data[r.wp&r.mask]
 	return

@@ -1,0 +1,18 @@
+{"L":"INFO","T":"2021-07-18T10:39:57.619+0800","C":"log/zap.go:121","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:39:57.639+0800","C":"log/zap.go:121","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:39:57.639+0800","C":"log/zap.go:121","M":"[HTTP] server listening on: [::]:8007"}
+{"L":"INFO","T":"2021-07-18T10:40:30.744+0800","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:40:30.762+0800","M":"[HTTP] server listening on: [::]:8007"}
+{"L":"INFO","T":"2021-07-18T10:40:30.762+0800","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:41:20.488+0800","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:41:20.507+0800","M":"[HTTP] server listening on: [::]:8007"}
+{"L":"INFO","T":"2021-07-18T10:41:20.507+0800","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:41:34.100+0800","C":"log/zap.go:121","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:41:34.119+0800","C":"log/zap.go:121","M":"[HTTP] server listening on: [::]:8007"}
+{"L":"INFO","T":"2021-07-18T10:41:34.119+0800","C":"log/zap.go:121","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:43:22.360+0800","C":"migrate/migrate.go:50","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:43:22.380+0800","C":"v2@v2.0.0/app.go:90","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:43:22.380+0800","C":"v2@v2.0.0/app.go:90","M":"[HTTP] server listening on: [::]:8007"}
+{"L":"INFO","T":"2021-07-18T10:43:35.842+0800","C":"log/helper.go:56","M":"数据库结构初始化成功！","module":"migrate"}
+{"L":"INFO","T":"2021-07-18T10:43:35.861+0800","C":"grpc/server.go:162","M":"[gRPC] server listening on: [::]:9007"}
+{"L":"INFO","T":"2021-07-18T10:43:35.861+0800","C":"http/server.go:221","M":"[HTTP] server listening on: [::]:8007"}

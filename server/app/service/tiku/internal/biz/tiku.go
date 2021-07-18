@@ -3,10 +3,9 @@ package biz
 import (
 	"context"
 
-	ssopb "edu/api/sso/v1"
 	pb "edu/api/tiku"
 	uuidpb "edu/api/uuid"
-	"edu/pkg/jwtauth"
+	"edu/pkg/meta"
 	"edu/pkg/strings"
 	"edu/service/tiku/internal/conf"
 	"edu/service/tiku/internal/dao"
@@ -21,7 +20,6 @@ import (
 type TikuUsecase struct {
 	d     dao.Dao
 	uuidc uuidpb.UUIDClient
-	mw    *jwtauth.GinJWTMiddleware
 	log   *log.Helper
 }
 
@@ -31,18 +29,9 @@ func NewTikuUsecase(c *conf.App, logger log.Logger, d dao.Dao, r *registry.Regis
 	if err != nil {
 		return nil, err
 	}
-	mw, err := jwtauth.New(
-		&jwtauth.Jwt{Secret: c.Jwt.Secret, Timeout: c.Jwt.Timeout.AsDuration()},
-		logger,
-		jwtauth.DataPermissionToClaimsFunc,
-		jwtauth.ClaimsToDataPermissionFunc)
-	if err != nil {
-		return nil, err
-	}
 	return &TikuUsecase{
 		d:     d,
 		uuidc: uuidc,
-		mw:    mw,
 		log:   log}, nil
 }
 
@@ -86,11 +75,10 @@ func (uc *TikuUsecase) GetChoice(ctx context.Context, id uint64) (reply *pb.Choi
 }
 
 func (uc *TikuUsecase) CreateChoices(ctx context.Context, token string, req *pb.Choice) (err error) {
-	out, err := uc.mw.ValidationToken(token)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	id, err := uc.uuidc.GenID(ctx, &uuidpb.GenIDReq{})
 	if err != nil {
 		return
@@ -113,11 +101,10 @@ func (uc *TikuUsecase) CreateChoices(ctx context.Context, token string, req *pb.
 }
 
 func (uc *TikuUsecase) UpdateChoice(ctx context.Context, token string, req *pb.Choice) (err error) {
-	out, err := uc.mw.ValidationToken(token)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	ud := &model.Choices{
 		Id:       req.Id,
 		Ty:       req.Ty,
@@ -173,11 +160,10 @@ func (uc *TikuUsecase) GetExercisePage(ctx context.Context, req *pb.GetExerciseL
 }
 
 func (uc *TikuUsecase) CreateExercise(ctx context.Context, token string, req *pb.Exercise) (err error) {
-	out, err := uc.mw.ValidationToken(token)
+	dp, err := meta.GetDataPermissions(ctx)
 	if err != nil {
 		return
 	}
-	dp := out.(*ssopb.DataPermission)
 	id, err := uc.uuidc.GenID(ctx, &uuidpb.GenIDReq{})
 	if err != nil {
 		return err
