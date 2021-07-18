@@ -19,11 +19,13 @@ service Admin {
     rpc CreateResource (SysConfig) returns (ApiReply) {
         option (google.api.http) = {
             post: "/admin/v1/config"
+            body: "*"
         };
     };
     rpc UpdateResource (SysConfig) returns (ApiReply){
         option (google.api.http) = {
             put: "/admin/v1/config/{configId}"
+            body: "*"
         };
     };
     rpc DeleteResource (DeleteConfigRequest) returns (ApiReply) {

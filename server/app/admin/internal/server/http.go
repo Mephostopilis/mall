@@ -44,7 +44,7 @@ func (s *httpServer) ServeHTTP(res xhttp.ResponseWriter, req *xhttp.Request) {
 }
 
 // NewHTTPServer new a HTTP server.
-func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *http.Server {
+func NewHTTPServer(c *conf.Server, authc *conf.Auth, logger log.Logger, r *registry.Registry) *http.Server {
 	m := grpc.WithMiddleware(
 		middleware.Chain(
 			recovery.Recovery(),
@@ -121,7 +121,7 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, r *registry.Registry) *htt
 	if err != nil {
 		panic(err)
 	}
-	au := auth.New(&auth.Config{DisableCSRF: false}, logger, ssocc)
+	au := auth.New(&auth.Config{DisableCSRF: false, WhiteList: authc.WhiteList}, logger, ssocc)
 	var opts = []http.ServerOption{
 		http.Middleware(
 			middleware.Chain(

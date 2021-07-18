@@ -16,6 +16,7 @@ import (
 type Config struct {
 	// csrf switch.
 	DisableCSRF bool
+	WhiteList   []string
 }
 
 // Auth is the authorization middleware
@@ -23,6 +24,7 @@ type Auth struct {
 	ssoClient ssopb.SsoClient
 	conf      *Config
 	log       *log.Helper
+	whiteList map[string]bool
 }
 
 // authFunc will return mid and error by given context
@@ -41,6 +43,11 @@ func New(conf *Config, logger log.Logger, ssoClient ssopb.SsoClient) *Auth {
 		conf:      conf,
 		log:       log.NewHelper(log.With(logger, "module", "middleware/auth")),
 		ssoClient: ssoClient,
+		whiteList: make(map[string]bool),
+	}
+	for i := 0; i < len(conf.WhiteList); i++ {
+		url := conf.WhiteList[i]
+		auth.whiteList[url] = true
 	}
 	return auth
 }
@@ -54,11 +61,13 @@ func (a *Auth) User(handler middleware.Handler) middleware.Handler {
 		if ok {
 			if tp.Kind() == transport.KindHTTP {
 				h := tp.(*transporthttp.Transport)
-				if h.RequestHeader().Get("access_token") == "" {
-					a.UserWeb(ctx, h)
-					return
+				if a.whiteList[h.Request().URL.Path] {
+					if h.RequestHeader().Get("access_token") == "" {
+						a.UserWeb(ctx, h)
+						return
+					}
+					a.UserMobile(ctx, h)
 				}
-				a.UserMobile(ctx, h)
 			}
 		}
 		return handler(ctx, req)

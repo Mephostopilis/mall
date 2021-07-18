@@ -11,7 +11,7 @@ message Bootstrap {
   Data data = 3;
   Reg reg = 4;
   Logger logger = 5;
-  App app = 6;
+  Auth auth = 6;
 }
 
 message Service {
@@ -68,10 +68,6 @@ message Logger {
   int32 level = 3;
 }
 
-message App {
-  message Jwt {
-    string secret = 1;
-    google.protobuf.Duration timeout = 2;
-  }
-  Jwt jwt = 1;
+message Auth {
+  repeated string whiteList = 1;
 }

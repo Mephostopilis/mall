@@ -141,7 +141,7 @@ func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 func _Admin_CreateResource0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysConfig
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.sys.v1.Admin/CreateResource")
@@ -160,7 +160,7 @@ func _Admin_CreateResource0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateResource0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SysConfig
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
@@ -1397,10 +1397,10 @@ func (c *AdminHTTPClientImpl) CreateOperLog(ctx context.Context, in *OperLog, op
 func (c *AdminHTTPClientImpl) CreateResource(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateResource"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2047,10 +2047,10 @@ func (c *AdminHTTPClientImpl) UpdateOperLog(ctx context.Context, in *OperLog, op
 func (c *AdminHTTPClientImpl) UpdateResource(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/config/{configId}"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateResource"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

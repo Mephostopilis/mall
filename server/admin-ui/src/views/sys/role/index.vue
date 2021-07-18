@@ -242,7 +242,6 @@
 <script>
 import { listRole, getRole, delRole, addRole, updateRole, dataScope, changeRoleStatus } from '@/api/system/role'
 import { treeselect as menuTreeselect, roleMenuTreeselect } from '@/api/system/menu'
-import { treeselect as deptTreeselect, roleDeptTreeselect } from '@/api/system/dept'
 import { formatJson } from '@/utils'
 
 export default {
@@ -354,12 +353,6 @@ export default {
         this.menuOptions = response.data
       })
     },
-    /** 查询部门树结构 */
-    getDeptTreeselect() {
-      deptTreeselect().then(response => {
-        this.deptOptions = response.data.list
-      })
-    },
     // 所有菜单节点数据
     getMenuAllCheckedKeys() {
       // 目前被选中的菜单节点
@@ -384,15 +377,6 @@ export default {
         this.menuOptions = response.menus
         this.$nextTick(() => {
           this.$refs.menu.setCheckedKeys(response.checkedKeys)
-        })
-      })
-    },
-    /** 根据角色ID查询部门树结构 */
-    getRoleDeptTreeselect(roleId) {
-      roleDeptTreeselect(roleId).then(response => {
-        this.deptOptions = response.depts
-        this.$nextTick(() => {
-          this.$refs.dept.setCheckedKeys(response.checkedKeys)
         })
       })
     },
