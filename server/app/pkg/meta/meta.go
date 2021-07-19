@@ -10,18 +10,19 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-func GetDataPermissions(ctx context.Context) (permission ssopb.DataPermission, err error) {
+func GetDataPermissions(ctx context.Context) (permission *ssopb.DataPermission, err error) {
 	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
 		err = ecode.Unknown("不存在md")
 		return
 	}
-	v := md.Get("permision")
-	if len(v) < 0 {
-		err = ecode.Unknown("不存在permission")
+	v := md.Get("x-md-global-dp")
+	if len(v) <= 0 {
+		err = ecode.Unknown("不存在dp")
 		return
 	}
-	if err = proto.Unmarshal([]byte(v), &permission); err != nil {
+	var dp ssopb.DataPermission
+	if err = proto.Unmarshal([]byte(v), &dp); err != nil {
 		return
 	}
 	return
@@ -33,9 +34,9 @@ func GetToken(ctx context.Context) (token string, err error) {
 		err = ecode.Unknown("不存在md")
 		return
 	}
-	v := md.Get("token")
-	if len(v) < 0 {
-		err = ecode.Unknown("meta", "error")
+	v := md.Get("x-md-global-token")
+	if len(v) <= 0 {
+		err = ecode.Unknown("不存在token")
 		return
 	}
 	token = v
@@ -49,8 +50,8 @@ func GetUA(ctx context.Context) (ua string, err error) {
 		return
 	}
 	v := md.Get("ua")
-	if len(v) < 0 {
-		err = ecode.Unknown("meta", "error")
+	if len(v) <= 0 {
+		err = ecode.Unknown("meta")
 		return
 	}
 	ua = v
@@ -64,40 +65,10 @@ func GetRemoteAddr(ctx context.Context) (remoteAddr string, err error) {
 		return
 	}
 	v := md.Get("remote_addr")
-	if len(v) < 0 {
-		err = ecode.Unknown("meta", "error")
+	if len(v) <= 0 {
+		err = ecode.Unknown("meta")
 		return
 	}
 	remoteAddr = v
 	return
 }
-
-//IdsStrToIdsIntGroup 获取URL中批量id并解析
-// func IdsStrToIdsIntGroup(key string, ctx context.Context) ([]int, error) {
-// 	md, ok := metadata.FromIncomingContext(ctx)
-// 	if !ok {
-// 		err = errors.Unknown("meta", "error")
-// 		return
-// 	}
-// 	v := md.Get("permision")
-// 	if len(v) < 0 {
-// 		err = errors.Unknown("meta", "error")
-// 		return
-// 	}
-// 	var permission ssopb.DataPermission
-// 	if err = proto.Unmarshal([]byte(v[0]), &permission); err != nil {
-// 		return
-// 	}
-// 	p := c.Value(key).(string)
-// 	return idsStrToIdsIntGroup(p)
-// }
-
-// func idsStrToIdsIntGroup(keys string) []int {
-// 	IDS := make([]int, 0)
-// 	ids := strings.Split(keys, ",")
-// 	for i := 0; i < len(ids); i++ {
-// 		ID, _ := tools.StringToInt(ids[i])
-// 		IDS = append(IDS, ID)
-// 	}
-// 	return IDS
-// }

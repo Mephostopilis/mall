@@ -2,14 +2,21 @@ package auth
 
 import (
 	"context"
+	"io/ioutil"
+	"os"
+	"strings"
 
 	ssopb "edu/api/sso/v1"
+	"edu/pkg/ecode"
+	"edu/pkg/tools"
 
-	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/metadata"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/transport"
 	transporthttp "github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/golang/protobuf/proto"
+	"gopkg.in/yaml.v2"
 )
 
 // Config is the identify config model.
@@ -17,6 +24,10 @@ type Config struct {
 	// csrf switch.
 	DisableCSRF bool
 	WhiteList   []string
+}
+
+type TokenList struct {
+	List []string
 }
 
 // Auth is the authorization middleware
@@ -28,7 +39,7 @@ type Auth struct {
 }
 
 // authFunc will return mid and error by given context
-type authFunc func(context.Context, *transporthttp.Transport) (uint64, error)
+type authFunc func(context.Context, *transporthttp.Transport) (*ssopb.DataPermission, error)
 
 var _defaultConf = &Config{
 	DisableCSRF: false,
@@ -45,8 +56,21 @@ func New(conf *Config, logger log.Logger, ssoClient ssopb.SsoClient) *Auth {
 		ssoClient: ssoClient,
 		whiteList: make(map[string]bool),
 	}
-	for i := 0; i < len(conf.WhiteList); i++ {
-		url := conf.WhiteList[i]
+
+	f, err := tools.Open("../../configs/tokenlist.yaml", os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		panic(err)
+	}
+	bytes, err := ioutil.ReadAll(f)
+	if err != nil {
+		panic(err)
+	}
+	var tl TokenList
+	if err = yaml.Unmarshal(bytes, &tl); err != nil {
+		panic(err)
+	}
+	for i := 0; i < len(tl.List); i++ {
+		url := tl.List[i]
 		auth.whiteList[url] = true
 	}
 	return auth
@@ -63,10 +87,16 @@ func (a *Auth) User(handler middleware.Handler) middleware.Handler {
 				h := tp.(*transporthttp.Transport)
 				if a.whiteList[h.Request().URL.Path] {
 					if h.RequestHeader().Get("access_token") == "" {
-						a.UserWeb(ctx, h)
-						return
+						ctx, err = a.UserWeb(ctx, h)
+						if err != nil {
+							return
+						}
+					} else {
+						ctx, err = a.UserMobile(ctx, h)
+						if err != nil {
+							return
+						}
 					}
-					a.UserMobile(ctx, h)
 				}
 			}
 		}
@@ -74,23 +104,9 @@ func (a *Auth) User(handler middleware.Handler) middleware.Handler {
 	}
 }
 
-// BearerAuth parse bearer token
-// func (a *Auth) BearerAuth(ctx *bm.Context) (string, bool) {
-// 	auth := ctx.Request.Header.Get("Authorization")
-// 	prefix := "Bearer "
-// 	token := ""
-
-// 	if auth != "" && strings.HasPrefix(auth, prefix) {
-// 		token = auth[len(prefix):]
-// 	} else {
-// 		token = ctx.Params.ByName("access_token")
-// 	}
-// 	return token, token != ""
-// }
-
 // UserWeb is used to mark path as web access required.
 func (a *Auth) UserWeb(ctx context.Context, info *transporthttp.Transport) (context.Context, error) {
-	return a.midAuth(ctx, info, a.authCookie)
+	return a.midAuth(ctx, info, a.authBearerAuth)
 }
 
 // UserMobile is used to mark path as mobile access required.
@@ -128,39 +144,45 @@ func (a *Auth) GuestWeb(ctx context.Context, info *transporthttp.Transport) (con
 func (a *Auth) GuestMobile(ctx context.Context, info *transporthttp.Transport) (context.Context, error) {
 	a.log.Info("http: [%s] %s", info.Request().Method, info.Request().URL.Path)
 	return a.guestAuth(ctx, info, a.authToken)
-
 }
 
 // authToken is used to authorize request by token
-func (a *Auth) authToken(ctx context.Context, info *transporthttp.Transport) (uint64, error) {
+func (a *Auth) authToken(ctx context.Context, info *transporthttp.Transport) (*ssopb.DataPermission, error) {
 	req := info.Request()
 	key := req.Form.Get("access_token")
 	if key == "" {
-		return 0, errors.Unauthorized("ErrAccessToken", "access_token is null")
+		return nil, ecode.Unauthorized("ErrAccessToken", "access_token is null")
 	}
 	// NOTE: 请求登录鉴权服务接口，拿到对应的用户id
 	// TODO: get mid from some code
-	var mid uint64
+	// var mid uint64
 	resp, err := a.ssoClient.Introspect(ctx, &ssopb.IntrospectReq{
 		AccessToken: key,
 	})
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
-	mid = uint64(resp.UserId)
-	return mid, nil
+
+	return &ssopb.DataPermission{
+		UserId:    resp.UserId,
+		RoleId:    resp.RoleId,
+		RoleKey:   resp.RoleKey,
+		DataScope: resp.DataScope,
+	}, nil
 }
 
 // authCookie is used to authorize request by cookie
-func (a *Auth) authCookie(ctx context.Context, h *transporthttp.Transport) (uint64, error) {
+func (a *Auth) authCookie(ctx context.Context, h *transporthttp.Transport) (*ssopb.DataPermission, error) {
 	req := h.Request()
 	session, _ := req.Cookie("SESSION")
 	if session == nil {
-		return 0, errors.Unauthorized("ErrSession", "session is null")
+		a.log.Info("---------------------")
+		return nil, ecode.Unauthorized("ErrSession", "session is null")
 	}
 	// NOTE: 请求登录鉴权服务接口，拿到对应的用户id
-	var mid uint64
+	// var mid uint64
 	// TODO: get mid from some code
+	a.log.Info("---------------------")
 
 	// check csrf
 	clientCsrf := req.FormValue("csrf")
@@ -168,17 +190,42 @@ func (a *Auth) authCookie(ctx context.Context, h *transporthttp.Transport) (uint
 		// NOTE: 如果开启了CSRF认证，请从CSRF服务获取该用户关联的csrf
 		var csrf string // TODO: get csrf from some code
 		if clientCsrf != csrf {
-			return 0, errors.Unauthorized("ErrCsrf", "csrf err")
+			return nil, ecode.Unauthorized("ErrCsrf", "csrf err")
 		}
 	}
 
-	return mid, nil
+	return nil, nil
+}
+
+// BearerAuth parse bearer token
+func (a *Auth) authBearerAuth(ctx context.Context, info *transporthttp.Transport) (*ssopb.DataPermission, error) {
+	auth := info.RequestHeader().Get("Authorization")
+	prefix := "Bearer "
+	token := ""
+
+	if auth != "" && strings.HasPrefix(auth, prefix) {
+		token = auth[len(prefix):]
+	} else {
+		token = info.RequestHeader().Get("access_token")
+	}
+	resp, err := a.ssoClient.Introspect(ctx, &ssopb.IntrospectReq{
+		AccessToken: token,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &ssopb.DataPermission{
+		UserId:    resp.UserId,
+		RoleId:    resp.RoleId,
+		RoleKey:   resp.RoleKey,
+		DataScope: resp.DataScope,
+	}, nil
 }
 
 func (a *Auth) midAuth(ctx context.Context, h *transporthttp.Transport, auth authFunc) (context.Context, error) {
 	mid, err := auth(ctx, h)
 	if err != nil {
-		return nil, errors.Unauthorized("mid", "auth not found")
+		return nil, err
 	}
 	return setMid(ctx, mid)
 }
@@ -186,7 +233,7 @@ func (a *Auth) midAuth(ctx context.Context, h *transporthttp.Transport, auth aut
 func (a *Auth) guestAuth(ctx context.Context, h *transporthttp.Transport, auth authFunc) (context.Context, error) {
 	mid, err := auth(ctx, h)
 	// no error happened and mid is valid
-	if err == nil && mid > 0 {
+	if err == nil {
 		return setMid(ctx, mid)
 	}
 	return ctx, nil
@@ -194,7 +241,11 @@ func (a *Auth) guestAuth(ctx context.Context, h *transporthttp.Transport, auth a
 
 // set mid into context
 // NOTE: This method is not thread safe.
-func setMid(ctx context.Context, mid uint64) (context.Context, error) {
-	ctx = context.WithValue(ctx, "mid", mid)
+func setMid(ctx context.Context, resp *ssopb.DataPermission) (context.Context, error) {
+	dp, err := proto.Marshal(resp)
+	if err != nil {
+		return nil, err
+	}
+	ctx = metadata.AppendToClientContext(ctx, "x-md-global-dp", string(dp))
 	return ctx, nil
 }
