@@ -2,15 +2,14 @@ package meta
 
 import (
 	"context"
+	"encoding/json"
 
-	ssopb "edu/api/sso/v1"
 	"edu/pkg/ecode"
 
 	"github.com/go-kratos/kratos/v2/metadata"
-	"google.golang.org/protobuf/proto"
 )
 
-func GetDataPermissions(ctx context.Context) (permission *ssopb.DataPermission, err error) {
+func GetDataPermissions(ctx context.Context) (permission *DataPermission, err error) {
 	md, ok := metadata.FromServerContext(ctx)
 	if !ok {
 		err = ecode.Unknown("不存在md")
@@ -21,10 +20,11 @@ func GetDataPermissions(ctx context.Context) (permission *ssopb.DataPermission, 
 		err = ecode.Unknown("不存在dp")
 		return
 	}
-	var dp ssopb.DataPermission
-	if err = proto.Unmarshal([]byte(v), &dp); err != nil {
+	var dp DataPermission
+	if err = json.Unmarshal([]byte(v), &dp); err != nil {
 		return
 	}
+	permission = &dp
 	return
 }
 

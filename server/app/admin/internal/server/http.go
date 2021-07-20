@@ -19,6 +19,7 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/middleware/logging"
+	"github.com/go-kratos/kratos/v2/middleware/metadata"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/middleware/validate"
@@ -45,11 +46,27 @@ func (s *httpServer) ServeHTTP(res xhttp.ResponseWriter, req *xhttp.Request) {
 
 // NewHTTPServer new a HTTP server.
 func NewHTTPServer(c *conf.Server, authc *conf.Auth, logger log.Logger, r *registry.Registry) *http.Server {
+	ssocc, err := ssopb.NewSso(context.TODO(),
+		grpc.WithMiddleware(
+			middleware.Chain(
+				recovery.Recovery(),
+				tracing.Client(),
+				logging.Client(logger),
+			),
+		),
+		grpc.WithDiscovery(r))
+	if err != nil {
+		panic(err)
+	}
+	au := auth.New(&auth.Config{DisableCSRF: false, WhiteList: authc.WhiteList}, logger, ssocc)
 	m := grpc.WithMiddleware(
 		middleware.Chain(
 			recovery.Recovery(),
 			tracing.Client(),
 			logging.Client(logger),
+			validate.Validator(),
+			au.User,
+			metadata.Client(),
 		),
 	)
 
@@ -117,22 +134,7 @@ func NewHTTPServer(c *conf.Server, authc *conf.Auth, logger log.Logger, r *regis
 	}
 	memberpb.RegisterAdminHandlerClient(ctx, gr, memberc)
 
-	ssocc, err := ssopb.NewSso(ctx, m, grpc.WithDiscovery(r))
-	if err != nil {
-		panic(err)
-	}
-	au := auth.New(&auth.Config{DisableCSRF: false, WhiteList: authc.WhiteList}, logger, ssocc)
-	var opts = []http.ServerOption{
-		http.Middleware(
-			middleware.Chain(
-				recovery.Recovery(recovery.WithLogger(logger)),
-				tracing.Server(),
-				logging.Server(logger),
-				validate.Validator(),
-				au.User,
-			),
-		),
-	}
+	var opts = []http.ServerOption{}
 	if c.Http.Network != "" {
 		opts = append(opts, http.Network(c.Http.Network))
 	}

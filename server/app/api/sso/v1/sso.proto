@@ -619,7 +619,6 @@ message GetSysUserReply {
     repeated int32 postIds = 2;
     repeated int32 roleIds = 3;
     repeated Role roles = 4;
-    repeated Post posts = 5;
 }
 
 message GetSysUserProfileRequest {}
@@ -628,14 +627,11 @@ message GetSysUserProfileReply {
     repeated int32 postIds = 2;
     repeated int32 roleIds = 3;
     repeated Role roles = 4;
-    repeated Post posts = 5;
-    Dept dept = 6;
 }
 
 message GetSysUserInitRequest {}
 message GetSysUserInitReply {
     repeated Role roles = 1;
-    repeated Post posts = 2;
 }
 
 message ListSysUserRequest {

@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"strings"
 
-	ssopb "edu/api/sso/v1"
 	pb "edu/api/sys/v1"
 	"edu/pkg/meta"
 	stringsx "edu/pkg/strings"
@@ -89,7 +88,7 @@ func (uc *AdminUsecase) convertSysTables2Pb(tables []model.SysTables) []*pb.SysT
 	return list
 }
 
-func (uc *AdminUsecase) genTableInit(ctx context.Context, dp *ssopb.DataPermission, toold tools.Dao, tbname string) (reply *model.SysTables, err error) {
+func (uc *AdminUsecase) genTableInit(ctx context.Context, dp *meta.DataPermission, toold tools.Dao, tbname string) (reply *model.SysTables, err error) {
 	dbtable, err := toold.GetDBTables(uc.cfg.Gen.Dbname, &model.DBTables{TableName: tbname})
 	if err != nil {
 		return

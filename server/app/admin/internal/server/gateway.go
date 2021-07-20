@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"strings"
 
-	"edu/pkg/meta"
-
 	"github.com/go-kratos/kratos/v2/encoding"
 	"github.com/go-kratos/kratos/v2/encoding/json"
 	"github.com/go-kratos/kratos/v2/errors"
@@ -15,7 +13,6 @@ import (
 	"github.com/go-kratos/kratos/v2/transport/http/binding"
 	gwruntime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"
 )
 
 const (
@@ -33,7 +30,6 @@ var (
 func newGateway(logger log.Logger) *gwruntime.ServeMux {
 	mux := gwruntime.NewServeMux(
 		gwruntime.WithErrorHandler(handleGatewayError),
-		gwruntime.WithMetadata(handleMd(logger)),
 	)
 	return mux
 }
@@ -111,15 +107,4 @@ func contentSubtype(contentType string) string {
 
 func handleGatewayError(ctx context.Context, mux *gwruntime.ServeMux, mar gwruntime.Marshaler, w http.ResponseWriter, r *http.Request, err error) {
 	encodeError(w, r, err)
-}
-
-func handleMd(logger log.Logger) func(context.Context, *http.Request) metadata.MD {
-	a := meta.New(&meta.Config{DisableCSRF: true}, logger)
-	return func(ctx context.Context, r *http.Request) metadata.MD {
-		md := metadata.Pairs()
-		if r.URL.Path == "/admin/v1/getinfo" {
-			return a.BearerAuth(ctx, r, md)
-		}
-		return a.BearerAuth(ctx, r, md)
-	}
 }

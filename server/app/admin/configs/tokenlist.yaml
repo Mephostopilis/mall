@@ -1,0 +1,4 @@
+list:
+  - /admin/v1/getinfo
+  - /admin/v1/menurole
+  - /admin/v1/menulist
