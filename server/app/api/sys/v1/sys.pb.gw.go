@@ -2585,7 +2585,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource", runtime.WithHTTPPathPattern("/admin/v1/config"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource", runtime.WithHTTPPathPattern("/admin/v1/resource"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2608,7 +2608,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource", runtime.WithHTTPPathPattern("/admin/v1/resource/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2631,7 +2631,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource", runtime.WithHTTPPathPattern("/admin/v1/config/{ids}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource", runtime.WithHTTPPathPattern("/admin/v1/resource/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2654,7 +2654,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource", runtime.WithHTTPPathPattern("/admin/v1/resource/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4036,7 +4036,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource", runtime.WithHTTPPathPattern("/admin/v1/config"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/CreateResource", runtime.WithHTTPPathPattern("/admin/v1/resource"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4056,7 +4056,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/UpdateResource", runtime.WithHTTPPathPattern("/admin/v1/resource/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4076,7 +4076,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource", runtime.WithHTTPPathPattern("/admin/v1/config/{ids}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/DeleteResource", runtime.WithHTTPPathPattern("/admin/v1/resource/{ids}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4096,7 +4096,7 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource", runtime.WithHTTPPathPattern("/admin/v1/config/{configId}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.sys.v1.Admin/GetResource", runtime.WithHTTPPathPattern("/admin/v1/resource/{configId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5176,13 +5176,13 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Admin_CreateResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"admin", "v1", "config"}, ""))
+	pattern_Admin_CreateResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"admin", "v1", "resource"}, ""))
 
-	pattern_Admin_UpdateResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "config", "configId"}, ""))
+	pattern_Admin_UpdateResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "resource", "configId"}, ""))
 
-	pattern_Admin_DeleteResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "config", "ids"}, ""))
+	pattern_Admin_DeleteResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "resource", "ids"}, ""))
 
-	pattern_Admin_GetResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "config", "configId"}, ""))
+	pattern_Admin_GetResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "resource", "configId"}, ""))
 
 	pattern_Admin_ListResource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"admin", "v1", "resourceList"}, ""))
 

@@ -2,12 +2,15 @@ package auth
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
 
 	ssopb "edu/api/sso/v1"
 	"edu/pkg/ecode"
+	"edu/pkg/meta"
 	"edu/pkg/tools"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -15,7 +18,6 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/transport"
 	transporthttp "github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/golang/protobuf/proto"
 	"gopkg.in/yaml.v2"
 )
 
@@ -39,7 +41,7 @@ type Auth struct {
 }
 
 // authFunc will return mid and error by given context
-type authFunc func(context.Context, *transporthttp.Transport) (*ssopb.DataPermission, error)
+type authFunc func(context.Context, *transporthttp.Transport) (*meta.DataPermission, error)
 
 var _defaultConf = &Config{
 	DisableCSRF: false,
@@ -86,6 +88,7 @@ func (a *Auth) User(handler middleware.Handler) middleware.Handler {
 			if tp.Kind() == transport.KindHTTP {
 				h := tp.(*transporthttp.Transport)
 				if a.whiteList[h.Request().URL.Path] {
+					a.log.Info("----------------------------------auth")
 					if h.RequestHeader().Get("access_token") == "" {
 						ctx, err = a.UserWeb(ctx, h)
 						if err != nil {
@@ -147,7 +150,7 @@ func (a *Auth) GuestMobile(ctx context.Context, info *transporthttp.Transport) (
 }
 
 // authToken is used to authorize request by token
-func (a *Auth) authToken(ctx context.Context, info *transporthttp.Transport) (*ssopb.DataPermission, error) {
+func (a *Auth) authToken(ctx context.Context, info *transporthttp.Transport) (*meta.DataPermission, error) {
 	req := info.Request()
 	key := req.Form.Get("access_token")
 	if key == "" {
@@ -163,7 +166,7 @@ func (a *Auth) authToken(ctx context.Context, info *transporthttp.Transport) (*s
 		return nil, err
 	}
 
-	return &ssopb.DataPermission{
+	return &meta.DataPermission{
 		UserId:    resp.UserId,
 		RoleId:    resp.RoleId,
 		RoleKey:   resp.RoleKey,
@@ -172,11 +175,10 @@ func (a *Auth) authToken(ctx context.Context, info *transporthttp.Transport) (*s
 }
 
 // authCookie is used to authorize request by cookie
-func (a *Auth) authCookie(ctx context.Context, h *transporthttp.Transport) (*ssopb.DataPermission, error) {
+func (a *Auth) authCookie(ctx context.Context, h *transporthttp.Transport) (*meta.DataPermission, error) {
 	req := h.Request()
 	session, _ := req.Cookie("SESSION")
 	if session == nil {
-		a.log.Info("---------------------")
 		return nil, ecode.Unauthorized("ErrSession", "session is null")
 	}
 	// NOTE: 请求登录鉴权服务接口，拿到对应的用户id
@@ -198,7 +200,7 @@ func (a *Auth) authCookie(ctx context.Context, h *transporthttp.Transport) (*sso
 }
 
 // BearerAuth parse bearer token
-func (a *Auth) authBearerAuth(ctx context.Context, info *transporthttp.Transport) (*ssopb.DataPermission, error) {
+func (a *Auth) authBearerAuth(ctx context.Context, info *transporthttp.Transport) (*meta.DataPermission, error) {
 	auth := info.RequestHeader().Get("Authorization")
 	prefix := "Bearer "
 	token := ""
@@ -214,7 +216,8 @@ func (a *Auth) authBearerAuth(ctx context.Context, info *transporthttp.Transport
 	if err != nil {
 		return nil, err
 	}
-	return &ssopb.DataPermission{
+	a.log.Infof("------------------auth:%v", resp)
+	return &meta.DataPermission{
 		UserId:    resp.UserId,
 		RoleId:    resp.RoleId,
 		RoleKey:   resp.RoleKey,
@@ -241,11 +244,17 @@ func (a *Auth) guestAuth(ctx context.Context, h *transporthttp.Transport, auth a
 
 // set mid into context
 // NOTE: This method is not thread safe.
-func setMid(ctx context.Context, resp *ssopb.DataPermission) (context.Context, error) {
-	dp, err := proto.Marshal(resp)
+func setMid(ctx context.Context, resp *meta.DataPermission) (context.Context, error) {
+	dp, err := json.Marshal(resp)
 	if err != nil {
 		return nil, err
 	}
 	ctx = metadata.AppendToClientContext(ctx, "x-md-global-dp", string(dp))
+	md, ok := metadata.FromClientContext(ctx)
+	if !ok {
+		return ctx, ecode.Unauthorized("ErrMD", "md is nil")
+	}
+	dpp := md.Get("x-md-global-dp")
+	fmt.Printf("dp: %v", dpp)
 	return ctx, nil
 }

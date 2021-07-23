@@ -18,24 +18,24 @@ option java_package = "api.sys.v1";
 service Admin {
     rpc CreateResource (SysConfig) returns (ApiReply) {
         option (google.api.http) = {
-            post: "/admin/v1/config"
+            post: "/admin/v1/resource"
             body: "*"
         };
     };
     rpc UpdateResource (SysConfig) returns (ApiReply){
         option (google.api.http) = {
-            put: "/admin/v1/config/{configId}"
+            put: "/admin/v1/resource/{configId}"
             body: "*"
         };
     };
     rpc DeleteResource (DeleteConfigRequest) returns (ApiReply) {
         option (google.api.http) = {
-            delete: "/admin/v1/config/{ids}"
+            delete: "/admin/v1/resource/{ids}"
         };
     };
     rpc GetResource (GetConfigRequest) returns (ApiReply) {
         option (google.api.http) = {
-            get: "/admin/v1/config/{configId}"
+            get: "/admin/v1/resource/{configId}"
         };
     };
     rpc ListResource (ListResourceRequest) returns (ApiReply) {

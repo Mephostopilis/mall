@@ -79,10 +79,10 @@ type AdminHTTPServer interface {
 
 func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r := s.Route("/")
-	r.POST("/admin/v1/config", _Admin_CreateResource0_HTTP_Handler(srv))
-	r.PUT("/admin/v1/config/{configId}", _Admin_UpdateResource0_HTTP_Handler(srv))
-	r.DELETE("/admin/v1/config/{ids}", _Admin_DeleteResource0_HTTP_Handler(srv))
-	r.GET("/admin/v1/config/{configId}", _Admin_GetResource0_HTTP_Handler(srv))
+	r.POST("/admin/v1/resource", _Admin_CreateResource0_HTTP_Handler(srv))
+	r.PUT("/admin/v1/resource/{configId}", _Admin_UpdateResource0_HTTP_Handler(srv))
+	r.DELETE("/admin/v1/resource/{ids}", _Admin_DeleteResource0_HTTP_Handler(srv))
+	r.GET("/admin/v1/resource/{configId}", _Admin_GetResource0_HTTP_Handler(srv))
 	r.GET("/admin/v1/resourceList", _Admin_ListResource0_HTTP_Handler(srv))
 	r.POST("/admin/v1/config", _Admin_CreateConfig0_HTTP_Handler(srv))
 	r.PUT("/admin/v1/config/{configId}", _Admin_UpdateConfig0_HTTP_Handler(srv))
@@ -1396,7 +1396,7 @@ func (c *AdminHTTPClientImpl) CreateOperLog(ctx context.Context, in *OperLog, op
 
 func (c *AdminHTTPClientImpl) CreateResource(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
-	pattern := "/admin/v1/config"
+	pattern := "/admin/v1/resource"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/CreateResource"))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1500,7 +1500,7 @@ func (c *AdminHTTPClientImpl) DeleteOperLog(ctx context.Context, in *DeleteOperL
 
 func (c *AdminHTTPClientImpl) DeleteResource(ctx context.Context, in *DeleteConfigRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
-	pattern := "/admin/v1/config/{ids}"
+	pattern := "/admin/v1/resource/{ids}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/DeleteResource"))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1773,7 +1773,7 @@ func (c *AdminHTTPClientImpl) GetOperLog(ctx context.Context, in *GetOperLogRequ
 
 func (c *AdminHTTPClientImpl) GetResource(ctx context.Context, in *GetConfigRequest, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
-	pattern := "/admin/v1/config/{configId}"
+	pattern := "/admin/v1/resource/{configId}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/GetResource"))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2046,7 +2046,7 @@ func (c *AdminHTTPClientImpl) UpdateOperLog(ctx context.Context, in *OperLog, op
 
 func (c *AdminHTTPClientImpl) UpdateResource(ctx context.Context, in *SysConfig, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
-	pattern := "/admin/v1/config/{configId}"
+	pattern := "/admin/v1/resource/{configId}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.sys.v1.Admin/UpdateResource"))
 	opts = append(opts, http.PathTemplate(pattern))

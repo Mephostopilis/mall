@@ -1136,6 +1136,157 @@
         ]
       }
     },
+    "/admin/v1/resource": {
+      "post": {
+        "operationId": "Admin_CreateResource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apisysv1ApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SysConfig"
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/resource/{configId}": {
+      "get": {
+        "operationId": "Admin_GetResource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apisysv1ApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "configId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "Admin_UpdateResource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apisysv1ApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "configId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "configName": {
+                  "type": "string"
+                },
+                "configKey": {
+                  "type": "string"
+                },
+                "configValue": {
+                  "type": "string"
+                },
+                "configType": {
+                  "type": "string"
+                },
+                "remark": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/v1/resource/{ids}": {
+      "delete": {
+        "operationId": "Admin_DeleteResource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apisysv1ApiReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
     "/admin/v1/resourceList": {
       "get": {
         "operationId": "Admin_ListResource",
