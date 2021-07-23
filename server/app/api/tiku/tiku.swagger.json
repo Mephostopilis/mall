@@ -36,6 +36,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tikuChoice"
+            }
+          }
+        ],
         "tags": [
           "Admin"
         ]
@@ -56,6 +66,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tikuChoice"
+            }
+          }
+        ],
         "tags": [
           "Admin"
         ]
@@ -203,6 +223,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tikuExercise"
+            }
+          }
+        ],
         "tags": [
           "Admin"
         ]
@@ -223,6 +253,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tikuExercise"
+            }
+          }
+        ],
         "tags": [
           "Admin"
         ]
@@ -370,6 +410,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tikuAnswerChoiceRequest"
+            }
+          }
+        ],
         "tags": [
           "Api"
         ]
@@ -487,6 +537,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tikuAnswerExerciseRequest"
+            }
+          }
+        ],
         "tags": [
           "Api"
         ]
@@ -544,36 +604,6 @@
           "Api"
         ]
       }
-    },
-    "/api/v1/tiku/say_hello": {
-      "get": {
-        "operationId": "Api_SayHelloURL",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apitikuHelloResp"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Api"
-        ]
-      }
     }
   },
   "definitions": {
@@ -614,14 +644,6 @@
         }
       }
     },
-    "apitikuHelloResp": {
-      "type": "object",
-      "properties": {
-        "Content": {
-          "type": "string"
-        }
-      }
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -658,7 +680,22 @@
     "tikuAnswerChoiceReply": {
       "type": "object"
     },
+    "tikuAnswerChoiceRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
     "tikuAnswerExerciseReply": {
+      "type": "object"
+    },
+    "tikuAnswerExerciseRequest": {
       "type": "object"
     },
     "tikuChoice": {

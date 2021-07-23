@@ -88,7 +88,7 @@ func _Admin_GetChoice0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) 
 func _Admin_InsertChoice0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Choice
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.tiku.Admin/InsertChoice")
@@ -107,7 +107,7 @@ func _Admin_InsertChoice0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Contex
 func _Admin_UpdateChoice0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Choice
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.tiku.Admin/UpdateChoice")
@@ -189,7 +189,7 @@ func _Admin_GetExercise0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context
 func _Admin_InsertExercise0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Exercise
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.tiku.Admin/InsertExercise")
@@ -208,7 +208,7 @@ func _Admin_InsertExercise0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Cont
 func _Admin_UpdateExercise0_HTTP_Handler(srv AdminHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in Exercise
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.tiku.Admin/UpdateExercise")
@@ -348,10 +348,10 @@ func (c *AdminHTTPClientImpl) GetExerciseList(ctx context.Context, in *GetExerci
 func (c *AdminHTTPClientImpl) InsertChoice(ctx context.Context, in *Choice, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tiku/choices"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.tiku.Admin/InsertChoice"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -361,10 +361,10 @@ func (c *AdminHTTPClientImpl) InsertChoice(ctx context.Context, in *Choice, opts
 func (c *AdminHTTPClientImpl) InsertExercise(ctx context.Context, in *Exercise, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tiku/exercise"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.tiku.Admin/InsertExercise"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,10 +374,10 @@ func (c *AdminHTTPClientImpl) InsertExercise(ctx context.Context, in *Exercise, 
 func (c *AdminHTTPClientImpl) UpdateChoice(ctx context.Context, in *Choice, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tiku/choices"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.tiku.Admin/UpdateChoice"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -387,10 +387,10 @@ func (c *AdminHTTPClientImpl) UpdateChoice(ctx context.Context, in *Choice, opts
 func (c *AdminHTTPClientImpl) UpdateExercise(ctx context.Context, in *Exercise, opts ...http.CallOption) (*ApiReply, error) {
 	var out ApiReply
 	pattern := "/admin/v1/tiku/exercise"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.tiku.Admin/UpdateExercise"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -405,12 +405,10 @@ type ApiHTTPServer interface {
 	GetExercise(context.Context, *GetExerciseRequest) (*Exercise, error)
 	GetExerciseList(context.Context, *GetExerciseListRequest) (*GetExerciseListReply, error)
 	Ping(context.Context, *PingReq) (*PingResp, error)
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 }
 
 func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r := s.Route("/")
-	r.GET("/api/v1/tiku/say_hello", _Api_SayHelloURL5_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/public/ping", _Api_Ping0_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/choicesList", _Api_GetChoiceList1_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/choice/{id}", _Api_GetChoice1_HTTP_Handler(srv))
@@ -418,25 +416,6 @@ func RegisterApiHTTPServer(s *http.Server, srv ApiHTTPServer) {
 	r.GET("/admin/v1/tiku/exerciseList", _Api_GetExerciseList1_HTTP_Handler(srv))
 	r.GET("/api/v1/tiku/exercise/{id}", _Api_GetExercise1_HTTP_Handler(srv))
 	r.PUT("/api/v1/tiku/exercise/answer", _Api_AnswerExercise0_HTTP_Handler(srv))
-}
-
-func _Api_SayHelloURL5_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in HelloReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/api.tiku.Api/SayHelloURL")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SayHelloURL(ctx, req.(*HelloReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*HelloResp)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _Api_Ping0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
@@ -502,7 +481,7 @@ func _Api_GetChoice1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) erro
 func _Api_AnswerChoice0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AnswerChoiceRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.tiku.Api/AnswerChoice")
@@ -562,7 +541,7 @@ func _Api_GetExercise1_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) er
 func _Api_AnswerExercise0_HTTP_Handler(srv ApiHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AnswerExerciseRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, "/api.tiku.Api/AnswerExercise")
@@ -586,7 +565,6 @@ type ApiHTTPClient interface {
 	GetExercise(ctx context.Context, req *GetExerciseRequest, opts ...http.CallOption) (rsp *Exercise, err error)
 	GetExerciseList(ctx context.Context, req *GetExerciseListRequest, opts ...http.CallOption) (rsp *GetExerciseListReply, err error)
 	Ping(ctx context.Context, req *PingReq, opts ...http.CallOption) (rsp *PingResp, err error)
-	SayHelloURL(ctx context.Context, req *HelloReq, opts ...http.CallOption) (rsp *HelloResp, err error)
 }
 
 type ApiHTTPClientImpl struct {
@@ -600,10 +578,10 @@ func NewApiHTTPClient(client *http.Client) ApiHTTPClient {
 func (c *ApiHTTPClientImpl) AnswerChoice(ctx context.Context, in *AnswerChoiceRequest, opts ...http.CallOption) (*AnswerChoiceReply, error) {
 	var out AnswerChoiceReply
 	pattern := "/api/v1/tiku/choice/answer"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.tiku.Api/AnswerChoice"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -613,10 +591,10 @@ func (c *ApiHTTPClientImpl) AnswerChoice(ctx context.Context, in *AnswerChoiceRe
 func (c *ApiHTTPClientImpl) AnswerExercise(ctx context.Context, in *AnswerExerciseRequest, opts ...http.CallOption) (*AnswerExerciseReply, error) {
 	var out AnswerExerciseReply
 	pattern := "/api/v1/tiku/exercise/answer"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/api.tiku.Api/AnswerExercise"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -680,19 +658,6 @@ func (c *ApiHTTPClientImpl) Ping(ctx context.Context, in *PingReq, opts ...http.
 	pattern := "/api/v1/tiku/public/ping"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/api.tiku.Api/Ping"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *ApiHTTPClientImpl) SayHelloURL(ctx context.Context, in *HelloReq, opts ...http.CallOption) (*HelloResp, error) {
-	var out HelloResp
-	pattern := "/api/v1/tiku/say_hello"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.tiku.Api/SayHelloURL"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

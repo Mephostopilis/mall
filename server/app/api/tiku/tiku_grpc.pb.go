@@ -428,7 +428,6 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
-	SayHelloURL(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloResp, error)
 	Ping(ctx context.Context, in *PingReq, opts ...grpc.CallOption) (*PingResp, error)
 	GetChoiceList(ctx context.Context, in *GetChoiceListRequest, opts ...grpc.CallOption) (*GetChoiceListReply, error)
 	GetChoice(ctx context.Context, in *GetChoiceRequest, opts ...grpc.CallOption) (*Choice, error)
@@ -444,15 +443,6 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
-}
-
-func (c *apiClient) SayHelloURL(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloResp, error) {
-	out := new(HelloResp)
-	err := c.cc.Invoke(ctx, "/api.tiku.Api/SayHelloURL", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *apiClient) Ping(ctx context.Context, in *PingReq, opts ...grpc.CallOption) (*PingResp, error) {
@@ -522,7 +512,6 @@ func (c *apiClient) AnswerExercise(ctx context.Context, in *AnswerExerciseReques
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
-	SayHelloURL(context.Context, *HelloReq) (*HelloResp, error)
 	Ping(context.Context, *PingReq) (*PingResp, error)
 	GetChoiceList(context.Context, *GetChoiceListRequest) (*GetChoiceListReply, error)
 	GetChoice(context.Context, *GetChoiceRequest) (*Choice, error)
@@ -537,9 +526,6 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
-func (UnimplementedApiServer) SayHelloURL(context.Context, *HelloReq) (*HelloResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHelloURL not implemented")
-}
 func (UnimplementedApiServer) Ping(context.Context, *PingReq) (*PingResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
@@ -572,24 +558,6 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
-}
-
-func _Api_SayHelloURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).SayHelloURL(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.tiku.Api/SayHelloURL",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).SayHelloURL(ctx, req.(*HelloReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -725,10 +693,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.tiku.Api",
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SayHelloURL",
-			Handler:    _Api_SayHelloURL_Handler,
-		},
 		{
 			MethodName: "Ping",
 			Handler:    _Api_Ping_Handler,

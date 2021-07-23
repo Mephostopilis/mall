@@ -205,7 +205,7 @@ npm run dev
 [spf13/viper](https://github.com/spf13/viper)
 [gorm](https://github.com/jinzhu/gorm)
 [gin-swagger](https://github.com/swaggo/gin-swagger)
-[jwt-go](https://github.com/dgrijalva/jwt-go)
+[jwt-go](https://github.com/golang-jwt/jwt)
 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 [ruoyi-vue](https://gitee.com/y_project/RuoYi-Vue)
 

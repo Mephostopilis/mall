@@ -7,7 +7,7 @@ import (
 	pb "edu/api/sso/v1"
 	"edu/pkg/ecode"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt"
 )
 
 type MapClaims map[string]interface{}
@@ -178,30 +178,6 @@ func (mw *JWTUsecase) TokenGenerator(data interface{}) (tokenString string, expi
 	claims["exp"] = expire.Unix()
 	claims["orig_iat"] = mw.TimeFunc().Unix()
 	tokenString, err = mw.signedString(token)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func (mw *JWTUsecase) RefreshToken(tokenstr string) (tokenString string, expire time.Time, err error) {
-	claims, err := mw.checkIfTokenExpire(tokenstr)
-	if err != nil {
-		return
-	}
-
-	// Create the token
-	newToken := jwt.New(jwt.GetSigningMethod(mw.SigningAlgorithm))
-	newClaims := newToken.Claims.(jwt.MapClaims)
-
-	for key := range claims {
-		newClaims[key] = claims[key]
-	}
-
-	expire = mw.TimeFunc().Add(mw.Timeout)
-	newClaims["exp"] = expire.Unix()
-	newClaims["orig_iat"] = mw.TimeFunc().Unix()
-	tokenString, err = mw.signedString(newToken)
 	if err != nil {
 		return
 	}

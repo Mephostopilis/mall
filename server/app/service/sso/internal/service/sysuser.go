@@ -103,7 +103,7 @@ func (s *AdminService) GetSysUser(ctx context.Context, req *pb.GetSysUserRequest
 		PostIds: make([]int32, 0),
 		RoleIds: make([]int32, 0),
 		Roles:   make([]*pb.Role, 0),
-		Posts:   make([]*pb.Post, 0),
+		// Posts:   make([]*pb.Post, 0),
 	}
 	d.PostIds = append(d.PostIds, int32(it.PostId))
 	d.RoleIds = append(d.RoleIds, int32(it.RoleId))
@@ -170,7 +170,7 @@ func (s *AdminService) GetSysUserInit(ctx context.Context, req *pb.GetSysUserIni
 	list := make([]*anypb.Any, 0)
 	d := &pb.GetSysUserInitReply{
 		Roles: make([]*pb.Role, 0),
-		Posts: make([]*pb.Post, 0),
+		// Posts: make([]*pb.Post, 0),
 	}
 	var SysRole model.SysRole
 	roles, err := s.adao.GetSysRoleList(&SysRole)

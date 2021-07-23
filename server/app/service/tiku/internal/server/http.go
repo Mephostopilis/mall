@@ -3,9 +3,9 @@ package server
 import (
 	xhttp "net/http"
 
-	pb "edu/api/sys/v1"
-	"edu/service/sys/internal/conf"
-	"edu/service/sys/internal/service"
+	pb "edu/api/tiku"
+	"edu/service/tiku/internal/conf"
+	"edu/service/tiku/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware"

@@ -246,7 +246,7 @@ func (uc *AdminUsecase) InsertSysTable(ctx context.Context, tok string, req *pb.
 	tablesList := strings.Split(req.Tables, ",")
 	for i := 0; i < len(tablesList); i++ {
 		tbname := tablesList[i]
-		data, err1 := uc.genTableInit(ctx, &dp, d, tbname)
+		data, err1 := uc.genTableInit(ctx, dp, d, tbname)
 		if err1 != nil {
 			err = err1
 			return

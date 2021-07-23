@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	ssopb "edu/api/sso"
 	. "edu/pkg/jwtauth"
+	"edu/pkg/meta"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/stretchr/testify/assert"
@@ -20,7 +20,7 @@ func TestGen(t *testing.T) {
 		t.Errorf("err = %v", err)
 		return
 	}
-	dp := &ssopb.DataPermission{
+	dp := &meta.DataPermission{
 		UserId:  11,
 		RoleId:  1,
 		RoleKey: "admin",
@@ -35,7 +35,7 @@ func TestGen(t *testing.T) {
 		t.Errorf("err = %v", err)
 		return
 	}
-	o := out.(*ssopb.DataPermission)
+	o := out.(*meta.DataPermission)
 	assert.Equal(t, dp.UserId, o.UserId)
 
 	tokenstr1, _, err := mw.RefreshToken(tokenstr)

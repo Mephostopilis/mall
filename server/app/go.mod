@@ -7,10 +7,9 @@ require (
 	github.com/astaxie/beego v1.12.3
 	github.com/blevesearch/bleve v1.0.14
 	github.com/blevesearch/segment v0.9.0
-	github.com/casbin/casbin/v2 v2.25.1
+	github.com/casbin/casbin/v2 v2.25.1 // indirect
 	github.com/casbin/gorm-adapter/v3 v3.2.0
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/elazarl/goproxy v0.0.0-20210110162100-a92cc753f88e // indirect
 	github.com/envoyproxy/protoc-gen-validate v0.1.0
 	github.com/go-ego/gse v0.66.7
@@ -20,6 +19,7 @@ require (
 	github.com/go-oauth2/oauth2/v4 v4.1.2
 	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/go-redis/redis/v8 v8.11.0
+	github.com/golang-jwt/jwt v3.2.1+incompatible
 	github.com/golang-migrate/migrate/v4 v4.8.0
 	github.com/golang/mock v1.5.0 // indirect
 	github.com/golang/protobuf v1.5.2

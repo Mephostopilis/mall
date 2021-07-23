@@ -4,7 +4,6 @@ import (
 	"context"
 
 	pb "edu/api/sso/v1"
-	"edu/pkg/meta"
 
 	"edu/service/sso/internal/biz"
 )
@@ -23,11 +22,7 @@ func NewSsoService(uc *biz.GreeterUsecase, jwtuc *biz.JWTUsecase) *SsoService {
 }
 
 func (s *SsoService) Introspect(ctx context.Context, req *pb.IntrospectReq) (reply *pb.IntrospectResp, err error) {
-	token, err := meta.GetToken(ctx)
-	if err != nil {
-		return
-	}
-	ti, err := s.jwtuc.ValidationMidToken(ctx, token)
+	ti, err := s.jwtuc.ValidationMidToken(ctx, req.AccessToken)
 	if err != nil {
 		return
 	}
@@ -36,8 +31,8 @@ func (s *SsoService) Introspect(ctx context.Context, req *pb.IntrospectReq) (rep
 		UserId:    ti.UserId,
 		RoleId:    ti.RoleId,
 		RoleKey:   ti.RoleKey,
-		DeptId:    ti.DeptId,
-		PostId:    ti.PostId,
+		// DeptId:    ti.DeptId,
+		// PostId:    ti.PostId,
 	}
 	return
 }

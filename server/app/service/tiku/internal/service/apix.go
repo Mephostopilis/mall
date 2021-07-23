@@ -17,20 +17,12 @@ type ApiService struct {
 }
 
 func NewApiService(logger log.Logger, uc *biz.TikuUsecase) *ApiService {
-	log := log.NewHelper(log.With(logger, "module", "service"))
+	log := log.NewHelper(log.With(logger, "module", "service/api"))
 	s := &ApiService{
 		uc:  uc,
 		log: log,
 	}
 	return s
-}
-
-func (s *ApiService) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.HelloResp, err error) {
-	s.log.Infof("hello url %s", req.Name)
-	reply = &pb.HelloResp{
-		Content: "hello " + req.Name,
-	}
-	return
 }
 
 func (s *ApiService) Ping(ctx context.Context, req *pb.PingReq) (*pb.PingResp, error) {

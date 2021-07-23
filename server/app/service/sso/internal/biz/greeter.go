@@ -9,16 +9,17 @@ import (
 	uuidpb "edu/api/uuid"
 	"edu/pkg/ecode"
 	"edu/pkg/fastdfs"
+	"edu/pkg/meta"
 	"edu/pkg/tools"
 	"edu/service/sso/internal/dao"
 	"edu/service/sso/internal/model"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-oauth2/oauth2/v4/generates"
 	"github.com/go-oauth2/oauth2/v4/manage"
 	"github.com/go-oauth2/oauth2/v4/server"
 	"github.com/go-oauth2/oauth2/v4/store"
+	"github.com/golang-jwt/jwt"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -91,7 +92,7 @@ func (uc *GreeterUsecase) RefreshToken(ctx context.Context, req *pb.RefreshToken
 	return
 }
 
-func (uc *GreeterUsecase) GetInfo(ctx context.Context, dp *pb.DataPermission, req *pb.GetInfoRequest) (reply *pb.GetInfoReply, err error) {
+func (uc *GreeterUsecase) GetInfo(ctx context.Context, dp *meta.DataPermission, req *pb.GetInfoRequest) (reply *pb.GetInfoReply, err error) {
 	var roles = make([]string, 1)
 	roles[0] = dp.RoleKey
 
@@ -139,7 +140,7 @@ func (uc *GreeterUsecase) GetInfo(ctx context.Context, dp *pb.DataPermission, re
 }
 
 // 获取用户个人信息
-func (uc *GreeterUsecase) GetSysUserProfile(ctx context.Context, dp *pb.DataPermission, req *pb.GetSysUserProfileRequest) (reply *pb.ApiReply, err error) {
+func (uc *GreeterUsecase) GetSysUserProfile(ctx context.Context, dp *meta.DataPermission, req *pb.GetSysUserProfileRequest) (reply *pb.ApiReply, err error) {
 	var sysUser model.SysUser
 	sysUser.UserId = dp.UserId
 	result, err := uc.repo.GetSysUserInfo(&sysUser)
@@ -270,7 +271,7 @@ func (uc *GreeterUsecase) SetSysUserPwd(ctx context.Context, uid uint64, req *pb
 	return
 }
 
-func (uc *GreeterUsecase) GetMemberInfo(ctx context.Context, dp *pb.DataPermission, req *pb.GetInfoRequest) (reply *pb.ApiReply, err error) {
+func (uc *GreeterUsecase) GetMemberInfo(ctx context.Context, dp *meta.DataPermission, req *pb.GetInfoRequest) (reply *pb.ApiReply, err error) {
 	// var roles = make([]string, 0)
 	// roles[0] = jwtauth.GetRoleName(ctx)
 

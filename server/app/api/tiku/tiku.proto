@@ -26,11 +26,13 @@ service Admin {
   rpc InsertChoice(Choice) returns (ApiReply) {
     option (google.api.http) = {
       post: "/admin/v1/tiku/choices"
+      body: "*"
     };
   };
   rpc UpdateChoice(Choice) returns (ApiReply) {
     option (google.api.http) = {
       put: "/admin/v1/tiku/choices"
+      body: "*"
     };
   };
   rpc DeleteChoice(DeleteChoiceRequest) returns (ApiReply) {
@@ -51,11 +53,13 @@ service Admin {
   rpc InsertExercise(Exercise) returns (ApiReply) {
     option (google.api.http) = {
       post: "/admin/v1/tiku/exercise"
+      body: "*"
     };
   };
   rpc UpdateExercise(Exercise) returns (ApiReply) {
     option (google.api.http) = {
       put: "/admin/v1/tiku/exercise"
+      body: "*"
     };
   };
   rpc DeleteExercise(DeleteExerciseRequest) returns (ApiReply) {
@@ -66,11 +70,6 @@ service Admin {
 }
 
 service Api {
-  rpc SayHelloURL(HelloReq) returns (HelloResp) {
-    option (google.api.http) = {
-      get:"/api/v1/tiku/say_hello"
-    };
-  };
   rpc Ping(PingReq) returns (PingResp) {
     option (google.api.http) = {
       get: "/api/v1/tiku/public/ping"
@@ -89,6 +88,7 @@ service Api {
   rpc AnswerChoice (AnswerChoiceRequest) returns (AnswerChoiceReply) {
     option (google.api.http) = {
       put: "/api/v1/tiku/choice/answer"
+      body: "*"
     };
   };
   rpc GetExerciseList (GetExerciseListRequest) returns (GetExerciseListReply) {
@@ -104,20 +104,13 @@ service Api {
   rpc AnswerExercise (AnswerExerciseRequest) returns (AnswerExerciseReply) {
     option (google.api.http) = {
       put: "/api/v1/tiku/exercise/answer"
+      body: "*"
     };
   };
 }
 
 message PingReq {}
 message PingResp {}
-
-message HelloReq {
-  string name = 1;
-}
-
-message HelloResp {
-  string Content = 1;
-}
 
 message InsertChoiceRequest {
     string tok = 1;

@@ -28,14 +28,6 @@ func NewAdminService(logger log.Logger, uc *biz.TikuUsecase) *AdminService {
 	return s
 }
 
-func (s *AdminService) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.HelloResp, err error) {
-	s.log.Infof("hello url %s", req.Name)
-	reply = &pb.HelloResp{
-		Content: "hello " + req.Name,
-	}
-	return
-}
-
 func (s *AdminService) Ping(ctx context.Context, req *pb.PingReq) (*pb.PingResp, error) {
 	return &pb.PingResp{}, nil
 }

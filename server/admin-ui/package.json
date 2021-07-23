@@ -16,8 +16,7 @@
     "new": "plop"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [

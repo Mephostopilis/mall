@@ -1,11 +1,9 @@
 package biz
 
-import (
-	ssopb "edu/api/sso/v1"
-)
+import "edu/pkg/meta"
 
 func DataPermissionToClaimsFunc(data interface{}) MapClaims {
-	if v, ok := data.(*ssopb.DataPermission); ok {
+	if v, ok := data.(*meta.DataPermission); ok {
 		return MapClaims{
 			IdentityKey: v.UserId,
 			NiceKey:     v.UserId,
@@ -18,7 +16,7 @@ func DataPermissionToClaimsFunc(data interface{}) MapClaims {
 }
 
 func ClaimsToDataPermissionFunc(claims MapClaims) (interface{}, error) {
-	return &ssopb.DataPermission{
+	return &meta.DataPermission{
 		UserId:  uint64(claims["identity"].(float64)),
 		RoleId:  uint64(claims["roleid"].(float64)),
 		RoleKey: claims["rolekey"].(string),

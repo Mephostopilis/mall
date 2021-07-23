@@ -14,6 +14,7 @@ import (
 	"edu/service/sso/internal/model"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/golang-jwt/jwt"
 	"github.com/mojocn/base64Captcha"
 	"github.com/mssola/user_agent"
 )
@@ -109,12 +110,12 @@ func NewJWTUsecase(c *conf.Jwt, logger log.Logger, d dao.Dao) (*JWTUsecase, erro
 }
 
 // MiddlewareFunc makes GinJWTMiddleware implement the Middleware interface.
-func (mw *JWTUsecase) ValidationMidToken(ctx context.Context, token string) (pd *pb.DataPermission, err error) {
+func (mw *JWTUsecase) ValidationMidToken(ctx context.Context, token string) (pd *meta.DataPermission, err error) {
 	out, err := mw.ValidationToken(token)
 	if err != nil {
 		return
 	}
-	pd = out.(*pb.DataPermission)
+	pd = out.(*meta.DataPermission)
 	return
 }
 
@@ -200,7 +201,7 @@ func (mw *JWTUsecase) LoginHandler(ctx context.Context, req *pb.LoginRequest) (t
 		return
 	}
 
-	dp := &pb.DataPermission{
+	dp := &meta.DataPermission{
 		UserId:  u.UserId,
 		RoleId:  uint64(r.RoleId),
 		RoleKey: r.RoleKey,
@@ -215,8 +216,28 @@ func (mw *JWTUsecase) LoginHandler(ctx context.Context, req *pb.LoginRequest) (t
 // Shall be put under an endpoint that is using the GinJWTMiddleware.
 // Reply will be of the form {"token": "TOKEN"}.
 // 刷新token
-func (mw *JWTUsecase) RefreshHandler(ctx context.Context, token string) (string, time.Time, error) {
-	return mw.RefreshToken(token)
+func (mw *JWTUsecase) RefreshHandler(ctx context.Context, token string) (tokenString string, expire time.Time, err error) {
+	claims, err := mw.checkIfTokenExpire(token)
+	if err != nil {
+		return
+	}
+
+	// Create the token
+	newToken := jwt.New(jwt.GetSigningMethod(mw.SigningAlgorithm))
+	newClaims := newToken.Claims.(jwt.MapClaims)
+
+	for key := range claims {
+		newClaims[key] = claims[key]
+	}
+
+	expire = mw.TimeFunc().Add(mw.Timeout)
+	newClaims["exp"] = expire.Unix()
+	newClaims["orig_iat"] = mw.TimeFunc().Unix()
+	tokenString, err = mw.signedString(newToken)
+	if err != nil {
+		return
+	}
+	return
 }
 
 // @Summary 退出登录
